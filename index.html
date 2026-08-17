@@ -1,0 +1,2690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CodeMentor AI - Intelligent Coding Mentor</title>
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #07111f;
+    --panel: #0c192b;
+    --panel2: #101f34;
+    --border: #22334d;
+
+    --primary: #4d8eff;
+    --primary2: #7aa7ff;
+
+    --text: #f5f7fb;
+    --muted: #9ba9bd;
+
+    --success: #35d07f;
+    --danger: #ff5c70;
+    --warning: #ffc857;
+
+    --code: #07101c;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 20% 0%,
+            rgba(77,142,255,.14),
+            transparent 35%
+        ),
+        var(--bg);
+
+    color: var(--text);
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 24px;
+
+    background: rgba(7,17,31,.88);
+
+    border-bottom: 1px solid var(--border);
+
+    backdrop-filter: blur(12px);
+
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        #795cff
+    );
+
+    box-shadow: 0 0 25px rgba(77,142,255,.3);
+}
+
+.logo span {
+    color: var(--primary2);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: var(--success);
+
+    box-shadow: 0 0 10px var(--success);
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+.app {
+    display: grid;
+
+    grid-template-columns:
+        230px
+        minmax(400px, 1fr)
+        390px;
+
+    height: calc(100vh - 70px);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    background: rgba(8,18,32,.95);
+
+    border-right: 1px solid var(--border);
+
+    padding: 20px 14px;
+
+    overflow-y: auto;
+}
+
+.sidebar-title {
+    color: var(--muted);
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin: 10px 10px 12px;
+}
+
+.nav-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 11px 12px;
+
+    border-radius: 9px;
+
+    color: var(--muted);
+
+    cursor: pointer;
+
+    margin-bottom: 5px;
+
+    transition: .2s;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background: rgba(77,142,255,.12);
+
+    color: white;
+}
+
+.nav-icon {
+    width: 22px;
+
+    text-align: center;
+}
+
+.language-select {
+    width: 100%;
+
+    background: var(--panel);
+
+    border: 1px solid var(--border);
+
+    color: white;
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    margin-top: 8px;
+}
+
+.sidebar-card {
+    margin-top: 25px;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(77,142,255,.14),
+            rgba(122,92,255,.08)
+        );
+
+    border: 1px solid var(--border);
+}
+
+.sidebar-card h4 {
+    margin-bottom: 7px;
+}
+
+.sidebar-card p {
+    font-size: 12px;
+
+    color: var(--muted);
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   EDITOR AREA
+========================================================= */
+
+.workspace {
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+    overflow: hidden;
+}
+
+.workspace-header {
+    min-height: 62px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 10px 18px;
+
+    border-bottom: 1px solid var(--border);
+
+    background: rgba(12,25,43,.8);
+}
+
+.file-name {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+.file-icon {
+    color: #ffd35a;
+}
+
+.editor-actions {
+    display: flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+}
+
+button {
+    font-family: inherit;
+}
+
+.action-btn {
+    border: 1px solid var(--border);
+
+    background: var(--panel2);
+
+    color: var(--muted);
+
+    padding: 8px 11px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    transition: .2s;
+}
+
+.action-btn:hover {
+    color: white;
+
+    border-color: var(--primary);
+
+    background: rgba(77,142,255,.12);
+}
+
+.run-btn {
+    background: var(--success);
+
+    color: #06140c;
+
+    border: none;
+
+    font-weight: 700;
+}
+
+.run-btn:hover {
+    background: #4be48e;
+}
+
+
+/* =========================================================
+   CODE EDITOR
+========================================================= */
+
+.editor-container {
+    flex: 1;
+
+    min-height: 300px;
+
+    position: relative;
+
+    background: var(--code);
+
+    overflow: hidden;
+}
+
+.editor {
+    width: 100%;
+    height: 100%;
+
+    resize: none;
+
+    border: none;
+
+    outline: none;
+
+    background: var(--code);
+
+    color: #dbe7ff;
+
+    padding: 20px;
+
+    font-family:
+        "JetBrains Mono",
+        "Fira Code",
+        Consolas,
+        monospace;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    tab-size: 4;
+
+    overflow: auto;
+}
+
+
+/* =========================================================
+   CONSOLE
+========================================================= */
+
+.console {
+    height: 170px;
+
+    background: #050b13;
+
+    border-top: 1px solid var(--border);
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.console-header {
+    height: 38px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 0 14px;
+
+    border-bottom: 1px solid var(--border);
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.console-output {
+    padding: 12px 15px;
+
+    overflow-y: auto;
+
+    font-family: monospace;
+
+    font-size: 12px;
+
+    color: #c9d5e8;
+
+    white-space: pre-wrap;
+}
+
+.console-success {
+    color: var(--success);
+}
+
+.console-error {
+    color: var(--danger);
+}
+
+
+/* =========================================================
+   AI PANEL
+========================================================= */
+
+.ai-panel {
+    display: flex;
+
+    flex-direction: column;
+
+    background: #091625;
+
+    border-left: 1px solid var(--border);
+
+    min-width: 0;
+}
+
+.ai-header {
+    min-height: 62px;
+
+    padding: 10px 16px;
+
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.ai-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.ai-avatar {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            #795cff
+        );
+}
+
+.ai-title h3 {
+    font-size: 14px;
+}
+
+.ai-title p {
+    color: var(--muted);
+
+    font-size: 10px;
+
+    margin-top: 2px;
+}
+
+.clear-chat {
+    border: none;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    cursor: pointer;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+.chat {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 18px 15px;
+}
+
+.message {
+    display: flex;
+
+    gap: 9px;
+
+    margin-bottom: 18px;
+
+    animation: messageIn .25s ease;
+}
+
+@keyframes messageIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(7px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message.user {
+    justify-content: flex-end;
+}
+
+.message-avatar {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--panel2);
+
+    font-size: 13px;
+}
+
+.user .message-avatar {
+    background: var(--primary);
+
+    color: #061327;
+}
+
+.message-content {
+    max-width: 85%;
+}
+
+.bubble {
+    padding: 11px 13px;
+
+    border-radius: 10px;
+
+    background: var(--panel2);
+
+    border: 1px solid var(--border);
+
+    color: #dbe4f3;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+}
+
+.user .bubble {
+    background: rgba(77,142,255,.17);
+
+    border-color: rgba(77,142,255,.3);
+
+    color: white;
+}
+
+.message-time {
+    color: #65758c;
+
+    font-size: 9px;
+
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-actions {
+    display: flex;
+
+    gap: 6px;
+
+    padding: 8px 12px;
+
+    overflow-x: auto;
+
+    border-top: 1px solid var(--border);
+}
+
+.quick-btn {
+    flex-shrink: 0;
+
+    padding: 7px 9px;
+
+    border: 1px solid var(--border);
+
+    background: var(--panel);
+
+    color: var(--muted);
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+}
+
+.quick-btn:hover {
+    color: white;
+
+    border-color: var(--primary);
+}
+
+
+/* =========================================================
+   ATTACHMENT
+========================================================= */
+
+.attachments {
+    display: none;
+
+    padding: 7px 12px;
+
+    border-top: 1px solid var(--border);
+
+    gap: 7px;
+
+    overflow-x: auto;
+}
+
+.attachment {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 6px 9px;
+
+    background: var(--panel2);
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    font-size: 11px;
+
+    color: var(--muted);
+}
+
+.remove-file {
+    cursor: pointer;
+
+    color: var(--danger);
+}
+
+
+/* =========================================================
+   CHAT INPUT
+========================================================= */
+
+.chat-input-area {
+    padding: 12px;
+
+    border-top: 1px solid var(--border);
+
+    background: #081423;
+}
+
+.chat-input-box {
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 8px;
+
+    background: var(--panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    padding: 8px;
+}
+
+.chat-input {
+    flex: 1;
+
+    resize: none;
+
+    min-height: 42px;
+
+    max-height: 130px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    padding: 8px;
+}
+
+.chat-input::placeholder {
+    color: #617189;
+}
+
+.icon-btn {
+    width: 36px;
+    height: 36px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: var(--panel2);
+
+    color: var(--muted);
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn:hover {
+    color: white;
+
+    background: rgba(77,142,255,.15);
+}
+
+.send-btn {
+    background: var(--primary);
+
+    color: #041126;
+}
+
+.send-btn:hover {
+    background: var(--primary2);
+}
+
+.input-hint {
+    color: #53647b;
+
+    font-size: 9px;
+
+    margin-top: 7px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.7);
+
+    backdrop-filter: blur(5px);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 5000;
+
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    width: min(700px, 100%);
+
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    background: var(--panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+
+    padding: 25px;
+}
+
+.modal-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.close-modal {
+    background: transparent;
+
+    border: none;
+
+    color: var(--muted);
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+.modal-content {
+    color: var(--muted);
+
+    line-height: 1.7;
+
+    font-size: 14px;
+}
+
+.modal-content pre {
+    margin-top: 15px;
+
+    padding: 15px;
+
+    background: #050b13;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    overflow-x: auto;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.typing {
+    display: flex;
+
+    gap: 4px;
+
+    padding: 4px;
+}
+
+.typing span {
+    width: 6px;
+    height: 6px;
+
+    background: var(--primary);
+
+    border-radius: 50%;
+
+    animation: typing 1s infinite;
+}
+
+.typing span:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.typing span:nth-child(3) {
+    animation-delay: .3s;
+}
+
+@keyframes typing {
+
+    0%,60%,100% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-5px);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px) {
+
+    .app {
+        grid-template-columns:
+            190px
+            1fr
+            340px;
+    }
+
+}
+
+@media(max-width:850px) {
+
+    .app {
+        grid-template-columns: 1fr;
+
+        height: auto;
+
+        overflow: visible;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .workspace {
+        min-height: 700px;
+    }
+
+    .ai-panel {
+        min-height: 650px;
+
+        border-left: none;
+
+        border-top: 1px solid var(--border);
+    }
+
+    header {
+        position: relative;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🤖
+        </div>
+
+        Code<span>Mentor</span> AI
+
+    </div>
+
+    <div class="header-right">
+
+        <div class="status">
+
+            <div class="status-dot"></div>
+
+            AI Mentor Online
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     APPLICATION
+========================================================= -->
+
+<div class="app">
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-title">
+        Workspace
+    </div>
+
+    <div class="nav-item active">
+
+        <span class="nav-icon">💻</span>
+
+        Code Editor
+
+    </div>
+
+    <div class="nav-item"
+         onclick="askMentor('Explain my current code in simple terms.')">
+
+        <span class="nav-icon">🧠</span>
+
+        AI Mentor
+
+    </div>
+
+    <div class="nav-item"
+         onclick="debugCode()">
+
+        <span class="nav-icon">🐛</span>
+
+        Debug Code
+
+    </div>
+
+    <div class="nav-item"
+         onclick="getHint()">
+
+        <span class="nav-icon">💡</span>
+
+        Get Hint
+
+    </div>
+
+    <div class="nav-item"
+         onclick="explainCode()">
+
+        <span class="nav-icon">📖</span>
+
+        Explain Code
+
+    </div>
+
+    <div class="nav-item"
+         onclick="improveCode()">
+
+        <span class="nav-icon">✨</span>
+
+        Improve Code
+
+    </div>
+
+
+    <div class="sidebar-title">
+        Language
+    </div>
+
+    <select
+        id="language"
+        class="language-select"
+        onchange="changeLanguage()">
+
+        <option value="Python">
+            Python
+        </option>
+
+        <option value="JavaScript">
+            JavaScript
+        </option>
+
+        <option value="Java">
+            Java
+        </option>
+
+        <option value="C++">
+            C++
+        </option>
+
+        <option value="C">
+            C
+        </option>
+
+        <option value="C#">
+            C#
+        </option>
+
+        <option value="HTML">
+            HTML
+        </option>
+
+        <option value="CSS">
+            CSS
+        </option>
+
+        <option value="SQL">
+            SQL
+        </option>
+
+    </select>
+
+
+    <div class="sidebar-card">
+
+        <h4>🚀 AI Learning</h4>
+
+        <p>
+            CodeMentor doesn't just give you answers.
+            It helps you understand programming,
+            debug errors and improve your problem-solving skills.
+        </p>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================================================
+     CODE WORKSPACE
+========================================================= -->
+
+<main class="workspace">
+
+
+    <div class="workspace-header">
+
+        <div class="file-name">
+
+            <span class="file-icon">🐍</span>
+
+            <span id="fileName">
+                main.py
+            </span>
+
+        </div>
+
+
+        <div class="editor-actions">
+
+            <button
+                class="action-btn"
+                onclick="document.getElementById('fileInput').click()">
+
+                📁 Upload
+
+            </button>
+
+            <button
+                class="action-btn"
+                onclick="uploadScreenshot()">
+
+                🖼️ Screenshot
+
+            </button>
+
+            <button
+                class="action-btn"
+                onclick="copyCode()">
+
+                📋 Copy
+
+            </button>
+
+            <button
+                class="action-btn"
+                onclick="clearCode()">
+
+                🗑️ Clear
+
+            </button>
+
+            <button
+                class="action-btn run-btn"
+                onclick="runPython()">
+
+                ▶ Run
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- hidden file input -->
+
+    <input
+        type="file"
+        id="fileInput"
+        hidden
+        accept=".py,.js,.java,.cpp,.c,.cs,.html,.css,.sql,.txt"
+        onchange="handleFile(event)"
+    >
+
+
+    <!-- hidden screenshot input -->
+
+    <input
+        type="file"
+        id="screenshotInput"
+        hidden
+        accept="image/*"
+        onchange="handleScreenshot(event)"
+    >
+
+
+    <div class="editor-container">
+
+<textarea
+id="codeEditor"
+class="editor"
+spellcheck="false"
+placeholder="Write your code here..."># Welcome to CodeMentor AI
+
+def greet(name):
+    return "Hello, " + name
+
+name = "Developer"
+
+print(greet(name))
+</textarea>
+
+    </div>
+
+
+    <!-- Console -->
+
+    <div class="console">
+
+        <div class="console-header">
+
+            <span>
+                TERMINAL / OUTPUT
+            </span>
+
+            <button
+                class="action-btn"
+                onclick="clearConsole()">
+
+                Clear
+
+            </button>
+
+        </div>
+
+        <div
+            id="consoleOutput"
+            class="console-output">
+
+            Ready to run your code...
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================================================
+     AI MENTOR PANEL
+========================================================= -->
+
+<section class="ai-panel">
+
+
+    <div class="ai-header">
+
+        <div class="ai-title">
+
+            <div class="ai-avatar">
+                🤖
+            </div>
+
+            <div>
+
+                <h3>
+                    CodeMentor AI
+                </h3>
+
+                <p>
+                    Your personal programming mentor
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="clear-chat"
+            onclick="clearChat()">
+
+            Clear chat
+
+        </button>
+
+    </div>
+
+
+
+    <!-- CHAT -->
+
+    <div
+        id="chat"
+        class="chat">
+
+
+        <div class="message">
+
+            <div class="message-avatar">
+                🤖
+            </div>
+
+            <div class="message-content">
+
+                <div class="bubble">
+
+                    👋 Hi! I'm CodeMentor AI.
+
+                    I can help you with:
+
+                    • Debugging
+                    • Code explanations
+                    • Programming questions
+                    • Progressive hints
+                    • Error analysis
+                    • Code improvement
+                    • Project guidance
+
+                    Ask me anything about programming!
+
+                </div>
+
+                <div class="message-time">
+                    AI Mentor
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="quick-actions">
+
+        <button
+            class="quick-btn"
+            onclick="explainCode()">
+
+            📖 Explain
+
+        </button>
+
+        <button
+            class="quick-btn"
+            onclick="debugCode()">
+
+            🐛 Debug
+
+        </button>
+
+        <button
+            class="quick-btn"
+            onclick="getHint()">
+
+            💡 Hint
+
+        </button>
+
+        <button
+            class="quick-btn"
+            onclick="improveCode()">
+
+            ✨ Improve
+
+        </button>
+
+        <button
+            class="quick-btn"
+            onclick="askMentor('Give me a coding challenge based on my current skill level.')">
+
+            🎯 Challenge
+
+        </button>
+
+    </div>
+
+
+
+    <!-- ATTACHMENTS -->
+
+    <div
+        id="attachments"
+        class="attachments">
+    </div>
+
+
+
+    <!-- INPUT -->
+
+    <div class="chat-input-area">
+
+        <div class="chat-input-box">
+
+            <button
+                class="icon-btn"
+                title="Upload file"
+                onclick="document.getElementById('fileInput').click()">
+
+                📎
+
+            </button>
+
+            <button
+                class="icon-btn"
+                title="Upload screenshot"
+                onclick="uploadScreenshot()">
+
+                🖼️
+
+            </button>
+
+
+            <textarea
+                id="messageInput"
+                class="chat-input"
+                placeholder="Ask your AI coding mentor..."
+                rows="1"
+                onkeydown="handleEnter(event)"
+            ></textarea>
+
+
+            <button
+                id="sendButton"
+                class="icon-btn send-btn"
+                onclick="sendMessage()">
+
+                ➤
+
+            </button>
+
+        </div>
+
+
+        <div class="input-hint">
+
+            Press Enter to send • Shift + Enter for new line
+
+        </div>
+
+    </div>
+
+
+</section>
+
+</div>
+
+
+
+<!-- =========================================================
+     IMAGE MODAL
+========================================================= -->
+
+<div
+    id="imageModal"
+    class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h3>
+                🖼️ Screenshot
+            </h3>
+
+            <button
+                class="close-modal"
+                onclick="closeModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+        <div
+            id="imagePreview"
+            class="modal-content">
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   CONFIGURATION
+========================================================= */
+
+/*
+    IMPORTANT:
+
+    Replace this with your Google Apps Script Web App URL.
+
+    Example:
+
+    https://script.google.com/macros/s/XXXXXXXX/exec
+*/
+
+const BACKEND_URL =
+    "YOUR_APPS_SCRIPT_WEB_APP_URL";
+
+
+/* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
+
+let currentFile = null;
+
+let currentScreenshot = null;
+
+let hintLevel = 0;
+
+
+/* =========================================================
+   DOM ELEMENTS
+========================================================= */
+
+const codeEditor =
+    document.getElementById("codeEditor");
+
+const messageInput =
+    document.getElementById("messageInput");
+
+const chat =
+    document.getElementById("chat");
+
+const consoleOutput =
+    document.getElementById("consoleOutput");
+
+const language =
+    document.getElementById("language");
+
+
+/* =========================================================
+   ENTER KEY
+========================================================= */
+
+function handleEnter(event) {
+
+    if (
+        event.key === "Enter" &&
+        !event.shiftKey
+    ) {
+
+        event.preventDefault();
+
+        sendMessage();
+
+    }
+
+}
+
+
+/* =========================================================
+   ADD CHAT MESSAGE
+========================================================= */
+
+function addMessage(
+    text,
+    sender = "ai",
+    loading = false
+) {
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        "message " + sender;
+
+
+    const avatar =
+        document.createElement("div");
+
+    avatar.className =
+        "message-avatar";
+
+    avatar.textContent =
+        sender === "user"
+            ? "👤"
+            : "🤖";
+
+
+    const content =
+        document.createElement("div");
+
+    content.className =
+        "message-content";
+
+
+    const bubble =
+        document.createElement("div");
+
+    bubble.className =
+        "bubble";
+
+
+    if (loading) {
+
+        bubble.innerHTML = `
+            <div class="typing">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        `;
+
+    } else {
+
+        bubble.textContent = text;
+
+    }
+
+
+    const time =
+        document.createElement("div");
+
+    time.className =
+        "message-time";
+
+    time.textContent =
+        sender === "user"
+            ? "You"
+            : "CodeMentor AI";
+
+
+    content.appendChild(bubble);
+
+    content.appendChild(time);
+
+    message.appendChild(avatar);
+
+    message.appendChild(content);
+
+    chat.appendChild(message);
+
+
+    chat.scrollTop =
+        chat.scrollHeight;
+
+
+    return message;
+
+}
+
+
+/* =========================================================
+   SEND MESSAGE TO AI
+========================================================= */
+
+async function sendMessage() {
+
+    const message =
+        messageInput.value.trim();
+
+
+    if (!message) {
+
+        return;
+
+    }
+
+
+    addMessage(
+        message,
+        "user"
+    );
+
+
+    messageInput.value = "";
+
+
+    const loadingMessage =
+        addMessage(
+            "",
+            "ai",
+            true
+        );
+
+
+    const payload = {
+
+        action: "mentor",
+
+        message: message,
+
+        language:
+            language.value,
+
+        code:
+            codeEditor.value,
+
+        error:
+            getConsoleError(),
+
+        fileName:
+            currentFile
+                ? currentFile.name
+                : "",
+
+        screenshot:
+            currentScreenshot || ""
+
+    };
+
+
+    try {
+
+        const response =
+            await fetch(
+                BACKEND_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "text/plain;charset=utf-8"
+                    },
+
+                    body:
+                        JSON.stringify(payload)
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        loadingMessage.remove();
+
+
+        if (data.success) {
+
+            addMessage(
+                data.reply,
+                "ai"
+            );
+
+        } else {
+
+            addMessage(
+                "⚠️ " +
+                (
+                    data.error ||
+                    "The AI backend returned an error."
+                ),
+                "ai"
+            );
+
+        }
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        loadingMessage.remove();
+
+
+        addMessage(
+            "⚠️ Unable to connect to the AI backend.\n\n" +
+            "Check your Apps Script URL and deployment settings.",
+            "ai"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ASK MENTOR
+========================================================= */
+
+function askMentor(question) {
+
+    messageInput.value =
+        question;
+
+    sendMessage();
+
+}
+
+
+/* =========================================================
+   EXPLAIN CODE
+========================================================= */
+
+function explainCode() {
+
+    askMentor(
+        `Explain my current ${language.value} code step-by-step in simple language.`
+    );
+
+}
+
+
+/* =========================================================
+   DEBUG CODE
+========================================================= */
+
+function debugCode() {
+
+    askMentor(
+        `Debug my current ${language.value} code.
+
+Identify:
+1. The error
+2. Why it happens
+3. How to fix it
+4. Corrected code
+5. How to prevent this error`
+    );
+
+}
+
+
+/* =========================================================
+   IMPROVE CODE
+========================================================= */
+
+function improveCode() {
+
+    askMentor(
+        `Review my current ${language.value} code.
+
+Suggest:
+1. Bugs
+2. Performance improvements
+3. Better coding practices
+4. Cleaner code
+5. Security improvements
+
+Do not change the functionality unnecessarily.`
+    );
+
+}
+
+
+/* =========================================================
+   PROGRESSIVE HINTS
+========================================================= */
+
+function getHint() {
+
+    hintLevel++;
+
+
+    let instruction = "";
+
+
+    if (hintLevel === 1) {
+
+        instruction =
+            "Give me ONLY the first small hint. Do not reveal the solution.";
+
+    }
+
+    else if (hintLevel === 2) {
+
+        instruction =
+            "Give me the second, more specific hint. Still do not give the complete solution.";
+
+    }
+
+    else if (hintLevel === 3) {
+
+        instruction =
+            "Give me a strong hint that almost leads to the solution, but let me solve the final step.";
+
+    }
+
+    else {
+
+        instruction =
+            "Now provide the complete solution and explain it.";
+
+        hintLevel = 0;
+
+    }
+
+
+    askMentor(
+        `${instruction}
+
+Analyze my current code:
+
+${codeEditor.value}`
+    );
+
+}
+
+
+/* =========================================================
+   FILE UPLOAD
+========================================================= */
+
+function handleFile(event) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file) {
+
+        return;
+
+    }
+
+
+    currentFile = file;
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(e) {
+
+            codeEditor.value =
+                e.target.result;
+
+
+            document.getElementById(
+                "fileName"
+            ).textContent =
+                file.name;
+
+
+            showAttachment(
+                "📄 " + file.name
+            );
+
+
+            addMessage(
+                `I uploaded "${file.name}". Please analyze this file.`,
+                "user"
+            );
+
+
+            setTimeout(() => {
+
+                askMentor(
+                    `Analyze the uploaded file "${file.name}".
+
+Explain what it does, identify errors and suggest improvements.`
+                );
+
+            }, 200);
+
+        };
+
+
+    reader.readAsText(file);
+
+}
+
+
+/* =========================================================
+   SCREENSHOT UPLOAD
+========================================================= */
+
+function uploadScreenshot() {
+
+    document
+        .getElementById("screenshotInput")
+        .click();
+
+}
+
+
+function handleScreenshot(event) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file) {
+
+        return;
+
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(e) {
+
+            currentScreenshot =
+                e.target.result;
+
+
+            showAttachment(
+                "🖼️ " + file.name
+            );
+
+
+            const preview =
+                document.getElementById(
+                    "imagePreview"
+                );
+
+
+            preview.innerHTML = `
+                <img
+                    src="${e.target.result}"
+                    style="
+                        max-width:100%;
+                        border-radius:10px;
+                    "
+                >
+
+                <p style="margin-top:15px;">
+                    Screenshot uploaded successfully.
+                    Ask CodeMentor AI to analyze it.
+                </p>
+            `;
+
+
+            document
+                .getElementById(
+                    "imageModal"
+                )
+                .classList.add("show");
+
+        };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =========================================================
+   ATTACHMENT UI
+========================================================= */
+
+function showAttachment(name) {
+
+    const container =
+        document.getElementById(
+            "attachments"
+        );
+
+
+    container.style.display =
+        "flex";
+
+
+    const item =
+        document.createElement("div");
+
+
+    item.className =
+        "attachment";
+
+
+    item.innerHTML = `
+        <span>${name}</span>
+
+        <span
+            class="remove-file"
+            onclick="removeAttachment(this)">
+            ×
+        </span>
+    `;
+
+
+    container.appendChild(item);
+
+}
+
+
+function removeAttachment(element) {
+
+    element.parentElement.remove();
+
+}
+
+
+/* =========================================================
+   COPY CODE
+========================================================= */
+
+async function copyCode() {
+
+    try {
+
+        await navigator.clipboard.writeText(
+            codeEditor.value
+        );
+
+
+        showConsole(
+            "✅ Code copied to clipboard.",
+            "success"
+        );
+
+    } catch {
+
+        showConsole(
+            "❌ Unable to copy code.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CLEAR CODE
+========================================================= */
+
+function clearCode() {
+
+    if (
+        confirm(
+            "Are you sure you want to clear the code?"
+        )
+    ) {
+
+        codeEditor.value = "";
+
+        showConsole(
+            "Editor cleared.",
+            "success"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   PYTHON TESTER
+========================================================= */
+
+/*
+   Browser JavaScript cannot directly execute Python.
+
+   This prototype provides a lightweight Python syntax/error
+   checker for common mistakes.
+
+   For REAL Python execution, connect this button to a
+   secure Python execution backend such as a sandbox/container.
+*/
+
+function runPython() {
+
+    const code =
+        codeEditor.value.trim();
+
+
+    if (!code) {
+
+        showConsole(
+            "No code to run.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        language.value !==
+        "Python"
+    ) {
+
+        showConsole(
+            "▶ The browser Python tester currently supports Python only.",
+            "error"
+        );
+
+        askMentor(
+            `Analyze this ${language.value} code for possible errors and explain what would happen if it runs:
+
+${code}`
+        );
+
+        return;
+
+    }
+
+
+    showConsole(
+        "Running Python syntax checks...",
+        "success"
+    );
+
+
+    setTimeout(() => {
+
+        const result =
+            basicPythonCheck(code);
+
+
+        showConsole(
+            result.message,
+            result.error
+                ? "error"
+                : "success"
+        );
+
+
+        if (result.error) {
+
+            askMentor(
+                `I attempted to run this Python code and found this possible problem:
+
+${result.message}
+
+Analyze the following code and explain how to fix it:
+
+${code}`
+            );
+
+        }
+
+    }, 500);
+
+}
+
+
+/* =========================================================
+   BASIC PYTHON CHECKER
+========================================================= */
+
+function basicPythonCheck(code) {
+
+    const lines =
+        code.split("\n");
+
+
+    /* Check bracket matching */
+
+    let stack = [];
+
+
+    const pairs = {
+
+        ")": "(",
+
+        "]": "[",
+
+        "}": "{"
+
+    };
+
+
+    for (
+        let i = 0;
+        i < code.length;
+        i++
+    ) {
+
+        const char =
+            code[i];
+
+
+        if (
+            ["(", "[", "{"]
+                .includes(char)
+        ) {
+
+            stack.push(char);
+
+        }
+
+
+        if (
+            [")", "]", "}"]
+                .includes(char)
+        ) {
+
+            if (
+                stack.pop()
+                !== pairs[char]
+            ) {
+
+                return {
+
+                    error: true,
+
+                    message:
+                        `Possible syntax error near character ${i + 1}: mismatched brackets.`
+
+                };
+
+            }
+
+        }
+
+    }
+
+
+    if (stack.length > 0) {
+
+        return {
+
+            error: true,
+
+            message:
+                "Possible syntax error: an opening bracket has not been closed."
+
+        };
+
+    }
+
+
+    /* Check common indentation */
+
+    for (
+        let i = 0;
+        i < lines.length - 1;
+        i++
+    ) {
+
+        const line =
+            lines[i].trim();
+
+
+        if (
+            (
+                line.startsWith("if ") ||
+                line.startsWith("for ") ||
+                line.startsWith("while ") ||
+                line.startsWith("def ") ||
+                line.startsWith("class ") ||
+                line.startsWith("else:")
+            ) &&
+            !line.endsWith(":")
+        ) {
+
+            return {
+
+                error: true,
+
+                message:
+                    `Possible syntax error on line ${i + 1}: Python block statements usually require ':'.`
+
+            };
+
+        }
+
+    }
+
+
+    /* Detect obvious undefined variable */
+
+    const printMatches =
+        code.match(
+            /print\s*\(\s*([a-zA-Z_]\w*)\s*\)/g
+        );
+
+
+    if (printMatches) {
+
+        // Informational only.
+    }
+
+
+    return {
+
+        error: false,
+
+        message:
+            "✅ Basic Python checks passed.\n\n" +
+            "The browser tester cannot fully execute Python. " +
+            "For complete execution, connect a secure Python sandbox backend."
+
+    };
+
+}
+
+
+/* =========================================================
+   CONSOLE
+========================================================= */
+
+function showConsole(
+    message,
+    type = "success"
+) {
+
+    consoleOutput.className =
+        "console-output " +
+        (
+            type === "error"
+                ? "console-error"
+                : "console-success"
+        );
+
+
+    consoleOutput.textContent =
+        message;
+
+}
+
+
+function clearConsole() {
+
+    consoleOutput.textContent =
+        "Ready to run your code...";
+
+    consoleOutput.className =
+        "console-output";
+
+}
+
+
+function getConsoleError() {
+
+    if (
+        consoleOutput.classList.contains(
+            "console-error"
+        )
+    ) {
+
+        return consoleOutput.textContent;
+
+    }
+
+    return "";
+
+}
+
+
+/* =========================================================
+   CLEAR CHAT
+========================================================= */
+
+function clearChat() {
+
+    if (
+        !confirm(
+            "Clear the AI conversation?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    chat.innerHTML = "";
+
+
+    addMessage(
+        "👋 Chat cleared. What would you like to learn?",
+        "ai"
+    );
+
+}
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+function changeLanguage() {
+
+    const lang =
+        language.value;
+
+
+    const extensions = {
+
+        Python: "py",
+
+        JavaScript: "js",
+
+        Java: "java",
+
+        "C++": "cpp",
+
+        C: "c",
+
+        "C#": "cs",
+
+        HTML: "html",
+
+        CSS: "css",
+
+        SQL: "sql"
+
+    };
+
+
+    document.getElementById(
+        "fileName"
+    ).textContent =
+        "main." +
+        extensions[lang];
+
+
+    askMentor(
+        `I am now working with ${lang}. Give me a short beginner-friendly overview of what I should know about this language.`
+    );
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function closeModal() {
+
+    document
+        .getElementById("imageModal")
+        .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   TAB SUPPORT IN EDITOR
+========================================================= */
+
+codeEditor.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Tab"
+        ) {
+
+            event.preventDefault();
+
+
+            const start =
+                this.selectionStart;
+
+            const end =
+                this.selectionEnd;
+
+
+            this.value =
+                this.value.substring(
+                    0,
+                    start
+                ) +
+                "    " +
+                this.value.substring(
+                    end
+                );
+
+
+            this.selectionStart =
+                this.selectionEnd =
+                    start + 4;
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+console.log(
+    "CodeMentor AI loaded."
+);
+
+console.log(
+    "Backend:",
+    BACKEND_URL
+);
+
+</script>
+
+</body>
+</html>
