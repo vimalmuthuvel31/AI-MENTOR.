@@ -3577,3 +3577,1617 @@ Ask me a programming question or paste some code and I'll help you understand it
   updateFingerprintUI();
 
 </script>
+<!-- =========================================================
+     MULTI-LANGUAGE AI LEARNING LADDER
+     ADD THIS ENTIRE BLOCK BEFORE YOUR EXISTING </body>
+     ========================================================= -->
+
+
+<!-- =========================
+     LEARNING LADDER CSS
+     ========================= -->
+
+<style>
+
+.learning-ladder {
+    width: 100%;
+    padding: 80px 0;
+    margin-top: 40px;
+}
+
+.learning-container {
+    width: min(1100px, calc(100% - 32px));
+    margin: auto;
+}
+
+
+/* ---------- HEADER ---------- */
+
+.learning-heading {
+    max-width: 760px;
+    margin-bottom: 30px;
+}
+
+.learning-heading > span {
+    display: inline-block;
+    margin-bottom: 10px;
+
+    color: #5b8cff;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.learning-heading h2 {
+    margin: 0;
+
+    color: #f4f7ff;
+
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.08;
+
+    letter-spacing: -2px;
+}
+
+.learning-heading h2 strong {
+    color: #7c5cff;
+}
+
+.learning-heading p {
+    max-width: 680px;
+
+    margin-top: 16px;
+
+    color: #9da9c2;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* ---------- LANGUAGE SELECTOR ---------- */
+
+.language-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-bottom: 18px;
+}
+
+.language-btn {
+    padding: 10px 14px;
+
+    border: 1px solid #26344f;
+    border-radius: 8px;
+
+    background: #0d1424;
+
+    color: #9da9c2;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        border-color .2s ease,
+        color .2s ease,
+        background .2s ease,
+        transform .2s ease;
+}
+
+.language-btn:hover {
+    border-color: #5b8cff;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.language-btn.active {
+    border-color: #5b8cff;
+
+    background: rgba(91, 140, 255, 0.12);
+
+    color: #ffffff;
+}
+
+
+/* ---------- CURRENT LANGUAGE ---------- */
+
+.current-language {
+    padding: 24px;
+
+    border: 1px solid rgba(91, 140, 255, 0.20);
+    border-radius: 15px;
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(124, 92, 255, 0.09),
+            transparent 40%
+        ),
+        #0d1424;
+
+    margin-bottom: 14px;
+}
+
+.current-language > span {
+    color: #5b8cff;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.current-language h3 {
+    margin: 7px 0 0;
+
+    color: #f4f7ff;
+
+    font-size: 20px;
+}
+
+.current-language p {
+    margin: 8px 0 0;
+
+    color: #8998b0;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* ---------- LEVELS ---------- */
+
+.learning-levels {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.learning-level {
+    display: flex;
+    gap: 18px;
+
+    padding: 21px;
+
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+
+    background: #0d1424;
+
+    transition:
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+.learning-level:hover {
+    transform: translateY(-1px);
+}
+
+.learning-level.active {
+    border-color: rgba(91, 140, 255, 0.32);
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(91, 140, 255, 0.07),
+            transparent 35%
+        ),
+        #0d1424;
+}
+
+.level-number {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    flex-shrink: 0;
+
+    border-radius: 9px;
+
+    background: rgba(91, 140, 255, 0.09);
+
+    color: #5b8cff;
+
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.level-content {
+    flex: 1;
+}
+
+.level-header {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.level-header small {
+    color: #68768c;
+
+    font-size: 9px;
+    letter-spacing: 1.2px;
+}
+
+.level-header h3 {
+    margin: 4px 0 0;
+
+    color: #f4f7ff;
+
+    font-size: 16px;
+}
+
+.level-status {
+    color: #5b8cff;
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.level-status.locked {
+    color: #647188;
+}
+
+.level-content > p {
+    margin: 7px 0 0;
+
+    color: #7f8ca1;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* ---------- CONCEPTS ---------- */
+
+.concept-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 13px;
+}
+
+.concept-list span {
+    padding: 6px 9px;
+
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px;
+
+    background: #080f1b;
+
+    color: #77859a;
+
+    font-size: 9px;
+}
+
+
+/* ---------- AI MENTOR PANEL ---------- */
+
+.learning-mentor {
+    display: flex;
+    gap: 17px;
+
+    margin-top: 18px;
+    padding: 25px;
+
+    border: 1px solid rgba(124, 92, 255, 0.22);
+    border-radius: 15px;
+
+    background:
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(124, 92, 255, 0.08),
+            transparent 40%
+        ),
+        #0d1424;
+}
+
+.mentor-icon {
+    width: 45px;
+    height: 45px;
+
+    display: grid;
+    place-items: center;
+
+    flex-shrink: 0;
+
+    border-radius: 11px;
+
+    background: rgba(124, 92, 255, 0.10);
+
+    font-size: 21px;
+}
+
+.mentor-content {
+    flex: 1;
+}
+
+.mentor-content > span {
+    color: #7c5cff;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+}
+
+.mentor-content h3 {
+    margin: 6px 0 0;
+
+    color: #f4f7ff;
+
+    font-size: 18px;
+}
+
+.mentor-content > p {
+    margin: 8px 0 0;
+
+    color: #8998b0;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* ---------- CODE WINDOW ---------- */
+
+.mentor-code {
+    overflow-x: auto;
+
+    margin-top: 18px;
+
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 9px;
+
+    background: #070b16;
+}
+
+.mentor-code pre {
+    margin: 0;
+    padding: 18px;
+
+    color: #cbd3df;
+
+    font-family:
+        Consolas,
+        Monaco,
+        monospace;
+
+    font-size: 12px;
+    line-height: 1.8;
+
+    white-space: pre;
+}
+
+
+/* ---------- CHALLENGE BUTTON ---------- */
+
+.learning-challenge {
+    margin-top: 14px;
+
+    padding: 11px 16px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #7c5cff;
+
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+.learning-challenge:hover {
+    transform: translateY(-1px);
+    opacity: .9;
+}
+
+
+/* ---------- QUESTION ---------- */
+
+.learning-question {
+    display: none;
+
+    margin-top: 17px;
+    padding: 18px;
+
+    border: 1px solid rgba(124, 92, 255, 0.18);
+    border-radius: 10px;
+
+    background: rgba(124, 92, 255, 0.04);
+}
+
+.learning-question.show {
+    display: block;
+}
+
+.learning-question h4 {
+    margin: 0;
+
+    color: #f4f7ff;
+
+    font-size: 13px;
+}
+
+.learning-question > p {
+    margin: 8px 0 0;
+
+    color: #9da9c2;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.question-options {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 14px;
+}
+
+.question-options button {
+    padding: 9px 13px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 7px;
+
+    background: #080f1b;
+
+    color: #9da9c2;
+
+    font-family: monospace;
+    font-size: 11px;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.question-options button:hover {
+    border-color: #7c5cff;
+    color: #ffffff;
+}
+
+.learning-feedback {
+    min-height: 18px;
+
+    margin-top: 11px;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 650px) {
+
+    .learning-ladder {
+        padding: 60px 0;
+    }
+
+    .learning-container {
+        width: calc(100% - 26px);
+    }
+
+    .learning-level {
+        padding: 17px;
+    }
+
+    .level-header {
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .learning-mentor {
+        flex-direction: column;
+    }
+
+    .question-options {
+        flex-direction: column;
+    }
+
+    .question-options button {
+        width: 100%;
+    }
+
+}
+
+</style>
+
+
+<!-- =========================
+     LEARNING LADDER HTML
+     ========================= -->
+
+<section
+    class="learning-ladder"
+    id="learningLadder"
+>
+
+    <div class="learning-container">
+
+
+        <!-- HEADER -->
+
+        <div class="learning-heading">
+
+            <span>
+                PERSONALIZED LEARNING PATH
+            </span>
+
+            <h2>
+                Learn any language.
+                <strong>Level up step by step.</strong>
+            </h2>
+
+            <p>
+                Choose a programming language and start
+                from the fundamentals. Your AI mentor
+                helps you build the foundation before
+                moving toward advanced concepts.
+            </p>
+
+        </div>
+
+
+        <!-- LANGUAGE SELECTOR -->
+
+        <div class="language-selector">
+
+            <button
+                type="button"
+                class="language-btn active"
+                data-language="html"
+            >
+                🌐 HTML
+            </button>
+
+            <button
+                type="button"
+                class="language-btn"
+                data-language="css"
+            >
+                🎨 CSS
+            </button>
+
+            <button
+                type="button"
+                class="language-btn"
+                data-language="javascript"
+            >
+                ⚡ JavaScript
+            </button>
+
+            <button
+                type="button"
+                class="language-btn"
+                data-language="java"
+            >
+                ☕ Java
+            </button>
+
+            <button
+                type="button"
+                class="language-btn"
+                data-language="csharp"
+            >
+                💠 C#
+            </button>
+
+            <button
+                type="button"
+                class="language-btn"
+                data-language="cpp"
+            >
+                ⚙️ C++
+            </button>
+
+        </div>
+
+
+        <!-- CURRENT LANGUAGE -->
+
+        <div class="current-language">
+
+            <span id="currentLanguageLabel">
+                HTML
+            </span>
+
+            <h3 id="currentLanguageTitle">
+                Start with HTML Foundations
+            </h3>
+
+            <p id="currentLanguageDescription">
+                Learn how webpages are structured before
+                moving into styling and interactive behaviour.
+            </p>
+
+        </div>
+
+
+        <!-- LEVELS -->
+
+        <div class="learning-levels">
+
+
+            <!-- LEVEL 1 -->
+
+            <div class="learning-level active">
+
+                <div class="level-number">
+                    01
+                </div>
+
+                <div class="level-content">
+
+                    <div class="level-header">
+
+                        <div>
+
+                            <small>
+                                BEGINNER
+                            </small>
+
+                            <h3>
+                                🌱 Foundations
+                            </h3>
+
+                        </div>
+
+                        <span class="level-status">
+                            START HERE
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Learn the essential building blocks
+                        before writing complex code.
+                    </p>
+
+                    <div
+                        class="concept-list"
+                        id="beginnerConcepts"
+                    >
+
+                        <span>HTML Structure</span>
+                        <span>Elements</span>
+                        <span>Attributes</span>
+                        <span>Forms</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LEVEL 2 -->
+
+            <div class="learning-level">
+
+                <div class="level-number">
+                    02
+                </div>
+
+                <div class="level-content">
+
+                    <div class="level-header">
+
+                        <div>
+
+                            <small>
+                                INTERMEDIATE
+                            </small>
+
+                            <h3>
+                                🔧 Core Skills
+                            </h3>
+
+                        </div>
+
+                        <span class="level-status locked">
+                            🔒 LOCKED
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Combine concepts to solve problems
+                        and build real-world projects.
+                    </p>
+
+                    <div
+                        class="concept-list"
+                        id="intermediateConcepts"
+                    >
+
+                        <span>Semantic HTML</span>
+                        <span>Accessibility</span>
+                        <span>Forms</span>
+                        <span>Page Structure</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LEVEL 3 -->
+
+            <div class="learning-level">
+
+                <div class="level-number">
+                    03
+                </div>
+
+                <div class="level-content">
+
+                    <div class="level-header">
+
+                        <div>
+
+                            <small>
+                                ADVANCED
+                            </small>
+
+                            <h3>
+                                🚀 Advanced Development
+                            </h3>
+
+                        </div>
+
+                        <span class="level-status locked">
+                            🔒 LOCKED
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Move from writing code to designing
+                        scalable and professional applications.
+                    </p>
+
+                    <div
+                        class="concept-list"
+                        id="advancedConcepts"
+                    >
+
+                        <span>Architecture</span>
+                        <span>Performance</span>
+                        <span>Security</span>
+                        <span>Projects</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AI MENTOR -->
+
+        <div class="learning-mentor">
+
+            <div class="mentor-icon">
+                🧠
+            </div>
+
+            <div class="mentor-content">
+
+                <span>
+                    AI CODING MENTOR
+                </span>
+
+                <h3 id="mentorTitle">
+                    Let's start with HTML structure.
+                </h3>
+
+                <p id="mentorText">
+                    HTML gives your webpage its structure.
+                    Before learning CSS or JavaScript,
+                    let's understand how HTML elements
+                    work together.
+                </p>
+
+
+                <div class="mentor-code">
+
+                    <pre id="mentorCode">&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+
+  &lt;body&gt;
+
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+
+  &lt;/body&gt;
+
+&lt;/html&gt;</pre>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="learning-challenge"
+                    id="learningChallenge"
+                >
+                    Test My Understanding →
+                </button>
+
+
+                <div
+                    class="learning-question"
+                    id="learningQuestion"
+                >
+
+                    <h4>
+                        🧠 Quick Check
+                    </h4>
+
+                    <p id="questionText">
+                        Which language is responsible
+                        for the structure of a webpage?
+                    </p>
+
+
+                    <div
+                        class="question-options"
+                        id="questionOptions"
+                    >
+
+                        <button
+                            type="button"
+                            data-answer="html"
+                        >
+                            HTML
+                        </button>
+
+                        <button
+                            type="button"
+                            data-answer="css"
+                        >
+                            CSS
+                        </button>
+
+                        <button
+                            type="button"
+                            data-answer="javascript"
+                        >
+                            JavaScript
+                        </button>
+
+                    </div>
+
+
+                    <p
+                        class="learning-feedback"
+                        id="learningFeedback"
+                    ></p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     LEARNING LADDER JAVASCRIPT
+     ========================= -->
+
+<script>
+
+(function () {
+
+    "use strict";
+
+
+    /* =====================================================
+       LANGUAGE DATA
+       ===================================================== */
+
+    const learningData = {
+
+        html: {
+
+            label: "HTML",
+
+            title: "Start with HTML Foundations",
+
+            description:
+                "Learn how webpages are structured before moving into styling and interactive behaviour.",
+
+            beginner: [
+                "HTML Structure",
+                "Elements",
+                "Attributes",
+                "Forms"
+            ],
+
+            intermediate: [
+                "Semantic HTML",
+                "Accessibility",
+                "Forms",
+                "Page Structure"
+            ],
+
+            advanced: [
+                "Web Components",
+                "Accessibility",
+                "SEO",
+                "Advanced Forms"
+            ],
+
+            mentorTitle:
+                "Let's start with HTML structure.",
+
+            mentorText:
+                "HTML gives your webpage its structure. Before learning CSS or JavaScript, understand how HTML elements work together.",
+
+            code:
+`<!DOCTYPE html>
+
+<html>
+
+  <body>
+
+    <h1>Hello World</h1>
+
+  </body>
+
+</html>`,
+
+            question:
+                "Which language is responsible for the structure of a webpage?",
+
+            answers: [
+                ["HTML", "html"],
+                ["CSS", "css"],
+                ["JavaScript", "javascript"]
+            ],
+
+            correct: "html"
+        },
+
+
+        css: {
+
+            label: "CSS",
+
+            title: "Start with CSS Foundations",
+
+            description:
+                "Learn how to control colors, spacing, layouts and the visual appearance of webpages.",
+
+            beginner: [
+                "Selectors",
+                "Colors",
+                "Fonts",
+                "Box Model"
+            ],
+
+            intermediate: [
+                "Flexbox",
+                "Grid",
+                "Responsive Design",
+                "Animations"
+            ],
+
+            advanced: [
+                "Advanced Layout",
+                "CSS Architecture",
+                "Transitions",
+                "Complex Animations"
+            ],
+
+            mentorTitle:
+                "Let's start with CSS selectors.",
+
+            mentorText:
+                "CSS selectors tell the browser which HTML elements should receive your styles.",
+
+            code:
+`.card {
+
+    color: white;
+
+    padding: 20px;
+
+}`,
+
+            question:
+                "Which language is responsible for styling a webpage?",
+
+            answers: [
+                ["HTML", "html"],
+                ["CSS", "css"],
+                ["JavaScript", "javascript"]
+            ],
+
+            correct: "css"
+        },
+
+
+        javascript: {
+
+            label: "JAVASCRIPT",
+
+            title: "Start with JavaScript Foundations",
+
+            description:
+                "Learn programming logic, variables, functions and events before building interactive applications.",
+
+            beginner: [
+                "Variables",
+                "Data Types",
+                "Conditions",
+                "Functions"
+            ],
+
+            intermediate: [
+                "Arrays",
+                "Objects",
+                "DOM",
+                "Events"
+            ],
+
+            advanced: [
+                "Async JavaScript",
+                "Promises",
+                "Modules",
+                "APIs"
+            ],
+
+            mentorTitle:
+                "Let's start with JavaScript variables.",
+
+            mentorText:
+                "Variables allow JavaScript programs to store and work with information.",
+
+            code:
+`let name = "Alex";
+
+let age = 18;
+
+console.log(name);`,
+
+            question:
+                "Which keyword creates a changeable variable in JavaScript?",
+
+            answers: [
+                ["let", "let"],
+                ["html", "html"],
+                ["style", "style"]
+            ],
+
+            correct: "let"
+        },
+
+
+        java: {
+
+            label: "JAVA",
+
+            title: "Start with Java Foundations",
+
+            description:
+                "Build a strong Java foundation before moving into object-oriented and advanced programming.",
+
+            beginner: [
+                "Variables",
+                "Data Types",
+                "Conditions",
+                "Loops"
+            ],
+
+            intermediate: [
+                "Methods",
+                "Arrays",
+                "Classes",
+                "Objects"
+            ],
+
+            advanced: [
+                "Collections",
+                "Streams",
+                "Exceptions",
+                "Multithreading"
+            ],
+
+            mentorTitle:
+                "Let's start with Java variables.",
+
+            mentorText:
+                "Variables store information that your Java program can use and change.",
+
+            code:
+`int age = 18;
+
+double price = 99.99;
+
+String name = "Alex";`,
+
+            question:
+                "Which Java type is commonly used for whole numbers?",
+
+            answers: [
+                ["String", "string"],
+                ["int", "int"],
+                ["boolean", "boolean"]
+            ],
+
+            correct: "int"
+        },
+
+
+        csharp: {
+
+            label: "C#",
+
+            title: "Start with C# Foundations",
+
+            description:
+                "Learn the fundamentals of C# and gradually move toward object-oriented application development.",
+
+            beginner: [
+                "Variables",
+                "Types",
+                "Conditions",
+                "Loops"
+            ],
+
+            intermediate: [
+                "Methods",
+                "Classes",
+                "Objects",
+                "Collections"
+            ],
+
+            advanced: [
+                "LINQ",
+                "Async",
+                "Generics",
+                "Application Architecture"
+            ],
+
+            mentorTitle:
+                "Let's start with C# variables.",
+
+            mentorText:
+                "C# is strongly typed, so variables have defined data types.",
+
+            code:
+`int age = 18;
+
+string name = "Alex";
+
+bool active = true;`,
+
+            question:
+                "Which C# type stores true or false?",
+
+            answers: [
+                ["string", "string"],
+                ["bool", "bool"],
+                ["int", "int"]
+            ],
+
+            correct: "bool"
+        },
+
+
+        cpp: {
+
+            label: "C++",
+
+            title: "Start with C++ Foundations",
+
+            description:
+                "Build a strong C++ foundation before moving into memory, object-oriented programming and advanced concepts.",
+
+            beginner: [
+                "Variables",
+                "Types",
+                "Conditions",
+                "Loops"
+            ],
+
+            intermediate: [
+                "Functions",
+                "Arrays",
+                "Classes",
+                "Pointers"
+            ],
+
+            advanced: [
+                "STL",
+                "Templates",
+                "Memory",
+                "Modern C++"
+            ],
+
+            mentorTitle:
+                "Let's start with C++ variables.",
+
+            mentorText:
+                "C++ variables store values that your program can use during execution.",
+
+            code:
+`int age = 18;
+
+double price = 99.99;
+
+string name = "Alex";`,
+
+            question:
+                "Which C++ type is commonly used for whole numbers?",
+
+            answers: [
+                ["string", "string"],
+                ["int", "int"],
+                ["double", "double"]
+            ],
+
+            correct: "int"
+        }
+
+    };
+
+
+    /* =====================================================
+       GET ELEMENTS
+       ===================================================== */
+
+    const languageButtons =
+        document.querySelectorAll(
+            "#learningLadder .language-btn"
+        );
+
+    const languageLabel =
+        document.getElementById(
+            "currentLanguageLabel"
+        );
+
+    const languageTitle =
+        document.getElementById(
+            "currentLanguageTitle"
+        );
+
+    const languageDescription =
+        document.getElementById(
+            "currentLanguageDescription"
+        );
+
+    const beginnerConcepts =
+        document.getElementById(
+            "beginnerConcepts"
+        );
+
+    const intermediateConcepts =
+        document.getElementById(
+            "intermediateConcepts"
+        );
+
+    const advancedConcepts =
+        document.getElementById(
+            "advancedConcepts"
+        );
+
+    const mentorTitle =
+        document.getElementById(
+            "mentorTitle"
+        );
+
+    const mentorText =
+        document.getElementById(
+            "mentorText"
+        );
+
+    const mentorCode =
+        document.getElementById(
+            "mentorCode"
+        );
+
+    const challengeButton =
+        document.getElementById(
+            "learningChallenge"
+        );
+
+    const questionBox =
+        document.getElementById(
+            "learningQuestion"
+        );
+
+    const questionText =
+        document.getElementById(
+            "questionText"
+        );
+
+    const questionOptions =
+        document.getElementById(
+            "questionOptions"
+        );
+
+    const feedback =
+        document.getElementById(
+            "learningFeedback"
+        );
+
+
+    let currentLanguage = "html";
+
+
+    /* =====================================================
+       CREATE CONCEPTS
+       ===================================================== */
+
+    function renderConcepts(
+        element,
+        concepts
+    ) {
+
+        element.innerHTML = "";
+
+        concepts.forEach(
+            function (concept) {
+
+                const span =
+                    document.createElement(
+                        "span"
+                    );
+
+                span.textContent =
+                    concept;
+
+                element.appendChild(
+                    span
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       RENDER QUESTION
+       ===================================================== */
+
+    function renderQuestion(data) {
+
+        questionText.textContent =
+            data.question;
+
+        questionOptions.innerHTML = "";
+
+        feedback.textContent = "";
+
+        data.answers.forEach(
+            function (answer) {
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+                button.type = "button";
+
+                button.textContent =
+                    answer[0];
+
+                button.dataset.answer =
+                    answer[1];
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        if (
+                            button.dataset.answer ===
+                            data.correct
+                        ) {
+
+                            feedback.textContent =
+                                "✓ Correct! You understand the foundation.";
+
+                            feedback.style.color =
+                                "#32d583";
+
+                        } else {
+
+                            feedback.textContent =
+                                "Not quite. Think about what this language is designed to do.";
+
+                            feedback.style.color =
+                                "#ff5c72";
+
+                        }
+
+                    }
+                );
+
+                questionOptions.appendChild(
+                    button
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       UPDATE LANGUAGE
+       ===================================================== */
+
+    function updateLanguage(
+        language
+    ) {
+
+        const data =
+            learningData[language];
+
+        if (!data) {
+            return;
+        }
+
+        currentLanguage =
+            language;
+
+
+        languageLabel.textContent =
+            data.label;
+
+        languageTitle.textContent =
+            data.title;
+
+        languageDescription.textContent =
+            data.description;
+
+        mentorTitle.textContent =
+            data.mentorTitle;
+
+        mentorText.textContent =
+            data.mentorText;
+
+        mentorCode.textContent =
+            data.code;
+
+
+        renderConcepts(
+            beginnerConcepts,
+            data.beginner
+        );
+
+        renderConcepts(
+            intermediateConcepts,
+            data.intermediate
+        );
+
+        renderConcepts(
+            advancedConcepts,
+            data.advanced
+        );
+
+
+        renderQuestion(
+            data
+        );
+
+
+        questionBox.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    /* =====================================================
+       LANGUAGE BUTTONS
+       ===================================================== */
+
+    languageButtons.forEach(
+        function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    languageButtons.forEach(
+                        function (item) {
+
+                            item.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    updateLanguage(
+                        button.dataset.language
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       SHOW CHALLENGE
+       ===================================================== */
+
+    if (challengeButton) {
+
+        challengeButton.addEventListener(
+            "click",
+            function () {
+
+                questionBox.classList.add(
+                    "show"
+                );
+
+                questionBox.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest"
+                });
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       INITIALIZE
+       ===================================================== */
+
+    updateLanguage(
+        "html"
+    );
+
+})();
+
+</script>
+
+<!-- =========================================================
+     END OF MULTI-LANGUAGE AI LEARNING LADDER
+     ========================================================= -->
