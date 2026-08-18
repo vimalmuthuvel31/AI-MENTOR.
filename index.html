@@ -1445,3 +1445,2135 @@ Ask me a programming question or paste some code and I'll help you understand it
 
 </body>
 </html>
+<!-- =========================================================
+     UNIQUE FEATURES
+     1. BUG DETECTIVE
+     2. MISTAKE FINGERPRINT
+     ========================================================= -->
+
+<section class="unique-features" id="uniqueFeatures">
+
+  <div class="unique-container">
+
+    <!-- SECTION HEADER -->
+
+    <div class="unique-heading">
+
+      <span class="unique-label">
+        YOUR PERSONAL CODING TRAINER
+      </span>
+
+      <h2>
+        Don't just fix bugs.
+        <span>Learn how you think.</span>
+      </h2>
+
+      <p>
+        Practice debugging with interactive challenges and
+        build a personal mistake fingerprint as you learn.
+      </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         FEATURE 1 — BUG DETECTIVE
+         ===================================================== -->
+
+    <div class="detective-card">
+
+      <div class="detective-header">
+
+        <div>
+
+          <div class="detective-title">
+            <span class="detective-icon">🕵️</span>
+
+            <div>
+              <small>INTERACTIVE CHALLENGE</small>
+
+              <h3>Bug Detective</h3>
+            </div>
+          </div>
+
+          <p class="detective-description">
+            Find the bug yourself. Your mentor gives you clues,
+            not the answer.
+          </p>
+
+        </div>
+
+
+        <div class="difficulty">
+          <span>Difficulty</span>
+
+          <div class="difficulty-bars">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- CASE -->
+
+      <div class="case-box">
+
+        <div class="case-top">
+
+          <span>
+            CASE #024
+          </span>
+
+          <span id="caseStatus">
+            INVESTIGATION OPEN
+          </span>
+
+        </div>
+
+
+        <h4>
+          The Missing Number
+        </h4>
+
+
+        <p>
+          This program should print every number from
+          <strong>1 to 10</strong>, but something is wrong.
+          Can you find it?
+        </p>
+
+
+        <!-- CODE -->
+
+        <div class="detective-code">
+
+<pre><span class="py-keyword">for</span> number <span class="py-keyword">in</span> <span class="py-function">range</span>(<span class="py-number">1</span>, <span class="py-number">10</span>):
+    <span class="py-function">print</span>(number)</pre>
+
+        </div>
+
+
+        <!-- STEP 1 -->
+
+        <div
+          class="detective-step active"
+          id="detectiveStep1"
+        >
+
+          <div class="step-heading">
+
+            <span class="step-number">
+              01
+            </span>
+
+            <div>
+              <small>YOUR PREDICTION</small>
+
+              <h5>
+                What will this program print?
+              </h5>
+            </div>
+
+          </div>
+
+
+          <input
+            type="text"
+            id="predictionInput"
+            class="detective-input"
+            placeholder="Example: 1 2 3 4..."
+          >
+
+
+          <button
+            class="detective-button"
+            id="predictionButton"
+          >
+            Check My Prediction →
+          </button>
+
+        </div>
+
+
+        <!-- STEP 2 -->
+
+        <div
+          class="detective-step"
+          id="detectiveStep2"
+        >
+
+          <div class="step-heading">
+
+            <span class="step-number">
+              02
+            </span>
+
+            <div>
+              <small>FIND THE BUG</small>
+
+              <h5>
+                Which part of the code looks suspicious?
+              </h5>
+            </div>
+
+          </div>
+
+
+          <div class="suspect-options">
+
+            <button data-suspect="for">
+              `for number`
+            </button>
+
+            <button data-suspect="range">
+              `range(1, 10)`
+            </button>
+
+            <button data-suspect="print">
+              `print(number)`
+            </button>
+
+          </div>
+
+
+          <p
+            class="detective-feedback"
+            id="suspectFeedback"
+          ></p>
+
+        </div>
+
+
+        <!-- STEP 3 -->
+
+        <div
+          class="detective-step"
+          id="detectiveStep3"
+        >
+
+          <div class="step-heading">
+
+            <span class="step-number">
+              03
+            </span>
+
+            <div>
+              <small>YOUR EXPLANATION</small>
+
+              <h5>
+                Why do you think that part is causing the problem?
+              </h5>
+            </div>
+
+          </div>
+
+
+          <textarea
+            id="explanationInput"
+            class="detective-textarea"
+            placeholder="Explain what you think is happening..."
+          ></textarea>
+
+
+          <button
+            class="detective-button"
+            id="explanationButton"
+          >
+            Submit Explanation →
+          </button>
+
+
+          <div
+            class="mentor-response"
+            id="mentorResponse"
+          ></div>
+
+        </div>
+
+
+        <!-- COMPLETE -->
+
+        <div
+          class="detective-complete"
+          id="detectiveComplete"
+        >
+
+          <div class="complete-icon">
+            ✓
+          </div>
+
+          <h4>
+            Case Solved!
+          </h4>
+
+          <p>
+            Nice work. You discovered an important Python
+            concept: the end value of <code>range()</code>
+            is not included.
+          </p>
+
+
+          <div class="lesson-card">
+
+            <strong>
+              🧠 What you learned
+            </strong>
+
+            <span>
+              <code>range(1, 10)</code> produces numbers
+              from 1 through 9.
+            </span>
+
+            <span>
+              To include 10, use
+              <code>range(1, 11)</code>.
+            </span>
+
+          </div>
+
+
+          <button
+            class="next-case-button"
+            id="nextCaseButton"
+          >
+            Start Another Case →
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FEATURE 2 — MISTAKE FINGERPRINT
+         ===================================================== -->
+
+    <div class="fingerprint-card">
+
+      <div class="fingerprint-header">
+
+        <div>
+
+          <span class="fingerprint-label">
+            YOUR LEARNING PROFILE
+          </span>
+
+          <h3>
+            🧠 Mistake Fingerprint
+          </h3>
+
+          <p>
+            Your mentor remembers the types of mistakes
+            you make most often and uses them to personalize
+            your practice.
+          </p>
+
+        </div>
+
+
+        <button
+          class="reset-fingerprint"
+          id="resetFingerprint"
+        >
+          Reset Data
+        </button>
+
+      </div>
+
+
+      <div class="fingerprint-content">
+
+        <!-- PROFILE -->
+
+        <div class="fingerprint-profile">
+
+          <div class="profile-circle">
+            <span id="mistakeCount">
+              0
+            </span>
+
+            <small>
+              mistakes
+            </small>
+          </div>
+
+
+          <div>
+
+            <h4>
+              Your Debugging Profile
+            </h4>
+
+            <p id="profileMessage">
+              Complete challenges to discover
+              your coding patterns.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- BARS -->
+
+        <div class="mistake-bars">
+
+          <!-- LOGIC -->
+
+          <div class="mistake-row">
+
+            <div class="mistake-info">
+
+              <span>
+                Logic mistakes
+              </span>
+
+              <strong id="logicValue">
+                0%
+              </strong>
+
+            </div>
+
+            <div class="mistake-track">
+              <div
+                class="mistake-progress"
+                id="logicBar"
+              ></div>
+            </div>
+
+          </div>
+
+
+          <!-- LOOPS -->
+
+          <div class="mistake-row">
+
+            <div class="mistake-info">
+
+              <span>
+                Loop mistakes
+              </span>
+
+              <strong id="loopValue">
+                0%
+              </strong>
+
+            </div>
+
+            <div class="mistake-track">
+              <div
+                class="mistake-progress"
+                id="loopBar"
+              ></div>
+            </div>
+
+          </div>
+
+
+          <!-- EDGE CASES -->
+
+          <div class="mistake-row">
+
+            <div class="mistake-info">
+
+              <span>
+                Edge cases
+              </span>
+
+              <strong id="edgeValue">
+                0%
+              </strong>
+
+            </div>
+
+            <div class="mistake-track">
+              <div
+                class="mistake-progress"
+                id="edgeBar"
+              ></div>
+            </div>
+
+          </div>
+
+
+          <!-- SYNTAX -->
+
+          <div class="mistake-row">
+
+            <div class="mistake-info">
+
+              <span>
+                Syntax mistakes
+              </span>
+
+              <strong id="syntaxValue">
+                0%
+              </strong>
+
+            </div>
+
+            <div class="mistake-track">
+              <div
+                class="mistake-progress"
+                id="syntaxBar"
+              ></div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PATTERN -->
+
+      <div
+        class="fingerprint-insight"
+        id="fingerprintInsight"
+      >
+
+        <span class="insight-icon">
+          💡
+        </span>
+
+        <div>
+
+          <strong>
+            Your mentor's observation
+          </strong>
+
+          <p id="insightText">
+            Start solving challenges and your mentor
+            will identify patterns in your mistakes.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     STYLES FOR THE TWO NEW FEATURES
+     ========================================================= -->
+
+<style>
+
+  .unique-features {
+    padding: 110px 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+
+    background:
+      radial-gradient(
+        circle at 50% 0%,
+        rgba(97,226,148,.06),
+        transparent 45%
+      );
+  }
+
+
+  .unique-container {
+    width: min(1100px, calc(100% - 40px));
+    margin: auto;
+  }
+
+
+  .unique-heading {
+    max-width: 720px;
+    margin-bottom: 55px;
+  }
+
+
+  .unique-label,
+  .fingerprint-label {
+    display: inline-block;
+    margin-bottom: 13px;
+
+    color: #61e294;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.7px;
+  }
+
+
+  .unique-heading h2 {
+    font-size: clamp(35px, 5vw, 54px);
+    line-height: 1.06;
+
+    letter-spacing: -2px;
+  }
+
+
+  .unique-heading h2 span {
+    color: #61e294;
+  }
+
+
+  .unique-heading p {
+    margin-top: 17px;
+
+    color: #99aaa0;
+
+    font-size: 15px;
+  }
+
+
+  /* =====================================================
+     BUG DETECTIVE
+     ===================================================== */
+
+
+  .detective-card {
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 18px;
+
+    background: #0b1712;
+
+    box-shadow:
+      0 30px 80px rgba(0,0,0,.22);
+  }
+
+
+  .detective-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 28px;
+
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+
+
+  .detective-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+
+  .detective-icon {
+    width: 46px;
+    height: 46px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+
+    background: rgba(97,226,148,.09);
+
+    font-size: 22px;
+  }
+
+
+  .detective-title small {
+    color: #64736a;
+
+    font-size: 9px;
+    letter-spacing: 1.4px;
+    font-weight: 800;
+  }
+
+
+  .detective-title h3 {
+    margin-top: 3px;
+
+    font-size: 21px;
+  }
+
+
+  .detective-description {
+    max-width: 570px;
+
+    margin-top: 12px;
+
+    color: #89988f;
+
+    font-size: 13px;
+  }
+
+
+  .difficulty {
+    min-width: 130px;
+  }
+
+
+  .difficulty > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #67756d;
+
+    font-size: 10px;
+  }
+
+
+  .difficulty-bars {
+    display: flex;
+    gap: 3px;
+  }
+
+
+  .difficulty-bars i {
+    width: 8px;
+    height: 5px;
+
+    border-radius: 2px;
+
+    background: #24332b;
+  }
+
+
+  .difficulty-bars i:nth-child(-n+6) {
+    background: #61e294;
+  }
+
+
+  .case-box {
+    padding: 30px;
+  }
+
+
+  .case-top {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+
+    color: #5c6c63;
+
+    font-family: monospace;
+    font-size: 10px;
+  }
+
+
+  #caseStatus {
+    color: #61e294;
+  }
+
+
+  .case-box > h4 {
+    font-size: 20px;
+  }
+
+
+  .case-box > p {
+    max-width: 650px;
+
+    margin-top: 7px;
+
+    color: #8e9c94;
+
+    font-size: 13px;
+  }
+
+
+  .detective-code {
+    margin-top: 24px;
+
+    overflow-x: auto;
+
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 10px;
+
+    background: #06100c;
+  }
+
+
+  .detective-code pre {
+    padding: 19px;
+
+    color: #cdd8d1;
+
+    font-family: monospace;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+
+  .py-keyword {
+    color: #a7a6ff;
+  }
+
+
+  .py-function {
+    color: #67d99d;
+  }
+
+
+  .py-number {
+    color: #e4b47a;
+  }
+
+
+  .detective-step {
+    display: none;
+
+    margin-top: 24px;
+
+    padding: 22px;
+
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 12px;
+
+    background: rgba(255,255,255,.018);
+  }
+
+
+  .detective-step.active {
+    display: block;
+  }
+
+
+  .step-heading {
+    display: flex;
+    gap: 13px;
+
+    align-items: flex-start;
+
+    margin-bottom: 18px;
+  }
+
+
+  .step-number {
+    display: grid;
+    place-items: center;
+
+    width: 28px;
+    height: 28px;
+
+    flex-shrink: 0;
+
+    border-radius: 7px;
+
+    background: rgba(97,226,148,.09);
+
+    color: #61e294;
+
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: 800;
+  }
+
+
+  .step-heading small {
+    color: #65746b;
+
+    font-size: 9px;
+    letter-spacing: 1.2px;
+  }
+
+
+  .step-heading h5 {
+    margin-top: 4px;
+
+    font-size: 14px;
+  }
+
+
+  .detective-input,
+  .detective-textarea {
+    width: 100%;
+
+    outline: none;
+
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 8px;
+
+    background: #07100c;
+
+    color: #d6dfda;
+
+    font-size: 12px;
+  }
+
+
+  .detective-input {
+    height: 43px;
+
+    padding: 0 12px;
+  }
+
+
+  .detective-textarea {
+    min-height: 100px;
+
+    resize: vertical;
+
+    padding: 12px;
+
+    font-family: inherit;
+  }
+
+
+  .detective-input:focus,
+  .detective-textarea:focus {
+    border-color: rgba(97,226,148,.4);
+  }
+
+
+  .detective-button,
+  .next-case-button {
+    margin-top: 12px;
+
+    padding: 11px 16px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: #61e294;
+
+    color: #06100b;
+
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+
+  .suspect-options {
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, 1fr);
+
+    gap: 9px;
+  }
+
+
+  .suspect-options button {
+    padding: 13px;
+
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 8px;
+
+    background: #07100c;
+
+    color: #a9b6af;
+
+    font-family: monospace;
+    font-size: 11px;
+  }
+
+
+  .suspect-options button:hover {
+    border-color: rgba(97,226,148,.35);
+
+    color: #61e294;
+  }
+
+
+  .detective-feedback {
+    min-height: 20px;
+
+    margin-top: 13px;
+
+    color: #61e294;
+
+    font-size: 12px;
+  }
+
+
+  .mentor-response {
+    display: none;
+
+    margin-top: 15px;
+
+    padding: 13px;
+
+    border-radius: 8px;
+
+    background: rgba(97,226,148,.06);
+
+    color: #a9b9b0;
+
+    font-size: 12px;
+  }
+
+
+  .detective-complete {
+    display: none;
+
+    margin-top: 24px;
+
+    padding: 30px;
+
+    border: 1px solid rgba(97,226,148,.2);
+    border-radius: 12px;
+
+    background: rgba(97,226,148,.045);
+
+    text-align: center;
+  }
+
+
+  .detective-complete.show {
+    display: block;
+  }
+
+
+  .complete-icon {
+    width: 46px;
+    height: 46px;
+
+    display: grid;
+    place-items: center;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    background: #61e294;
+
+    color: #06100b;
+
+    font-weight: 900;
+  }
+
+
+  .detective-complete h4 {
+    margin-top: 15px;
+
+    font-size: 19px;
+  }
+
+
+  .detective-complete > p {
+    max-width: 560px;
+
+    margin: 7px auto 20px;
+
+    color: #89988f;
+
+    font-size: 13px;
+  }
+
+
+  .lesson-card {
+    max-width: 560px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin: auto;
+
+    padding: 16px;
+
+    border-radius: 9px;
+
+    background: rgba(0,0,0,.18);
+
+    text-align: left;
+  }
+
+
+  .lesson-card strong {
+    color: #61e294;
+
+    font-size: 12px;
+  }
+
+
+  .lesson-card span {
+    color: #89988f;
+
+    font-size: 11px;
+  }
+
+
+  .lesson-card code {
+    color: #d9b27b;
+  }
+
+
+  /* =====================================================
+     MISTAKE FINGERPRINT
+     ===================================================== */
+
+
+  .fingerprint-card {
+    margin-top: 18px;
+
+    padding: 30px;
+
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 18px;
+
+    background: #0b1712;
+  }
+
+
+  .fingerprint-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 30px;
+  }
+
+
+  .fingerprint-header h3 {
+    font-size: 22px;
+  }
+
+
+  .fingerprint-header p {
+    max-width: 650px;
+
+    margin-top: 8px;
+
+    color: #89988f;
+
+    font-size: 13px;
+  }
+
+
+  .reset-fingerprint {
+    height: fit-content;
+
+    padding: 8px 11px;
+
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #68766e;
+
+    font-size: 10px;
+  }
+
+
+  .reset-fingerprint:hover {
+    color: #ff8585;
+
+    border-color: rgba(255,100,100,.25);
+  }
+
+
+  .fingerprint-content {
+    display: grid;
+
+    grid-template-columns:
+      .8fr 1.5fr;
+
+    gap: 50px;
+
+    align-items: center;
+
+    margin-top: 35px;
+  }
+
+
+  .fingerprint-profile {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+  }
+
+
+  .profile-circle {
+    width: 82px;
+    height: 82px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border: 1px solid rgba(97,226,148,.25);
+
+    border-radius: 50%;
+
+    background: rgba(97,226,148,.045);
+  }
+
+
+  .profile-circle span {
+    color: #61e294;
+
+    font-size: 24px;
+    font-weight: 800;
+  }
+
+
+  .profile-circle small {
+    color: #607067;
+
+    font-size: 8px;
+  }
+
+
+  .fingerprint-profile h4 {
+    font-size: 14px;
+  }
+
+
+  .fingerprint-profile p {
+    max-width: 220px;
+
+    margin-top: 5px;
+
+    color: #6f7e75;
+
+    font-size: 11px;
+  }
+
+
+  .mistake-bars {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+  }
+
+
+  .mistake-info {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 6px;
+
+    color: #89988f;
+
+    font-size: 11px;
+  }
+
+
+  .mistake-info strong {
+    color: #61e294;
+
+    font-size: 10px;
+  }
+
+
+  .mistake-track {
+    height: 6px;
+
+    overflow: hidden;
+
+    border-radius: 99px;
+
+    background: #1a2820;
+  }
+
+
+  .mistake-progress {
+    width: 0%;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #61e294;
+
+    transition: width .7s ease;
+  }
+
+
+  .fingerprint-insight {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 13px;
+
+    margin-top: 35px;
+
+    padding: 16px;
+
+    border: 1px solid rgba(97,226,148,.12);
+    border-radius: 10px;
+
+    background: rgba(97,226,148,.035);
+  }
+
+
+  .insight-icon {
+    font-size: 18px;
+  }
+
+
+  .fingerprint-insight strong {
+    display: block;
+
+    color: #b8c7bf;
+
+    font-size: 11px;
+  }
+
+
+  .fingerprint-insight p {
+    margin-top: 4px;
+
+    color: #75847b;
+
+    font-size: 11px;
+  }
+
+
+  @media (max-width: 750px) {
+
+    .detective-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+
+    .difficulty {
+      width: 100%;
+    }
+
+
+    .suspect-options {
+      grid-template-columns: 1fr;
+    }
+
+
+    .fingerprint-header {
+      flex-direction: column;
+    }
+
+
+    .fingerprint-content {
+      grid-template-columns: 1fr;
+
+      gap: 30px;
+    }
+
+  }
+
+
+  @media (max-width: 500px) {
+
+    .unique-container {
+      width: calc(100% - 28px);
+    }
+
+
+    .unique-features {
+      padding: 75px 0;
+    }
+
+
+    .detective-header,
+    .case-box,
+    .fingerprint-card {
+      padding: 20px;
+    }
+
+  }
+
+</style>
+
+
+<!-- =========================================================
+     JAVASCRIPT FOR THE TWO FEATURES
+     ========================================================= -->
+
+<script>
+
+  /* ========================================================
+     MISTAKE FINGERPRINT STORAGE
+     ======================================================== */
+
+  const fingerprintKey =
+    "aiCodingMentorFingerprint";
+
+
+  const defaultFingerprint = {
+
+    total: 0,
+
+    logic: 0,
+
+    loops: 0,
+
+    edge: 0,
+
+    syntax: 0
+
+  };
+
+
+  function getFingerprint() {
+
+    try {
+
+      const saved =
+        localStorage.getItem(
+          fingerprintKey
+        );
+
+
+      if (!saved) {
+
+        return {
+          ...defaultFingerprint
+        };
+
+      }
+
+
+      const parsed =
+        JSON.parse(saved);
+
+
+      return {
+        ...defaultFingerprint,
+        ...parsed
+      };
+
+    } catch (error) {
+
+      console.warn(
+        "Could not read fingerprint:",
+        error
+      );
+
+      return {
+        ...defaultFingerprint
+      };
+
+    }
+
+  }
+
+
+  function saveFingerprint(data) {
+
+    localStorage.setItem(
+      fingerprintKey,
+      JSON.stringify(data)
+    );
+
+  }
+
+
+  function recordMistake(type) {
+
+    const data =
+      getFingerprint();
+
+
+    data.total++;
+
+
+    if (
+      Object.prototype.hasOwnProperty
+        .call(data, type)
+    ) {
+
+      data[type]++;
+
+    }
+
+
+    saveFingerprint(data);
+
+    updateFingerprintUI();
+
+  }
+
+
+  function percentage(
+    value,
+    total
+  ) {
+
+    if (!total) {
+
+      return 0;
+
+    }
+
+
+    return Math.min(
+      100,
+      Math.round(
+        (value / total) * 100
+      )
+    );
+
+  }
+
+
+  function updateFingerprintUI() {
+
+    const data =
+      getFingerprint();
+
+
+    const logic =
+      percentage(
+        data.logic,
+        data.total
+      );
+
+
+    const loops =
+      percentage(
+        data.loops,
+        data.total
+      );
+
+
+    const edge =
+      percentage(
+        data.edge,
+        data.total
+      );
+
+
+    const syntax =
+      percentage(
+        data.syntax,
+        data.total
+      );
+
+
+    document.getElementById(
+      "mistakeCount"
+    ).textContent =
+      data.total;
+
+
+    document.getElementById(
+      "logicValue"
+    ).textContent =
+      logic + "%";
+
+
+    document.getElementById(
+      "loopValue"
+    ).textContent =
+      loops + "%";
+
+
+    document.getElementById(
+      "edgeValue"
+    ).textContent =
+      edge + "%";
+
+
+    document.getElementById(
+      "syntaxValue"
+    ).textContent =
+      syntax + "%";
+
+
+    document.getElementById(
+      "logicBar"
+    ).style.width =
+      logic + "%";
+
+
+    document.getElementById(
+      "loopBar"
+    ).style.width =
+      loops + "%";
+
+
+    document.getElementById(
+      "edgeBar"
+    ).style.width =
+      edge + "%";
+
+
+    document.getElementById(
+      "syntaxBar"
+    ).style.width =
+      syntax + "%";
+
+
+    updateFingerprintInsight(data);
+
+  }
+
+
+  function updateFingerprintInsight(data) {
+
+    const message =
+      document.getElementById(
+        "profileMessage"
+      );
+
+
+    const insight =
+      document.getElementById(
+        "insightText"
+      );
+
+
+    if (!data.total) {
+
+      message.textContent =
+        "Complete challenges to discover your coding patterns.";
+
+      insight.textContent =
+        "Start solving challenges and your mentor will identify patterns in your mistakes.";
+
+      return;
+
+    }
+
+
+    const categories = [
+
+      {
+        name: "logic",
+        label: "logic"
+      },
+
+      {
+        name: "loops",
+        label: "loop"
+      },
+
+      {
+        name: "edge",
+        label: "edge-case"
+      },
+
+      {
+        name: "syntax",
+        label: "syntax"
+      }
+
+    ];
+
+
+    categories.sort(
+      (a,b) =>
+        data[b.name] -
+        data[a.name]
+    );
+
+
+    const strongest =
+      categories[0];
+
+
+    if (
+      data[strongest.name] === 0
+    ) {
+
+      message.textContent =
+        "Your profile is still developing.";
+
+      insight.textContent =
+        "Keep solving challenges so your mentor can identify useful patterns.";
+
+      return;
+
+    }
+
+
+    const percent =
+      percentage(
+        data[strongest.name],
+        data.total
+      );
+
+
+    message.textContent =
+      "Your mentor has identified a pattern.";
+
+
+    if (
+      strongest.name === "loops"
+    ) {
+
+      insight.textContent =
+        "You often make mistakes involving loops and boundaries. Your next challenges will include more loop reasoning.";
+
+    }
+
+    else if (
+      strongest.name === "logic"
+    ) {
+
+      insight.textContent =
+        "You often understand the syntax but miss a logical condition. Try explaining what each condition should do before changing your code.";
+
+    }
+
+    else if (
+      strongest.name === "edge"
+    ) {
+
+      insight.textContent =
+        "You sometimes miss unusual inputs. Before submitting code, try asking: what happens with an empty, very large, or unexpected input?";
+
+    }
+
+    else {
+
+      insight.textContent =
+        "Syntax mistakes appear frequently in your attempts. Slow down and check the structure of your code before changing its logic.";
+
+    }
+
+
+    insight.textContent +=
+      " Current pattern strength: " +
+      percent +
+      "%.";
+
+  }
+
+
+  /* ========================================================
+     BUG DETECTIVE
+     ======================================================== */
+
+
+  const predictionInput =
+    document.getElementById(
+      "predictionInput"
+    );
+
+
+  const predictionButton =
+    document.getElementById(
+      "predictionButton"
+    );
+
+
+  const step1 =
+    document.getElementById(
+      "detectiveStep1"
+    );
+
+
+  const step2 =
+    document.getElementById(
+      "detectiveStep2"
+    );
+
+
+  const step3 =
+    document.getElementById(
+      "detectiveStep3"
+    );
+
+
+  const complete =
+    document.getElementById(
+      "detectiveComplete"
+    );
+
+
+  const caseStatus =
+    document.getElementById(
+      "caseStatus"
+    );
+
+
+  const suspectFeedback =
+    document.getElementById(
+      "suspectFeedback"
+    );
+
+
+  const mentorResponse =
+    document.getElementById(
+      "mentorResponse"
+    );
+
+
+  let predictionCorrect =
+    false;
+
+
+  let suspectCorrect =
+    false;
+
+
+  /* ========================================================
+     STEP 1 — PREDICTION
+     ======================================================== */
+
+  predictionButton.addEventListener(
+    "click",
+    () => {
+
+      const answer =
+        predictionInput.value
+          .trim()
+          .replace(/\s+/g, " ");
+
+
+      if (!answer) {
+
+        predictionInput.focus();
+
+        return;
+
+      }
+
+
+      /*
+       * Correct output:
+       *
+       * 1 2 3 4 5 6 7 8 9
+       */
+
+      const normalized =
+        answer
+          .replace(/,/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+
+
+      if (
+        normalized ===
+        "1 2 3 4 5 6 7 8 9"
+      ) {
+
+        predictionCorrect =
+          true;
+
+        recordMistake("edge");
+
+      }
+
+      else {
+
+        recordMistake("logic");
+
+      }
+
+
+      step1.classList.remove(
+        "active"
+      );
+
+
+      step2.classList.add(
+        "active"
+      );
+
+
+      caseStatus.textContent =
+        "STEP 2 — FIND THE BUG";
+
+    }
+  );
+
+
+  /* ========================================================
+     STEP 2 — SUSPECT
+     ======================================================== */
+
+  document
+    .querySelectorAll(
+      ".suspect-options button"
+    )
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const selected =
+            button.dataset.suspect;
+
+
+          if (
+            selected === "range"
+          ) {
+
+            suspectCorrect =
+              true;
+
+
+            suspectFeedback.textContent =
+              "✓ Good instinct. range(1, 10) is where we should investigate.";
+
+            suspectFeedback.style.color =
+              "#61e294";
+
+            recordMistake("loops");
+
+
+          } else {
+
+            suspectFeedback.textContent =
+              "Not quite. Look at how Python decides where the range ends.";
+
+            suspectFeedback.style.color =
+              "#ff9a9a";
+
+            recordMistake("logic");
+
+          }
+
+
+          /*
+           * Allow the student to continue
+           * even if the first choice was wrong.
+           */
+
+          setTimeout(
+            () => {
+
+              step2.classList.remove(
+                "active"
+              );
+
+
+              step3.classList.add(
+                "active"
+              );
+
+
+              caseStatus.textContent =
+                "STEP 3 — EXPLAIN THE BUG";
+
+            },
+            700
+          );
+
+        }
+      );
+
+    });
+
+
+  /* ========================================================
+     STEP 3 — EXPLANATION
+     ======================================================== */
+
+  document
+    .getElementById(
+      "explanationButton"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        const explanation =
+          document
+            .getElementById(
+              "explanationInput"
+            )
+            .value
+            .trim();
+
+
+        if (!explanation) {
+
+          document
+            .getElementById(
+              "explanationInput"
+            )
+            .focus();
+
+          return;
+
+        }
+
+
+        mentorResponse.style.display =
+          "block";
+
+
+        mentorResponse.innerHTML = `
+          <strong style="color:#61e294;">
+            AI Mentor:
+          </strong>
+          <br><br>
+          You're on the right track. Python's
+          <code style="color:#d9b27b;">range()</code>
+          stops before the ending value.
+          That's why
+          <code style="color:#d9b27b;">range(1, 10)</code>
+          gives us 1 through 9 instead of 1 through 10.
+        `;
+
+
+        recordMistake(
+          suspectCorrect
+            ? "loops"
+            : "logic"
+        );
+
+
+        setTimeout(
+          () => {
+
+            step3.classList.remove(
+              "active"
+            );
+
+
+            complete.classList.add(
+              "show"
+            );
+
+
+            caseStatus.textContent =
+              "CASE SOLVED ✓";
+
+          },
+          900
+        );
+
+      }
+    );
+
+
+  /* ========================================================
+     NEXT CASE
+     ======================================================== */
+
+  document
+    .getElementById(
+      "nextCaseButton"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        /*
+         * For now, restart the case.
+         *
+         * Later you can replace this with
+         * dynamically generated AI cases.
+         */
+
+        predictionInput.value =
+          "";
+
+
+        document
+          .getElementById(
+            "explanationInput"
+          )
+          .value =
+          "";
+
+
+        mentorResponse.style.display =
+          "none";
+
+
+        suspectFeedback.textContent =
+          "";
+
+
+        complete.classList.remove(
+          "show"
+        );
+
+
+        step3.classList.remove(
+          "active"
+        );
+
+
+        step2.classList.remove(
+          "active"
+        );
+
+
+        step1.classList.add(
+          "active"
+        );
+
+
+        caseStatus.textContent =
+          "INVESTIGATION OPEN";
+
+
+        predictionCorrect =
+          false;
+
+
+        suspectCorrect =
+          false;
+
+      }
+    );
+
+
+  /* ========================================================
+     RESET FINGERPRINT
+     ======================================================== */
+
+  document
+    .getElementById(
+      "resetFingerprint"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        const confirmed =
+          window.confirm(
+            "Reset your Mistake Fingerprint?"
+          );
+
+
+        if (!confirmed) {
+
+          return;
+
+        }
+
+
+        localStorage.removeItem(
+          fingerprintKey
+        );
+
+
+        updateFingerprintUI();
+
+      }
+    );
+
+
+  /* ========================================================
+     INITIALIZE
+     ======================================================== */
+
+  updateFingerprintUI();
+
+</script>
