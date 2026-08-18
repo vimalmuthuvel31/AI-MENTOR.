@@ -3576,1019 +3576,18 @@ Ask me a programming question or paste some code and I'll help you understand it
 
   updateFingerprintUI();
 
-</script>
-<!-- =========================================================
-     AI CODING MENTOR
-     PERSONALIZED LEARNING LADDER
-     ISOLATED VERSION
-     
-     Paste everything below BEFORE </body>
-     ========================================================= -->
+</script><script>
 
-<style>
-
-/* =========================================================
-   MAIN
-   ========================================================= */
-
-#alm-learning-ladder {
-    width: 100%;
-    margin: 0;
-    padding: 80px 0;
-    box-sizing: border-box;
-    background: transparent;
-}
-
-#alm-learning-ladder *,
-#alm-learning-ladder *::before,
-#alm-learning-ladder *::after {
-    box-sizing: border-box;
-}
-
-.alm-container {
-    width: min(1100px, calc(100% - 32px));
-    margin: 0 auto;
-}
-
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-.alm-header {
-    max-width: 760px;
-    margin-bottom: 30px;
-}
-
-.alm-eyebrow {
-    display: inline-block;
-    margin-bottom: 10px;
-
-    color: #5b8cff;
-
-    font-size: 10px;
-    font-weight: 800;
-
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
-}
-
-.alm-title {
-    margin: 0;
-
-    color: #f4f7ff;
-
-    font-size: clamp(32px, 5vw, 52px);
-    line-height: 1.08;
-
-    letter-spacing: -2px;
-}
-
-.alm-title strong {
-    color: #7c5cff;
-}
-
-.alm-description {
-    max-width: 680px;
-
-    margin: 16px 0 0;
-
-    color: #9da9c2;
-
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-
-/* =========================================================
-   LANGUAGE BUTTONS
-   ========================================================= */
-
-.alm-language-selector {
-    display: flex;
-    flex-wrap: wrap;
-
-    gap: 8px;
-
-    margin-bottom: 18px;
-}
-
-.alm-language-button {
-    appearance: none;
-    -webkit-appearance: none;
-
-    border: 1px solid #26344f;
-    border-radius: 8px;
-
-    padding: 10px 14px;
-
-    background: #0d1424;
-
-    color: #9da9c2;
-
-    font-family: inherit;
-    font-size: 11px;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        border-color .2s ease,
-        color .2s ease,
-        background .2s ease,
-        transform .2s ease;
-}
-
-.alm-language-button:hover {
-    border-color: #5b8cff;
-
-    color: #ffffff;
-
-    transform: translateY(-1px);
-}
-
-.alm-language-button.alm-selected {
-    border-color: #5b8cff;
-
-    background: rgba(91, 140, 255, 0.12);
-
-    color: #ffffff;
-}
-
-
-/* =========================================================
-   CURRENT LANGUAGE
-   ========================================================= */
-
-.alm-current {
-    padding: 24px;
-
-    margin-bottom: 14px;
-
-    border: 1px solid rgba(91, 140, 255, 0.20);
-    border-radius: 15px;
-
-    background:
-        radial-gradient(
-            circle at 100% 0%,
-            rgba(124, 92, 255, 0.09),
-            transparent 40%
-        ),
-        #0d1424;
-}
-
-.alm-current-label {
-    display: block;
-
-    color: #5b8cff;
-
-    font-size: 9px;
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
-}
-
-.alm-current-title {
-    margin: 7px 0 0;
-
-    color: #f4f7ff;
-
-    font-size: 20px;
-}
-
-.alm-current-description {
-    margin: 8px 0 0;
-
-    color: #8998b0;
-
-    font-size: 12px;
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   LEVELS
-   ========================================================= */
-
-.alm-levels {
-    display: flex;
-    flex-direction: column;
-
-    gap: 12px;
-}
-
-.alm-level {
-    display: flex;
-
-    gap: 18px;
-
-    padding: 21px;
-
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 14px;
-
-    background: #0d1424;
-
-    transition:
-        border-color .2s ease,
-        transform .2s ease,
-        background .2s ease;
-}
-
-.alm-level:hover {
-    transform: translateY(-1px);
-
-    border-color: rgba(91,140,255,0.18);
-}
-
-.alm-level.alm-active {
-    border-color: rgba(91,140,255,0.32);
-
-    background:
-        radial-gradient(
-            circle at 100% 0%,
-            rgba(91,140,255,0.07),
-            transparent 35%
-        ),
-        #0d1424;
-}
-
-.alm-number {
-    width: 42px;
-    height: 42px;
-
-    display: grid;
-    place-items: center;
-
-    flex-shrink: 0;
-
-    border-radius: 9px;
-
-    background: rgba(91,140,255,0.09);
-
-    color: #5b8cff;
-
-    font-family: monospace;
-    font-size: 11px;
-    font-weight: 800;
-}
-
-.alm-level-content {
-    min-width: 0;
-    flex: 1;
-}
-
-.alm-level-header {
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 20px;
-}
-
-.alm-level-small {
-    display: block;
-
-    color: #68768c;
-
-    font-size: 9px;
-
-    letter-spacing: 1.2px;
-}
-
-.alm-level-title {
-    margin: 4px 0 0;
-
-    color: #f4f7ff;
-
-    font-size: 16px;
-}
-
-.alm-level-status {
-    flex-shrink: 0;
-
-    color: #5b8cff;
-
-    font-size: 9px;
-    font-weight: 800;
-}
-
-.alm-level-status.alm-locked {
-    color: #647188;
-}
-
-.alm-level-description {
-    margin: 7px 0 0;
-
-    color: #7f8ca1;
-
-    font-size: 12px;
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   CONCEPTS
-   ========================================================= */
-
-.alm-concepts {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 7px;
-
-    margin-top: 13px;
-}
-
-.alm-concept {
-    display: inline-block;
-
-    padding: 6px 9px;
-
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 6px;
-
-    background: #080f1b;
-
-    color: #77859a;
-
-    font-size: 9px;
-}
-
-
-/* =========================================================
-   MENTOR
-   ========================================================= */
-
-.alm-mentor {
-    display: flex;
-
-    gap: 17px;
-
-    margin-top: 18px;
-    padding: 25px;
-
-    border: 1px solid rgba(124,92,255,0.22);
-    border-radius: 15px;
-
-    background:
-        radial-gradient(
-            circle at 0% 100%,
-            rgba(124,92,255,0.08),
-            transparent 40%
-        ),
-        #0d1424;
-}
-
-.alm-mentor-icon {
-    width: 45px;
-    height: 45px;
-
-    display: grid;
-    place-items: center;
-
-    flex-shrink: 0;
-
-    border-radius: 11px;
-
-    background: rgba(124,92,255,0.10);
-
-    font-size: 21px;
-}
-
-.alm-mentor-content {
-    min-width: 0;
-    flex: 1;
-}
-
-.alm-mentor-label {
-    display: block;
-
-    color: #7c5cff;
-
-    font-size: 9px;
-    font-weight: 800;
-
-    letter-spacing: 1.3px;
-}
-
-.alm-mentor-title {
-    margin: 6px 0 0;
-
-    color: #f4f7ff;
-
-    font-size: 18px;
-}
-
-.alm-mentor-text {
-    margin: 8px 0 0;
-
-    color: #8998b0;
-
-    font-size: 12px;
-    line-height: 1.7;
-}
-
-
-/* =========================================================
-   CODE
-   ========================================================= */
-
-.alm-code {
-    width: 100%;
-
-    overflow-x: auto;
-
-    margin-top: 18px;
-
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 9px;
-
-    background: #070b16;
-}
-
-.alm-code pre {
-    margin: 0;
-
-    padding: 18px;
-
-    color: #cbd3df;
-
-    font-family:
-        Consolas,
-        Monaco,
-        "Courier New",
-        monospace;
-
-    font-size: 12px;
-    line-height: 1.8;
-
-    white-space: pre;
-}
-
-
-/* =========================================================
-   CHALLENGE
-   ========================================================= */
-
-.alm-challenge-button {
-    appearance: none;
-    -webkit-appearance: none;
-
-    display: inline-block;
-
-    margin-top: 14px;
-
-    padding: 11px 16px;
-
-    border: 0;
-    border-radius: 8px;
-
-    background: #7c5cff;
-
-    color: #ffffff;
-
-    font-family: inherit;
-    font-size: 11px;
-    font-weight: 800;
-
-    cursor: pointer;
-
-    transition:
-        transform .2s ease,
-        opacity .2s ease;
-}
-
-.alm-challenge-button:hover {
-    opacity: .9;
-
-    transform: translateY(-1px);
-}
-
-
-/* =========================================================
-   QUESTION
-   ========================================================= */
-
-.alm-question {
-    display: none;
-
-    margin-top: 17px;
-
-    padding: 18px;
-
-    border: 1px solid rgba(124,92,255,0.18);
-    border-radius: 10px;
-
-    background: rgba(124,92,255,0.04);
-}
-
-.alm-question.alm-visible {
-    display: block;
-}
-
-.alm-question-title {
-    margin: 0;
-
-    color: #f4f7ff;
-
-    font-size: 13px;
-}
-
-.alm-question-text {
-    margin: 8px 0 0;
-
-    color: #9da9c2;
-
-    font-size: 11px;
-    line-height: 1.6;
-}
-
-.alm-options {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 8px;
-
-    margin-top: 14px;
-}
-
-.alm-option {
-    appearance: none;
-    -webkit-appearance: none;
-
-    padding: 9px 13px;
-
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 7px;
-
-    background: #080f1b;
-
-    color: #9da9c2;
-
-    font-family: monospace;
-    font-size: 11px;
-
-    cursor: pointer;
-
-    transition: .2s ease;
-}
-
-.alm-option:hover {
-    border-color: #7c5cff;
-
-    color: #ffffff;
-}
-
-.alm-option.alm-correct {
-    border-color: #32d583;
-
-    background: rgba(50,213,131,0.08);
-
-    color: #32d583;
-}
-
-.alm-option.alm-wrong {
-    border-color: #ff5c72;
-
-    background: rgba(255,92,114,0.08);
-
-    color: #ff5c72;
-}
-
-.alm-feedback {
-    min-height: 18px;
-
-    margin: 11px 0 0;
-
-    font-size: 11px;
-    font-weight: 700;
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 650px) {
-
-    #alm-learning-ladder {
-        padding: 60px 0;
-    }
-
-    .alm-container {
-        width: calc(100% - 26px);
-    }
-
-    .alm-title {
-        letter-spacing: -1.2px;
-    }
-
-    .alm-level {
-        padding: 17px;
-    }
-
-    .alm-level-header {
-        flex-direction: column;
-
-        gap: 7px;
-    }
-
-    .alm-mentor {
-        flex-direction: column;
-    }
-
-    .alm-options {
-        flex-direction: column;
-    }
-
-    .alm-option {
-        width: 100%;
-    }
-
-}
-
-</style>
-
-
-<!-- =========================================================
-     HTML
-     ========================================================= -->
-
-<section id="alm-learning-ladder">
-
-    <div class="alm-container">
-
-
-        <!-- HEADER -->
-
-        <header class="alm-header">
-
-            <span class="alm-eyebrow">
-                Personalized Learning Path
-            </span>
-
-            <h2 class="alm-title">
-                Learn any language.
-                <strong>Level up step by step.</strong>
-            </h2>
-
-            <p class="alm-description">
-                Choose a programming language and start
-                from the fundamentals. Your AI mentor
-                helps you build the foundation before
-                moving toward advanced concepts.
-            </p>
-
-        </header>
-
-
-        <!-- LANGUAGE SELECTOR -->
-
-        <div
-            class="alm-language-selector"
-            role="tablist"
-            aria-label="Programming languages"
-        >
-
-            <button
-                type="button"
-                class="alm-language-button alm-selected"
-                data-alm-language="html"
-            >
-                🌐 HTML
-            </button>
-
-            <button
-                type="button"
-                class="alm-language-button"
-                data-alm-language="css"
-            >
-                🎨 CSS
-            </button>
-
-            <button
-                type="button"
-                class="alm-language-button"
-                data-alm-language="javascript"
-            >
-                ⚡ JavaScript
-            </button>
-
-            <button
-                type="button"
-                class="alm-language-button"
-                data-alm-language="java"
-            >
-                ☕ Java
-            </button>
-
-            <button
-                type="button"
-                class="alm-language-button"
-                data-alm-language="csharp"
-            >
-                💠 C#
-            </button>
-
-            <button
-                type="button"
-                class="alm-language-button"
-                data-alm-language="cpp"
-            >
-                ⚙️ C++
-            </button>
-
-        </div>
-
-
-        <!-- CURRENT LANGUAGE -->
-
-        <div class="alm-current">
-
-            <span
-                class="alm-current-label"
-                id="alm-current-label"
-            >
-                HTML
-            </span>
-
-            <h3
-                class="alm-current-title"
-                id="alm-current-title"
-            >
-                Start with HTML Foundations
-            </h3>
-
-            <p
-                class="alm-current-description"
-                id="alm-current-description"
-            >
-                Learn how webpages are structured before
-                moving into styling and interactive behaviour.
-            </p>
-
-        </div>
-
-
-        <!-- LEVELS -->
-
-        <div class="alm-levels">
-
-
-            <!-- BEGINNER -->
-
-            <article class="alm-level alm-active">
-
-                <div class="alm-number">
-                    01
-                </div>
-
-                <div class="alm-level-content">
-
-                    <div class="alm-level-header">
-
-                        <div>
-
-                            <span class="alm-level-small">
-                                BEGINNER
-                            </span>
-
-                            <h3 class="alm-level-title">
-                                🌱 Foundations
-                            </h3>
-
-                        </div>
-
-                        <span class="alm-level-status">
-                            START HERE
-                        </span>
-
-                    </div>
-
-                    <p class="alm-level-description">
-                        Learn the essential building blocks
-                        before writing complex code.
-                    </p>
-
-                    <div
-                        class="alm-concepts"
-                        id="alm-beginner"
-                    ></div>
-
-                </div>
-
-            </article>
-
-
-            <!-- INTERMEDIATE -->
-
-            <article class="alm-level">
-
-                <div class="alm-number">
-                    02
-                </div>
-
-                <div class="alm-level-content">
-
-                    <div class="alm-level-header">
-
-                        <div>
-
-                            <span class="alm-level-small">
-                                INTERMEDIATE
-                            </span>
-
-                            <h3 class="alm-level-title">
-                                🔧 Core Skills
-                            </h3>
-
-                        </div>
-
-                        <span class="alm-level-status alm-locked">
-                            🔒 LOCKED
-                        </span>
-
-                    </div>
-
-                    <p class="alm-level-description">
-                        Combine concepts to solve problems
-                        and build real-world projects.
-                    </p>
-
-                    <div
-                        class="alm-concepts"
-                        id="alm-intermediate"
-                    ></div>
-
-                </div>
-
-            </article>
-
-
-            <!-- ADVANCED -->
-
-            <article class="alm-level">
-
-                <div class="alm-number">
-                    03
-                </div>
-
-                <div class="alm-level-content">
-
-                    <div class="alm-level-header">
-
-                        <div>
-
-                            <span class="alm-level-small">
-                                ADVANCED
-                            </span>
-
-                            <h3 class="alm-level-title">
-                                🚀 Advanced Development
-                            </h3>
-
-                        </div>
-
-                        <span class="alm-level-status alm-locked">
-                            🔒 LOCKED
-                        </span>
-
-                    </div>
-
-                    <p class="alm-level-description">
-                        Move from writing code to designing
-                        scalable and professional applications.
-                    </p>
-
-                    <div
-                        class="alm-concepts"
-                        id="alm-advanced"
-                    ></div>
-
-                </div>
-
-            </article>
-
-        </div>
-
-
-        <!-- AI MENTOR -->
-
-        <div class="alm-mentor">
-
-            <div class="alm-mentor-icon">
-                🧠
-            </div>
-
-            <div class="alm-mentor-content">
-
-                <span class="alm-mentor-label">
-                    AI CODING MENTOR
-                </span>
-
-                <h3
-                    class="alm-mentor-title"
-                    id="alm-mentor-title"
-                >
-                    Let's start with HTML structure.
-                </h3>
-
-                <p
-                    class="alm-mentor-text"
-                    id="alm-mentor-text"
-                >
-                    HTML gives your webpage its structure.
-                    Before learning CSS or JavaScript,
-                    let's understand how HTML elements
-                    work together.
-                </p>
-
-
-                <!-- CODE -->
-
-                <div class="alm-code">
-
-                    <pre id="alm-code">&lt;!DOCTYPE html&gt;
-
-&lt;html&gt;
-
-  &lt;body&gt;
-
-    &lt;h1&gt;Hello World&lt;/h1&gt;
-
-  &lt;/body&gt;
-
-&lt;/html&gt;</pre>
-
-                </div>
-
-
-                <!-- CHALLENGE BUTTON -->
-
-                <button
-                    type="button"
-                    class="alm-challenge-button"
-                    id="alm-challenge"
-                >
-                    Test My Understanding →
-                </button>
-
-
-                <!-- QUESTION -->
-
-                <div
-                    class="alm-question"
-                    id="alm-question"
-                >
-
-                    <h4 class="alm-question-title">
-                        🧠 Quick Check
-                    </h4>
-
-                    <p
-                        class="alm-question-text"
-                        id="alm-question-text"
-                    ></p>
-
-                    <div
-                        class="alm-options"
-                        id="alm-options"
-                    ></div>
-
-                    <p
-                        class="alm-feedback"
-                        id="alm-feedback"
-                    ></p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     JAVASCRIPT
-     ========================================================= -->
-
-<script>
 (function () {
 
     "use strict";
 
 
     /* =====================================================
-       WAIT UNTIL THE PAGE IS READY
+       INITIALIZE
        ===================================================== */
 
-    function initializeLearningLadder() {
+    function initLearningLadder() {
 
         const root =
             document.getElementById(
@@ -4597,9 +3596,8 @@ Ask me a programming question or paste some code and I'll help you understand it
 
         if (!root) {
             console.error(
-                "AI Mentor Learning Ladder: root element not found."
+                "Learning Ladder was not found."
             );
-
             return;
         }
 
@@ -4630,22 +3628,22 @@ Ask me a programming question or paste some code and I'll help you understand it
                 intermediate: [
                     "Semantic HTML",
                     "Accessibility",
-                    "Forms",
-                    "Page Structure"
+                    "Page Structure",
+                    "Advanced Forms"
                 ],
 
                 advanced: [
                     "Web Components",
-                    "Accessibility",
                     "SEO",
-                    "Advanced Forms"
+                    "Advanced Accessibility",
+                    "Professional HTML"
                 ],
 
                 mentorTitle:
                     "Let's start with HTML structure.",
 
                 mentorText:
-                    "HTML gives your webpage its structure. Before learning CSS or JavaScript, understand how HTML elements work together.",
+                    "HTML provides the structure of a webpage. Learn how elements work together before moving to CSS and JavaScript.",
 
                 code:
 `<!DOCTYPE html>
@@ -4660,17 +3658,112 @@ Ask me a programming question or paste some code and I'll help you understand it
 
 </html>`,
 
-                question:
-                    "Which language is responsible for the structure of a webpage?",
+                questions: {
 
-                answers: [
-                    ["HTML", "html"],
-                    ["CSS", "css"],
-                    ["JavaScript", "javascript"]
-                ],
+                    beginner: [
 
-                correct:
-                    "html"
+                        {
+                            question:
+                                "Which language is used to structure a webpage?",
+                            answers: [
+                                ["HTML", "correct"],
+                                ["CSS", "wrong"],
+                                ["Java", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which HTML tag creates a main heading?",
+                            answers: [
+                                ["<h1>", "correct"],
+                                ["<head>", "wrong"],
+                                ["<title>", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which tag creates a paragraph?",
+                            answers: [
+                                ["<p>", "correct"],
+                                ["<para>", "wrong"],
+                                ["<text>", "wrong"]
+                            ]
+                        }
+
+                    ],
+
+                    intermediate: [
+
+                        {
+                            question:
+                                "Which HTML element is normally used for navigation links?",
+                            answers: [
+                                ["<nav>", "correct"],
+                                ["<navigate>", "wrong"],
+                                ["<links>", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which attribute provides alternative text for an image?",
+                            answers: [
+                                ["alt", "correct"],
+                                ["src", "wrong"],
+                                ["text", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which element represents an independent piece of content?",
+                            answers: [
+                                ["<article>", "correct"],
+                                ["<content>", "wrong"],
+                                ["<sectioning>", "wrong"]
+                            ]
+                        }
+
+                    ],
+
+                    advanced: [
+
+                        {
+                            question:
+                                "Which HTML feature helps create reusable custom elements?",
+                            answers: [
+                                ["Web Components", "correct"],
+                                ["CSS Grid", "wrong"],
+                                ["JSON", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which attribute can improve accessibility by describing an element's purpose?",
+                            answers: [
+                                ["ARIA attributes", "correct"],
+                                ["style", "wrong"],
+                                ["border", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which HTML practice generally helps search engines understand page structure?",
+                            answers: [
+                                ["Semantic HTML", "correct"],
+                                ["Random divs", "wrong"],
+                                ["Inline colors", "wrong"]
+                            ]
+                        }
+
+                    ]
+
+                }
+
             },
 
 
@@ -4682,7 +3775,7 @@ Ask me a programming question or paste some code and I'll help you understand it
                     "Start with CSS Foundations",
 
                 description:
-                    "Learn how to control colors, spacing, layouts and the visual appearance of webpages.",
+                    "Learn how to style webpages and build responsive layouts.",
 
                 beginner: [
                     "Selectors",
@@ -4699,17 +3792,17 @@ Ask me a programming question or paste some code and I'll help you understand it
                 ],
 
                 advanced: [
-                    "Advanced Layout",
                     "CSS Architecture",
-                    "Transitions",
-                    "Complex Animations"
+                    "Advanced Layout",
+                    "Complex Animations",
+                    "Performance"
                 ],
 
                 mentorTitle:
                     "Let's start with CSS selectors.",
 
                 mentorText:
-                    "CSS selectors tell the browser which HTML elements should receive your styles.",
+                    "CSS controls the appearance of HTML elements. Selectors tell CSS which elements should receive a style.",
 
                 code:
 `.card {
@@ -4720,17 +3813,112 @@ Ask me a programming question or paste some code and I'll help you understand it
 
 }`,
 
-                question:
-                    "Which language is responsible for styling a webpage?",
+                questions: {
 
-                answers: [
-                    ["HTML", "html"],
-                    ["CSS", "css"],
-                    ["JavaScript", "javascript"]
-                ],
+                    beginner: [
 
-                correct:
-                    "css"
+                        {
+                            question:
+                                "What does CSS primarily control?",
+                            answers: [
+                                ["Appearance and layout", "correct"],
+                                ["Database storage", "wrong"],
+                                ["Server hardware", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which property changes text color?",
+                            answers: [
+                                ["color", "correct"],
+                                ["font-color", "wrong"],
+                                ["text-paint", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which property controls the space inside an element?",
+                            answers: [
+                                ["padding", "correct"],
+                                ["margin-outside", "wrong"],
+                                ["inside-space", "wrong"]
+                            ]
+                        }
+
+                    ],
+
+                    intermediate: [
+
+                        {
+                            question:
+                                "Which CSS layout system is useful for one-dimensional layouts?",
+                            answers: [
+                                ["Flexbox", "correct"],
+                                ["HTML", "wrong"],
+                                ["SQL", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which CSS system is designed for two-dimensional layouts?",
+                            answers: [
+                                ["Grid", "correct"],
+                                ["FloatText", "wrong"],
+                                ["DOM", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "What is commonly used to adapt a layout to different screen sizes?",
+                            answers: [
+                                ["Media queries", "correct"],
+                                ["HTML comments", "wrong"],
+                                ["Console logs", "wrong"]
+                            ]
+                        }
+
+                    ],
+
+                    advanced: [
+
+                        {
+                            question:
+                                "What helps keep large CSS projects organized?",
+                            answers: [
+                                ["CSS architecture", "correct"],
+                                ["Random selectors", "wrong"],
+                                ["Duplicate styles", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which feature allows smooth changes between CSS states?",
+                            answers: [
+                                ["Transitions", "correct"],
+                                ["HTML forms", "wrong"],
+                                ["Variables in Java", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which CSS feature can create complex visual movement?",
+                            answers: [
+                                ["Animations", "correct"],
+                                ["Arrays", "wrong"],
+                                ["Classes in Java", "wrong"]
+                            ]
+                        }
+
+                    ]
+
+                }
+
             },
 
 
@@ -4742,7 +3930,7 @@ Ask me a programming question or paste some code and I'll help you understand it
                     "Start with JavaScript Foundations",
 
                 description:
-                    "Learn programming logic, variables, functions and events before building interactive applications.",
+                    "Learn programming logic, variables, functions and events.",
 
                 beginner: [
                     "Variables",
@@ -4759,8 +3947,8 @@ Ask me a programming question or paste some code and I'll help you understand it
                 ],
 
                 advanced: [
-                    "Async JavaScript",
                     "Promises",
+                    "Async JavaScript",
                     "Modules",
                     "APIs"
                 ],
@@ -4769,7 +3957,7 @@ Ask me a programming question or paste some code and I'll help you understand it
                     "Let's start with JavaScript variables.",
 
                 mentorText:
-                    "Variables allow JavaScript programs to store and work with information.",
+                    "JavaScript lets webpages respond to users and perform programming logic.",
 
                 code:
 `let name = "Alex";
@@ -4778,17 +3966,112 @@ let age = 18;
 
 console.log(name);`,
 
-                question:
-                    "Which keyword creates a changeable variable in JavaScript?",
+                questions: {
 
-                answers: [
-                    ["let", "let"],
-                    ["const", "const"],
-                    ["style", "style"]
-                ],
+                    beginner: [
 
-                correct:
-                    "let"
+                        {
+                            question:
+                                "Which keyword declares a changeable JavaScript variable?",
+                            answers: [
+                                ["let", "correct"],
+                                ["style", "wrong"],
+                                ["html", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which symbol starts a JavaScript single-line comment?",
+                            answers: [
+                                ["//", "correct"],
+                                ["<!--", "wrong"],
+                                ["##", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which structure is used to make a decision?",
+                            answers: [
+                                ["if", "correct"],
+                                ["loop", "wrong"],
+                                ["style", "wrong"]
+                            ]
+                        }
+
+                    ],
+
+                    intermediate: [
+
+                        {
+                            question:
+                                "Which structure stores multiple values in JavaScript?",
+                            answers: [
+                                ["Array", "correct"],
+                                ["Selector", "wrong"],
+                                ["ElementTag", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "What does the DOM represent?",
+                            answers: [
+                                ["The webpage document structure", "correct"],
+                                ["A database server", "wrong"],
+                                ["A Java compiler", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which feature lets JavaScript react to a click?",
+                            answers: [
+                                ["Event handling", "correct"],
+                                ["CSS padding", "wrong"],
+                                ["HTML comments", "wrong"]
+                            ]
+                        }
+
+                    ],
+
+                    advanced: [
+
+                        {
+                            question:
+                                "Which feature is commonly used for handling asynchronous results?",
+                            answers: [
+                                ["Promises", "correct"],
+                                ["Selectors", "wrong"],
+                                ["HTML attributes", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which keyword can pause an async function until a Promise settles?",
+                            answers: [
+                                ["await", "correct"],
+                                ["pause", "wrong"],
+                                ["waitFor", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "What is commonly used to communicate with a backend service?",
+                            answers: [
+                                ["APIs", "correct"],
+                                ["CSS selectors", "wrong"],
+                                ["HTML headings", "wrong"]
+                            ]
+                        }
+
+                    ]
+
+                }
+
             },
 
 
@@ -4800,7 +4083,7 @@ console.log(name);`,
                     "Start with Java Foundations",
 
                 description:
-                    "Build a strong Java foundation before moving into object-oriented and advanced programming.",
+                    "Build a strong Java foundation before moving into object-oriented programming.",
 
                 beginner: [
                     "Variables",
@@ -4827,7 +4110,7 @@ console.log(name);`,
                     "Let's start with Java variables.",
 
                 mentorText:
-                    "Variables store information that your Java program can use and change.",
+                    "Java is strongly typed. Learn variables and data types before moving into classes and objects.",
 
                 code:
 `int age = 18;
@@ -4836,17 +4119,112 @@ double price = 99.99;
 
 String name = "Alex";`,
 
-                question:
-                    "Which Java type is commonly used for whole numbers?",
+                questions: {
 
-                answers: [
-                    ["String", "string"],
-                    ["int", "int"],
-                    ["boolean", "boolean"]
-                ],
+                    beginner: [
 
-                correct:
-                    "int"
+                        {
+                            question:
+                                "Which Java type is commonly used for whole numbers?",
+                            answers: [
+                                ["int", "correct"],
+                                ["String", "wrong"],
+                                ["boolean", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which Java keyword declares a class?",
+                            answers: [
+                                ["class", "correct"],
+                                ["object", "wrong"],
+                                ["define", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which Java type stores true or false?",
+                            answers: [
+                                ["boolean", "correct"],
+                                ["number", "wrong"],
+                                ["String", "wrong"]
+                            ]
+                        }
+
+                    ],
+
+                    intermediate: [
+
+                        {
+                            question:
+                                "What is a method?",
+                            answers: [
+                                ["A block of code that performs a task", "correct"],
+                                ["A CSS selector", "wrong"],
+                                ["An HTML tag", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "What is an object created from?",
+                            answers: [
+                                ["A class", "correct"],
+                                ["A loop", "wrong"],
+                                ["A comment", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which structure can store multiple values of the same type?",
+                            answers: [
+                                ["Array", "correct"],
+                                ["String only", "wrong"],
+                                ["Boolean", "wrong"]
+                            ]
+                        }
+
+                    ],
+
+                    advanced: [
+
+                        {
+                            question:
+                                "Which Java API is commonly used for collections?",
+                            answers: [
+                                ["Collections Framework", "correct"],
+                                ["HTML DOM", "wrong"],
+                                ["CSS Grid", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which concept handles unexpected program conditions?",
+                            answers: [
+                                ["Exceptions", "correct"],
+                                ["Selectors", "wrong"],
+                                ["Attributes", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "What allows multiple tasks to execute concurrently?",
+                            answers: [
+                                ["Multithreading", "correct"],
+                                ["HTML", "wrong"],
+                                ["CSS", "wrong"]
+                            ]
+                        }
+
+                    ]
+
+                }
+
             },
 
 
@@ -4858,7 +4236,7 @@ String name = "Alex";`,
                     "Start with C# Foundations",
 
                 description:
-                    "Learn the fundamentals of C# and gradually move toward object-oriented application development.",
+                    "Learn C# fundamentals before moving into object-oriented application development.",
 
                 beginner: [
                     "Variables",
@@ -4878,14 +4256,14 @@ String name = "Alex";`,
                     "LINQ",
                     "Async",
                     "Generics",
-                    "Application Architecture"
+                    "Architecture"
                 ],
 
                 mentorTitle:
                     "Let's start with C# variables.",
 
                 mentorText:
-                    "C# is strongly typed, so variables have defined data types.",
+                    "C# is strongly typed. Understanding its basic types gives you a strong foundation for application development.",
 
                 code:
 `int age = 18;
@@ -4894,17 +4272,112 @@ string name = "Alex";
 
 bool active = true;`,
 
-                question:
-                    "Which C# type stores true or false?",
+                questions: {
 
-                answers: [
-                    ["string", "string"],
-                    ["bool", "bool"],
-                    ["int", "int"]
-                ],
+                    beginner: [
 
-                correct:
-                    "bool"
+                        {
+                            question:
+                                "Which C# type stores true or false?",
+                            answers: [
+                                ["bool", "correct"],
+                                ["string", "wrong"],
+                                ["int", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which C# type stores text?",
+                            answers: [
+                                ["string", "correct"],
+                                ["bool", "wrong"],
+                                ["double", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which C# type is commonly used for whole numbers?",
+                            answers: [
+                                ["int", "correct"],
+                                ["string", "wrong"],
+                                ["bool", "wrong"]
+                            ]
+                        }
+
+                    ],
+
+                    intermediate: [
+
+                        {
+                            question:
+                                "What is a class used for?",
+                            answers: [
+                                ["Defining objects and their behavior", "correct"],
+                                ["Styling webpages", "wrong"],
+                                ["Creating HTML tags", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which structure stores multiple objects or values?",
+                            answers: [
+                                ["Collection", "correct"],
+                                ["Selector", "wrong"],
+                                ["HTML tag", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "What is a method?",
+                            answers: [
+                                ["A named block of executable code", "correct"],
+                                ["A CSS property", "wrong"],
+                                ["An HTML attribute", "wrong"]
+                            ]
+                        }
+
+                    ],
+
+                    advanced: [
+
+                        {
+                            question:
+                                "What does LINQ help developers do?",
+                            answers: [
+                                ["Query data", "correct"],
+                                ["Style HTML", "wrong"],
+                                ["Create CSS colors", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which concept allows code to run asynchronously?",
+                            answers: [
+                                ["async/await", "correct"],
+                                ["HTML/CSS", "wrong"],
+                                ["foreach only", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "What do generics help provide?",
+                            answers: [
+                                ["Reusable type-safe code", "correct"],
+                                ["Webpage colors", "wrong"],
+                                ["HTML structure", "wrong"]
+                            ]
+                        }
+
+                    ]
+
+                }
+
             },
 
 
@@ -4916,7 +4389,7 @@ bool active = true;`,
                     "Start with C++ Foundations",
 
                 description:
-                    "Build a strong C++ foundation before moving into memory, object-oriented programming and advanced concepts.",
+                    "Build a strong C++ foundation before moving into memory and advanced programming.",
 
                 beginner: [
                     "Variables",
@@ -4943,26 +4416,121 @@ bool active = true;`,
                     "Let's start with C++ variables.",
 
                 mentorText:
-                    "C++ variables store values that your program can use during execution.",
+                    "C++ gives you detailed control over programs and memory. Start with its basic types and syntax.",
 
                 code:
 `int age = 18;
 
 double price = 99.99;
 
-string name = "Alex";`,
+std::string name = "Alex";`,
 
-                question:
-                    "Which C++ type is commonly used for whole numbers?",
+                questions: {
 
-                answers: [
-                    ["string", "string"],
-                    ["int", "int"],
-                    ["double", "double"]
-                ],
+                    beginner: [
 
-                correct:
-                    "int"
+                        {
+                            question:
+                                "Which C++ type is commonly used for whole numbers?",
+                            answers: [
+                                ["int", "correct"],
+                                ["string", "wrong"],
+                                ["double", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which symbol begins a single-line C++ comment?",
+                            answers: [
+                                ["//", "correct"],
+                                ["<!--", "wrong"],
+                                ["##", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which structure repeats code while a condition is true?",
+                            answers: [
+                                ["while", "correct"],
+                                ["style", "wrong"],
+                                ["className", "wrong"]
+                            ]
+                        }
+
+                    ],
+
+                    intermediate: [
+
+                        {
+                            question:
+                                "What is a pointer?",
+                            answers: [
+                                ["A variable that stores an address", "correct"],
+                                ["A CSS selector", "wrong"],
+                                ["An HTML element", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "What does a class define?",
+                            answers: [
+                                ["Data and behavior for objects", "correct"],
+                                ["Webpage colors", "wrong"],
+                                ["Database tables only", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "What is a function?",
+                            answers: [
+                                ["A reusable block of code", "correct"],
+                                ["A CSS property", "wrong"],
+                                ["An HTML attribute", "wrong"]
+                            ]
+                        }
+
+                    ],
+
+                    advanced: [
+
+                        {
+                            question:
+                                "What does STL stand for?",
+                            answers: [
+                                ["Standard Template Library", "correct"],
+                                ["Simple Type Language", "wrong"],
+                                ["System Text Layout", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "What do C++ templates allow?",
+                            answers: [
+                                ["Generic programming", "correct"],
+                                ["HTML styling", "wrong"],
+                                ["CSS animations", "wrong"]
+                            ]
+                        },
+
+                        {
+                            question:
+                                "Which concept is important when managing dynamically allocated memory?",
+                            answers: [
+                                ["Memory management", "correct"],
+                                ["HTML semantics", "wrong"],
+                                ["CSS selectors", "wrong"]
+                            ]
+                        }
+
+                    ]
+
+                }
+
             }
 
         };
@@ -4972,7 +4540,7 @@ string name = "Alex";`,
            ELEMENTS
            ================================================= */
 
-        const buttons =
+        const languageButtons =
             root.querySelectorAll(
                 ".alm-language-button"
             );
@@ -4992,17 +4560,17 @@ string name = "Alex";`,
                 "#alm-current-description"
             );
 
-        const beginner =
+        const beginnerConcepts =
             root.querySelector(
                 "#alm-beginner"
             );
 
-        const intermediate =
+        const intermediateConcepts =
             root.querySelector(
                 "#alm-intermediate"
             );
 
-        const advanced =
+        const advancedConcepts =
             root.querySelector(
                 "#alm-advanced"
             );
@@ -5017,17 +4585,17 @@ string name = "Alex";`,
                 "#alm-mentor-text"
             );
 
-        const code =
+        const mentorCode =
             root.querySelector(
                 "#alm-code"
             );
 
-        const challenge =
+        const challengeButton =
             root.querySelector(
                 "#alm-challenge"
             );
 
-        const question =
+        const questionBox =
             root.querySelector(
                 "#alm-question"
             );
@@ -5047,42 +4615,181 @@ string name = "Alex";`,
                 "#alm-feedback"
             );
 
+        const progressText =
+            root.querySelector(
+                "#alm-progress-text"
+            );
+
+        const progressCount =
+            root.querySelector(
+                "#alm-progress-count"
+            );
+
+        const progressFill =
+            root.querySelector(
+                "#alm-progress-fill"
+            );
+
+        const nextButton =
+            root.querySelector(
+                "#alm-next-level"
+            );
+
+        const completeMessage =
+            root.querySelector(
+                "#alm-complete-message"
+            );
+
+        const startBeginner =
+            root.querySelector(
+                "#alm-start-beginner"
+            );
+
+        const startIntermediate =
+            root.querySelector(
+                "#alm-start-intermediate"
+            );
+
+        const startAdvanced =
+            root.querySelector(
+                "#alm-start-advanced"
+            );
+
+        const beginnerLevel =
+            root.querySelector(
+                "#alm-level-beginner"
+            );
+
+        const intermediateLevel =
+            root.querySelector(
+                "#alm-level-intermediate"
+            );
+
+        const advancedLevel =
+            root.querySelector(
+                "#alm-level-advanced"
+            );
+
 
         /* =================================================
-           CHECK REQUIRED ELEMENTS
+           STATE
            ================================================= */
 
-        const requiredElements = [
-            currentLabel,
-            currentTitle,
-            currentDescription,
-            beginner,
-            intermediate,
-            advanced,
-            mentorTitle,
-            mentorText,
-            code,
-            challenge,
-            question,
-            questionText,
-            options,
-            feedback
+        let selectedLanguage =
+            "html";
+
+        let currentLevel =
+            0;
+
+        let questionNumber =
+            0;
+
+        let currentQuestion =
+            null;
+
+        let levelCompleted = false;
+
+
+        /*
+         * Level indexes:
+         *
+         * 0 = Beginner
+         * 1 = Intermediate
+         * 2 = Advanced
+         */
+
+        const levelNames = [
+            "beginner",
+            "intermediate",
+            "advanced"
         ];
 
-        const missing =
-            requiredElements.some(
-                function (element) {
-                    return !element;
-                }
+
+        /* =================================================
+           RANDOM QUESTION
+           ================================================= */
+
+        function getRandomQuestion() {
+
+            const data =
+                languages[selectedLanguage];
+
+            const levelName =
+                levelNames[currentLevel];
+
+            const questions =
+                data.questions[levelName];
+
+            if (
+                !questions ||
+                questions.length === 0
+            ) {
+                return null;
+            }
+
+
+            /*
+             * Make sure the new question
+             * is not the same as the previous one.
+             */
+
+            let randomIndex;
+
+            do {
+
+                randomIndex =
+                    Math.floor(
+                        Math.random() *
+                        questions.length
+                    );
+
+            } while (
+                questions.length > 1 &&
+                questions[randomIndex] ===
+                currentQuestion
             );
 
-        if (missing) {
 
-            console.error(
-                "AI Mentor Learning Ladder: one or more elements are missing."
-            );
+            return questions[randomIndex];
 
-            return;
+        }
+
+
+        /* =================================================
+           SHUFFLE ANSWERS
+           ================================================= */
+
+        function shuffleAnswers(
+            answers
+        ) {
+
+            const copy =
+                answers.slice();
+
+            for (
+                let i = copy.length - 1;
+                i > 0;
+                i--
+            ) {
+
+                const j =
+                    Math.floor(
+                        Math.random() *
+                        (i + 1)
+                    );
+
+                [
+                    copy[i],
+                    copy[j]
+                ] = [
+                    copy[j],
+                    copy[i]
+                ];
+
+            }
+
+            return copy;
+
         }
 
 
@@ -5091,11 +4798,11 @@ string name = "Alex";`,
            ================================================= */
 
         function renderConcepts(
-            container,
+            element,
             concepts
         ) {
 
-            container.innerHTML = "";
+            element.innerHTML = "";
 
             concepts.forEach(
                 function (concept) {
@@ -5111,23 +4818,35 @@ string name = "Alex";`,
                     span.textContent =
                         concept;
 
-                    container.appendChild(
+                    element.appendChild(
                         span
                     );
 
                 }
             );
+
         }
 
 
         /* =================================================
-           RENDER QUESTION
+           SHOW QUESTION
            ================================================= */
 
-        function renderQuestion(data) {
+        function showQuestion() {
+
+            const data =
+                languages[selectedLanguage];
+
+            currentQuestion =
+                getRandomQuestion();
+
+            if (!currentQuestion) {
+                return;
+            }
+
 
             questionText.textContent =
-                data.question;
+                currentQuestion.question;
 
             options.innerHTML = "";
 
@@ -5137,7 +4856,17 @@ string name = "Alex";`,
             feedback.style.color =
                 "";
 
-            data.answers.forEach(
+            levelCompleted =
+                false;
+
+
+            const shuffled =
+                shuffleAnswers(
+                    currentQuestion.answers
+                );
+
+
+            shuffled.forEach(
                 function (answer) {
 
                     const button =
@@ -5154,60 +4883,22 @@ string name = "Alex";`,
                     button.textContent =
                         answer[0];
 
-                    button.dataset.answer =
+                    button.dataset.result =
                         answer[1];
+
 
                     button.addEventListener(
                         "click",
                         function () {
 
-                            const allOptions =
-                                options.querySelectorAll(
-                                    ".alm-option"
-                                );
-
-                            allOptions.forEach(
-                                function (item) {
-
-                                    item.classList.remove(
-                                        "alm-correct",
-                                        "alm-wrong"
-                                    );
-
-                                }
+                            handleAnswer(
+                                button,
+                                answer[1]
                             );
-
-
-                            if (
-                                button.dataset.answer ===
-                                data.correct
-                            ) {
-
-                                button.classList.add(
-                                    "alm-correct"
-                                );
-
-                                feedback.textContent =
-                                    "✓ Correct! You understand the foundation.";
-
-                                feedback.style.color =
-                                    "#32d583";
-
-                            } else {
-
-                                button.classList.add(
-                                    "alm-wrong"
-                                );
-
-                                feedback.textContent =
-                                    "Not quite. Think about what this language is designed to do.";
-
-                                feedback.style.color =
-                                    "#ff5c72";
-                            }
 
                         }
                     );
+
 
                     options.appendChild(
                         button
@@ -5215,113 +4906,611 @@ string name = "Alex";`,
 
                 }
             );
+
+
+            questionBox.classList.add(
+                "alm-visible"
+            );
+
+            updateProgress();
+
         }
 
 
         /* =================================================
-           CHANGE LANGUAGE
+           ANSWER
            ================================================= */
 
-        function changeLanguage(
-            language
+        function handleAnswer(
+            clickedButton,
+            result
         ) {
 
-            const data =
-                languages[language];
-
-            if (!data) {
-                console.error(
-                    "Unknown language:",
-                    language
+            const allButtons =
+                options.querySelectorAll(
+                    ".alm-option"
                 );
 
+
+            /*
+             * Prevent clicking again after
+             * the question has been answered.
+             */
+
+            allButtons.forEach(
+                function (button) {
+
+                    button.disabled =
+                        true;
+
+                }
+            );
+
+
+            if (result === "correct") {
+
+                clickedButton.classList.add(
+                    "alm-correct"
+                );
+
+                feedback.textContent =
+                    "✓ Correct! Great work.";
+
+                feedback.style.color =
+                    "#32d583";
+
+
+                questionNumber++;
+
+
+                updateProgress();
+
+
+                /*
+                 * Wait a moment, then either
+                 * show another question or
+                 * complete the level.
+                 */
+
+                setTimeout(
+                    function () {
+
+                        const data =
+                            languages[
+                                selectedLanguage
+                            ];
+
+                        const levelName =
+                            levelNames[
+                                currentLevel
+                            ];
+
+                        const totalQuestions =
+                            data.questions[
+                                levelName
+                            ].length;
+
+
+                        if (
+                            questionNumber >=
+                            totalQuestions
+                        ) {
+
+                            completeLevel();
+
+                        } else {
+
+                            showQuestion();
+
+                        }
+
+                    },
+                    650
+                );
+
+
+            } else {
+
+                clickedButton.classList.add(
+                    "alm-wrong"
+                );
+
+                feedback.textContent =
+                    "Not quite. Think about the concept and try again.";
+
+                feedback.style.color =
+                    "#ff5c72";
+
+
+                /*
+                 * Allow another attempt.
+                 */
+
+                setTimeout(
+                    function () {
+
+                        allButtons.forEach(
+                            function (button) {
+
+                                button.disabled =
+                                    false;
+
+                            }
+                        );
+
+                    },
+                    500
+                );
+
+            }
+
+        }
+
+
+        /* =================================================
+           START LEVEL
+           ================================================= */
+
+        function startLevel(
+            level
+        ) {
+
+            /*
+             * Don't allow students to jump
+             * to locked levels.
+             */
+
+            if (
+                level > currentLevel
+            ) {
+
                 return;
+
             }
 
 
-            /* Button state */
+            currentLevel =
+                level;
 
-            buttons.forEach(
-                function (button) {
+            questionNumber =
+                0;
 
-                    const selected =
-                        button.dataset.almLanguage ===
-                        language;
+            currentQuestion =
+                null;
 
-                    button.classList.toggle(
-                        "alm-selected",
-                        selected
+            levelCompleted =
+                false;
+
+
+            nextButton.classList.remove(
+                "alm-show"
+            );
+
+            completeMessage.classList.remove(
+                "alm-show"
+            );
+
+
+            updateLevelUI();
+
+            showQuestion();
+
+
+            questionBox.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
+
+        }
+
+
+        /* =================================================
+           COMPLETE LEVEL
+           ================================================= */
+
+        function completeLevel() {
+
+            levelCompleted =
+                true;
+
+
+            const levelName =
+                levelNames[
+                    currentLevel
+                ];
+
+
+            /*
+             * Mark current level complete.
+             */
+
+            const currentLevelElement =
+                [
+                    beginnerLevel,
+                    intermediateLevel,
+                    advancedLevel
+                ][currentLevel];
+
+
+            if (
+                currentLevelElement
+            ) {
+
+                currentLevelElement.classList.add(
+                    "alm-completed"
+                );
+
+            }
+
+
+            const number =
+                currentLevelElement
+                    ? currentLevelElement.querySelector(
+                        ".alm-number"
+                    )
+                    : null;
+
+
+            if (number) {
+
+                number.classList.add(
+                    "alm-done"
+                );
+
+                number.textContent =
+                    "✓";
+
+            }
+
+
+            /*
+             * Unlock next level.
+             */
+
+            if (
+                currentLevel < 2
+            ) {
+
+                currentLevel++;
+
+                const nextLevelElement =
+                    [
+                        beginnerLevel,
+                        intermediateLevel,
+                        advancedLevel
+                    ][currentLevel];
+
+
+                if (
+                    nextLevelElement
+                ) {
+
+                    nextLevelElement.classList.add(
+                        "alm-current-level"
                     );
 
-                    button.setAttribute(
-                        "aria-selected",
-                        selected
+                }
+
+
+                nextButton.textContent =
+                    currentLevel === 1
+                        ? "Continue to Intermediate →"
+                        : "Continue to Advanced →";
+
+
+                nextButton.classList.add(
+                    "alm-show"
+                );
+
+
+                feedback.textContent =
+                    "🎉 Level complete! Your next level is now unlocked.";
+
+                feedback.style.color =
+                    "#32d583";
+
+
+                updateProgress();
+
+
+            } else {
+
+                /*
+                 * Entire course complete.
+                 */
+
+                completeMessage.classList.add(
+                    "alm-show"
+                );
+
+                nextButton.classList.remove(
+                    "alm-show"
+                );
+
+                feedback.textContent =
+                    "🏆 You completed Beginner, Intermediate and Advanced.";
+
+                feedback.style.color =
+                    "#32d583";
+
+
+                progressText.textContent =
+                    "Course Complete";
+
+                progressCount.textContent =
+                    "3 / 3 levels";
+
+                progressFill.style.width =
+                    "100%";
+
+            }
+
+        }
+
+
+        /* =================================================
+           NEXT LEVEL
+           ================================================= */
+
+        nextButton.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    currentLevel > 2
+                ) {
+                    return;
+                }
+
+
+                questionNumber =
+                    0;
+
+                currentQuestion =
+                    null;
+
+
+                nextButton.classList.remove(
+                    "alm-show"
+                );
+
+
+                updateLevelUI();
+
+                showQuestion();
+
+
+                questionBox.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest"
+                });
+
+            }
+        );
+
+
+        /* =================================================
+           UPDATE PROGRESS
+           ================================================= */
+
+        function updateProgress() {
+
+            const data =
+                languages[
+                    selectedLanguage
+                ];
+
+            const levelName =
+                levelNames[
+                    currentLevel
+                ];
+
+            const questions =
+                data.questions[
+                    levelName
+                ];
+
+
+            progressText.textContent =
+                "Level " +
+                (currentLevel + 1) +
+                " of 3";
+
+
+            progressCount.textContent =
+                questionNumber +
+                " / " +
+                questions.length +
+                " questions";
+
+
+            const percentage =
+                Math.min(
+                    (
+                        questionNumber /
+                        questions.length
+                    ) * 100,
+                    100
+                );
+
+
+            progressFill.style.width =
+                percentage + "%";
+
+        }
+
+
+        /* =================================================
+           UPDATE LEVEL UI
+           ================================================= */
+
+        function updateLevelUI() {
+
+            const levelElements = [
+                beginnerLevel,
+                intermediateLevel,
+                advancedLevel
+            ];
+
+
+            levelElements.forEach(
+                function (
+                    element,
+                    index
+                ) {
+
+                    if (!element) {
+                        return;
+                    }
+
+
+                    element.classList.toggle(
+                        "alm-current-level",
+                        index === currentLevel
                     );
 
                 }
             );
 
 
-            /* Current language */
+            /*
+             * Beginner
+             */
 
-            currentLabel.textContent =
-                data.label;
+            if (
+                currentLevel === 0
+            ) {
 
-            currentTitle.textContent =
-                data.title;
+                startBeginner.textContent =
+                    "▶ START HERE";
 
-            currentDescription.textContent =
-                data.description;
+                startBeginner.className =
+                    "alm-level-status alm-current";
 
+            } else {
 
-            /* Levels */
+                startBeginner.textContent =
+                    "✓ COMPLETED";
 
-            renderConcepts(
-                beginner,
-                data.beginner
-            );
+                startBeginner.className =
+                    "alm-level-status alm-completed";
 
-            renderConcepts(
-                intermediate,
-                data.intermediate
-            );
-
-            renderConcepts(
-                advanced,
-                data.advanced
-            );
+            }
 
 
-            /* Mentor */
+            /*
+             * Intermediate
+             */
 
-            mentorTitle.textContent =
-                data.mentorTitle;
+            if (
+                currentLevel === 0
+            ) {
 
-            mentorText.textContent =
-                data.mentorText;
+                startIntermediate.textContent =
+                    "🔒 LOCKED";
 
-            code.textContent =
-                data.code;
+                startIntermediate.className =
+                    "alm-level-status alm-locked";
+
+            } else if (
+                currentLevel === 1
+            ) {
+
+                startIntermediate.textContent =
+                    "▶ START HERE";
+
+                startIntermediate.className =
+                    "alm-level-status alm-current";
+
+            } else {
+
+                startIntermediate.textContent =
+                    "✓ COMPLETED";
+
+                startIntermediate.className =
+                    "alm-level-status alm-completed";
+
+            }
 
 
-            /* Question */
+            /*
+             * Advanced
+             */
 
-            renderQuestion(
-                data
-            );
+            if (
+                currentLevel < 2
+            ) {
 
-            question.classList.remove(
-                "alm-visible"
-            );
+                startAdvanced.textContent =
+                    "🔒 LOCKED";
+
+                startAdvanced.className =
+                    "alm-level-status alm-locked";
+
+            } else {
+
+                startAdvanced.textContent =
+                    "▶ START HERE";
+
+                startAdvanced.className =
+                    "alm-level-status alm-current";
+
+            }
 
         }
 
 
         /* =================================================
-           LANGUAGE BUTTON EVENTS
+           LEVEL BUTTONS
            ================================================= */
 
-        buttons.forEach(
+        startBeginner.addEventListener(
+            "click",
+            function () {
+
+                startLevel(0);
+
+            }
+        );
+
+
+        startIntermediate.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    currentLevel >= 1
+                ) {
+
+                    startLevel(1);
+
+                }
+
+            }
+        );
+
+
+        startAdvanced.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    currentLevel >= 2
+                ) {
+
+                    startLevel(2);
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           LANGUAGE CHANGE
+           ================================================= */
+
+        languageButtons.forEach(
             function (button) {
 
                 button.addEventListener(
@@ -5331,9 +5520,140 @@ string name = "Alex";`,
                         const language =
                             button.dataset.almLanguage;
 
-                        changeLanguage(
-                            language
+
+                        if (
+                            !languages[language]
+                        ) {
+                            return;
+                        }
+
+
+                        selectedLanguage =
+                            language;
+
+
+                        /*
+                         * Changing language starts
+                         * the new course from Beginner.
+                         */
+
+                        currentLevel =
+                            0;
+
+                        questionNumber =
+                            0;
+
+                        currentQuestion =
+                            null;
+
+
+                        languageButtons.forEach(
+                            function (item) {
+
+                                item.classList.toggle(
+                                    "alm-selected",
+                                    item === button
+                                );
+
+                            }
                         );
+
+
+                        const data =
+                            languages[
+                                language
+                            ];
+
+
+                        currentLabel.textContent =
+                            data.label;
+
+                        currentTitle.textContent =
+                            data.title;
+
+                        currentDescription.textContent =
+                            data.description;
+
+
+                        mentorTitle.textContent =
+                            data.mentorTitle;
+
+                        mentorText.textContent =
+                            data.mentorText;
+
+                        mentorCode.textContent =
+                            data.code;
+
+
+                        renderConcepts(
+                            beginnerConcepts,
+                            data.beginner
+                        );
+
+                        renderConcepts(
+                            intermediateConcepts,
+                            data.intermediate
+                        );
+
+                        renderConcepts(
+                            advancedConcepts,
+                            data.advanced
+                        );
+
+
+                        questionBox.classList.remove(
+                            "alm-visible"
+                        );
+
+                        nextButton.classList.remove(
+                            "alm-show"
+                        );
+
+                        completeMessage.classList.remove(
+                            "alm-show"
+                        );
+
+
+                        /*
+                         * Reset level appearance.
+                         */
+
+                        [
+                            beginnerLevel,
+                            intermediateLevel,
+                            advancedLevel
+                        ].forEach(
+                            function (element) {
+
+                                if (!element) {
+                                    return;
+                                }
+
+                                element.classList.remove(
+                                    "alm-completed",
+                                    "alm-current-level"
+                                );
+
+                                const number =
+                                    element.querySelector(
+                                        ".alm-number"
+                                    );
+
+                                if (number) {
+
+                                    number.classList.remove(
+                                        "alm-done"
+                                    );
+
+                                }
+
+                            }
+                        );
+
+
+                        updateLevelUI();
+
+                        updateProgress();
 
                     }
                 );
@@ -5343,54 +5663,57 @@ string name = "Alex";`,
 
 
         /* =================================================
-           CHALLENGE BUTTON
+           INITIALIZE
            ================================================= */
 
-        challenge.addEventListener(
-            "click",
-            function () {
+        const initialData =
+            languages.html;
 
-                question.classList.toggle(
-                    "alm-visible"
-                );
 
-                if (
-                    question.classList.contains(
-                        "alm-visible"
-                    )
-                ) {
+        renderConcepts(
+            beginnerConcepts,
+            initialData.beginner
+        );
 
-                    setTimeout(
-                        function () {
+        renderConcepts(
+            intermediateConcepts,
+            initialData.intermediate
+        );
 
-                            question.scrollIntoView({
-                                behavior: "smooth",
-                                block: "nearest"
-                            });
-
-                        },
-                        50
-                    );
-
-                }
-
-            }
+        renderConcepts(
+            advancedConcepts,
+            initialData.advanced
         );
 
 
-        /* =================================================
-           INITIAL LOAD
-           ================================================= */
+        currentLabel.textContent =
+            initialData.label;
 
-        changeLanguage(
-            "html"
-        );
+        currentTitle.textContent =
+            initialData.title;
+
+        currentDescription.textContent =
+            initialData.description;
+
+        mentorTitle.textContent =
+            initialData.mentorTitle;
+
+        mentorText.textContent =
+            initialData.mentorText;
+
+        mentorCode.textContent =
+            initialData.code;
+
+
+        updateLevelUI();
+
+        updateProgress();
 
     }
 
 
     /* =====================================================
-       SAFE INITIALIZATION
+       SAFE START
        ===================================================== */
 
     if (
@@ -5400,18 +5723,15 @@ string name = "Alex";`,
 
         document.addEventListener(
             "DOMContentLoaded",
-            initializeLearningLadder
+            initLearningLadder
         );
 
     } else {
 
-        initializeLearningLadder();
+        initLearningLadder();
 
     }
 
 })();
-</script>
 
-<!-- =========================================================
-     END OF AI MENTOR LEARNING LADDER
-     ========================================================= -->
+</script>
