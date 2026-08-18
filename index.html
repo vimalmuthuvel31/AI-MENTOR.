@@ -3578,37 +3578,49 @@ Ask me a programming question or paste some code and I'll help you understand it
 
 </script>
 <!-- =========================================================
-     MULTI-LANGUAGE AI LEARNING LADDER
-     ADD THIS ENTIRE BLOCK BEFORE YOUR EXISTING </body>
+     AI CODING MENTOR
+     PERSONALIZED LEARNING LADDER
+     ISOLATED VERSION
+     
+     Paste everything below BEFORE </body>
      ========================================================= -->
-
-
-<!-- =========================
-     LEARNING LADDER CSS
-     ========================= -->
 
 <style>
 
-.learning-ladder {
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+#alm-learning-ladder {
     width: 100%;
+    margin: 0;
     padding: 80px 0;
-    margin-top: 40px;
+    box-sizing: border-box;
+    background: transparent;
 }
 
-.learning-container {
+#alm-learning-ladder *,
+#alm-learning-ladder *::before,
+#alm-learning-ladder *::after {
+    box-sizing: border-box;
+}
+
+.alm-container {
     width: min(1100px, calc(100% - 32px));
-    margin: auto;
+    margin: 0 auto;
 }
 
 
-/* ---------- HEADER ---------- */
+/* =========================================================
+   HEADER
+   ========================================================= */
 
-.learning-heading {
+.alm-header {
     max-width: 760px;
     margin-bottom: 30px;
 }
 
-.learning-heading > span {
+.alm-eyebrow {
     display: inline-block;
     margin-bottom: 10px;
 
@@ -3617,10 +3629,11 @@ Ask me a programming question or paste some code and I'll help you understand it
     font-size: 10px;
     font-weight: 800;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
 }
 
-.learning-heading h2 {
+.alm-title {
     margin: 0;
 
     color: #f4f7ff;
@@ -3631,14 +3644,14 @@ Ask me a programming question or paste some code and I'll help you understand it
     letter-spacing: -2px;
 }
 
-.learning-heading h2 strong {
+.alm-title strong {
     color: #7c5cff;
 }
 
-.learning-heading p {
+.alm-description {
     max-width: 680px;
 
-    margin-top: 16px;
+    margin: 16px 0 0;
 
     color: #9da9c2;
 
@@ -3647,26 +3660,33 @@ Ask me a programming question or paste some code and I'll help you understand it
 }
 
 
-/* ---------- LANGUAGE SELECTOR ---------- */
+/* =========================================================
+   LANGUAGE BUTTONS
+   ========================================================= */
 
-.language-selector {
+.alm-language-selector {
     display: flex;
     flex-wrap: wrap;
+
     gap: 8px;
 
     margin-bottom: 18px;
 }
 
-.language-btn {
-    padding: 10px 14px;
+.alm-language-button {
+    appearance: none;
+    -webkit-appearance: none;
 
     border: 1px solid #26344f;
     border-radius: 8px;
+
+    padding: 10px 14px;
 
     background: #0d1424;
 
     color: #9da9c2;
 
+    font-family: inherit;
     font-size: 11px;
     font-weight: 700;
 
@@ -3679,13 +3699,15 @@ Ask me a programming question or paste some code and I'll help you understand it
         transform .2s ease;
 }
 
-.language-btn:hover {
+.alm-language-button:hover {
     border-color: #5b8cff;
+
     color: #ffffff;
+
     transform: translateY(-1px);
 }
 
-.language-btn.active {
+.alm-language-button.alm-selected {
     border-color: #5b8cff;
 
     background: rgba(91, 140, 255, 0.12);
@@ -3694,10 +3716,14 @@ Ask me a programming question or paste some code and I'll help you understand it
 }
 
 
-/* ---------- CURRENT LANGUAGE ---------- */
+/* =========================================================
+   CURRENT LANGUAGE
+   ========================================================= */
 
-.current-language {
+.alm-current {
     padding: 24px;
+
+    margin-bottom: 14px;
 
     border: 1px solid rgba(91, 140, 255, 0.20);
     border-radius: 15px;
@@ -3709,11 +3735,11 @@ Ask me a programming question or paste some code and I'll help you understand it
             transparent 40%
         ),
         #0d1424;
-
-    margin-bottom: 14px;
 }
 
-.current-language > span {
+.alm-current-label {
+    display: block;
+
     color: #5b8cff;
 
     font-size: 9px;
@@ -3722,7 +3748,7 @@ Ask me a programming question or paste some code and I'll help you understand it
     letter-spacing: 1.5px;
 }
 
-.current-language h3 {
+.alm-current-title {
     margin: 7px 0 0;
 
     color: #f4f7ff;
@@ -3730,7 +3756,7 @@ Ask me a programming question or paste some code and I'll help you understand it
     font-size: 20px;
 }
 
-.current-language p {
+.alm-current-description {
     margin: 8px 0 0;
 
     color: #8998b0;
@@ -3740,17 +3766,20 @@ Ask me a programming question or paste some code and I'll help you understand it
 }
 
 
-/* ---------- LEVELS ---------- */
+/* =========================================================
+   LEVELS
+   ========================================================= */
 
-.learning-levels {
+.alm-levels {
     display: flex;
     flex-direction: column;
 
     gap: 12px;
 }
 
-.learning-level {
+.alm-level {
     display: flex;
+
     gap: 18px;
 
     padding: 21px;
@@ -3762,26 +3791,29 @@ Ask me a programming question or paste some code and I'll help you understand it
 
     transition:
         border-color .2s ease,
-        transform .2s ease;
+        transform .2s ease,
+        background .2s ease;
 }
 
-.learning-level:hover {
+.alm-level:hover {
     transform: translateY(-1px);
+
+    border-color: rgba(91,140,255,0.18);
 }
 
-.learning-level.active {
-    border-color: rgba(91, 140, 255, 0.32);
+.alm-level.alm-active {
+    border-color: rgba(91,140,255,0.32);
 
     background:
         radial-gradient(
             circle at 100% 0%,
-            rgba(91, 140, 255, 0.07),
+            rgba(91,140,255,0.07),
             transparent 35%
         ),
         #0d1424;
 }
 
-.level-number {
+.alm-number {
     width: 42px;
     height: 42px;
 
@@ -3792,7 +3824,7 @@ Ask me a programming question or paste some code and I'll help you understand it
 
     border-radius: 9px;
 
-    background: rgba(91, 140, 255, 0.09);
+    background: rgba(91,140,255,0.09);
 
     color: #5b8cff;
 
@@ -3801,25 +3833,30 @@ Ask me a programming question or paste some code and I'll help you understand it
     font-weight: 800;
 }
 
-.level-content {
+.alm-level-content {
+    min-width: 0;
     flex: 1;
 }
 
-.level-header {
+.alm-level-header {
     display: flex;
+
     justify-content: space-between;
 
     gap: 20px;
 }
 
-.level-header small {
+.alm-level-small {
+    display: block;
+
     color: #68768c;
 
     font-size: 9px;
+
     letter-spacing: 1.2px;
 }
 
-.level-header h3 {
+.alm-level-title {
     margin: 4px 0 0;
 
     color: #f4f7ff;
@@ -3827,18 +3864,20 @@ Ask me a programming question or paste some code and I'll help you understand it
     font-size: 16px;
 }
 
-.level-status {
+.alm-level-status {
+    flex-shrink: 0;
+
     color: #5b8cff;
 
     font-size: 9px;
     font-weight: 800;
 }
 
-.level-status.locked {
+.alm-level-status.alm-locked {
     color: #647188;
 }
 
-.level-content > p {
+.alm-level-description {
     margin: 7px 0 0;
 
     color: #7f8ca1;
@@ -3848,10 +3887,13 @@ Ask me a programming question or paste some code and I'll help you understand it
 }
 
 
-/* ---------- CONCEPTS ---------- */
+/* =========================================================
+   CONCEPTS
+   ========================================================= */
 
-.concept-list {
+.alm-concepts {
     display: flex;
+
     flex-wrap: wrap;
 
     gap: 7px;
@@ -3859,7 +3901,9 @@ Ask me a programming question or paste some code and I'll help you understand it
     margin-top: 13px;
 }
 
-.concept-list span {
+.alm-concept {
+    display: inline-block;
+
     padding: 6px 9px;
 
     border: 1px solid rgba(255,255,255,0.06);
@@ -3873,28 +3917,31 @@ Ask me a programming question or paste some code and I'll help you understand it
 }
 
 
-/* ---------- AI MENTOR PANEL ---------- */
+/* =========================================================
+   MENTOR
+   ========================================================= */
 
-.learning-mentor {
+.alm-mentor {
     display: flex;
+
     gap: 17px;
 
     margin-top: 18px;
     padding: 25px;
 
-    border: 1px solid rgba(124, 92, 255, 0.22);
+    border: 1px solid rgba(124,92,255,0.22);
     border-radius: 15px;
 
     background:
         radial-gradient(
             circle at 0% 100%,
-            rgba(124, 92, 255, 0.08),
+            rgba(124,92,255,0.08),
             transparent 40%
         ),
         #0d1424;
 }
 
-.mentor-icon {
+.alm-mentor-icon {
     width: 45px;
     height: 45px;
 
@@ -3905,16 +3952,19 @@ Ask me a programming question or paste some code and I'll help you understand it
 
     border-radius: 11px;
 
-    background: rgba(124, 92, 255, 0.10);
+    background: rgba(124,92,255,0.10);
 
     font-size: 21px;
 }
 
-.mentor-content {
+.alm-mentor-content {
+    min-width: 0;
     flex: 1;
 }
 
-.mentor-content > span {
+.alm-mentor-label {
+    display: block;
+
     color: #7c5cff;
 
     font-size: 9px;
@@ -3923,7 +3973,7 @@ Ask me a programming question or paste some code and I'll help you understand it
     letter-spacing: 1.3px;
 }
 
-.mentor-content h3 {
+.alm-mentor-title {
     margin: 6px 0 0;
 
     color: #f4f7ff;
@@ -3931,7 +3981,7 @@ Ask me a programming question or paste some code and I'll help you understand it
     font-size: 18px;
 }
 
-.mentor-content > p {
+.alm-mentor-text {
     margin: 8px 0 0;
 
     color: #8998b0;
@@ -3941,9 +3991,13 @@ Ask me a programming question or paste some code and I'll help you understand it
 }
 
 
-/* ---------- CODE WINDOW ---------- */
+/* =========================================================
+   CODE
+   ========================================================= */
 
-.mentor-code {
+.alm-code {
+    width: 100%;
+
     overflow-x: auto;
 
     margin-top: 18px;
@@ -3954,8 +4008,9 @@ Ask me a programming question or paste some code and I'll help you understand it
     background: #070b16;
 }
 
-.mentor-code pre {
+.alm-code pre {
     margin: 0;
+
     padding: 18px;
 
     color: #cbd3df;
@@ -3963,6 +4018,7 @@ Ask me a programming question or paste some code and I'll help you understand it
     font-family:
         Consolas,
         Monaco,
+        "Courier New",
         monospace;
 
     font-size: 12px;
@@ -3972,20 +4028,28 @@ Ask me a programming question or paste some code and I'll help you understand it
 }
 
 
-/* ---------- CHALLENGE BUTTON ---------- */
+/* =========================================================
+   CHALLENGE
+   ========================================================= */
 
-.learning-challenge {
+.alm-challenge-button {
+    appearance: none;
+    -webkit-appearance: none;
+
+    display: inline-block;
+
     margin-top: 14px;
 
     padding: 11px 16px;
 
-    border: none;
+    border: 0;
     border-radius: 8px;
 
     background: #7c5cff;
 
     color: #ffffff;
 
+    font-family: inherit;
     font-size: 11px;
     font-weight: 800;
 
@@ -3996,31 +4060,35 @@ Ask me a programming question or paste some code and I'll help you understand it
         opacity .2s ease;
 }
 
-.learning-challenge:hover {
-    transform: translateY(-1px);
+.alm-challenge-button:hover {
     opacity: .9;
+
+    transform: translateY(-1px);
 }
 
 
-/* ---------- QUESTION ---------- */
+/* =========================================================
+   QUESTION
+   ========================================================= */
 
-.learning-question {
+.alm-question {
     display: none;
 
     margin-top: 17px;
+
     padding: 18px;
 
-    border: 1px solid rgba(124, 92, 255, 0.18);
+    border: 1px solid rgba(124,92,255,0.18);
     border-radius: 10px;
 
-    background: rgba(124, 92, 255, 0.04);
+    background: rgba(124,92,255,0.04);
 }
 
-.learning-question.show {
+.alm-question.alm-visible {
     display: block;
 }
 
-.learning-question h4 {
+.alm-question-title {
     margin: 0;
 
     color: #f4f7ff;
@@ -4028,7 +4096,7 @@ Ask me a programming question or paste some code and I'll help you understand it
     font-size: 13px;
 }
 
-.learning-question > p {
+.alm-question-text {
     margin: 8px 0 0;
 
     color: #9da9c2;
@@ -4037,8 +4105,9 @@ Ask me a programming question or paste some code and I'll help you understand it
     line-height: 1.6;
 }
 
-.question-options {
+.alm-options {
     display: flex;
+
     flex-wrap: wrap;
 
     gap: 8px;
@@ -4046,7 +4115,10 @@ Ask me a programming question or paste some code and I'll help you understand it
     margin-top: 14px;
 }
 
-.question-options button {
+.alm-option {
+    appearance: none;
+    -webkit-appearance: none;
+
     padding: 9px 13px;
 
     border: 1px solid rgba(255,255,255,0.08);
@@ -4064,51 +4136,75 @@ Ask me a programming question or paste some code and I'll help you understand it
     transition: .2s ease;
 }
 
-.question-options button:hover {
+.alm-option:hover {
     border-color: #7c5cff;
+
     color: #ffffff;
 }
 
-.learning-feedback {
+.alm-option.alm-correct {
+    border-color: #32d583;
+
+    background: rgba(50,213,131,0.08);
+
+    color: #32d583;
+}
+
+.alm-option.alm-wrong {
+    border-color: #ff5c72;
+
+    background: rgba(255,92,114,0.08);
+
+    color: #ff5c72;
+}
+
+.alm-feedback {
     min-height: 18px;
 
-    margin-top: 11px;
+    margin: 11px 0 0;
 
     font-size: 11px;
     font-weight: 700;
 }
 
 
-/* ---------- MOBILE ---------- */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 650px) {
 
-    .learning-ladder {
+    #alm-learning-ladder {
         padding: 60px 0;
     }
 
-    .learning-container {
+    .alm-container {
         width: calc(100% - 26px);
     }
 
-    .learning-level {
+    .alm-title {
+        letter-spacing: -1.2px;
+    }
+
+    .alm-level {
         padding: 17px;
     }
 
-    .level-header {
+    .alm-level-header {
         flex-direction: column;
+
         gap: 7px;
     }
 
-    .learning-mentor {
+    .alm-mentor {
         flex-direction: column;
     }
 
-    .question-options {
+    .alm-options {
         flex-direction: column;
     }
 
-    .question-options button {
+    .alm-option {
         width: 100%;
     }
 
@@ -4117,89 +4213,90 @@ Ask me a programming question or paste some code and I'll help you understand it
 </style>
 
 
-<!-- =========================
-     LEARNING LADDER HTML
-     ========================= -->
+<!-- =========================================================
+     HTML
+     ========================================================= -->
 
-<section
-    class="learning-ladder"
-    id="learningLadder"
->
+<section id="alm-learning-ladder">
 
-    <div class="learning-container">
+    <div class="alm-container">
 
 
         <!-- HEADER -->
 
-        <div class="learning-heading">
+        <header class="alm-header">
 
-            <span>
-                PERSONALIZED LEARNING PATH
+            <span class="alm-eyebrow">
+                Personalized Learning Path
             </span>
 
-            <h2>
+            <h2 class="alm-title">
                 Learn any language.
                 <strong>Level up step by step.</strong>
             </h2>
 
-            <p>
+            <p class="alm-description">
                 Choose a programming language and start
                 from the fundamentals. Your AI mentor
                 helps you build the foundation before
                 moving toward advanced concepts.
             </p>
 
-        </div>
+        </header>
 
 
         <!-- LANGUAGE SELECTOR -->
 
-        <div class="language-selector">
+        <div
+            class="alm-language-selector"
+            role="tablist"
+            aria-label="Programming languages"
+        >
 
             <button
                 type="button"
-                class="language-btn active"
-                data-language="html"
+                class="alm-language-button alm-selected"
+                data-alm-language="html"
             >
                 🌐 HTML
             </button>
 
             <button
                 type="button"
-                class="language-btn"
-                data-language="css"
+                class="alm-language-button"
+                data-alm-language="css"
             >
                 🎨 CSS
             </button>
 
             <button
                 type="button"
-                class="language-btn"
-                data-language="javascript"
+                class="alm-language-button"
+                data-alm-language="javascript"
             >
                 ⚡ JavaScript
             </button>
 
             <button
                 type="button"
-                class="language-btn"
-                data-language="java"
+                class="alm-language-button"
+                data-alm-language="java"
             >
                 ☕ Java
             </button>
 
             <button
                 type="button"
-                class="language-btn"
-                data-language="csharp"
+                class="alm-language-button"
+                data-alm-language="csharp"
             >
                 💠 C#
             </button>
 
             <button
                 type="button"
-                class="language-btn"
-                data-language="cpp"
+                class="alm-language-button"
+                data-alm-language="cpp"
             >
                 ⚙️ C++
             </button>
@@ -4209,17 +4306,26 @@ Ask me a programming question or paste some code and I'll help you understand it
 
         <!-- CURRENT LANGUAGE -->
 
-        <div class="current-language">
+        <div class="alm-current">
 
-            <span id="currentLanguageLabel">
+            <span
+                class="alm-current-label"
+                id="alm-current-label"
+            >
                 HTML
             </span>
 
-            <h3 id="currentLanguageTitle">
+            <h3
+                class="alm-current-title"
+                id="alm-current-title"
+            >
                 Start with HTML Foundations
             </h3>
 
-            <p id="currentLanguageDescription">
+            <p
+                class="alm-current-description"
+                id="alm-current-description"
+            >
                 Learn how webpages are structured before
                 moving into styling and interactive behaviour.
             </p>
@@ -4229,186 +4335,171 @@ Ask me a programming question or paste some code and I'll help you understand it
 
         <!-- LEVELS -->
 
-        <div class="learning-levels">
+        <div class="alm-levels">
 
 
-            <!-- LEVEL 1 -->
+            <!-- BEGINNER -->
 
-            <div class="learning-level active">
+            <article class="alm-level alm-active">
 
-                <div class="level-number">
+                <div class="alm-number">
                     01
                 </div>
 
-                <div class="level-content">
+                <div class="alm-level-content">
 
-                    <div class="level-header">
+                    <div class="alm-level-header">
 
                         <div>
 
-                            <small>
+                            <span class="alm-level-small">
                                 BEGINNER
-                            </small>
+                            </span>
 
-                            <h3>
+                            <h3 class="alm-level-title">
                                 🌱 Foundations
                             </h3>
 
                         </div>
 
-                        <span class="level-status">
+                        <span class="alm-level-status">
                             START HERE
                         </span>
 
                     </div>
 
-                    <p>
+                    <p class="alm-level-description">
                         Learn the essential building blocks
                         before writing complex code.
                     </p>
 
                     <div
-                        class="concept-list"
-                        id="beginnerConcepts"
-                    >
-
-                        <span>HTML Structure</span>
-                        <span>Elements</span>
-                        <span>Attributes</span>
-                        <span>Forms</span>
-
-                    </div>
+                        class="alm-concepts"
+                        id="alm-beginner"
+                    ></div>
 
                 </div>
 
-            </div>
+            </article>
 
 
-            <!-- LEVEL 2 -->
+            <!-- INTERMEDIATE -->
 
-            <div class="learning-level">
+            <article class="alm-level">
 
-                <div class="level-number">
+                <div class="alm-number">
                     02
                 </div>
 
-                <div class="level-content">
+                <div class="alm-level-content">
 
-                    <div class="level-header">
+                    <div class="alm-level-header">
 
                         <div>
 
-                            <small>
+                            <span class="alm-level-small">
                                 INTERMEDIATE
-                            </small>
+                            </span>
 
-                            <h3>
+                            <h3 class="alm-level-title">
                                 🔧 Core Skills
                             </h3>
 
                         </div>
 
-                        <span class="level-status locked">
+                        <span class="alm-level-status alm-locked">
                             🔒 LOCKED
                         </span>
 
                     </div>
 
-                    <p>
+                    <p class="alm-level-description">
                         Combine concepts to solve problems
                         and build real-world projects.
                     </p>
 
                     <div
-                        class="concept-list"
-                        id="intermediateConcepts"
-                    >
-
-                        <span>Semantic HTML</span>
-                        <span>Accessibility</span>
-                        <span>Forms</span>
-                        <span>Page Structure</span>
-
-                    </div>
+                        class="alm-concepts"
+                        id="alm-intermediate"
+                    ></div>
 
                 </div>
 
-            </div>
+            </article>
 
 
-            <!-- LEVEL 3 -->
+            <!-- ADVANCED -->
 
-            <div class="learning-level">
+            <article class="alm-level">
 
-                <div class="level-number">
+                <div class="alm-number">
                     03
                 </div>
 
-                <div class="level-content">
+                <div class="alm-level-content">
 
-                    <div class="level-header">
+                    <div class="alm-level-header">
 
                         <div>
 
-                            <small>
+                            <span class="alm-level-small">
                                 ADVANCED
-                            </small>
+                            </span>
 
-                            <h3>
+                            <h3 class="alm-level-title">
                                 🚀 Advanced Development
                             </h3>
 
                         </div>
 
-                        <span class="level-status locked">
+                        <span class="alm-level-status alm-locked">
                             🔒 LOCKED
                         </span>
 
                     </div>
 
-                    <p>
+                    <p class="alm-level-description">
                         Move from writing code to designing
                         scalable and professional applications.
                     </p>
 
                     <div
-                        class="concept-list"
-                        id="advancedConcepts"
-                    >
-
-                        <span>Architecture</span>
-                        <span>Performance</span>
-                        <span>Security</span>
-                        <span>Projects</span>
-
-                    </div>
+                        class="alm-concepts"
+                        id="alm-advanced"
+                    ></div>
 
                 </div>
 
-            </div>
+            </article>
 
         </div>
 
 
         <!-- AI MENTOR -->
 
-        <div class="learning-mentor">
+        <div class="alm-mentor">
 
-            <div class="mentor-icon">
+            <div class="alm-mentor-icon">
                 🧠
             </div>
 
-            <div class="mentor-content">
+            <div class="alm-mentor-content">
 
-                <span>
+                <span class="alm-mentor-label">
                     AI CODING MENTOR
                 </span>
 
-                <h3 id="mentorTitle">
+                <h3
+                    class="alm-mentor-title"
+                    id="alm-mentor-title"
+                >
                     Let's start with HTML structure.
                 </h3>
 
-                <p id="mentorText">
+                <p
+                    class="alm-mentor-text"
+                    id="alm-mentor-text"
+                >
                     HTML gives your webpage its structure.
                     Before learning CSS or JavaScript,
                     let's understand how HTML elements
@@ -4416,9 +4507,11 @@ Ask me a programming question or paste some code and I'll help you understand it
                 </p>
 
 
-                <div class="mentor-code">
+                <!-- CODE -->
 
-                    <pre id="mentorCode">&lt;!DOCTYPE html&gt;
+                <div class="alm-code">
+
+                    <pre id="alm-code">&lt;!DOCTYPE html&gt;
 
 &lt;html&gt;
 
@@ -4433,62 +4526,41 @@ Ask me a programming question or paste some code and I'll help you understand it
                 </div>
 
 
+                <!-- CHALLENGE BUTTON -->
+
                 <button
                     type="button"
-                    class="learning-challenge"
-                    id="learningChallenge"
+                    class="alm-challenge-button"
+                    id="alm-challenge"
                 >
                     Test My Understanding →
                 </button>
 
 
+                <!-- QUESTION -->
+
                 <div
-                    class="learning-question"
-                    id="learningQuestion"
+                    class="alm-question"
+                    id="alm-question"
                 >
 
-                    <h4>
+                    <h4 class="alm-question-title">
                         🧠 Quick Check
                     </h4>
 
-                    <p id="questionText">
-                        Which language is responsible
-                        for the structure of a webpage?
-                    </p>
-
+                    <p
+                        class="alm-question-text"
+                        id="alm-question-text"
+                    ></p>
 
                     <div
-                        class="question-options"
-                        id="questionOptions"
-                    >
-
-                        <button
-                            type="button"
-                            data-answer="html"
-                        >
-                            HTML
-                        </button>
-
-                        <button
-                            type="button"
-                            data-answer="css"
-                        >
-                            CSS
-                        </button>
-
-                        <button
-                            type="button"
-                            data-answer="javascript"
-                        >
-                            JavaScript
-                        </button>
-
-                    </div>
-
+                        class="alm-options"
+                        id="alm-options"
+                    ></div>
 
                     <p
-                        class="learning-feedback"
-                        id="learningFeedback"
+                        class="alm-feedback"
+                        id="alm-feedback"
                     ></p>
 
                 </div>
@@ -4502,60 +4574,80 @@ Ask me a programming question or paste some code and I'll help you understand it
 </section>
 
 
-<!-- =========================
-     LEARNING LADDER JAVASCRIPT
-     ========================= -->
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
 
 <script>
-
 (function () {
 
     "use strict";
 
 
     /* =====================================================
-       LANGUAGE DATA
+       WAIT UNTIL THE PAGE IS READY
        ===================================================== */
 
-    const learningData = {
+    function initializeLearningLadder() {
 
-        html: {
+        const root =
+            document.getElementById(
+                "alm-learning-ladder"
+            );
 
-            label: "HTML",
+        if (!root) {
+            console.error(
+                "AI Mentor Learning Ladder: root element not found."
+            );
 
-            title: "Start with HTML Foundations",
+            return;
+        }
 
-            description:
-                "Learn how webpages are structured before moving into styling and interactive behaviour.",
 
-            beginner: [
-                "HTML Structure",
-                "Elements",
-                "Attributes",
-                "Forms"
-            ],
+        /* =================================================
+           LANGUAGE DATA
+           ================================================= */
 
-            intermediate: [
-                "Semantic HTML",
-                "Accessibility",
-                "Forms",
-                "Page Structure"
-            ],
+        const languages = {
 
-            advanced: [
-                "Web Components",
-                "Accessibility",
-                "SEO",
-                "Advanced Forms"
-            ],
+            html: {
 
-            mentorTitle:
-                "Let's start with HTML structure.",
+                label: "HTML",
 
-            mentorText:
-                "HTML gives your webpage its structure. Before learning CSS or JavaScript, understand how HTML elements work together.",
+                title:
+                    "Start with HTML Foundations",
 
-            code:
+                description:
+                    "Learn how webpages are structured before moving into styling and interactive behaviour.",
+
+                beginner: [
+                    "HTML Structure",
+                    "Elements",
+                    "Attributes",
+                    "Forms"
+                ],
+
+                intermediate: [
+                    "Semantic HTML",
+                    "Accessibility",
+                    "Forms",
+                    "Page Structure"
+                ],
+
+                advanced: [
+                    "Web Components",
+                    "Accessibility",
+                    "SEO",
+                    "Advanced Forms"
+                ],
+
+                mentorTitle:
+                    "Let's start with HTML structure.",
+
+                mentorText:
+                    "HTML gives your webpage its structure. Before learning CSS or JavaScript, understand how HTML elements work together.",
+
+                code:
 `<!DOCTYPE html>
 
 <html>
@@ -4568,56 +4660,58 @@ Ask me a programming question or paste some code and I'll help you understand it
 
 </html>`,
 
-            question:
-                "Which language is responsible for the structure of a webpage?",
+                question:
+                    "Which language is responsible for the structure of a webpage?",
 
-            answers: [
-                ["HTML", "html"],
-                ["CSS", "css"],
-                ["JavaScript", "javascript"]
-            ],
+                answers: [
+                    ["HTML", "html"],
+                    ["CSS", "css"],
+                    ["JavaScript", "javascript"]
+                ],
 
-            correct: "html"
-        },
+                correct:
+                    "html"
+            },
 
 
-        css: {
+            css: {
 
-            label: "CSS",
+                label: "CSS",
 
-            title: "Start with CSS Foundations",
+                title:
+                    "Start with CSS Foundations",
 
-            description:
-                "Learn how to control colors, spacing, layouts and the visual appearance of webpages.",
+                description:
+                    "Learn how to control colors, spacing, layouts and the visual appearance of webpages.",
 
-            beginner: [
-                "Selectors",
-                "Colors",
-                "Fonts",
-                "Box Model"
-            ],
+                beginner: [
+                    "Selectors",
+                    "Colors",
+                    "Fonts",
+                    "Box Model"
+                ],
 
-            intermediate: [
-                "Flexbox",
-                "Grid",
-                "Responsive Design",
-                "Animations"
-            ],
+                intermediate: [
+                    "Flexbox",
+                    "Grid",
+                    "Responsive Design",
+                    "Animations"
+                ],
 
-            advanced: [
-                "Advanced Layout",
-                "CSS Architecture",
-                "Transitions",
-                "Complex Animations"
-            ],
+                advanced: [
+                    "Advanced Layout",
+                    "CSS Architecture",
+                    "Transitions",
+                    "Complex Animations"
+                ],
 
-            mentorTitle:
-                "Let's start with CSS selectors.",
+                mentorTitle:
+                    "Let's start with CSS selectors.",
 
-            mentorText:
-                "CSS selectors tell the browser which HTML elements should receive your styles.",
+                mentorText:
+                    "CSS selectors tell the browser which HTML elements should receive your styles.",
 
-            code:
+                code:
 `.card {
 
     color: white;
@@ -4626,568 +4720,698 @@ Ask me a programming question or paste some code and I'll help you understand it
 
 }`,
 
-            question:
-                "Which language is responsible for styling a webpage?",
+                question:
+                    "Which language is responsible for styling a webpage?",
 
-            answers: [
-                ["HTML", "html"],
-                ["CSS", "css"],
-                ["JavaScript", "javascript"]
-            ],
+                answers: [
+                    ["HTML", "html"],
+                    ["CSS", "css"],
+                    ["JavaScript", "javascript"]
+                ],
 
-            correct: "css"
-        },
+                correct:
+                    "css"
+            },
 
 
-        javascript: {
+            javascript: {
 
-            label: "JAVASCRIPT",
+                label: "JAVASCRIPT",
 
-            title: "Start with JavaScript Foundations",
+                title:
+                    "Start with JavaScript Foundations",
 
-            description:
-                "Learn programming logic, variables, functions and events before building interactive applications.",
+                description:
+                    "Learn programming logic, variables, functions and events before building interactive applications.",
 
-            beginner: [
-                "Variables",
-                "Data Types",
-                "Conditions",
-                "Functions"
-            ],
+                beginner: [
+                    "Variables",
+                    "Data Types",
+                    "Conditions",
+                    "Functions"
+                ],
 
-            intermediate: [
-                "Arrays",
-                "Objects",
-                "DOM",
-                "Events"
-            ],
+                intermediate: [
+                    "Arrays",
+                    "Objects",
+                    "DOM",
+                    "Events"
+                ],
 
-            advanced: [
-                "Async JavaScript",
-                "Promises",
-                "Modules",
-                "APIs"
-            ],
+                advanced: [
+                    "Async JavaScript",
+                    "Promises",
+                    "Modules",
+                    "APIs"
+                ],
 
-            mentorTitle:
-                "Let's start with JavaScript variables.",
+                mentorTitle:
+                    "Let's start with JavaScript variables.",
 
-            mentorText:
-                "Variables allow JavaScript programs to store and work with information.",
+                mentorText:
+                    "Variables allow JavaScript programs to store and work with information.",
 
-            code:
+                code:
 `let name = "Alex";
 
 let age = 18;
 
 console.log(name);`,
 
-            question:
-                "Which keyword creates a changeable variable in JavaScript?",
+                question:
+                    "Which keyword creates a changeable variable in JavaScript?",
 
-            answers: [
-                ["let", "let"],
-                ["html", "html"],
-                ["style", "style"]
-            ],
+                answers: [
+                    ["let", "let"],
+                    ["const", "const"],
+                    ["style", "style"]
+                ],
 
-            correct: "let"
-        },
+                correct:
+                    "let"
+            },
 
 
-        java: {
+            java: {
 
-            label: "JAVA",
+                label: "JAVA",
 
-            title: "Start with Java Foundations",
+                title:
+                    "Start with Java Foundations",
 
-            description:
-                "Build a strong Java foundation before moving into object-oriented and advanced programming.",
+                description:
+                    "Build a strong Java foundation before moving into object-oriented and advanced programming.",
 
-            beginner: [
-                "Variables",
-                "Data Types",
-                "Conditions",
-                "Loops"
-            ],
+                beginner: [
+                    "Variables",
+                    "Data Types",
+                    "Conditions",
+                    "Loops"
+                ],
 
-            intermediate: [
-                "Methods",
-                "Arrays",
-                "Classes",
-                "Objects"
-            ],
+                intermediate: [
+                    "Methods",
+                    "Arrays",
+                    "Classes",
+                    "Objects"
+                ],
 
-            advanced: [
-                "Collections",
-                "Streams",
-                "Exceptions",
-                "Multithreading"
-            ],
+                advanced: [
+                    "Collections",
+                    "Streams",
+                    "Exceptions",
+                    "Multithreading"
+                ],
 
-            mentorTitle:
-                "Let's start with Java variables.",
+                mentorTitle:
+                    "Let's start with Java variables.",
 
-            mentorText:
-                "Variables store information that your Java program can use and change.",
+                mentorText:
+                    "Variables store information that your Java program can use and change.",
 
-            code:
+                code:
 `int age = 18;
 
 double price = 99.99;
 
 String name = "Alex";`,
 
-            question:
-                "Which Java type is commonly used for whole numbers?",
+                question:
+                    "Which Java type is commonly used for whole numbers?",
 
-            answers: [
-                ["String", "string"],
-                ["int", "int"],
-                ["boolean", "boolean"]
-            ],
+                answers: [
+                    ["String", "string"],
+                    ["int", "int"],
+                    ["boolean", "boolean"]
+                ],
 
-            correct: "int"
-        },
+                correct:
+                    "int"
+            },
 
 
-        csharp: {
+            csharp: {
 
-            label: "C#",
+                label: "C#",
 
-            title: "Start with C# Foundations",
+                title:
+                    "Start with C# Foundations",
 
-            description:
-                "Learn the fundamentals of C# and gradually move toward object-oriented application development.",
+                description:
+                    "Learn the fundamentals of C# and gradually move toward object-oriented application development.",
 
-            beginner: [
-                "Variables",
-                "Types",
-                "Conditions",
-                "Loops"
-            ],
+                beginner: [
+                    "Variables",
+                    "Types",
+                    "Conditions",
+                    "Loops"
+                ],
 
-            intermediate: [
-                "Methods",
-                "Classes",
-                "Objects",
-                "Collections"
-            ],
+                intermediate: [
+                    "Methods",
+                    "Classes",
+                    "Objects",
+                    "Collections"
+                ],
 
-            advanced: [
-                "LINQ",
-                "Async",
-                "Generics",
-                "Application Architecture"
-            ],
+                advanced: [
+                    "LINQ",
+                    "Async",
+                    "Generics",
+                    "Application Architecture"
+                ],
 
-            mentorTitle:
-                "Let's start with C# variables.",
+                mentorTitle:
+                    "Let's start with C# variables.",
 
-            mentorText:
-                "C# is strongly typed, so variables have defined data types.",
+                mentorText:
+                    "C# is strongly typed, so variables have defined data types.",
 
-            code:
+                code:
 `int age = 18;
 
 string name = "Alex";
 
 bool active = true;`,
 
-            question:
-                "Which C# type stores true or false?",
+                question:
+                    "Which C# type stores true or false?",
 
-            answers: [
-                ["string", "string"],
-                ["bool", "bool"],
-                ["int", "int"]
-            ],
+                answers: [
+                    ["string", "string"],
+                    ["bool", "bool"],
+                    ["int", "int"]
+                ],
 
-            correct: "bool"
-        },
+                correct:
+                    "bool"
+            },
 
 
-        cpp: {
+            cpp: {
 
-            label: "C++",
+                label: "C++",
 
-            title: "Start with C++ Foundations",
+                title:
+                    "Start with C++ Foundations",
 
-            description:
-                "Build a strong C++ foundation before moving into memory, object-oriented programming and advanced concepts.",
+                description:
+                    "Build a strong C++ foundation before moving into memory, object-oriented programming and advanced concepts.",
 
-            beginner: [
-                "Variables",
-                "Types",
-                "Conditions",
-                "Loops"
-            ],
+                beginner: [
+                    "Variables",
+                    "Types",
+                    "Conditions",
+                    "Loops"
+                ],
 
-            intermediate: [
-                "Functions",
-                "Arrays",
-                "Classes",
-                "Pointers"
-            ],
+                intermediate: [
+                    "Functions",
+                    "Arrays",
+                    "Classes",
+                    "Pointers"
+                ],
 
-            advanced: [
-                "STL",
-                "Templates",
-                "Memory",
-                "Modern C++"
-            ],
+                advanced: [
+                    "STL",
+                    "Templates",
+                    "Memory",
+                    "Modern C++"
+                ],
 
-            mentorTitle:
-                "Let's start with C++ variables.",
+                mentorTitle:
+                    "Let's start with C++ variables.",
 
-            mentorText:
-                "C++ variables store values that your program can use during execution.",
+                mentorText:
+                    "C++ variables store values that your program can use during execution.",
 
-            code:
+                code:
 `int age = 18;
 
 double price = 99.99;
 
 string name = "Alex";`,
 
-            question:
-                "Which C++ type is commonly used for whole numbers?",
+                question:
+                    "Which C++ type is commonly used for whole numbers?",
 
-            answers: [
-                ["string", "string"],
-                ["int", "int"],
-                ["double", "double"]
-            ],
+                answers: [
+                    ["string", "string"],
+                    ["int", "int"],
+                    ["double", "double"]
+                ],
 
-            correct: "int"
-        }
-
-    };
-
-
-    /* =====================================================
-       GET ELEMENTS
-       ===================================================== */
-
-    const languageButtons =
-        document.querySelectorAll(
-            "#learningLadder .language-btn"
-        );
-
-    const languageLabel =
-        document.getElementById(
-            "currentLanguageLabel"
-        );
-
-    const languageTitle =
-        document.getElementById(
-            "currentLanguageTitle"
-        );
-
-    const languageDescription =
-        document.getElementById(
-            "currentLanguageDescription"
-        );
-
-    const beginnerConcepts =
-        document.getElementById(
-            "beginnerConcepts"
-        );
-
-    const intermediateConcepts =
-        document.getElementById(
-            "intermediateConcepts"
-        );
-
-    const advancedConcepts =
-        document.getElementById(
-            "advancedConcepts"
-        );
-
-    const mentorTitle =
-        document.getElementById(
-            "mentorTitle"
-        );
-
-    const mentorText =
-        document.getElementById(
-            "mentorText"
-        );
-
-    const mentorCode =
-        document.getElementById(
-            "mentorCode"
-        );
-
-    const challengeButton =
-        document.getElementById(
-            "learningChallenge"
-        );
-
-    const questionBox =
-        document.getElementById(
-            "learningQuestion"
-        );
-
-    const questionText =
-        document.getElementById(
-            "questionText"
-        );
-
-    const questionOptions =
-        document.getElementById(
-            "questionOptions"
-        );
-
-    const feedback =
-        document.getElementById(
-            "learningFeedback"
-        );
-
-
-    let currentLanguage = "html";
-
-
-    /* =====================================================
-       CREATE CONCEPTS
-       ===================================================== */
-
-    function renderConcepts(
-        element,
-        concepts
-    ) {
-
-        element.innerHTML = "";
-
-        concepts.forEach(
-            function (concept) {
-
-                const span =
-                    document.createElement(
-                        "span"
-                    );
-
-                span.textContent =
-                    concept;
-
-                element.appendChild(
-                    span
-                );
-
+                correct:
+                    "int"
             }
-        );
 
-    }
-
-
-    /* =====================================================
-       RENDER QUESTION
-       ===================================================== */
-
-    function renderQuestion(data) {
-
-        questionText.textContent =
-            data.question;
-
-        questionOptions.innerHTML = "";
-
-        feedback.textContent = "";
-
-        data.answers.forEach(
-            function (answer) {
-
-                const button =
-                    document.createElement(
-                        "button"
-                    );
-
-                button.type = "button";
-
-                button.textContent =
-                    answer[0];
-
-                button.dataset.answer =
-                    answer[1];
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        if (
-                            button.dataset.answer ===
-                            data.correct
-                        ) {
-
-                            feedback.textContent =
-                                "✓ Correct! You understand the foundation.";
-
-                            feedback.style.color =
-                                "#32d583";
-
-                        } else {
-
-                            feedback.textContent =
-                                "Not quite. Think about what this language is designed to do.";
-
-                            feedback.style.color =
-                                "#ff5c72";
-
-                        }
-
-                    }
-                );
-
-                questionOptions.appendChild(
-                    button
-                );
-
-            }
-        );
-
-    }
+        };
 
 
-    /* =====================================================
-       UPDATE LANGUAGE
-       ===================================================== */
+        /* =================================================
+           ELEMENTS
+           ================================================= */
 
-    function updateLanguage(
-        language
-    ) {
+        const buttons =
+            root.querySelectorAll(
+                ".alm-language-button"
+            );
 
-        const data =
-            learningData[language];
+        const currentLabel =
+            root.querySelector(
+                "#alm-current-label"
+            );
 
-        if (!data) {
+        const currentTitle =
+            root.querySelector(
+                "#alm-current-title"
+            );
+
+        const currentDescription =
+            root.querySelector(
+                "#alm-current-description"
+            );
+
+        const beginner =
+            root.querySelector(
+                "#alm-beginner"
+            );
+
+        const intermediate =
+            root.querySelector(
+                "#alm-intermediate"
+            );
+
+        const advanced =
+            root.querySelector(
+                "#alm-advanced"
+            );
+
+        const mentorTitle =
+            root.querySelector(
+                "#alm-mentor-title"
+            );
+
+        const mentorText =
+            root.querySelector(
+                "#alm-mentor-text"
+            );
+
+        const code =
+            root.querySelector(
+                "#alm-code"
+            );
+
+        const challenge =
+            root.querySelector(
+                "#alm-challenge"
+            );
+
+        const question =
+            root.querySelector(
+                "#alm-question"
+            );
+
+        const questionText =
+            root.querySelector(
+                "#alm-question-text"
+            );
+
+        const options =
+            root.querySelector(
+                "#alm-options"
+            );
+
+        const feedback =
+            root.querySelector(
+                "#alm-feedback"
+            );
+
+
+        /* =================================================
+           CHECK REQUIRED ELEMENTS
+           ================================================= */
+
+        const requiredElements = [
+            currentLabel,
+            currentTitle,
+            currentDescription,
+            beginner,
+            intermediate,
+            advanced,
+            mentorTitle,
+            mentorText,
+            code,
+            challenge,
+            question,
+            questionText,
+            options,
+            feedback
+        ];
+
+        const missing =
+            requiredElements.some(
+                function (element) {
+                    return !element;
+                }
+            );
+
+        if (missing) {
+
+            console.error(
+                "AI Mentor Learning Ladder: one or more elements are missing."
+            );
+
             return;
         }
 
-        currentLanguage =
-            language;
+
+        /* =================================================
+           RENDER CONCEPTS
+           ================================================= */
+
+        function renderConcepts(
+            container,
+            concepts
+        ) {
+
+            container.innerHTML = "";
+
+            concepts.forEach(
+                function (concept) {
+
+                    const span =
+                        document.createElement(
+                            "span"
+                        );
+
+                    span.className =
+                        "alm-concept";
+
+                    span.textContent =
+                        concept;
+
+                    container.appendChild(
+                        span
+                    );
+
+                }
+            );
+        }
 
 
-        languageLabel.textContent =
-            data.label;
+        /* =================================================
+           RENDER QUESTION
+           ================================================= */
 
-        languageTitle.textContent =
-            data.title;
+        function renderQuestion(data) {
 
-        languageDescription.textContent =
-            data.description;
+            questionText.textContent =
+                data.question;
 
-        mentorTitle.textContent =
-            data.mentorTitle;
+            options.innerHTML = "";
 
-        mentorText.textContent =
-            data.mentorText;
+            feedback.textContent =
+                "";
 
-        mentorCode.textContent =
-            data.code;
+            feedback.style.color =
+                "";
 
+            data.answers.forEach(
+                function (answer) {
 
-        renderConcepts(
-            beginnerConcepts,
-            data.beginner
-        );
+                    const button =
+                        document.createElement(
+                            "button"
+                        );
 
-        renderConcepts(
-            intermediateConcepts,
-            data.intermediate
-        );
+                    button.type =
+                        "button";
 
-        renderConcepts(
-            advancedConcepts,
-            data.advanced
-        );
+                    button.className =
+                        "alm-option";
 
+                    button.textContent =
+                        answer[0];
 
-        renderQuestion(
-            data
-        );
+                    button.dataset.answer =
+                        answer[1];
 
+                    button.addEventListener(
+                        "click",
+                        function () {
 
-        questionBox.classList.remove(
-            "show"
-        );
+                            const allOptions =
+                                options.querySelectorAll(
+                                    ".alm-option"
+                                );
 
-    }
+                            allOptions.forEach(
+                                function (item) {
 
+                                    item.classList.remove(
+                                        "alm-correct",
+                                        "alm-wrong"
+                                    );
 
-    /* =====================================================
-       LANGUAGE BUTTONS
-       ===================================================== */
-
-    languageButtons.forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    languageButtons.forEach(
-                        function (item) {
-
-                            item.classList.remove(
-                                "active"
+                                }
                             );
+
+
+                            if (
+                                button.dataset.answer ===
+                                data.correct
+                            ) {
+
+                                button.classList.add(
+                                    "alm-correct"
+                                );
+
+                                feedback.textContent =
+                                    "✓ Correct! You understand the foundation.";
+
+                                feedback.style.color =
+                                    "#32d583";
+
+                            } else {
+
+                                button.classList.add(
+                                    "alm-wrong"
+                                );
+
+                                feedback.textContent =
+                                    "Not quite. Think about what this language is designed to do.";
+
+                                feedback.style.color =
+                                    "#ff5c72";
+                            }
 
                         }
                     );
 
-
-                    button.classList.add(
-                        "active"
+                    options.appendChild(
+                        button
                     );
 
+                }
+            );
+        }
 
-                    updateLanguage(
-                        button.dataset.language
+
+        /* =================================================
+           CHANGE LANGUAGE
+           ================================================= */
+
+        function changeLanguage(
+            language
+        ) {
+
+            const data =
+                languages[language];
+
+            if (!data) {
+                console.error(
+                    "Unknown language:",
+                    language
+                );
+
+                return;
+            }
+
+
+            /* Button state */
+
+            buttons.forEach(
+                function (button) {
+
+                    const selected =
+                        button.dataset.almLanguage ===
+                        language;
+
+                    button.classList.toggle(
+                        "alm-selected",
+                        selected
+                    );
+
+                    button.setAttribute(
+                        "aria-selected",
+                        selected
                     );
 
                 }
             );
 
+
+            /* Current language */
+
+            currentLabel.textContent =
+                data.label;
+
+            currentTitle.textContent =
+                data.title;
+
+            currentDescription.textContent =
+                data.description;
+
+
+            /* Levels */
+
+            renderConcepts(
+                beginner,
+                data.beginner
+            );
+
+            renderConcepts(
+                intermediate,
+                data.intermediate
+            );
+
+            renderConcepts(
+                advanced,
+                data.advanced
+            );
+
+
+            /* Mentor */
+
+            mentorTitle.textContent =
+                data.mentorTitle;
+
+            mentorText.textContent =
+                data.mentorText;
+
+            code.textContent =
+                data.code;
+
+
+            /* Question */
+
+            renderQuestion(
+                data
+            );
+
+            question.classList.remove(
+                "alm-visible"
+            );
+
         }
-    );
 
 
-    /* =====================================================
-       SHOW CHALLENGE
-       ===================================================== */
+        /* =================================================
+           LANGUAGE BUTTON EVENTS
+           ================================================= */
 
-    if (challengeButton) {
+        buttons.forEach(
+            function (button) {
 
-        challengeButton.addEventListener(
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const language =
+                            button.dataset.almLanguage;
+
+                        changeLanguage(
+                            language
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =================================================
+           CHALLENGE BUTTON
+           ================================================= */
+
+        challenge.addEventListener(
             "click",
             function () {
 
-                questionBox.classList.add(
-                    "show"
+                question.classList.toggle(
+                    "alm-visible"
                 );
 
-                questionBox.scrollIntoView({
-                    behavior: "smooth",
-                    block: "nearest"
-                });
+                if (
+                    question.classList.contains(
+                        "alm-visible"
+                    )
+                ) {
+
+                    setTimeout(
+                        function () {
+
+                            question.scrollIntoView({
+                                behavior: "smooth",
+                                block: "nearest"
+                            });
+
+                        },
+                        50
+                    );
+
+                }
 
             }
+        );
+
+
+        /* =================================================
+           INITIAL LOAD
+           ================================================= */
+
+        changeLanguage(
+            "html"
         );
 
     }
 
 
     /* =====================================================
-       INITIALIZE
+       SAFE INITIALIZATION
        ===================================================== */
 
-    updateLanguage(
-        "html"
-    );
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initializeLearningLadder
+        );
+
+    } else {
+
+        initializeLearningLadder();
+
+    }
 
 })();
-
 </script>
 
 <!-- =========================================================
-     END OF MULTI-LANGUAGE AI LEARNING LADDER
+     END OF AI MENTOR LEARNING LADDER
      ========================================================= -->
