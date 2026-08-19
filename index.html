@@ -2871,1441 +2871,2218 @@ numbers.push_back(20);`,
     };
 
 
-    /* =========================================================
-       BUG DETECTIVE DATA
-       ========================================================= */
+   <!-- =========================================================
+     BUG DETECTIVE — COMPLETE REPLACEMENT
+     Replace ONLY your existing Bug Detective section with this.
+     ========================================================= -->
 
-    const bugCases = [
+<style>
+/* =========================================================
+   BUG DETECTIVE
+   ========================================================= */
 
-        {
-            title: "The Missing Assignment",
-            language: "JavaScript",
-            difficulty: "Beginner",
-
-            description:
-                "The developer expects the variable to contain 10, but something is missing.",
-
-            code:
-`let score;
-
-score + 10;
-
-console.log(score);`,
-
-            answer:
-                "The expression score + 10 calculates a value but does not assign it back to score. The developer probably intended score = score + 10, or score += 10."
-        },
-
-        {
-            title: "Wrong CSS Selector",
-            language: "CSS",
-            difficulty: "Beginner",
-
-            description:
-                "The HTML element has a class, but the style does not appear.",
-
-            code:
-`<div class="card">
-    Hello
-</div>
-
-.card-title {
-    color: red;
-}`,
-
-            answer:
-                "The CSS selector targets card-title, but the HTML element has the class card. The selector and class name need to match."
-        },
-
-        {
-            title: "The Java Comparison",
-            language: "Java",
-            difficulty: "Beginner",
-
-            description:
-                "The condition isn't checking the value the programmer expects.",
-
-            code:
-`int age = 18;
-
-if (age = 18) {
-    System.out.println("Adult");
-}`,
-
-            answer:
-                "The condition uses assignment instead of comparison. In Java, a condition needs a Boolean expression such as age == 18."
-        },
-
-        {
-            title: "C# Type Mismatch",
-            language: "C#",
-            difficulty: "Beginner",
-
-            description:
-                "The variable's declared type does not match the value being assigned.",
-
-            code:
-`int age = "18";
-
-Console.WriteLine(age);`,
-
-            answer:
-                "age is declared as int, but \"18\" is a string. Use int age = 18 for a number, or string age = \"18\" for text."
-        },
-
-        {
-            title: "C++ Missing Semicolon",
-            language: "C++",
-            difficulty: "Beginner",
-
-            description:
-                "The program refuses to compile because a statement is incomplete.",
-
-            code:
-`#include <iostream>
-
-int main()
-{
-    int age = 18
-    std::cout << age;
-}`,
-
-            answer:
-                "The declaration int age = 18 needs a semicolon at the end."
-        },
-
-        {
-            title: "The HTML Attribute Problem",
-            language: "HTML",
-            difficulty: "Beginner",
-
-            description:
-                "The link does not navigate to the expected address.",
-
-            code:
-`<a src="https://example.com">
-    Visit
-</a>`,
-
-            answer:
-                "Anchor elements use href for their destination. src is commonly used by elements such as images and scripts."
-        },
-
-        {
-            title: "JavaScript Function Argument",
-            language: "JavaScript",
-            difficulty: "Intermediate",
-
-            description:
-                "The function expects a value but receives nothing.",
-
-            code:
-`function greet(name) {
-    console.log("Hello " + name);
+.bug-detective {
+    width: 100%;
+    padding: 70px 0;
 }
 
-greet();`,
-
-            answer:
-                "The function is called without an argument, so name is undefined. Pass a value such as greet(\"Alex\")."
-        },
-
-        {
-            title: "C++ Pointer Confusion",
-            language: "C++",
-            difficulty: "Intermediate",
-
-            description:
-                "The programmer wants the value stored at an address.",
-
-            code:
-`int age = 18;
-int* ptr = &age;
-
-cout << ptr;`,
-
-            answer:
-                "ptr contains the address of age. If the goal is to print the value stored at that address, dereference the pointer with *ptr."
-        },
-
-        {
-            title: "C# Method Call",
-            language: "C#",
-            difficulty: "Intermediate",
-
-            description:
-                "The method exists, but the call is written incorrectly.",
-
-            code:
-`void SayHello()
-{
-    Console.WriteLine("Hello");
+.bug-detective-container {
+    width: min(1050px, calc(100% - 30px));
+    margin: 0 auto;
 }
 
-SayHello;`,
+/* HEADER */
 
-            answer:
-                "A method needs parentheses when it is called. Use SayHello();"
-        },
+.bug-detective-header {
+    max-width: 760px;
+    margin-bottom: 28px;
+}
 
-        {
-            title: "Java Array Index",
-            language: "Java",
-            difficulty: "Intermediate",
+.bug-detective-label {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #8b7cff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
 
-            description:
-                "The program tries to access an array position that doesn't exist.",
+.bug-detective-header h2 {
+    margin: 0;
+    color: #f4f7ff;
+    font-size: clamp(30px, 5vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+}
 
-            code:
-`int[] numbers = {10, 20, 30};
+.bug-detective-header h2 strong {
+    color: #8b7cff;
+}
 
-System.out.println(
-    numbers[3]
-);`,
+.bug-detective-header p {
+    max-width: 680px;
+    margin-top: 14px;
+    color: #8f9db3;
+    font-size: 13px;
+    line-height: 1.7;
+}
 
-            answer:
-                "The valid indexes are 0, 1 and 2. Index 3 is outside the array and causes an ArrayIndexOutOfBoundsException."
-        }
+/* TOP CONTROLS */
 
-    ];
+.bug-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
 
+.bug-language {
+    padding: 9px 13px;
+    border: 1px solid #26344f;
+    border-radius: 8px;
+    background: #0d1424;
+    color: #8f9db3;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s ease;
+}
 
-    /* =========================================================
-       STATE
-       ========================================================= */
+.bug-language:hover {
+    border-color: #8b7cff;
+    color: #fff;
+}
 
-    const STORAGE_KEY =
-        "aiMentorLearningProgressV2";
+.bug-language.active {
+    border-color: #8b7cff;
+    background: rgba(139,124,255,.12);
+    color: #fff;
+}
 
-    let progress =
-        JSON.parse(
-            localStorage.getItem(STORAGE_KEY) || "{}"
-        );
+/* STATS */
 
-    let selectedLanguage = "html";
+.bug-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
 
-    let currentLevel = 0;
+.bug-stat {
+    padding: 15px;
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 10px;
+    background: #0d1424;
+}
 
-    let currentLesson = 0;
+.bug-stat small {
+    display: block;
+    color: #647188;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
 
-    let questionAnswered = false;
+.bug-stat strong {
+    display: block;
+    margin-top: 5px;
+    color: #f4f7ff;
+    font-size: 19px;
+}
 
-    let hintUsed = false;
+/* MAIN CARD */
 
-    let lastCaseIndex = -1;
+.bug-card {
+    overflow: hidden;
+    border: 1px solid rgba(139,124,255,.23);
+    border-radius: 16px;
 
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(112,92,255,.10),
+            transparent 35%
+        ),
+        #0b151c;
+}
 
-    /* =========================================================
-       ELEMENTS
-       ========================================================= */
+/* CARD TOP */
 
-    const languageSelector =
-        document.getElementById("languageSelector");
+.bug-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
 
-    const levelList =
-        document.getElementById("levelList");
+    padding: 20px 22px;
 
-    const languageLabel =
-        document.getElementById("languageLabel");
+    border-bottom: 1px solid rgba(255,255,255,.06);
+}
 
-    const languageTitle =
-        document.getElementById("languageTitle");
+.bug-case-title {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
 
-    const languageDescription =
-        document.getElementById("languageDescription");
+.bug-icon {
+    width: 42px;
+    height: 42px;
 
-    const workspaceLevel =
-        document.getElementById("workspaceLevel");
+    display: grid;
+    place-items: center;
 
-    const progressText =
-        document.getElementById("progressText");
+    border-radius: 10px;
 
-    const lessonTitle =
-        document.getElementById("lessonTitle");
+    background: rgba(139,124,255,.12);
 
-    const lessonText =
-        document.getElementById("lessonText");
+    font-size: 20px;
+}
 
-    const lessonCode =
-        document.getElementById("lessonCode");
+.bug-case-title small {
+    display: block;
+    color: #8f86d9;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
 
-    const hintBox =
-        document.getElementById("hintBox");
+.bug-case-title h3 {
+    margin: 4px 0 0;
+    color: #f4f7ff;
+    font-size: 16px;
+}
 
-    const lessonQuestion =
-        document.getElementById("lessonQuestion");
+.bug-difficulty {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
 
-    const lessonOptions =
-        document.getElementById("lessonOptions");
+.bug-difficulty span {
+    color: #69778c;
+    font-size: 8px;
+    font-weight: 800;
+}
 
-    const learningFeedback =
-        document.getElementById("learningFeedback");
+.bug-difficulty i {
+    width: 7px;
+    height: 17px;
+    display: block;
+    border-radius: 2px;
+    background: #26344f;
+}
 
-    const hintButton =
-        document.getElementById("hintButton");
+/* BODY */
 
-    const newQuestionButton =
-        document.getElementById("newQuestionButton");
+.bug-body {
+    padding: 22px;
+}
 
-    const startLevelButton =
-        document.getElementById("startLevelButton");
+.bug-description {
+    margin: 0 0 15px;
+    color: #9da9c2;
+    font-size: 12px;
+    line-height: 1.7;
+}
 
+/* CODE */
 
-    /* =========================================================
-       PROGRESS HELPERS
-       ========================================================= */
+.bug-code-wrapper {
+    overflow: auto;
 
-    function saveProgress() {
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px;
 
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(progress)
-        );
+    background: #060b12;
+}
 
+.bug-code-header {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 9px 13px;
+
+    border-bottom: 1px solid rgba(255,255,255,.06);
+
+    color: #647188;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.bug-code {
+    margin: 0;
+    padding: 18px;
+
+    color: #d4dbe6;
+
+    font-family:
+        Consolas,
+        Monaco,
+        "Courier New",
+        monospace;
+
+    font-size: 12px;
+    line-height: 1.75;
+
+    white-space: pre;
+}
+
+/* QUESTION */
+
+.bug-question {
+    margin-top: 17px;
+    color: #f4f7ff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.bug-input {
+    width: 100%;
+    min-height: 100px;
+
+    box-sizing: border-box;
+
+    margin-top: 10px;
+    padding: 13px;
+
+    resize: vertical;
+
+    border: 1px solid #26344f;
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #080f1b;
+
+    color: #f4f7ff;
+
+    font-family:
+        Consolas,
+        Monaco,
+        monospace;
+
+    font-size: 12px;
+
+    transition: .2s ease;
+}
+
+.bug-input:focus {
+    border-color: rgba(139,124,255,.65);
+}
+
+/* BUTTONS */
+
+.bug-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+.bug-button {
+    padding: 10px 15px;
+
+    border: 1px solid #26344f;
+    border-radius: 8px;
+
+    background: #0d1424;
+
+    color: #9da9c2;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.bug-button:hover {
+    transform: translateY(-1px);
+    border-color: #8b7cff;
+    color: #fff;
+}
+
+.bug-button.primary {
+    border-color: #8b7cff;
+    background: #8b7cff;
+    color: #080711;
+}
+
+.bug-button.primary:hover {
+    opacity: .9;
+}
+
+/* HINT */
+
+.bug-hint {
+    display: none;
+
+    margin-top: 13px;
+    padding: 13px;
+
+    border: 1px solid rgba(139,124,255,.18);
+    border-radius: 9px;
+
+    background: rgba(139,124,255,.05);
+
+    color: #a9b3c5;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.bug-hint.show {
+    display: block;
+}
+
+.bug-hint strong {
+    color: #a69dff;
+}
+
+/* RESULT */
+
+.bug-result {
+    display: none;
+
+    margin-top: 15px;
+    padding: 16px;
+
+    border-radius: 10px;
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.bug-result.show {
+    display: block;
+}
+
+.bug-result.correct {
+    border: 1px solid rgba(50,213,131,.20);
+    background: rgba(50,213,131,.05);
+    color: #8de3b0;
+}
+
+.bug-result.wrong {
+    border: 1px solid rgba(255,92,114,.20);
+    background: rgba(255,92,114,.05);
+    color: #ff9aa7;
+}
+
+.bug-result-title {
+    margin-bottom: 5px;
+    font-weight: 800;
+}
+
+.bug-explanation {
+    color: inherit;
+}
+
+/* NEXT CASE */
+
+.bug-next {
+    display: none;
+
+    margin-top: 12px;
+
+    padding: 10px 15px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #38d3b4;
+
+    color: #06100d;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.bug-next.show {
+    display: inline-block;
+}
+
+/* COMPLETION */
+
+.bug-complete {
+    display: none;
+
+    margin-top: 15px;
+    padding: 18px;
+
+    border: 1px solid rgba(139,124,255,.22);
+    border-radius: 10px;
+
+    background: rgba(139,124,255,.05);
+}
+
+.bug-complete.show {
+    display: block;
+}
+
+.bug-complete h3 {
+    margin: 0;
+    color: #f4f7ff;
+    font-size: 15px;
+}
+
+.bug-complete p {
+    margin: 7px 0 0;
+    color: #8f9db3;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+    .bug-detective {
+        padding: 55px 0;
     }
 
-
-    function getLanguageProgress(language) {
-
-        if (!progress[language]) {
-
-            progress[language] = {
-                completed: [],
-                currentLevel: 0
-            };
-
-            saveProgress();
-        }
-
-        return progress[language];
+    .bug-detective-container {
+        width: calc(100% - 24px);
     }
 
-
-    function isLevelCompleted(
-        language,
-        level
-    ) {
-
-        const p =
-            getLanguageProgress(language);
-
-        return p.completed.includes(level);
-
+    .bug-stats {
+        grid-template-columns: 1fr;
     }
 
-
-    function isLevelUnlocked(
-        language,
-        level
-    ) {
-
-        if (level === 0) {
-            return true;
-        }
-
-        return isLevelCompleted(
-            language,
-            level - 1
-        );
-
+    .bug-card-top {
+        align-items: flex-start;
+        flex-direction: column;
     }
 
-
-    /* =========================================================
-       LANGUAGE BUTTONS
-       ========================================================= */
-
-    function renderLanguageButtons() {
-
-        languageSelector.innerHTML = "";
-
-        Object.keys(languages).forEach(
-            function (key) {
-
-                const language =
-                    languages[key];
-
-                const button =
-                    document.createElement("button");
-
-                button.type = "button";
-
-                button.className =
-                    "language-button" +
-                    (
-                        key === selectedLanguage
-                            ? " active"
-                            : ""
-                    );
-
-                button.textContent =
-                    language.icon +
-                    " " +
-                    language.name;
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        selectedLanguage =
-                            key;
-
-                        currentLevel = 0;
-
-                        currentLesson = 0;
-
-                        questionAnswered = false;
-
-                        hintUsed = false;
-
-                        renderLanguageButtons();
-
-                        renderLanguage();
-
-                        scrollToWorkspace();
-
-                    }
-                );
-
-                languageSelector.appendChild(
-                    button
-                );
-
-            }
-        );
-
+    .bug-body {
+        padding: 17px;
     }
 
+    .bug-actions {
+        flex-direction: column;
+    }
 
-    /* =========================================================
-       LEVEL CARDS
-       ========================================================= */
+    .bug-button {
+        width: 100%;
+    }
 
-    function renderLevels() {
+}
+</style>
 
-        const language =
-            languages[selectedLanguage];
 
-        const p =
-            getLanguageProgress(
-                selectedLanguage
-            );
+<section class="bug-detective" id="bugDetective">
 
-        levelList.innerHTML = "";
+    <div class="bug-detective-container">
 
-        language.levels.forEach(
-            function (level, index) {
+        <!-- HEADER -->
 
-                const completed =
-                    p.completed.includes(index);
+        <div class="bug-detective-header">
 
-                const unlocked =
-                    isLevelUnlocked(
-                        selectedLanguage,
-                        index
-                    );
+            <span class="bug-detective-label">
+                AI CODE DEBUGGING CHALLENGE
+            </span>
 
-                const current =
-                    index === currentLevel &&
-                    unlocked &&
-                    !completed;
+            <h2>
+                Become a
+                <strong>Bug Detective.</strong>
+            </h2>
 
-                const card =
-                    document.createElement("div");
+            <p>
+                Find the mistake, explain why it happens,
+                and fix it. Every case is different, so
+                you can keep practicing without getting
+                the same challenge again and again.
+            </p>
 
-                card.className =
-                    "level-card " +
-                    (
-                        completed
-                            ? "completed "
-                            : ""
-                    ) +
-                    (
-                        !unlocked
-                            ? "locked "
-                            : ""
-                    ) +
-                    (
-                        current
-                            ? "current"
-                            : ""
-                    );
+        </div>
 
-                let status = "";
 
-                if (completed) {
+        <!-- LANGUAGE SELECTOR -->
 
-                    status =
-                        "✓ COMPLETED";
+        <div class="bug-controls">
 
-                } else if (!unlocked) {
+            <button
+                type="button"
+                class="bug-language active"
+                data-bug-language="html"
+            >
+                🌐 HTML
+            </button>
 
-                    status =
-                        "🔒 LOCKED";
+            <button
+                type="button"
+                class="bug-language"
+                data-bug-language="css"
+            >
+                🎨 CSS
+            </button>
 
-                } else if (current) {
+            <button
+                type="button"
+                class="bug-language"
+                data-bug-language="javascript"
+            >
+                ⚡ JavaScript
+            </button>
 
-                    status =
-                        "CURRENT";
+            <button
+                type="button"
+                class="bug-language"
+                data-bug-language="java"
+            >
+                ☕ Java
+            </button>
 
-                } else {
+            <button
+                type="button"
+                class="bug-language"
+                data-bug-language="csharp"
+            >
+                💠 C#
+            </button>
 
-                    status =
-                        "AVAILABLE";
+            <button
+                type="button"
+                class="bug-language"
+                data-bug-language="cpp"
+            >
+                ⚙️ C++
+            </button>
 
-                }
+        </div>
 
-                card.innerHTML = `
-                    <div class="level-header">
 
-                        <div class="level-left">
+        <!-- STATS -->
 
-                            <div class="level-number">
-                                ${String(index + 1).padStart(2,"0")}
-                            </div>
+        <div class="bug-stats">
 
-                            <div class="level-name">
+            <div class="bug-stat">
+                <small>
+                    CASES SOLVED
+                </small>
 
-                                <small>
-                                    ${level.difficulty}
-                                </small>
+                <strong id="bugSolved">
+                    0
+                </strong>
+            </div>
 
-                                <h3>
-                                    ${level.name}
-                                </h3>
+            <div class="bug-stat">
+                <small>
+                    CURRENT STREAK
+                </small>
 
-                            </div>
+                <strong id="bugStreak">
+                    0
+                </strong>
+            </div>
 
-                        </div>
+            <div class="bug-stat">
+                <small>
+                    LANGUAGE
+                </small>
 
-                        <span class="level-status">
-                            ${status}
+                <strong id="bugCurrentLanguage">
+                    HTML
+                </strong>
+            </div>
+
+        </div>
+
+
+        <!-- CASE -->
+
+        <div class="bug-card">
+
+            <div class="bug-card-top">
+
+                <div class="bug-case-title">
+
+                    <div class="bug-icon">
+                        🕵️
+                    </div>
+
+                    <div>
+
+                        <small>
+                            CURRENT CASE
+                        </small>
+
+                        <h3 id="bugCaseTitle">
+                            HTML Mystery #1
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="bug-difficulty">
+
+                    <span>
+                        DIFFICULTY
+                    </span>
+
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="bug-body">
+
+                <p
+                    class="bug-description"
+                    id="bugDescription"
+                >
+                    Something is wrong with this code.
+                    Can you identify the problem?
+                </p>
+
+
+                <!-- CODE -->
+
+                <div class="bug-code-wrapper">
+
+                    <div class="bug-code-header">
+
+                        <span id="bugFileName">
+                            index.html
+                        </span>
+
+                        <span>
+                            FIND THE BUG
                         </span>
 
                     </div>
 
-                    <p>
-                        ${level.description}
+                    <pre
+                        class="bug-code"
+                        id="bugCode"
+                    ></pre>
+
+                </div>
+
+
+                <!-- QUESTION -->
+
+                <div class="bug-question">
+                    What is wrong with this code?
+                </div>
+
+
+                <textarea
+                    id="bugAnswer"
+                    class="bug-input"
+                    placeholder="Explain the bug in your own words..."
+                ></textarea>
+
+
+                <!-- ACTIONS -->
+
+                <div class="bug-actions">
+
+                    <button
+                        type="button"
+                        class="bug-button primary"
+                        id="checkBug"
+                    >
+                        🔍 Check My Answer
+                    </button>
+
+                    <button
+                        type="button"
+                        class="bug-button"
+                        id="showBugHint"
+                    >
+                        💡 Give Me a Hint
+                    </button>
+
+                    <button
+                        type="button"
+                        class="bug-button"
+                        id="skipBug"
+                    >
+                        Skip Case
+                    </button>
+
+                </div>
+
+
+                <!-- HINT -->
+
+                <div
+                    class="bug-hint"
+                    id="bugHint"
+                >
+                    <strong>💡 Detective Hint:</strong>
+                    <span id="bugHintText"></span>
+                </div>
+
+
+                <!-- RESULT -->
+
+                <div
+                    class="bug-result"
+                    id="bugResult"
+                >
+
+                    <div
+                        class="bug-result-title"
+                        id="bugResultTitle"
+                    ></div>
+
+                    <div
+                        class="bug-explanation"
+                        id="bugExplanation"
+                    ></div>
+
+                </div>
+
+
+                <!-- NEXT -->
+
+                <button
+                    type="button"
+                    class="bug-next"
+                    id="nextBug"
+                >
+                    Next Case →
+                </button>
+
+
+                <!-- COMPLETION -->
+
+                <div
+                    class="bug-complete"
+                    id="bugComplete"
+                >
+
+                    <h3>
+                        🎉 Case Collection Complete
+                    </h3>
+
+                    <p id="bugCompleteText">
+                        You solved every available case
+                        for this language.
                     </p>
 
-                    <div class="concepts">
-                        ${level.concepts.map(
-                            concept =>
-                                `<span>${concept}</span>`
-                        ).join("")}
-                    </div>
-                `;
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 
-                if (unlocked && !completed) {
+<script>
+(function () {
 
-                    card.style.cursor =
-                        "pointer";
-
-                    card.addEventListener(
-                        "click",
-                        function () {
-
-                            currentLevel =
-                                index;
-
-                            currentLesson = 0;
-
-                            questionAnswered =
-                                false;
-
-                            hintUsed = false;
-
-                            renderLevels();
-
-                            renderLesson();
-
-                            scrollToWorkspace();
-
-                        }
-                    );
-
-                }
+    "use strict";
 
 
-                levelList.appendChild(card);
+    /* =====================================================
+       BUG DATABASE
+
+       Every language has multiple cases.
+       The system remembers solved cases and avoids
+       immediately repeating the same problem.
+       ===================================================== */
+
+    const bugDatabase = {
+
+        html: [
+
+            {
+                title: "HTML Mystery #1",
+                difficulty: 1,
+                file: "index.html",
+
+                description:
+                    "The heading is not appearing on the page. Find the structural mistake.",
+
+                code:
+`<!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+<body>
+
+    <h1>Hello World</h1>
+
+</body>
+</html>`,
+
+                hint:
+                    "Look carefully at where the head section ends.",
+
+                keywords: [
+                    "head",
+                    "closing",
+                    "</head>"
+                ],
+
+                explanation:
+                    "The <head> element was never closed. Add </head> before <body>."
+            },
+
+            {
+                title: "HTML Mystery #2",
+                difficulty: 1,
+                file: "index.html",
+
+                description:
+                    "The image is not displaying correctly. Find the problem.",
+
+                code:
+`<!DOCTYPE html>
+<html>
+<body>
+
+    <img src="photo.png">
+
+</body>
+</html>`,
+
+                hint:
+                    "Check whether the image path actually points to a file.",
+
+                keywords: [
+                    "src",
+                    "path",
+                    "image"
+                ],
+
+                explanation:
+                    "The src value must point to the actual image location. Check the filename and path."
+            },
+
+            {
+                title: "HTML Mystery #3",
+                difficulty: 2,
+                file: "index.html",
+
+                description:
+                    "A form cannot be submitted correctly because an important attribute is missing.",
+
+                code:
+`<form>
+    <input type="text">
+    <button>Submit</button>
+</form>`,
+
+                hint:
+                    "Think about where the form should send its data.",
+
+                keywords: [
+                    "action",
+                    "form"
+                ],
+
+                explanation:
+                    "The form is missing an action attribute if it is expected to submit data to a specific endpoint."
+            },
+
+            {
+                title: "HTML Mystery #4",
+                difficulty: 2,
+                file: "index.html",
+
+                description:
+                    "The browser is not interpreting the document using the intended HTML standard.",
+
+                code:
+`<html>
+<head>
+    <title>Website</title>
+</head>
+<body>
+    <p>Hello</p>
+</body>
+</html>`,
+
+                hint:
+                    "Look at the very first line.",
+
+                keywords: [
+                    "doctype",
+                    "<!doctype html>"
+                ],
+
+                explanation:
+                    "A modern HTML document should begin with <!DOCTYPE html>."
+            }
+
+        ],
+
+
+        css: [
+
+            {
+                title: "CSS Mystery #1",
+                difficulty: 1,
+                file: "style.css",
+
+                description:
+                    "The text refuses to become blue. Find the CSS syntax problem.",
+
+                code:
+`.title {
+    color blue;
+}`,
+
+                hint:
+                    "CSS declarations have a specific separator between a property and its value.",
+
+                keywords: [
+                    ":",
+                    "colon",
+                    "color:"
+                ],
+
+                explanation:
+                    "CSS properties and values are separated by a colon. It should be color: blue;"
+            },
+
+            {
+                title: "CSS Mystery #2",
+                difficulty: 1,
+                file: "style.css",
+
+                description:
+                    "The card background is not changing.",
+
+                code:
+`.card {
+    background-color: #ffffff
+    padding: 20px;
+}`,
+
+                hint:
+                    "Check the end of the background-color declaration.",
+
+                keywords: [
+                    "semicolon",
+                    ";",
+                    "background"
+                ],
+
+                explanation:
+                    "The background-color declaration should end with a semicolon."
+            },
+
+            {
+                title: "CSS Mystery #3",
+                difficulty: 2,
+                file: "style.css",
+
+                description:
+                    "The element is not becoming a flex container.",
+
+                code:
+`.container {
+    display flex;
+    justify-content: center;
+}`,
+
+                hint:
+                    "The display property is written differently from the other declarations.",
+
+                keywords: [
+                    "display:",
+                    "colon"
+                ],
+
+                explanation:
+                    "The display declaration needs a colon: display: flex;"
+            },
+
+            {
+                title: "CSS Mystery #4",
+                difficulty: 3,
+                file: "style.css",
+
+                description:
+                    "The selector appears correct, but the style is not being applied.",
+
+                code:
+`#menu {
+    color: white;
+}
+
+.menu {
+    background: black;
+}`,
+
+                hint:
+                    "Compare #menu with .menu. Are they selecting the same thing?",
+
+                keywords: [
+                    "id",
+                    "class",
+                    "#menu",
+                    ".menu"
+                ],
+
+                explanation:
+                    "#menu targets an element with an id of menu, while .menu targets a class named menu. They are different selectors."
+            }
+
+        ],
+
+
+        javascript: [
+
+            {
+                title: "JavaScript Mystery #1",
+                difficulty: 1,
+                file: "script.js",
+
+                description:
+                    "The program should print the user's name, but nothing useful is printed.",
+
+                code:
+`let name = "Alex";
+
+console.log(nam);`,
+
+                hint:
+                    "Compare the variable declaration with the variable being printed.",
+
+                keywords: [
+                    "name",
+                    "nam",
+                    "variable",
+                    "typo"
+                ],
+
+                explanation:
+                    "The variable is called name, but the code tries to use nam. That causes a variable reference error."
+            },
+
+            {
+                title: "JavaScript Mystery #2",
+                difficulty: 1,
+                file: "script.js",
+
+                description:
+                    "The function is supposed to run, but the function call is incorrect.",
+
+                code:
+`function greet() {
+    console.log("Hello");
+}
+
+gret();`,
+
+                hint:
+                    "Compare the function name with the name used when calling it.",
+
+                keywords: [
+                    "greet",
+                    "gret",
+                    "function",
+                    "typo"
+                ],
+
+                explanation:
+                    "The function is named greet, but the code calls gret. The names must match."
+            },
+
+            {
+                title: "JavaScript Mystery #3",
+                difficulty: 2,
+                file: "script.js",
+
+                description:
+                    "The condition never behaves as expected.",
+
+                code:
+`let age = 18;
+
+if (age = 18) {
+    console.log("Adult");
+}`,
+
+                hint:
+                    "Is the operator inside the if statement comparing or assigning?",
+
+                keywords: [
+                    "===",
+                    "==",
+                    "comparison",
+                    "assignment",
+                    "="
+                ],
+
+                explanation:
+                    "The single = operator assigns a value. A comparison should use ===, such as if (age === 18)."
+            },
+
+            {
+                title: "JavaScript Mystery #4",
+                difficulty: 3,
+                file: "script.js",
+
+                description:
+                    "The code tries to access a property from an object, but the property name is wrong.",
+
+                code:
+`const user = {
+    name: "Alex",
+    age: 18
+};
+
+console.log(user.username);`,
+
+                hint:
+                    "Look at the properties actually defined inside the object.",
+
+                keywords: [
+                    "username",
+                    "name",
+                    "property",
+                    "object"
+                ],
+
+                explanation:
+                    "The object has name and age properties, but no username property."
+            }
+
+        ],
+
+
+        java: [
+
+            {
+                title: "Java Mystery #1",
+                difficulty: 1,
+                file: "Main.java",
+
+                description:
+                    "The Java program does not compile. Find the declaration problem.",
+
+                code:
+`public class Main {
+
+    public static void main(String[] args) {
+
+        int age = "18";
+
+        System.out.println(age);
+    }
+}`,
+
+                hint:
+                    "Compare the declared type of age with the value assigned to it.",
+
+                keywords: [
+                    "int",
+                    "string",
+                    "18",
+                    "type"
+                ],
+
+                explanation:
+                    "An int cannot be assigned a String value. Use int age = 18;."
+            },
+
+            {
+                title: "Java Mystery #2",
+                difficulty: 1,
+                file: "Main.java",
+
+                description:
+                    "The program tries to print a variable that does not exist.",
+
+                code:
+`public class Main {
+
+    public static void main(String[] args) {
+
+        String name = "Alex";
+
+        System.out.println(nam);
+    }
+}`,
+
+                hint:
+                    "Compare the variable declaration and println statement.",
+
+                keywords: [
+                    "name",
+                    "nam",
+                    "variable",
+                    "typo"
+                ],
+
+                explanation:
+                    "The variable is named name, but the code attempts to use nam."
+            },
+
+            {
+                title: "Java Mystery #3",
+                difficulty: 2,
+                file: "Main.java",
+
+                description:
+                    "The loop does not execute the expected number of times.",
+
+                code:
+`for (int i = 0; i < 5; i--) {
+    System.out.println(i);
+}`,
+
+                hint:
+                    "Watch how i changes after every iteration.",
+
+                keywords: [
+                    "i--",
+                    "i++",
+                    "increment",
+                    "decrement"
+                ],
+
+                explanation:
+                    "The loop starts at 0 and requires i to become larger than 0, but i-- makes it smaller. Use i++."
+            },
+
+            {
+                title: "Java Mystery #4",
+                difficulty: 3,
+                file: "Main.java",
+
+                description:
+                    "The class is being used incorrectly. Identify the object creation issue.",
+
+                code:
+`class Student {
+    String name;
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Student student = new student();
+
+    }
+}`,
+
+                hint:
+                    "Java class names are case-sensitive.",
+
+                keywords: [
+                    "Student",
+                    "student",
+                    "case",
+                    "new Student"
+                ],
+
+                explanation:
+                    "The class is Student with a capital S. Object creation should use new Student()."
+            }
+
+        ],
+
+
+        csharp: [
+
+            {
+                title: "C# Mystery #1",
+                difficulty: 1,
+                file: "Program.cs",
+
+                description:
+                    "The program does not compile because the assigned value has the wrong type.",
+
+                code:
+`int age = "18";
+
+Console.WriteLine(age);`,
+
+                hint:
+                    "An int expects a number, not text.",
+
+                keywords: [
+                    "int",
+                    "string",
+                    "type"
+                ],
+
+                explanation:
+                    "The int variable should receive a numeric value: int age = 18;."
+            },
+
+            {
+                title: "C# Mystery #2",
+                difficulty: 1,
+                file: "Program.cs",
+
+                description:
+                    "The variable cannot be found when it is printed.",
+
+                code:
+`string name = "Alex";
+
+Console.WriteLine(nam);`,
+
+                hint:
+                    "Compare the variable name in both lines.",
+
+                keywords: [
+                    "name",
+                    "nam",
+                    "typo"
+                ],
+
+                explanation:
+                    "The variable is named name, but the code uses nam."
+            },
+
+            {
+                title: "C# Mystery #3",
+                difficulty: 2,
+                file: "Program.cs",
+
+                description:
+                    "The condition does not produce the expected result.",
+
+                code:
+`int age = 18;
+
+if (age = 18)
+{
+    Console.WriteLine("Adult");
+}`,
+
+                hint:
+                    "The operator used in the condition is normally used for assignment.",
+
+                keywords: [
+                    "==",
+                    "=",
+                    "comparison",
+                    "assignment"
+                ],
+
+                explanation:
+                    "Use == when comparing values in this context: if (age == 18)."
+            },
+
+            {
+                title: "C# Mystery #4",
+                difficulty: 3,
+                file: "Program.cs",
+
+                description:
+                    "The loop is supposed to count upward but moves in the wrong direction.",
+
+                code:
+`for (int i = 0; i < 5; i--)
+{
+    Console.WriteLine(i);
+}`,
+
+                hint:
+                    "Look at the final expression in the for loop.",
+
+                keywords: [
+                    "i++",
+                    "i--",
+                    "increment"
+                ],
+
+                explanation:
+                    "The loop needs i++ to increase the counter. i-- decreases it."
+            }
+
+        ],
+
+
+        cpp: [
+
+            {
+                title: "C++ Mystery #1",
+                difficulty: 1,
+                file: "main.cpp",
+
+                description:
+                    "The program cannot print the text because a required header is missing.",
+
+                code:
+`int main() {
+
+    std::cout << "Hello World";
+
+    return 0;
+}`,
+
+                hint:
+                    "Which standard library component provides cout?",
+
+                keywords: [
+                    "iostream",
+                    "cout",
+                    "#include"
+                ],
+
+                explanation:
+                    "std::cout is provided by the iostream header. Add #include <iostream>."
+            },
+
+            {
+                title: "C++ Mystery #2",
+                difficulty: 1,
+                file: "main.cpp",
+
+                description:
+                    "The variable declaration uses an inappropriate type for the text value.",
+
+                code:
+`int name = "Alex";
+
+std::cout << name;`,
+
+                hint:
+                    "Is name storing a number or text?",
+
+                keywords: [
+                    "string",
+                    "int",
+                    "text",
+                    "type"
+                ],
+
+                explanation:
+                    "name contains text, so it should use a string type, such as std::string."
+            },
+
+            {
+                title: "C++ Mystery #3",
+                difficulty: 2,
+                file: "main.cpp",
+
+                description:
+                    "The loop never reaches the expected stopping condition.",
+
+                code:
+`for (int i = 0; i < 5; i--) {
+
+    std::cout << i;
+}`,
+
+                hint:
+                    "The counter should move toward 5, not away from it.",
+
+                keywords: [
+                    "i++",
+                    "i--",
+                    "increment"
+                ],
+
+                explanation:
+                    "The loop needs i++ because i must increase from 0 toward 5."
+            },
+
+            {
+                title: "C++ Mystery #4",
+                difficulty: 3,
+                file: "main.cpp",
+
+                description:
+                    "The condition is assigning a value instead of comparing two values.",
+
+                code:
+`int age = 18;
+
+if (age = 20) {
+
+    std::cout << "Age is 20";
+}`,
+
+                hint:
+                    "Look at the operator inside the if condition.",
+
+                keywords: [
+                    "==",
+                    "=",
+                    "comparison"
+                ],
+
+                explanation:
+                    "Use == for comparison. The condition should be if (age == 20)."
+            }
+
+        ]
+
+    };
+
+
+    /* =====================================================
+       STATE
+       ===================================================== */
+
+    let currentLanguage = "html";
+
+    let currentCase = null;
+
+    let solvedCases = {};
+
+    let currentStreak = 0;
+
+    let hintUsed = false;
+
+
+    /* =====================================================
+       ELEMENTS
+       ===================================================== */
+
+    const root =
+        document.getElementById("bugDetective");
+
+    if (!root) {
+        return;
+    }
+
+    const languageButtons =
+        root.querySelectorAll(".bug-language");
+
+    const caseTitle =
+        document.getElementById("bugCaseTitle");
+
+    const description =
+        document.getElementById("bugDescription");
+
+    const fileName =
+        document.getElementById("bugFileName");
+
+    const code =
+        document.getElementById("bugCode");
+
+    const answer =
+        document.getElementById("bugAnswer");
+
+    const hint =
+        document.getElementById("bugHint");
+
+    const hintText =
+        document.getElementById("bugHintText");
+
+    const result =
+        document.getElementById("bugResult");
+
+    const resultTitle =
+        document.getElementById("bugResultTitle");
+
+    const explanation =
+        document.getElementById("bugExplanation");
+
+    const nextButton =
+        document.getElementById("nextBug");
+
+    const checkButton =
+        document.getElementById("checkBug");
+
+    const hintButton =
+        document.getElementById("showBugHint");
+
+    const skipButton =
+        document.getElementById("skipBug");
+
+    const solvedDisplay =
+        document.getElementById("bugSolved");
+
+    const streakDisplay =
+        document.getElementById("bugStreak");
+
+    const languageDisplay =
+        document.getElementById("bugCurrentLanguage");
+
+    const complete =
+        document.getElementById("bugComplete");
+
+    const completeText =
+        document.getElementById("bugCompleteText");
+
+
+    /* =====================================================
+       STORAGE
+       ===================================================== */
+
+    function loadProgress() {
+
+        try {
+
+            const saved =
+                localStorage.getItem(
+                    "aiMentorBugDetective"
+                );
+
+            if (saved) {
+
+                const data =
+                    JSON.parse(saved);
+
+                solvedCases =
+                    data.solvedCases || {};
 
             }
-        );
+
+        } catch (error) {
+
+            solvedCases = {};
+
+        }
 
     }
 
 
-    /* =========================================================
-       LANGUAGE RENDER
-       ========================================================= */
+    function saveProgress() {
 
-    function renderLanguage() {
+        try {
 
-        const language =
-            languages[selectedLanguage];
-
-        const p =
-            getLanguageProgress(
-                selectedLanguage
+            localStorage.setItem(
+                "aiMentorBugDetective",
+                JSON.stringify({
+                    solvedCases: solvedCases
+                })
             );
 
+        } catch (error) {
 
-        languageLabel.textContent =
-            language.name.toUpperCase();
-
-        languageTitle.textContent =
-            "Learn " +
-            language.name +
-            " from the ground up";
-
-        languageDescription.textContent =
-            language.description;
-
-
-        /*
-         * If the current level is already completed,
-         * automatically select the next available level.
-         */
-
-        if (
-            p.completed.includes(currentLevel) &&
-            currentLevel <
-                language.levels.length - 1
-        ) {
-
-            currentLevel++;
-
-        }
-
-
-        renderLevels();
-
-        renderLesson();
-
-    }
-
-
-    /* =========================================================
-       LESSON
-       ========================================================= */
-
-    function renderLesson() {
-
-        const language =
-            languages[selectedLanguage];
-
-        const level =
-            language.levels[currentLevel];
-
-        if (!level) {
-            return;
-        }
-
-
-        const lesson =
-            level.lessons[
-                currentLesson %
-                level.lessons.length
-            ];
-
-
-        workspaceLevel.textContent =
-            "LEVEL " +
-            (currentLevel + 1) +
-            " • " +
-            level.difficulty;
-
-
-        progressText.textContent =
-            "Lesson " +
-            (currentLesson + 1) +
-            " of " +
-            level.lessons.length;
-
-
-        lessonTitle.textContent =
-            lesson.title;
-
-        lessonText.textContent =
-            lesson.text;
-
-        lessonCode.textContent =
-            lesson.code;
-
-        lessonQuestion.textContent =
-            lesson.question;
-
-
-        hintBox.classList.remove(
-            "show"
-        );
-
-        hintBox.textContent =
-            "💡 " +
-            lesson.hint;
-
-
-        learningFeedback.textContent =
-            "";
-
-        questionAnswered =
-            false;
-
-        hintUsed =
-            false;
-
-
-        lessonOptions.innerHTML =
-            "";
-
-
-        /*
-         * Randomize answer order every time
-         */
-
-        const answers =
-            [...lesson.answers];
-
-        shuffle(answers);
-
-
-        answers.forEach(
-            function (answer) {
-
-                const button =
-                    document.createElement(
-                        "button"
-                    );
-
-                button.type =
-                    "button";
-
-                button.className =
-                    "answer-button";
-
-                button.textContent =
-                    answer[0];
-
-                button.dataset.answer =
-                    answer[1];
-
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        handleAnswer(
-                            button,
-                            answer[1],
-                            lesson
-                        );
-
-                    }
-                );
-
-
-                lessonOptions.appendChild(
-                    button
-                );
-
-            }
-        );
-
-
-        /*
-         * Level 1 has Start Here.
-         * Once started, the button becomes Next Lesson.
-         */
-
-        const started =
-            sessionStorage.getItem(
-                "started-" +
-                selectedLanguage +
-                "-" +
-                currentLevel
-            );
-
-
-        if (started) {
-
-            startLevelButton.textContent =
-                currentLesson <
-                level.lessons.length - 1
-                    ? "Next Lesson →"
-                    : "Complete Level ✓";
-
-        } else {
-
-            startLevelButton.textContent =
-                "Start Here →";
+            /* Storage may be unavailable.
+               The game still works without it. */
 
         }
 
     }
 
 
-    /* =========================================================
-       ANSWER HANDLER
-       ========================================================= */
+    /* =====================================================
+       HELPERS
+       ===================================================== */
 
-    function handleAnswer(
-        clickedButton,
-        result,
-        lesson
-    ) {
+    function getSolvedList(language) {
 
-        if (questionAnswered) {
-            return;
+        if (!Array.isArray(solvedCases[language])) {
+            solvedCases[language] = [];
         }
 
-
-        const buttons =
-            lessonOptions.querySelectorAll(
-                ".answer-button"
-            );
-
-
-        if (result === "correct") {
-
-            questionAnswered =
-                true;
-
-            clickedButton.classList.add(
-                "correct"
-            );
-
-            learningFeedback.style.color =
-                "#46dfac";
-
-            learningFeedback.textContent =
-                "✓ Correct. " +
-                lesson.explanation;
-
-
-            buttons.forEach(
-                function (button) {
-
-                    button.disabled =
-                        true;
-
-                }
-            );
-
-
-            setTimeout(
-                function () {
-
-                    nextLesson();
-
-                },
-                1700
-            );
-
-
-        } else {
-
-            clickedButton.classList.add(
-                "wrong"
-            );
-
-            learningFeedback.style.color =
-                "#ff7582";
-
-            learningFeedback.textContent =
-                "Not quite. Don't guess — use the hint and try again.";
-
-            setTimeout(
-                function () {
-
-                    clickedButton.classList.remove(
-                        "wrong"
-                    );
-
-                },
-                700
-            );
-
-        }
+        return solvedCases[language];
 
     }
 
 
-    /* =========================================================
-       NEXT LESSON
-       ========================================================= */
+    function getAvailableCases(language) {
 
-    function nextLesson() {
+        const cases =
+            bugDatabase[language] || [];
 
-        const language =
-            languages[selectedLanguage];
+        const solved =
+            getSolvedList(language);
 
-        const level =
-            language.levels[currentLevel];
+        return cases.filter(
+            function (item) {
 
-
-        if (
-            currentLesson <
-            level.lessons.length - 1
-        ) {
-
-            currentLesson++;
-
-            renderLesson();
-
-            renderLevels();
-
-            return;
-
-        }
-
-
-        /*
-         * Finish current level
-         */
-
-        const p =
-            getLanguageProgress(
-                selectedLanguage
-            );
-
-
-        if (
-            !p.completed.includes(
-                currentLevel
-            )
-        ) {
-
-            p.completed.push(
-                currentLevel
-            );
-
-        }
-
-
-        p.currentLevel =
-            Math.min(
-                currentLevel + 1,
-                language.levels.length - 1
-            );
-
-
-        saveProgress();
-
-
-        /*
-         * If there is another level,
-         * unlock it.
-         */
-
-        if (
-            currentLevel <
-            language.levels.length - 1
-        ) {
-
-            showToast(
-                "✓ Level " +
-                (currentLevel + 1) +
-                " complete! The next level is now unlocked."
-            );
-
-            currentLevel++;
-
-            currentLesson = 0;
-
-            sessionStorage.setItem(
-                "started-" +
-                selectedLanguage +
-                "-" +
-                currentLevel,
-                "true"
-            );
-
-            renderLevels();
-
-            renderLesson();
-
-        } else {
-
-            showToast(
-                "🏆 You completed every level of " +
-                language.name +
-                "!"
-            );
-
-            renderLevels();
-
-            renderLesson();
-
-        }
-
-    }
-
-
-    /* =========================================================
-       START LEVEL
-       ========================================================= */
-
-    startLevelButton.addEventListener(
-        "click",
-        function () {
-
-            const p =
-                getLanguageProgress(
-                    selectedLanguage
-                );
-
-
-            /*
-             * Never allow a locked level
-             * to be started.
-             */
-
-            if (
-                !isLevelUnlocked(
-                    selectedLanguage,
-                    currentLevel
-                )
-            ) {
-
-                showToast(
-                    "🔒 Complete the previous level first."
-                );
-
-                return;
-
-            }
-
-
-            const level =
-                languages[
-                    selectedLanguage
-                ].levels[currentLevel];
-
-
-            const sessionKey =
-                "started-" +
-                selectedLanguage +
-                "-" +
-                currentLevel;
-
-
-            const alreadyStarted =
-                sessionStorage.getItem(
-                    sessionKey
-                );
-
-
-            if (!alreadyStarted) {
-
-                sessionStorage.setItem(
-                    sessionKey,
-                    "true"
-                );
-
-                currentLesson = 0;
-
-                renderLesson();
-
-                showToast(
-                    "🚀 Level " +
-                    (currentLevel + 1) +
-                    " started. Complete each lesson to unlock the next level."
-                );
-
-                return;
-
-            }
-
-
-            /*
-             * If already started, button works
-             * as next lesson / complete level.
-             */
-
-            if (
-                questionAnswered
-            ) {
-
-                nextLesson();
-
-            } else {
-
-                showToast(
-                    "Answer the question correctly before moving on."
+                return !solved.includes(
+                    item.title
                 );
 
             }
-
-        }
-    );
-
-
-    /* =========================================================
-       HINT
-       ========================================================= */
-
-    hintButton.addEventListener(
-        "click",
-        function () {
-
-            const language =
-                languages[selectedLanguage];
-
-            const level =
-                language.levels[currentLevel];
-
-            const lesson =
-                level.lessons[
-                    currentLesson %
-                    level.lessons.length
-                ];
-
-
-            hintUsed = true;
-
-            hintBox.textContent =
-                "💡 Hint: " +
-                lesson.hint;
-           hintBox.classList.add(
-                "show"
-            );
-
-        }
-    );
-
-
-    /* =========================================================
-       NEW QUESTION
-       ========================================================= */
-
-    newQuestionButton.addEventListener(
-        "click",
-        function () {
-
-            const language =
-                languages[selectedLanguage];
-
-            const level =
-                language.levels[currentLevel];
-
-
-            if (
-                level.lessons.length > 1
-            ) {
-
-                let next =
-                    Math.floor(
-                        Math.random() *
-                        level.lessons.length
-                    );
-
-
-                if (
-                    next === currentLesson
-                ) {
-
-                    next =
-                        (
-                            next + 1
-                        ) %
-                        level.lessons.length;
-
-                }
-
-
-                currentLesson =
-                    next;
-
-            }
-
-
-            renderLesson();
-
-
-            showToast(
-                "🔄 New question loaded."
-            );
-
-        }
-    );
-
-
-    /* =========================================================
-       AI MENTOR
-       ========================================================= */
-
-    const mentorInput =
-        document.getElementById(
-            "mentorInput"
         );
-
-    const mentorSend =
-        document.getElementById(
-            "mentorSend"
-        );
-
-    const mentorMessages =
-        document.getElementById(
-            "mentorMessages"
-        );
-
-
-    function addMessage(
-        text,
-        type
-    ) {
-
-        const message =
-            document.createElement(
-                "div"
-            );
-
-        message.className =
-            "message " +
-            type;
-
-        message.textContent =
-            text;
-
-        mentorMessages.appendChild(
-            message
-        );
-
-        mentorMessages.scrollTop =
-            mentorMessages.scrollHeight;
 
     }
 
 
     /*
-     * This local mentor intentionally uses
-     * the user's question to generate a different
-     * explanation instead of returning the same
-     * response every time.
-     */
+       Random case selection.
 
-    function generateMentorResponse(
-        question
-    ) {
+       Priority:
+       1. Never solved cases.
+       2. Avoid current case.
+       3. Randomize the result.
+       4. If every case has been solved,
+          reset that language's case pool.
+    */
 
-        const q =
-            question.toLowerCase();
+    function chooseCase(language) {
 
+        let available =
+            getAvailableCases(language);
 
-        if (
-            q.includes("error") ||
-            q.includes("syntax") ||
-            q.includes("bug") ||
-            q.includes("not working")
-        ) {
+        if (available.length === 0) {
 
-            return (
-                "Let's debug it instead of guessing. " +
-                "First identify the exact line mentioned by the error, " +
-                "then check the values and types involved. " +
-                "If you paste the relevant code and the exact error message, " +
-                "I can walk through the mistake step by step."
-            );
+            solvedCases[language] = [];
+
+            saveProgress();
+
+            available =
+                bugDatabase[language].slice();
 
         }
 
 
         if (
-            q.includes("html") ||
-            q.includes("tag") ||
-            q.includes("element")
+            currentCase &&
+            available.length > 1
         ) {
 
-            return (
-                "Think of HTML as the structure of a webpage. " +
-                "Elements describe what the content is: headings, paragraphs, links, images and so on. " +
-                "A good next step is to identify the element you need before worrying about styling it."
-            );
+            available =
+                available.filter(
+                    function (item) {
+
+                        return (
+                            item.title !==
+                            currentCase.title
+                        );
+
+                    }
+                );
 
         }
 
 
-        if (
-            q.includes("css") ||
-            q.includes("flex") ||
-            q.includes("grid") ||
-            q.includes("style")
-        ) {
-
-            return (
-                "For CSS, separate the problem into three questions: " +
-                "which element is being selected, which property is being changed, " +
-                "and whether another rule is overriding it. " +
-                "For layout problems, inspect the parent container before changing the child."
+        const index =
+            Math.floor(
+                Math.random() *
+                available.length
             );
 
-        }
+        return available[index];
+
+    }
 
 
-        if (
-            q.includes("javascript") ||
-            q.includes("js") ||
-            q.includes("function") ||
-            q.includes("variable") ||
-            q.includes("loop")
-        ) {
+    /* =====================================================
+       UPDATE STATS
+       ===================================================== */
 
-            return (
-                "For JavaScript, first work out the value your program has at the moment the problem occurs. " +
-                "Then trace the code one step at a time. " +
-                "If it's a loop, check the starting value, condition and update. " +
-                "If it's a function, check the arguments and return value."
+    function updateStats() {
+
+        let total = 0;
+
+        Object.keys(solvedCases)
+            .forEach(
+                function (language) {
+
+                    if (
+                        Array.isArray(
+                            solvedCases[language]
+                        )
+                    ) {
+
+                        total +=
+                            solvedCases[language].length;
+
+                    }
+
+                }
             );
 
-        }
+        solvedDisplay.textContent =
+            total;
+
+        streakDisplay.textContent =
+            currentStreak;
+
+        languageDisplay.textContent =
+            currentLanguage.toUpperCase();
+
+    }
 
 
-        if (
-            q.includes("java")
-        ) {
+    /* =====================================================
+       DIFFICULTY
+       ===================================================== */
 
-            return (
-                "Java becomes much easier when you separate syntax from concepts. " +
-                "Start by asking what data the program stores, what operation it performs, " +
-                "and whether the code is working with a class, object or primitive value."
+    function updateDifficulty(level) {
+
+        const bars =
+            root.querySelectorAll(
+                ".bug-difficulty i"
             );
 
-        }
+        bars.forEach(
+            function (bar, index) {
 
+                if (index < level) {
 
-        if (
-            q.includes("c#") ||
-            q.includes("csharp")
-        ) {
+                    bar.style.background =
+                        "#8b7cff";
 
-            return (
-                "With C#, pay attention to types because the compiler expects values to match their declared types. " +
-                "When debugging, check the variable type, the value being assigned and the method signature."
-            );
+                } else {
 
-        }
+                    bar.style.background =
+                        "#26344f";
 
+                }
 
-        if (
-            q.includes("c++") ||
-            q.includes("pointer") ||
-            q.includes("memory")
-        ) {
-
-            return (
-                "For C++, first separate the value from the memory location containing that value. " +
-                "Pointers become much easier once you ask: 'Am I holding the value, or the address of the value?'"
-            );
-
-        }
-
-
-        if (
-            q.includes("learn") ||
-            q.includes("beginner") ||
-            q.includes("start")
-        ) {
-
-            return (
-                "Start with the fundamentals rather than jumping directly into frameworks. " +
-                "Pick one language, learn its basic data types and control flow, " +
-                "then build a tiny project. Understanding why the code works matters more than memorizing syntax."
-            );
-
-        }
-
-
-        return (
-            "Good question. Let's break it down instead of jumping straight to the answer. " +
-            "First identify the concept involved, then make a tiny example, " +
-            "and finally test what happens when you change one part. " +
-            "If you share the code you're working on, I can guide you through the reasoning."
+            }
         );
 
     }
 
 
-    function sendMentorMessage() {
+    /* =====================================================
+       LOAD CASE
+       ===================================================== */
 
-        const question =
-            mentorInput.value.trim();
+    function loadCase(language) {
+
+        currentLanguage =
+            language;
+
+        currentCase =
+            chooseCase(language);
+
+        if (!currentCase) {
+            return;
+        }
 
 
-        if (!question) {
+        caseTitle.textContent =
+            currentCase.title;
 
-            showToast(
-                "Type a question first."
-            );
+        description.textContent =
+            currentCase.description;
+
+        fileName.textContent =
+            currentCase.file;
+
+        code.textContent =
+            currentCase.code;
+
+
+        updateDifficulty(
+            currentCase.difficulty
+        );
+
+
+        answer.value = "";
+
+        hint.classList.remove("show");
+
+        hintText.textContent =
+            currentCase.hint;
+
+        result.className =
+            "bug-result";
+
+        resultTitle.textContent =
+            "";
+
+        explanation.textContent =
+            "";
+
+        nextButton.classList.remove(
+            "show"
+        );
+
+        complete.classList.remove(
+            "show"
+        );
+
+        hintUsed = false;
+
+        hintButton.disabled = false;
+
+        hintButton.style.opacity = "1";
+
+        updateStats();
+
+    }
+
+
+    /* =====================================================
+       CHECK ANSWER
+       ===================================================== */
+
+    function checkAnswer() {
+
+        if (!currentCase) {
+            return;
+        }
+
+
+        const userAnswer =
+            answer.value
+                .trim()
+                .toLowerCase();
+
+
+        if (!userAnswer) {
+
+            result.className =
+                "bug-result wrong show";
+
+            resultTitle.textContent =
+                "Write your diagnosis first.";
+
+            explanation.textContent =
+                "Explain what you think is wrong with the code.";
 
             return;
 
         }
 
 
-        addMessage(
-            question,
-            "user"
-        );
+        /*
+           We don't require an exact sentence.
 
+           Instead, we check whether the student's
+           explanation contains relevant debugging terms.
+        */
 
-        mentorInput.value =
-            "";
+        const matched =
+            currentCase.keywords.filter(
+                function (keyword) {
 
-
-        mentorSend.disabled =
-            true;
-
-        mentorSend.textContent =
-            "Thinking...";
-
-
-        setTimeout(
-            function () {
-
-                const response =
-                    generateMentorResponse(
-                        question
+                    return userAnswer.includes(
+                        keyword.toLowerCase()
                     );
 
+                }
+            );
 
-                addMessage(
-                    response,
-                    "ai"
+
+        const isCorrect =
+            matched.length >= 1;
+
+
+        if (isCorrect) {
+
+            const solved =
+                getSolvedList(
+                    currentLanguage
                 );
 
 
-                mentorSend.disabled =
-                    false;
+            if (
+                !solved.includes(
+                    currentCase.title
+                )
+            ) {
 
-                mentorSend.textContent =
-                    "Ask Mentor";
+                solved.push(
+                    currentCase.title
+                );
 
-            },
-            500
+            }
+
+
+            saveProgress();
+
+            currentStreak++;
+
+            result.className =
+                "bug-result correct show";
+
+            resultTitle.textContent =
+                "✓ Case solved!";
+
+            explanation.textContent =
+                currentCase.explanation;
+
+
+            nextButton.classList.add(
+                "show"
+            );
+
+
+            const remaining =
+                getAvailableCases(
+                    currentLanguage
+                ).length;
+
+
+            if (remaining === 0) {
+
+                complete.classList.add(
+                    "show"
+                );
+
+                completeText.textContent =
+                    "You solved every available " +
+                    currentLanguage.toUpperCase() +
+                    " case. Start a new round to practice them again.";
+
+            }
+
+
+            updateStats();
+
+
+        } else {
+
+            currentStreak = 0;
+
+            result.className =
+                "bug-result wrong show";
+
+            resultTitle.textContent =
+                "Not quite. Keep investigating.";
+
+            explanation.textContent =
+                "Look at the syntax, variable names, operators, " +
+                "types, or structure. Try explaining the specific " +
+                "line that causes the problem.";
+
+            updateStats();
+
+        }
+
+    }
+
+
+    /* =====================================================
+       HINT
+       ===================================================== */
+
+    function showHint() {
+
+        if (!currentCase) {
+            return;
+        }
+
+        hint.classList.add(
+            "show"
+        );
+
+        hintUsed = true;
+
+        hintButton.disabled =
+            true;
+
+        hintButton.style.opacity =
+            ".5";
+
+    }
+
+
+    /* =====================================================
+       SKIP
+       ===================================================== */
+
+    function skipCase() {
+
+        currentStreak = 0;
+
+        loadCase(
+            currentLanguage
         );
 
     }
 
 
-    mentorSend.addEventListener(
-        "click",
-        sendMentorMessage
+    /* =====================================================
+       NEXT CASE
+       ===================================================== */
+
+    function nextCase() {
+
+        loadCase(
+            currentLanguage
+        );
+
+    }
+
+
+    /* =====================================================
+       LANGUAGE CHANGE
+       ===================================================== */
+
+    languageButtons.forEach(
+        function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    languageButtons.forEach(
+                        function (item) {
+
+                            item.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    currentStreak = 0;
+
+
+                    loadCase(
+                        button.dataset.bugLanguage
+                    );
+
+                }
+            );
+
+        }
     );
 
 
-    mentorInput.addEventListener(
+    /* =====================================================
+       BUTTON EVENTS
+       ===================================================== */
+
+    checkButton.addEventListener(
+        "click",
+        checkAnswer
+    );
+
+
+    hintButton.addEventListener(
+        "click",
+        showHint
+    );
+
+
+    skipButton.addEventListener(
+        "click",
+        skipCase
+    );
+
+
+    nextButton.addEventListener(
+        "click",
+        nextCase
+    );
+
+
+    /* =====================================================
+       KEYBOARD SHORTCUT
+       ===================================================== */
+
+    answer.addEventListener(
         "keydown",
         function (event) {
 
             if (
-                event.key === "Enter" &&
-                !event.shiftKey
+                (event.ctrlKey || event.metaKey) &&
+                event.key === "Enter"
             ) {
 
-                event.preventDefault();
-
-                sendMentorMessage();
+                checkAnswer();
 
             }
 
@@ -4313,329 +5090,17 @@ System.out.println(
     );
 
 
-    document
-        .querySelectorAll(
-            ".mentor-suggestion"
-        )
-        .forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        mentorInput.value =
-                            button.dataset.question;
-
-                        mentorInput.focus();
-
-                    }
-                );
-
-            }
-        );
-
-
-    /* =========================================================
-       BUG DETECTIVE
-       ========================================================= */
-
-    const caseTitle =
-        document.getElementById(
-            "caseTitle"
-        );
-
-    const caseLanguage =
-        document.getElementById(
-            "caseLanguage"
-        );
-
-    const caseDifficulty =
-        document.getElementById(
-            "caseDifficulty"
-        );
-
-    const caseNumber =
-        document.getElementById(
-            "caseNumber"
-        );
-
-    const caseDescription =
-        document.getElementById(
-            "caseDescription"
-        );
-
-    const bugCode =
-        document.getElementById(
-            "bugCode"
-        );
-
-    const caseAnswer =
-        document.getElementById(
-            "caseAnswer"
-        );
-
-    const showCaseAnswer =
-        document.getElementById(
-            "showCaseAnswer"
-        );
-
-    const nextCase =
-        document.getElementById(
-            "nextCase"
-        );
-
-
-    function loadRandomCase() {
-
-        let index;
-
-
-        do {
-
-            index =
-                Math.floor(
-                    Math.random() *
-                    bugCases.length
-                );
-
-        } while (
-            bugCases.length > 1 &&
-            index === lastCaseIndex
-        );
-
-
-        lastCaseIndex =
-            index;
-
-
-        const bug =
-            bugCases[index];
-
-
-        caseTitle.textContent =
-            bug.title;
-
-        caseLanguage.textContent =
-            bug.language;
-
-        caseDifficulty.textContent =
-            bug.difficulty;
-
-        caseNumber.textContent =
-            "Case #" +
-            (index + 1);
-
-        caseDescription.textContent =
-            bug.description;
-
-        bugCode.textContent =
-            bug.code;
-
-        caseAnswer.textContent =
-            "🧠 Explanation: " +
-            bug.answer;
-
-        caseAnswer.classList.remove(
-            "show"
-        );
-
-
-        showCaseAnswer.textContent =
-            "Reveal Explanation";
-
-    }
-
-
-    showCaseAnswer.addEventListener(
-        "click",
-        function () {
-
-            const visible =
-                caseAnswer.classList.contains(
-                    "show"
-                );
-
-
-            if (visible) {
-
-                caseAnswer.classList.remove(
-                    "show"
-                );
-
-                showCaseAnswer.textContent =
-                    "Reveal Explanation";
-
-            } else {
-
-                caseAnswer.classList.add(
-                    "show"
-                );
-
-                showCaseAnswer.textContent =
-                    "Hide Explanation";
-
-            }
-
-        }
-    );
-
-
-    nextCase.addEventListener(
-        "click",
-        function () {
-
-            loadRandomCase();
-
-            showToast(
-                "🔎 New bug case loaded."
-            );
-
-        }
-    );
-
-
-    /* =========================================================
-       UTILITY
-       ========================================================= */
-
-    function shuffle(array) {
-
-        for (
-            let i = array.length - 1;
-            i > 0;
-            i--
-        ) {
-
-            const j =
-                Math.floor(
-                    Math.random() *
-                    (i + 1)
-                );
-
-
-            [
-                array[i],
-                array[j]
-            ] = [
-                array[j],
-                array[i]
-            ];
-
-        }
-
-        return array;
-
-    }
-
-
-    function showToast(
-        message
-    ) {
-
-        const toast =
-            document.getElementById(
-                "toast"
-            );
-
-
-        toast.textContent =
-            message;
-
-        toast.classList.add(
-            "show"
-        );
-
-
-        clearTimeout(
-            window.__toastTimer
-        );
-
-
-        window.__toastTimer =
-            setTimeout(
-                function () {
-
-                    toast.classList.remove(
-                        "show"
-                    );
-
-                },
-                2500
-            );
-
-    }
-
-
-    function scrollToWorkspace() {
-
-        setTimeout(
-            function () {
-
-                document
-                    .getElementById(
-                        "learningWorkspace"
-                    )
-                    .scrollIntoView({
-                        behavior: "smooth",
-                        block: "center"
-                    });
-
-            },
-            100
-        );
-
-    }
-
-
-    /* =========================================================
-       NAVIGATION
-       ========================================================= */
-
-    document
-        .querySelectorAll(
-            "[data-scroll]"
-        )
-        .forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        const target =
-                            document.getElementById(
-                                button.dataset.scroll
-                            );
-
-                        if (target) {
-
-                            target.scrollIntoView({
-                                behavior: "smooth"
-                            });
-
-                        }
-
-                    }
-                );
-
-            }
-        );
-
-
-    /* =========================================================
+    /* =====================================================
        INITIALIZE
-       ========================================================= */
+       ===================================================== */
 
-    renderLanguageButtons();
+    loadProgress();
 
-    renderLanguage();
-
-    loadRandomCase();
-
+    loadCase("html");
 
 })();
 </script>
 
-</body>
-</html>
+<!-- =========================================================
+     END BUG DETECTIVE
+     ========================================================= -->
