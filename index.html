@@ -3,5104 +3,2469 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07111a">
-
-<title>AI Mentor — Coding Learning Platform</title>
+<title>AI Coding Mentor</title>
 
 <style>
-/* =========================================================
-   GLOBAL
-   ========================================================= */
-
-* {
-    box-sizing: border-box;
+:root{
+  --bg:#071018;
+  --panel:#0d1722;
+  --panel2:#101d2b;
+  --border:#203044;
+  --text:#eef4ff;
+  --muted:#91a1b7;
+  --blue:#6d8cff;
+  --purple:#8b72ff;
+  --green:#32d583;
+  --red:#ff647c;
+  --yellow:#ffc857;
+  --shadow:0 20px 60px rgba(0,0,0,.25);
 }
 
-html {
-    scroll-behavior: smooth;
+*{
+  box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+html{
+  scroll-behavior:smooth;
+}
 
-    background:
-        radial-gradient(
-            circle at 20% 0%,
-            rgba(87, 91, 255, 0.10),
-            transparent 30%
-        ),
-        #071018;
-
-    color: #eef4ff;
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 button,
 textarea,
-input {
-    font: inherit;
+select{
+  font:inherit;
 }
 
-button {
-    cursor: pointer;
+button{
+  cursor:pointer;
 }
 
-.container {
-    width: min(1120px, calc(100% - 32px));
-    margin: auto;
+.app{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:270px minmax(0,1fr) 350px;
 }
 
-/* =========================================================
-   HERO
-   ========================================================= */
+/* ================= SIDEBAR ================= */
 
-.hero {
-    padding: 85px 0 45px;
+.sidebar{
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow:auto;
+  padding:20px 15px;
+  border-right:1px solid var(--border);
+  background:#09131d;
 }
 
-.hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    padding: 8px 12px;
-
-    border: 1px solid rgba(103, 126, 255, .25);
-    border-radius: 999px;
-
-    background: rgba(92, 103, 255, .08);
-
-    color: #8ea2ff;
-
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-.hero h1 {
-    max-width: 850px;
-
-    margin: 20px 0 15px;
-
-    font-size: clamp(40px, 7vw, 76px);
-    line-height: .98;
-    letter-spacing: -4px;
-}
-
-.hero h1 span {
-    color: #8068ff;
-}
-
-.hero p {
-    max-width: 720px;
-
-    color: #93a3b8;
-
-    font-size: 16px;
-    line-height: 1.7;
-}
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-
-.quick-nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-
-    border-bottom: 1px solid rgba(255,255,255,.06);
-
-    background: rgba(7,16,24,.85);
-
-    backdrop-filter: blur(18px);
-}
-
-.quick-nav-inner {
-    display: flex;
-    gap: 8px;
-
-    overflow-x: auto;
-
-    padding: 10px 0;
-}
-
-.quick-nav button {
-    flex-shrink: 0;
-
-    padding: 9px 13px;
-
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 8px;
-
-    background: #0b1620;
-
-    color: #8798ad;
-
-    font-size: 11px;
-    font-weight: 700;
-}
-
-.quick-nav button:hover {
-    border-color: #6e65ff;
-    color: white;
-}
-
-/* =========================================================
-   COMMON SECTION
-   ========================================================= */
-
-.section {
-    padding: 75px 0;
-}
-
-.section-label {
-    display: block;
-
-    margin-bottom: 9px;
-
-    color: #7669ff;
-
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 1.7px;
-}
-
-.section-title {
-    margin: 0;
-
-    font-size: clamp(30px, 5vw, 48px);
-    line-height: 1.05;
-    letter-spacing: -2px;
-}
-
-.section-description {
-    max-width: 700px;
-
-    margin: 14px 0 30px;
-
-    color: #8999ae;
-
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-/* =========================================================
-   AI MENTOR
-   ========================================================= */
-
-.mentor-card {
-    padding: 25px;
-
-    border: 1px solid rgba(125,105,255,.22);
-    border-radius: 18px;
-
-    background:
-        radial-gradient(
-            circle at 100% 0%,
-            rgba(119,96,255,.12),
-            transparent 35%
-        ),
-        #0b1620;
-}
-
-.mentor-top {
-    display: flex;
-    gap: 15px;
-    align-items: flex-start;
-}
-
-.mentor-avatar {
-    width: 48px;
-    height: 48px;
-
-    display: grid;
-    place-items: center;
-
-    flex-shrink: 0;
-
-    border-radius: 12px;
-
-    background: rgba(122,102,255,.12);
-
-    font-size: 23px;
-}
-
-.mentor-top small {
-    color: #8c80ff;
-
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-}
-
-.mentor-top h3 {
-    margin: 5px 0 0;
-
-    font-size: 19px;
-}
-
-.mentor-messages {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    max-height: 440px;
-
-    overflow-y: auto;
-
-    margin: 22px 0;
-    padding-right: 5px;
-}
-
-.message {
-    max-width: 85%;
-
-    padding: 13px 15px;
-
-    border-radius: 12px;
-
-    font-size: 13px;
-    line-height: 1.65;
-}
-
-.message.ai {
-    align-self: flex-start;
-
-    border: 1px solid rgba(255,255,255,.06);
-
-    background: #101e29;
-
-    color: #c9d4e4;
-}
-
-.message.user {
-    align-self: flex-end;
-
-    background: #6657dc;
-
-    color: white;
-}
-
-.mentor-input-area {
-    display: flex;
-    gap: 9px;
-}
-
-.mentor-input {
-    width: 100%;
-    min-height: 48px;
-    max-height: 130px;
-
-    resize: vertical;
-
-    padding: 13px 14px;
-
-    border: 1px solid #263848;
-    border-radius: 10px;
-
-    outline: none;
-
-    background: #071018;
-
-    color: white;
-
-    font-size: 13px;
-}
-
-.mentor-input:focus {
-    border-color: #7465ff;
-}
-
-.primary-button {
-    border: 0;
-    border-radius: 10px;
-
-    padding: 0 18px;
-
-    background: #7565ff;
-
-    color: white;
-
-    font-size: 12px;
-    font-weight: 800;
-}
-
-.primary-button:hover {
-    opacity: .9;
-}
-
-.mentor-suggestions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-
-    margin-top: 11px;
-}
-
-.mentor-suggestion {
-    padding: 7px 10px;
-
-    border: 1px solid rgba(255,255,255,.07);
-    border-radius: 7px;
-
-    background: #09131c;
-
-    color: #8292a7;
-
-    font-size: 10px;
-}
-
-.mentor-suggestion:hover {
-    border-color: #7163ff;
-    color: white;
-}
-
-/* =========================================================
-   LEARNING PATH
-   ========================================================= */
-
-.language-selector {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-
-    margin-bottom: 18px;
-}
-
-.language-button {
-    padding: 11px 15px;
-
-    border: 1px solid #263848;
-    border-radius: 9px;
-
-    background: #0b1620;
-
-    color: #8e9eb1;
-
-    font-size: 11px;
-    font-weight: 800;
-
-    transition: .2s ease;
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:25px;
+  font-weight:900;
 }
 
-.language-button:hover {
-    transform: translateY(-1px);
-
-    border-color: #6c61ff;
-
-    color: white;
-}
-
-.language-button.active {
-    border-color: #6c61ff;
-
-    background: rgba(108,97,255,.13);
-
-    color: white;
-}
-
-.language-info {
-    padding: 22px;
-
-    border: 1px solid rgba(92,119,255,.20);
-    border-radius: 15px;
-
-    background:
-        radial-gradient(
-            circle at 100% 0%,
-            rgba(93,87,255,.10),
-            transparent 38%
-        ),
-        #0b1620;
-}
-
-.language-info-label {
-    color: #6e8fff;
-
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-}
-
-.language-info h3 {
-    margin: 7px 0;
-
-    font-size: 21px;
+.logo-icon{
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--blue),var(--purple));
 }
 
-.language-info p {
-    margin: 0;
-
-    color: #8798ad;
-
-    font-size: 12px;
-    line-height: 1.65;
+.logo span{
+  color:#fff;
 }
-
-/* =========================================================
-   LEVEL CARDS
-   ========================================================= */
-
-.level-list {
-    display: grid;
-    gap: 12px;
 
-    margin-top: 14px;
+.language-select{
+  width:100%;
+  padding:11px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:var(--panel);
+  color:#fff;
+  outline:none;
+  margin-bottom:20px;
 }
-
-.level-card {
-    position: relative;
-
-    padding: 21px;
-
-    border: 1px solid rgba(255,255,255,.07);
-    border-radius: 15px;
-
-    background: #0b1620;
 
-    transition: .25s ease;
+.level-group{
+  margin-bottom:20px;
 }
 
-.level-card.current {
-    border-color: rgba(94,123,255,.38);
-
-    box-shadow:
-        0 0 0 1px rgba(94,123,255,.04),
-        0 15px 50px rgba(0,0,0,.12);
+.level-title{
+  color:#65758b;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.4px;
+  margin:0 0 8px;
+  padding-left:7px;
 }
 
-.level-card.completed {
-    border-color: rgba(51,211,157,.25);
+.lesson-btn{
+  width:100%;
+  text-align:left;
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--muted);
+  padding:9px 10px;
+  border-radius:8px;
+  margin-bottom:3px;
+  font-size:12px;
 }
 
-.level-card.locked {
-    opacity: .58;
+.lesson-btn:hover{
+  background:rgba(109,140,255,.08);
+  color:#fff;
 }
 
-.level-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 15px;
+.lesson-btn.active{
+  background:rgba(109,140,255,.12);
+  border-color:rgba(109,140,255,.25);
+  color:#fff;
 }
 
-.level-left {
-    display: flex;
-    gap: 14px;
+.lesson-btn.locked{
+  opacity:.45;
+  cursor:not-allowed;
 }
-
-.level-number {
-    width: 43px;
-    height: 43px;
-
-    display: grid;
-    place-items: center;
-
-    flex-shrink: 0;
 
-    border-radius: 10px;
+/* ================= MAIN ================= */
 
-    background: rgba(95,110,255,.10);
-
-    color: #7184ff;
-
-    font-family: monospace;
-    font-weight: 900;
-    font-size: 12px;
+.main{
+  min-width:0;
+  padding:30px;
 }
-
-.level-card.completed .level-number {
-    background: rgba(51,211,157,.10);
-    color: #33d39d;
-}
-
-.level-name small {
-    color: #69798d;
 
-    font-size: 9px;
-    letter-spacing: 1.2px;
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:center;
+  margin-bottom:25px;
 }
 
-.level-name h3 {
-    margin: 4px 0 0;
-
-    font-size: 16px;
+.topbar h1{
+  margin:0;
+  font-size:25px;
 }
-
-.level-status {
-    padding: 6px 9px;
-
-    border-radius: 7px;
-
-    background: rgba(255,255,255,.04);
 
-    color: #6d7e92;
-
-    font-size: 9px;
-    font-weight: 900;
+.progress-wrap{
+  min-width:180px;
 }
 
-.level-card.current .level-status {
-    background: rgba(104,91,255,.12);
-    color: #8c7fff;
+.progress-label{
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:10px;
+  margin-bottom:6px;
 }
 
-.level-card.completed .level-status {
-    background: rgba(51,211,157,.10);
-    color: #33d39d;
+.progress{
+  height:6px;
+  border-radius:10px;
+  background:#172333;
+  overflow:hidden;
 }
-
-.level-card p {
-    margin: 12px 0 0;
 
-    color: #7f90a4;
-
-    font-size: 12px;
-    line-height: 1.6;
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--blue),var(--purple));
+  transition:.3s;
 }
-
-.concepts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
 
-    margin-top: 13px;
+.card{
+  border:1px solid var(--border);
+  background:var(--panel);
+  border-radius:15px;
+  padding:25px;
+  margin-bottom:18px;
+  box-shadow:var(--shadow);
 }
 
-.concepts span {
-    padding: 6px 9px;
-
-    border: 1px solid rgba(255,255,255,.06);
-    border-radius: 6px;
-
-    background: #071018;
-
-    color: #77879b;
-
-    font-size: 9px;
+.badge{
+  display:inline-block;
+  padding:6px 9px;
+  border-radius:6px;
+  background:rgba(109,140,255,.1);
+  color:var(--blue);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1px;
 }
-
-/* =========================================================
-   LEVEL WORKSPACE
-   ========================================================= */
-
-.learning-workspace {
-    margin-top: 17px;
-
-    padding: 24px;
-
-    border: 1px solid rgba(119,99,255,.20);
-    border-radius: 16px;
 
-    background:
-        radial-gradient(
-            circle at 0% 100%,
-            rgba(119,99,255,.08),
-            transparent 38%
-        ),
-        #0b1620;
+.lesson-title{
+  margin:12px 0 8px;
+  font-size:32px;
 }
 
-.workspace-header {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    align-items: flex-start;
+.lesson-description{
+  color:var(--muted);
+  line-height:1.7;
+  font-size:14px;
 }
 
-.workspace-header small {
-    color: #7d6fff;
-
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: 1.4px;
+.concept-box{
+  padding:17px;
+  border:1px solid rgba(109,140,255,.2);
+  border-radius:10px;
+  background:rgba(109,140,255,.04);
+  margin-top:18px;
 }
-
-.workspace-header h3 {
-    margin: 6px 0 0;
 
-    font-size: 19px;
+.concept-box strong{
+  display:block;
+  margin-bottom:7px;
 }
 
-.progress-text {
-    color: #6f8094;
-
-    font-size: 10px;
-    white-space: nowrap;
+.code-block{
+  margin-top:18px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
 }
-
-.lesson-text {
-    margin: 10px 0 0;
 
-    color: #91a1b4;
-
-    font-size: 12px;
-    line-height: 1.7;
+.code-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:9px 12px;
+  background:#07101a;
+  border-bottom:1px solid var(--border);
+  color:#7e8da3;
+  font-size:10px;
 }
-
-.code-box {
-    margin-top: 18px;
-
-    overflow-x: auto;
-
-    border: 1px solid rgba(255,255,255,.06);
-    border-radius: 10px;
 
-    background: #050a0f;
+.code-block pre{
+  margin:0;
+  padding:18px;
+  overflow:auto;
+  color:#d6e0ef;
+  background:#050b12;
+  font-family:Consolas,Monaco,monospace;
+  font-size:12px;
+  line-height:1.7;
 }
 
-.code-box pre {
-    margin: 0;
-
-    padding: 18px;
-
-    color: #d0d9e7;
-
-    font-family:
-        Consolas,
-        Monaco,
-        monospace;
-
-    font-size: 12px;
-    line-height: 1.75;
+.try-btn{
+  border:0;
+  border-radius:7px;
+  padding:7px 10px;
+  background:var(--blue);
+  color:white;
+  font-size:10px;
+  font-weight:800;
 }
-
-.hint-box {
-    display: none;
-
-    margin-top: 12px;
-
-    padding: 12px 14px;
-
-    border: 1px solid rgba(255,193,79,.18);
-    border-radius: 9px;
-
-    background: rgba(255,193,79,.045);
 
-    color: #d7bd7d;
-
-    font-size: 11px;
-    line-height: 1.6;
+.action-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:18px;
 }
 
-.hint-box.show {
-    display: block;
+.primary,
+.secondary,
+.danger{
+  border-radius:8px;
+  padding:10px 14px;
+  border:1px solid var(--border);
+  font-size:11px;
+  font-weight:800;
 }
-
-.question-box {
-    margin-top: 17px;
-
-    padding: 17px;
-
-    border: 1px solid rgba(255,255,255,.06);
-    border-radius: 11px;
 
-    background: rgba(255,255,255,.02);
+.primary{
+  background:var(--blue);
+  color:white;
+  border-color:transparent;
 }
 
-.question-box h4 {
-    margin: 0;
-
-    color: #edf3ff;
-
-    font-size: 13px;
+.secondary{
+  background:var(--panel2);
+  color:#d8e2ef;
 }
 
-.question-options {
-    display: grid;
-    gap: 8px;
-
-    margin-top: 13px;
+.danger{
+  background:rgba(255,100,124,.08);
+  color:#ff8295;
+  border-color:rgba(255,100,124,.2);
 }
-
-.answer-button {
-    padding: 11px 13px;
 
-    text-align: left;
+/* ================= QUIZ ================= */
 
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 8px;
-
-    background: #071018;
-
-    color: #a2b0c2;
-
-    font-size: 11px;
-
-    transition: .2s ease;
+.quiz-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  margin-top:8px;
+  padding:11px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#0a141f;
+  color:#b9c6d7;
 }
 
-.answer-button:hover {
-    border-color: #6f62ff;
-    color: white;
+.quiz-option:hover{
+  border-color:var(--blue);
+  color:white;
 }
 
-.answer-button.correct {
-    border-color: #32d59c;
-    background: rgba(50,213,156,.08);
-    color: #55e4b0;
+.quiz-result{
+  min-height:20px;
+  margin-top:10px;
+  font-size:12px;
+  font-weight:800;
 }
 
-.answer-button.wrong {
-    border-color: #ff6575;
-    background: rgba(255,101,117,.07);
-    color: #ff8290;
-}
-
-.workspace-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+/* ================= PLAYGROUND ================= */
 
-    margin-top: 14px;
+.editor{
+  width:100%;
+  min-height:230px;
+  resize:vertical;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:#050b12;
+  color:#d9e4f2;
+  padding:15px;
+  font-family:Consolas,Monaco,monospace;
+  font-size:12px;
+  line-height:1.6;
+  outline:none;
 }
-
-.secondary-button {
-    padding: 10px 13px;
-
-    border: 1px solid #2a3b4d;
-    border-radius: 8px;
 
-    background: #09131c;
-
-    color: #95a5b8;
-
-    font-size: 10px;
-    font-weight: 800;
+.editor:focus{
+  border-color:var(--blue);
 }
 
-.secondary-button:hover {
-    border-color: #6e62ff;
-    color: white;
+.output{
+  margin-top:12px;
+  width:100%;
+  height:220px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:white;
 }
 
-.feedback {
-    min-height: 18px;
+/* ================= BUG DETECTIVE ================= */
 
-    margin-top: 11px;
-
-    font-size: 11px;
-    font-weight: 800;
+.bug-code{
+  border:1px solid rgba(255,100,124,.2);
+  background:#090e15;
+  border-radius:9px;
+  padding:16px;
+  overflow:auto;
+  color:#d7e0ec;
+  font-family:monospace;
+  font-size:12px;
+  line-height:1.7;
 }
-
-/* =========================================================
-   BUG DETECTIVE
-   ========================================================= */
 
-.detective-card {
-    padding: 25px;
-
-    border: 1px solid rgba(139,124,255,.23);
-    border-radius: 17px;
-
-    background:
-        radial-gradient(
-            circle at 100% 0%,
-            rgba(112,92,255,.10),
-            transparent 35%
-        ),
-        #0b1620;
+.bug-input{
+  width:100%;
+  margin-top:10px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#08121c;
+  color:#fff;
+  padding:11px;
+  outline:none;
 }
 
-.detective-header {
-    display: flex;
-    gap: 14px;
+.bug-input:focus{
+  border-color:var(--red);
 }
-
-.detective-icon {
-    width: 46px;
-    height: 46px;
-
-    display: grid;
-    place-items: center;
 
-    flex-shrink: 0;
-
-    border-radius: 11px;
-
-    background: rgba(139,124,255,.12);
-
-    font-size: 21px;
+.bug-result{
+  margin-top:10px;
+  min-height:20px;
+  font-size:12px;
+  font-weight:800;
 }
 
-.detective-header small {
-    color: #8e82e8;
+/* ================= RIGHT MENTOR ================= */
 
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: 1.4px;
+.mentor{
+  position:sticky;
+  top:0;
+  height:100vh;
+  border-left:1px solid var(--border);
+  background:#09131d;
+  display:flex;
+  flex-direction:column;
 }
-
-.detective-header h3 {
-    margin: 5px 0 0;
 
-    font-size: 19px;
+.mentor-head{
+  padding:17px;
+  border-bottom:1px solid var(--border);
 }
 
-.case-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-
-    margin-top: 18px;
+.mentor-head strong{
+  display:block;
 }
-
-.case-tag {
-    padding: 6px 9px;
-
-    border-radius: 6px;
-
-    background: rgba(139,124,255,.08);
-
-    color: #a49aff;
 
-    font-size: 9px;
-    font-weight: 800;
+.mentor-head span{
+  color:var(--green);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1px;
 }
 
-.case-description {
-    margin-top: 14px;
-
-    color: #91a1b4;
-
-    font-size: 12px;
-    line-height: 1.7;
+.chat{
+  flex:1;
+  overflow:auto;
+  padding:15px;
 }
-
-.bug-code {
-    margin-top: 14px;
-
-    overflow-x: auto;
 
-    border-radius: 9px;
-
-    background: #05090d;
+.message{
+  max-width:92%;
+  padding:11px;
+  border-radius:10px;
+  margin-bottom:10px;
+  font-size:12px;
+  line-height:1.6;
+  white-space:pre-wrap;
 }
-
-.bug-code pre {
-    margin: 0;
-
-    padding: 17px;
-
-    color: #d2dbe7;
 
-    font-family: monospace;
-    font-size: 12px;
-    line-height: 1.7;
+.message.user{
+  margin-left:auto;
+  background:rgba(109,140,255,.15);
+  border:1px solid rgba(109,140,255,.2);
 }
 
-.detective-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-
-    margin-top: 14px;
+.message.ai{
+  background:#101d2a;
+  border:1px solid var(--border);
 }
-
-.case-answer {
-    display: none;
-
-    width: 100%;
-
-    margin-top: 12px;
 
-    padding: 12px 14px;
-
-    border-radius: 9px;
-
-    background: rgba(255,255,255,.03);
-
-    color: #9baabc;
-
-    font-size: 11px;
-    line-height: 1.65;
+.chat-input{
+  padding:12px;
+  border-top:1px solid var(--border);
 }
 
-.case-answer.show {
-    display: block;
+.chat-input textarea{
+  width:100%;
+  resize:none;
+  height:75px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:#07111a;
+  color:#fff;
+  padding:10px;
+  outline:none;
 }
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
 
-.footer {
-    padding: 45px 0;
-
-    border-top: 1px solid rgba(255,255,255,.06);
-
-    color: #64758a;
-
-    font-size: 11px;
+.chat-input textarea:focus{
+  border-color:var(--purple);
 }
 
-.footer-inner {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
+.send{
+  width:100%;
+  margin-top:8px;
+  border:0;
+  border-radius:8px;
+  padding:11px;
+  background:var(--purple);
+  color:white;
+  font-size:11px;
+  font-weight:900;
 }
-
-/* =========================================================
-   TOAST
-   ========================================================= */
-
-.toast {
-    position: fixed;
-    right: 18px;
-    bottom: 18px;
-    z-index: 100;
-
-    max-width: 310px;
-
-    padding: 13px 15px;
-
-    border: 1px solid rgba(255,255,255,.09);
-    border-radius: 10px;
 
-    background: #101c27;
+/* ================= MOBILE ================= */
 
-    box-shadow: 0 15px 50px rgba(0,0,0,.3);
+@media(max-width:1050px){
+  .app{
+    grid-template-columns:230px minmax(0,1fr);
+  }
 
-    color: #dce5f1;
-
-    font-size: 11px;
-
-    opacity: 0;
-    pointer-events: none;
-
-    transform: translateY(10px);
-
-    transition: .25s ease;
+  .mentor{
+    display:none;
+  }
 }
-
-.toast.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media(max-width:700px) {
-
-    .hero {
-        padding-top: 55px;
-    }
 
-    .hero h1 {
-        letter-spacing: -2px;
-    }
+@media(max-width:700px){
+  .app{
+    display:block;
+  }
 
-    .mentor-input-area {
-        flex-direction: column;
-    }
+  .sidebar{
+    position:relative;
+    height:auto;
+    border-right:0;
+    border-bottom:1px solid var(--border);
+  }
 
-    .primary-button {
-        min-height: 44px;
-    }
+  .main{
+    padding:15px;
+  }
 
-    .workspace-header {
-        flex-direction: column;
-    }
+  .lesson-title{
+    font-size:25px;
+  }
 
-    .footer-inner {
-        flex-direction: column;
-    }
+  .topbar{
+    align-items:flex-start;
+    flex-direction:column;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================================================
-     HERO
-     ========================================================= -->
-
-<header class="hero">
-    <div class="container">
-
-        <span class="hero-badge">
-            🧠 AI CODING MENTOR
-        </span>
-
-        <h1>
-            Learn to code by
-            <span>thinking.</span>
-        </h1>
-
-        <p>
-            An interactive coding mentor that helps you understand
-            mistakes, practice concepts, find bugs and progress from
-            beginner fundamentals to advanced development.
-        </p>
-
-    </div>
-</header>
-
+<div class="app">
 
 <!-- =========================================================
-     NAVIGATION
-     ========================================================= -->
+     SIDEBAR
+========================================================= -->
 
-<nav class="quick-nav">
-    <div class="container quick-nav-inner">
+<aside class="sidebar">
 
-        <button data-scroll="mentorSection">
-            AI Mentor
+  <div class="logo">
+    <div class="logo-icon">AI</div>
+    <span>Coding Mentor</span>
+  </div>
+
+  <select id="languageSelect" class="language-select">
+    <option value="html">HTML</option>
+    <option value="css">CSS</option>
+    <option value="javascript">JavaScript</option>
+    <option value="typescript">TypeScript</option>
+    <option value="python">Python</option>
+    <option value="java">Java</option>
+    <option value="csharp">C#</option>
+    <option value="cpp">C++</option>
+    <option value="sql">SQL</option>
+  </select>
+
+  <div id="curriculum"></div>
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="main">
+
+  <div class="topbar">
+
+    <div>
+      <div class="badge" id="levelBadge">BEGINNER</div>
+      <h1 id="pageHeading">Introduction</h1>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>COURSE PROGRESS</span>
+        <span id="progressText">0%</span>
+      </div>
+
+      <div class="progress">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- LESSON -->
+
+  <section class="card">
+
+    <div class="badge" id="lessonBadge">
+      LESSON 01
+    </div>
+
+    <h2 class="lesson-title" id="lessonTitle">
+      Introduction
+    </h2>
+
+    <p class="lesson-description" id="lessonDescription"></p>
+
+    <div class="concept-box">
+      <strong>What you should understand</strong>
+      <div id="conceptText"></div>
+    </div>
+
+    <div class="code-block">
+
+      <div class="code-header">
+        <span id="codeLanguage">CODE</span>
+
+        <button class="try-btn" id="tryButton">
+          TRY IT
         </button>
+      </div>
 
-        <button data-scroll="learningSection">
-            Learning Path
-        </button>
-
-        <button data-scroll="detectiveSection">
-            Bug Detective
-        </button>
+      <pre id="lessonCode"></pre>
 
     </div>
-</nav>
+
+    <div class="action-row">
+
+      <button class="primary" id="completeButton">
+        Complete Lesson
+      </button>
+
+      <button class="secondary" id="hintButton">
+        Get Hint
+      </button>
+
+      <button class="secondary" id="nextButton">
+        Next Lesson →
+      </button>
+
+    </div>
+
+    <div id="hintBox" class="concept-box" style="display:none"></div>
+
+  </section>
+
+
+  <!-- PLAYGROUND -->
+
+  <section class="card" id="playground">
+
+    <div class="badge">
+      TRY IT YOURSELF
+    </div>
+
+    <h2>Code Playground</h2>
+
+    <p class="lesson-description">
+      Experiment with the current lesson. For web languages,
+      the preview runs directly in your browser.
+    </p>
+
+    <textarea id="editor" class="editor"></textarea>
+
+    <div class="action-row">
+
+      <button class="primary" id="runButton">
+        ▶ Run Code
+      </button>
+
+      <button class="secondary" id="analyzeButton">
+        Analyze Code
+      </button>
+
+      <button class="secondary" id="resetEditor">
+        Reset
+      </button>
+
+    </div>
+
+    <iframe id="output" class="output"></iframe>
+
+    <div id="analysisResult" class="concept-box" style="display:none"></div>
+
+  </section>
+
+
+  <!-- QUIZ -->
+
+  <section class="card">
+
+    <div class="badge">
+      ACTIVE RECALL
+    </div>
+
+    <h2>Quick Concept Check</h2>
+
+    <p id="quizQuestion"></p>
+
+    <div id="quizOptions"></div>
+
+    <div id="quizResult" class="quiz-result"></div>
+
+  </section>
+
+
+  <!-- BUG DETECTIVE -->
+
+  <section class="card">
+
+    <div class="badge">
+      BUG DETECTIVE
+    </div>
+
+    <h2 id="bugTitle">Find the Bug</h2>
+
+    <p class="lesson-description" id="bugDescription"></p>
+
+    <pre class="bug-code" id="bugCode"></pre>
+
+    <input
+      id="bugAnswer"
+      class="bug-input"
+      placeholder="What do you think is wrong?"
+    >
+
+    <div class="action-row">
+
+      <button class="primary" id="checkBug">
+        Check My Diagnosis
+      </button>
+
+      <button class="secondary" id="newBug">
+        New Case
+      </button>
+
+    </div>
+
+    <div id="bugResult" class="bug-result"></div>
+
+  </section>
+
+</main>
 
 
 <!-- =========================================================
      AI MENTOR
-     ========================================================= -->
+========================================================= -->
 
-<section class="section" id="mentorSection">
+<aside class="mentor">
 
-    <div class="container">
+  <div class="mentor-head">
 
-        <span class="section-label">
-            ASK YOUR MENTOR
-        </span>
+    <strong>🧠 AI Coding Mentor</strong>
 
-        <h2 class="section-title">
-            Don't just get the answer.
-            <br>
-            Understand why.
-        </h2>
+    <span>
+      SOCRATIC LEARNING MODE
+    </span>
 
-        <p class="section-description">
-            Ask coding questions, describe errors or paste a small
-            piece of code. The mentor changes its explanation based
-            on what you actually ask.
-        </p>
+  </div>
 
+  <div class="chat" id="chat"></div>
 
-        <div class="mentor-card">
+  <div class="chat-input">
 
-            <div class="mentor-top">
+    <textarea
+      id="chatInput"
+      placeholder="Ask about your code or lesson..."
+    ></textarea>
 
-                <div class="mentor-avatar">
-                    🧠
-                </div>
+    <button class="send" id="sendButton">
+      Ask Mentor
+    </button>
 
-                <div>
-                    <small>AI CODING MENTOR</small>
+  </div>
 
-                    <h3>
-                        What are you stuck on?
-                    </h3>
-                </div>
+</aside>
 
-            </div>
-
-
-            <div
-                class="mentor-messages"
-                id="mentorMessages"
-            >
-
-                <div class="message ai">
-                    Hi! I'm your coding mentor. Ask me about
-                    HTML, CSS, JavaScript, Java, C# or C++.
-                    I'll explain the idea first instead of
-                    immediately throwing the answer at you.
-                </div>
-
-            </div>
-
-
-            <div class="mentor-input-area">
-
-                <textarea
-                    class="mentor-input"
-                    id="mentorInput"
-                    placeholder="Example: Why does my JavaScript loop not stop?"
-                ></textarea>
-
-                <button
-                    class="primary-button"
-                    id="mentorSend"
-                    type="button"
-                >
-                    Ask Mentor
-                </button>
-
-            </div>
-
-
-            <div class="mentor-suggestions">
-
-                <button
-                    class="mentor-suggestion"
-                    type="button"
-                    data-question="Explain JavaScript variables like I'm a beginner">
-                    Explain variables
-                </button>
-
-                <button
-                    class="mentor-suggestion"
-                    type="button"
-                    data-question="Why is my CSS flexbox layout not working?">
-                    CSS layout help
-                </button>
-
-                <button
-                    class="mentor-suggestion"
-                    type="button"
-                    data-question="What is a Java class and object?">
-                    Java classes
-                </button>
-
-                <button
-                    class="mentor-suggestion"
-                    type="button"
-                    data-question="What is a pointer in C++?">
-                    C++ pointers
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     PERSONAL LEARNING PATH
-     ========================================================= -->
-
-<section class="section" id="learningSection">
-
-    <div class="container">
-
-        <span class="section-label">
-            PERSONALIZED LEARNING PATH
-        </span>
-
-        <h2 class="section-title">
-            Start simple.
-            <br>
-            <span style="color:#7968ff;">
-                Level up when you're ready.
-            </span>
-        </h2>
-
-        <p class="section-description">
-            Choose a language and work through three levels.
-            You cannot accidentally skip a level. Complete the
-            current level before the next one becomes available.
-        </p>
-
-
-        <!-- LANGUAGE BUTTONS -->
-
-        <div
-            class="language-selector"
-            id="languageSelector"
-        ></div>
-
-
-        <!-- LANGUAGE INFO -->
-
-        <div class="language-info">
-
-            <span
-                class="language-info-label"
-                id="languageLabel"
-            >
-                HTML
-            </span>
-
-            <h3 id="languageTitle">
-                Start with HTML Foundations
-            </h3>
-
-            <p id="languageDescription">
-                Learn the structure of webpages before moving
-                into advanced concepts.
-            </p>
-
-        </div>
-
-
-        <!-- LEVEL CARDS -->
-
-        <div
-            class="level-list"
-            id="levelList"
-        ></div>
-
-
-        <!-- CURRENT LESSON -->
-
-        <div
-            class="learning-workspace"
-            id="learningWorkspace"
-        >
-
-            <div class="workspace-header">
-
-                <div>
-
-                    <small id="workspaceLevel">
-                        LEVEL 1 • BEGINNER
-                    </small>
-
-                    <h3 id="lessonTitle">
-                        Loading lesson...
-                    </h3>
-
-                </div>
-
-                <span
-                    class="progress-text"
-                    id="progressText"
-                >
-                    Question 1
-                </span>
-
-            </div>
-
-
-            <p
-                class="lesson-text"
-                id="lessonText"
-            ></p>
-
-
-            <div class="code-box">
-
-                <pre id="lessonCode"></pre>
-
-            </div>
-
-
-            <div
-                class="hint-box"
-                id="hintBox"
-            ></div>
-
-
-            <div class="question-box">
-
-                <h4 id="lessonQuestion">
-                    Question
-                </h4>
-
-                <div
-                    class="question-options"
-                    id="lessonOptions"
-                ></div>
-
-            </div>
-
-
-            <div class="workspace-actions">
-
-                <button
-                    class="secondary-button"
-                    id="hintButton"
-                    type="button"
-                >
-                    💡 Show Hint
-                </button>
-
-                <button
-                    class="secondary-button"
-                    id="newQuestionButton"
-                    type="button"
-                >
-                    🔄 New Question
-                </button>
-
-                <button
-                    class="primary-button"
-                    id="startLevelButton"
-                    type="button"
-                    style="min-height:40px;"
-                >
-                    Start Here →
-                </button>
-
-            </div>
-
-
-            <div
-                class="feedback"
-                id="learningFeedback"
-            ></div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     BUG DETECTIVE
-     ========================================================= -->
-
-<section class="section" id="detectiveSection">
-
-    <div class="container">
-
-        <span class="section-label">
-            PRACTICE MODE
-        </span>
-
-        <h2 class="section-title">
-            Become the
-            <span style="color:#8b7cff;">
-                Bug Detective.
-            </span>
-        </h2>
-
-        <p class="section-description">
-            Every case is randomly selected from a pool of
-            different bugs. Find the problem, explain why it
-            happens and then check the mentor's explanation.
-        </p>
-
-
-        <div class="detective-card">
-
-            <div class="detective-header">
-
-                <div class="detective-icon">
-                    🔎
-                </div>
-
-                <div>
-
-                    <small>
-                        BUG DETECTIVE
-                    </small>
-
-                    <h3 id="caseTitle">
-                        Loading case...
-                    </h3>
-
-                </div>
-
-            </div>
-
-
-            <div class="case-meta">
-
-                <span
-                    class="case-tag"
-                    id="caseLanguage"
-                >
-                    JavaScript
-                </span>
-
-                <span
-                    class="case-tag"
-                    id="caseDifficulty"
-                >
-                    Beginner
-                </span>
-
-                <span
-                    class="case-tag"
-                    id="caseNumber"
-                >
-                    Case #1
-                </span>
-
-            </div>
-
-
-            <p
-                class="case-description"
-                id="caseDescription"
-            ></p>
-
-
-            <div class="bug-code">
-
-                <pre id="bugCode"></pre>
-
-            </div>
-
-
-            <div class="detective-actions">
-
-                <button
-                    class="primary-button"
-                    id="showCaseAnswer"
-                    type="button"
-                    style="min-height:40px;"
-                >
-                    Reveal Explanation
-                </button>
-
-                <button
-                    class="secondary-button"
-                    id="nextCase"
-                    type="button"
-                >
-                    Next Case →
-                </button>
-
-            </div>
-
-
-            <div
-                class="case-answer"
-                id="caseAnswer"
-            ></div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     FOOTER
-     ========================================================= -->
-
-<footer class="footer">
-
-    <div class="container footer-inner">
-
-        <div>
-            <strong style="color:#b8c4d4;">
-                AI Mentor
-            </strong>
-            <br>
-            Learn. Practice. Understand.
-        </div>
-
-        <div>
-            Interactive coding education
-        </div>
-
-    </div>
-
-</footer>
-
-
-<!-- TOAST -->
-
-<div
-    class="toast"
-    id="toast"
-></div>
+</div>
 
 
 <script>
 /* =========================================================
-   AI MENTOR — LOCAL SMART RESPONSE ENGINE
-   ========================================================= */
+   CONFIGURATION
+========================================================= */
 
-(function () {
+/*
+  Replace this with your deployed Google Apps Script
+  /exec URL.
 
-    "use strict";
+  Example:
+  https://script.google.com/macros/s/XXXXXXXX/exec
+*/
+const BACKEND_URL =
+  "PASTE_YOUR_GOOGLE_APPS_SCRIPT_EXEC_URL_HERE";
 
 
-    /* =====================================================
-       DATA
-       ===================================================== */
-
-    const languages = {
-
-        html: {
-            name: "HTML",
-            icon: "🌐",
-            description:
-                "Learn how webpages are structured, then progress into semantic HTML and accessibility.",
-
-            levels: [
-
-                {
-                    name: "Foundations",
-                    difficulty: "BEGINNER",
-                    description:
-                        "Understand the basic building blocks of a webpage.",
-
-                    concepts: [
-                        "Elements",
-                        "Tags",
-                        "Attributes",
-                        "Links",
-                        "Images"
-                    ],
-
-                    lessons: [
-                        {
-                            title: "Understanding HTML elements",
-                            text:
-                                "HTML elements describe what each part of a webpage means. A heading, paragraph and link are all different elements.",
-
-                            code:
-`<h1>Hello World</h1>
-<p>This is my webpage.</p>`,
-
-                            question:
-                                "Which HTML element is normally used for the main heading?",
-
-                            answers: [
-                                ["<h1>", "correct"],
-                                ["<p>", "wrong"],
-                                ["<link>", "wrong"],
-                                ["<img>", "wrong"]
-                            ],
-
-                            hint:
-                                "Think about the number 1 in the heading element.",
-
-                            explanation:
-                                "<h1> represents the highest-level heading in a normal HTML document."
-                        },
-
-                        {
-                            title: "HTML attributes",
-                            text:
-                                "Attributes provide extra information about an HTML element.",
-
-                            code:
-`<a href="https://example.com">
-    Visit site
-</a>`,
-
-                            question:
-                                "Which attribute tells an anchor where the link should go?",
-
-                            answers: [
-                                ["href", "correct"],
-                                ["src", "wrong"],
-                                ["alt", "wrong"],
-                                ["class", "wrong"]
-                            ],
-
-                            hint:
-                                "It is short for a phrase meaning 'hypertext reference'.",
-
-                            explanation:
-                                "The href attribute specifies the destination of an anchor link."
-                        },
-
-                        {
-                            title: "Images and alternative text",
-                            text:
-                                "The alt attribute gives an image a text description.",
-
-                            code:
-`<img
-    src="cat.jpg"
-    alt="A sleeping cat"
->`,
-
-                            question:
-                                "Why is alt text useful?",
-
-                            answers: [
-                                [
-                                    "It describes the image",
-                                    "correct"
-                                ],
-                                [
-                                    "It changes the image size",
-                                    "wrong"
-                                ],
-                                [
-                                    "It creates JavaScript",
-                                    "wrong"
-                                ],
-                                [
-                                    "It adds a database",
-                                    "wrong"
-                                ]
-                            ],
-
-                            hint:
-                                "Think about what a screen reader needs when it encounters an image.",
-
-                            explanation:
-                                "Alternative text provides a text description for users who cannot see the image."
-                        }
-                    ]
-                },
-
-                {
-                    name: "Core Skills",
-                    difficulty: "INTERMEDIATE",
-                    description:
-                        "Use semantic structure, forms and accessibility practices.",
-
-                    concepts: [
-                        "Semantic HTML",
-                        "Forms",
-                        "Labels",
-                        "Accessibility",
-                        "Page structure"
-                    ],
-
-                    lessons: [
-                        {
-                            title: "Semantic elements",
-                            text:
-                                "Semantic elements communicate the meaning of a section to browsers, developers and assistive technologies.",
-
-                            code:
-`<header>
-    <h1>My Site</h1>
-</header>
-
-<main>
-    <p>Content</p>
-</main>`,
-
-                            question:
-                                "Which element is intended for the main content of a page?",
-
-                            answers: [
-                                ["<main>", "correct"],
-                                ["<style>", "wrong"],
-                                ["<script>", "wrong"],
-                                ["<meta>", "wrong"]
-                            ],
-
-                            hint:
-                                "The element's name describes exactly what it contains.",
-
-                            explanation:
-                                "The <main> element represents the dominant content of the document."
-                        },
-
-                        {
-                            title: "Accessible forms",
-                            text:
-                                "Form controls should have meaningful labels so users understand what information they should enter.",
-
-                            code:
-`<label for="email">
-    Email
-</label>
-
-<input id="email" type="email">`,
-
-                            question:
-                                "Which attribute connects the label to the input?",
-
-                            answers: [
-                                ["for + id", "correct"],
-                                ["src + alt", "wrong"],
-                                ["href + src", "wrong"],
-                                ["name + class", "wrong"]
-                            ],
-
-                            hint:
-                                "The value of the label's for attribute should match something on the input.",
-
-                            explanation:
-                                "The label's for value should match the input's id."
-                        }
-                    ]
-                },
-
-                {
-                    name: "Advanced Development",
-                    difficulty: "ADVANCED",
-                    description:
-                        "Move toward professional HTML architecture and accessibility.",
-
-                    concepts: [
-                        "Accessibility",
-                        "SEO",
-                        "Metadata",
-                        "Web components",
-                        "Advanced forms"
-                    ],
-
-                    lessons: [
-                        {
-                            title: "Accessible page structure",
-                            text:
-                                "Professional HTML uses meaningful structure so both people and machines can understand the page.",
-
-                            code:
-`<header>...</header>
-
-<nav>...</nav>
-
-<main>
-    <article>...</article>
-</main>
-
-<footer>...</footer>`,
-
-                            question:
-                                "Why is semantic structure valuable?",
-
-                            answers: [
-                                [
-                                    "It communicates meaning",
-                                    "correct"
-                                ],
-                                [
-                                    "It automatically creates CSS",
-                                    "wrong"
-                                ],
-                                [
-                                    "It replaces JavaScript",
-                                    "wrong"
-                                ],
-                                [
-                                    "It makes every site faster",
-                                    "wrong"
-                                ]
-                            ],
-
-                            hint:
-                                "Think about meaning rather than appearance.",
-
-                            explanation:
-                                "Semantic HTML communicates the role and meaning of content."
-                        }
-                    ]
-                }
-
-            ]
-        },
-
-
-        css: {
-
-            name: "CSS",
-            icon: "🎨",
-
-            description:
-                "Learn styling from selectors and the box model through responsive layouts and advanced CSS.",
-
-            levels: [
-
-                {
-                    name: "Foundations",
-                    difficulty: "BEGINNER",
-                    description:
-                        "Learn how CSS selects and styles HTML elements.",
-
-                    concepts: [
-                        "Selectors",
-                        "Colors",
-                        "Fonts",
-                        "Box model",
-                        "Spacing"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "CSS selectors",
-                            text:
-                                "Selectors determine which HTML elements receive a style.",
-
-                            code:
-`.title {
-    color: blue;
-}`,
-
-                            question:
-                                "What does .title select?",
-
-                            answers: [
-                                [
-                                    "An element with class='title'",
-                                    "correct"
-                                ],
-                                [
-                                    "An element named title",
-                                    "wrong"
-                                ],
-                                [
-                                    "Every heading",
-                                    "wrong"
-                                ],
-                                [
-                                    "An element with id='title'",
-                                    "wrong"
-                                ]
-                            ],
-
-                            hint:
-                                "A dot is used for a class selector.",
-
-                            explanation:
-                                "The .title selector targets elements whose class contains title."
-                        },
-
-                        {
-                            title: "The box model",
-                            text:
-                                "Every normal HTML element can be thought of as a box containing content, padding, border and margin.",
-
-                            code:
-`.card {
-    padding: 20px;
-    margin: 10px;
-}`,
-
-                            question:
-                                "Which property creates space inside an element?",
-
-                            answers: [
-                                ["padding", "correct"],
-                                ["margin", "wrong"],
-                                ["border", "wrong"],
-                                ["outline", "wrong"]
-                            ],
-
-                            hint:
-                                "Inside = padding. Outside = margin.",
-
-                            explanation:
-                                "Padding creates space between the content and the element's border."
-                        }
-                    ]
-                },
-
-                {
-                    name: "Core Skills",
-                    difficulty: "INTERMEDIATE",
-                    description:
-                        "Build layouts using Flexbox, Grid and responsive techniques.",
-
-                    concepts: [
-                        "Flexbox",
-                        "Grid",
-                        "Media queries",
-                        "Responsive design",
-                        "Positioning"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "Flexbox basics",
-                            text:
-                                "Flexbox is designed for arranging items along a flexible row or column.",
-
-                            code:
-`.container {
-    display: flex;
-    justify-content: center;
-}`,
-
-                            question:
-                                "What does justify-content control in a row flex container?",
-
-                            answers: [
-                                [
-                                    "Main-axis alignment",
-                                    "correct"
-                                ],
-                                [
-                                    "Font size",
-                                    "wrong"
-                                ],
-                                [
-                                    "Border thickness",
-                                    "wrong"
-                                ],
-                                [
-                                    "HTML semantics",
-                                    "wrong"
-                                ]
-                            ],
-
-                            hint:
-                                "In the default row direction, the main axis is horizontal.",
-
-                            explanation:
-                                "justify-content controls distribution and alignment along the flex container's main axis."
-                        }
-                    ]
-                },
-
-                {
-                    name: "Advanced Development",
-                    difficulty: "ADVANCED",
-                    description:
-                        "Use scalable CSS architecture, advanced layouts and animation.",
-
-                    concepts: [
-                        "CSS architecture",
-                        "Animations",
-                        "Custom properties",
-                        "Advanced Grid",
-                        "Performance"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "CSS custom properties",
-                            text:
-                                "Custom properties let you define reusable values that can be changed from one place.",
-
-                            code:
-`:root {
-    --brand: #7565ff;
-}
-
-.button {
-    background: var(--brand);
-}`,
-
-                            question:
-                                "Which syntax reads a CSS custom property?",
-
-                            answers: [
-                                ["var(--brand)", "correct"],
-                                ["get(--brand)", "wrong"],
-                                ["css(--brand)", "wrong"],
-                                ["value(--brand)", "wrong"]
-                            ],
-
-                            hint:
-                                "The function starts with three letters.",
-
-                            explanation:
-                                "The var() function reads the value stored in a CSS custom property."
-                        }
-                    ]
-                }
-            ]
-        },
-
-
-        javascript: {
-
-            name: "JavaScript",
-            icon: "⚡",
-
-            description:
-                "Progress from programming fundamentals to DOM manipulation, asynchronous code and APIs.",
-
-            levels: [
-
-                {
-                    name: "Foundations",
-                    difficulty: "BEGINNER",
-                    description:
-                        "Learn variables, values, conditions and functions.",
-
-                    concepts: [
-                        "Variables",
-                        "Types",
-                        "Conditions",
-                        "Functions",
-                        "Loops"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "JavaScript variables",
-                            text:
-                                "Variables allow your program to store values that it can use later.",
-
-                            code:
-`let name = "Alex";
-
-let age = 18;`,
-
-                            question:
-                                "Which keyword creates a variable that can be reassigned?",
-
-                            answers: [
-                                ["let", "correct"],
-                                ["const", "wrong"],
-                                ["html", "wrong"],
-                                ["style", "wrong"]
-                            ],
-
-                            hint:
-                                "It has only three letters and is commonly used for changing values.",
-
-                            explanation:
-                                "let creates a block-scoped variable that can be reassigned."
-                        },
-
-                        {
-                            title: "Conditions",
-                            text:
-                                "An if statement allows code to run only when a condition is true.",
-
-                            code:
-`if (age >= 18) {
-    console.log("Adult");
-}`,
-
-                            question:
-                                "When does the code inside the if block run?",
-
-                            answers: [
-                                [
-                                    "When the condition is true",
-                                    "correct"
-                                ],
-                                [
-                                    "Always",
-                                    "wrong"
-                                ],
-                                [
-                                    "Only when the page loads",
-                                    "wrong"
-                                ],
-                                [
-                                    "Only after a CSS animation",
-                                    "wrong"
-                                ]
-                            ],
-
-                            hint:
-                                "The word if means 'under this condition'.",
-
-                            explanation:
-                                "The block executes when the expression inside the parentheses evaluates to true."
-                        },
-
-                        {
-                            title: "Functions",
-                            text:
-                                "Functions group reusable instructions into a callable unit.",
-
-                            code:
-`function greet(name) {
-    return "Hello " + name;
-}`,
-
-                            question:
-                                "Why are functions useful?",
-
-                            answers: [
-                                [
-                                    "They package reusable logic",
-                                    "correct"
-                                ],
-                                [
-                                    "They replace HTML",
-                                    "wrong"
-                                ],
-                                [
-                                    "They only change colors",
-                                    "wrong"
-                                ],
-                                [
-                                    "They create databases automatically",
-                                    "wrong"
-                                ]
-                            ],
-
-                            hint:
-                                "Think about avoiding the same code in many places.",
-
-                            explanation:
-                                "Functions allow you to organize and reuse logic."
-                        }
-                    ]
-                },
-
-                {
-                    name: "Core Skills",
-                    difficulty: "INTERMEDIATE",
-                    description:
-                        "Work with arrays, objects, the DOM and browser events.",
-
-                    concepts: [
-                        "Arrays",
-                        "Objects",
-                        "DOM",
-                        "Events",
-                        "Callbacks"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "DOM selection",
-                            text:
-                                "JavaScript can select HTML elements and change them dynamically.",
-
-                            code:
-`const title =
-    document.querySelector("h1");
-
-title.textContent =
-    "Updated";`,
-
-                            question:
-                                "What does querySelector return?",
-
-                            answers: [
-                                [
-                                    "The first matching element",
-                                    "correct"
-                                ],
-                                [
-                                    "Every element on the page",
-                                    "wrong"
-                                ],
-                                [
-                                    "A CSS file",
-                                    "wrong"
-                                ],
-                                [
-                                    "A JavaScript server",
-                                    "wrong"
-                                ]
-                            ],
-
-                            hint:
-                                "The word 'first' is important here.",
-
-                            explanation:
-                                "querySelector returns the first element matching the supplied CSS selector."
-                        },
-
-                        {
-                            title: "Event listeners",
-                            text:
-                                "Events let JavaScript respond to actions such as clicks.",
-
-                            code:
-`button.addEventListener(
-    "click",
-    function () {
-        console.log("Clicked");
-    }
-);`,
-
-                            question:
-                                "What event is being listened for?",
-
-                            answers: [
-                                ["click", "correct"],
-                                ["hovering", "wrong"],
-                                ["pressing", "wrong"],
-                                ["style", "wrong"]
-                            ],
-
-                            hint:
-                                "Look at the first string passed to addEventListener.",
-
-                            explanation:
-                                "The listener runs when the element receives a click event."
-                        }
-                    ]
-                },
-
-                {
-                    name: "Advanced Development",
-                    difficulty: "ADVANCED",
-                    description:
-                        "Understand asynchronous programming, modules and APIs.",
-
-                    concepts: [
-                        "Promises",
-                        "async/await",
-                        "Fetch",
-                        "Modules",
-                        "APIs"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "Async and await",
-                            text:
-                                "async/await provides a readable way to work with promises.",
-
-                            code:
-`async function loadData() {
-
-    const response =
-        await fetch("/api/data");
-
-    return response.json();
-}`,
-
-                            question:
-                                "What does await do inside an async function?",
-
-                            answers: [
-                                [
-                                    "Waits for a promise to settle",
-                                    "correct"
-                                ],
-                                [
-                                    "Stops the browser forever",
-                                    "wrong"
-                                ],
-                                [
-                                    "Creates CSS",
-                                    "wrong"
-                                ],
-                                [
-                                    "Deletes the promise",
-                                    "wrong"
-                                ]
-                            ],
-
-                            hint:
-                                "Think about asynchronous work finishing before continuing.",
-
-                            explanation:
-                                "await pauses the async function until the awaited promise settles."
-                        }
-                    ]
-                }
-            ]
-        },
-
-
-        java: {
-
-            name: "Java",
-            icon: "☕",
-
-            description:
-                "Build Java fundamentals and progress toward object-oriented and advanced programming.",
-
-            levels: [
-
-                {
-                    name: "Foundations",
-                    difficulty: "BEGINNER",
-                    description:
-                        "Learn variables, types, conditions and loops.",
-
-                    concepts: [
-                        "Variables",
-                        "Types",
-                        "Conditions",
-                        "Loops",
-                        "Methods"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "Java integer variables",
-                            text:
-                                "Java variables have explicit types. int is commonly used for whole numbers.",
-
-                            code:
-`int age = 18;
-
-System.out.println(age);`,
-
-                            question:
-                                "Which Java type is commonly used for whole numbers?",
-
-                            answers: [
-                                ["int", "correct"],
-                                ["String", "wrong"],
-                                ["boolean", "wrong"],
-                                ["double", "wrong"]
-                            ],
-
-                            hint:
-                                "It is a short word related to integer.",
-
-                            explanation:
-                                "int stores signed whole-number values."
-                        },
-
-                        {
-                            title: "Java conditions",
-                            text:
-                                "Java uses if statements to execute code conditionally.",
-
-                            code:
-`if (age >= 18) {
-    System.out.println("Adult");
-}`,
-
-                            question:
-                                "What determines whether the if block runs?",
-
-                            answers: [
-                                [
-                                    "The condition",
-                                    "correct"
-                                ],
-                                [
-                                    "The variable name",
-                                    "wrong"
-                                ],
-                                [
-                                    "The class name",
-                                    "wrong"
-                                ],
-                                [
-                                    "The file extension",
-                                    "wrong"
-                                ]
-                            ],
-
-                            hint:
-                                "Look inside the parentheses.",
-
-                            explanation:
-                                "The boolean expression inside the if statement controls whether its block executes."
-                        }
-                    ]
-                },
-
-                {
-                    name: "Core Skills",
-                    difficulty: "INTERMEDIATE",
-                    description:
-                        "Learn classes, objects, methods and collections.",
-
-                    concepts: [
-                        "Classes",
-                        "Objects",
-                        "Methods",
-                        "Arrays",
-                        "Collections"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "Classes and objects",
-                            text:
-                                "A class describes a type while an object is an instance created from that class.",
-
-                            code:
-`class Student {
-    String name;
-}
-
-Student s =
-    new Student();`,
-
-                            question:
-                                "What does new Student() create?",
-
-                            answers: [
-                                [
-                                    "An object",
-                                    "correct"
-                                ],
-                                [
-                                    "A package",
-                                    "wrong"
-                                ],
-                                [
-                                    "A loop",
-                                    "wrong"
-                                ],
-                                [
-                                    "A primitive type",
-                                    "wrong"
-                                ]
-                            ],
-
-                            hint:
-                                "It creates an instance of the class.",
-
-                            explanation:
-                                "new Student() creates an instance of the Student class."
-                        }
-                    ]
-                },
-
-                {
-                    name: "Advanced Development",
-                    difficulty: "ADVANCED",
-                    description:
-                        "Move into collections, streams, exceptions and concurrency.",
-
-                    concepts: [
-                        "Collections",
-                        "Streams",
-                        "Exceptions",
-                        "Generics",
-                        "Concurrency"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "Handling exceptions",
-                            text:
-                                "Exceptions represent unusual conditions that a program may need to handle.",
-
-                            code:
-`try {
-    riskyOperation();
-}
-catch (Exception e) {
-    e.printStackTrace();
-}`,
-
-                            question:
-                                "Which block handles an exception?",
-
-                            answers: [
-                                ["catch", "correct"],
-                                ["try", "wrong"],
-                                ["class", "wrong"],
-                                ["main", "wrong"]
-                            ],
-
-                            hint:
-                                "The word describes what happens when something goes wrong.",
-
-                            explanation:
-                                "A catch block handles an exception thrown from the corresponding try block."
-                        }
-                    ]
-                }
-            ]
-        },
-
-
-        csharp: {
-
-            name: "C#",
-            icon: "💠",
-
-            description:
-                "Learn C# fundamentals and move toward object-oriented programming and modern .NET development.",
-
-            levels: [
-
-                {
-                    name: "Foundations",
-                    difficulty: "BEGINNER",
-                    description:
-                        "Understand variables, types, conditions and loops.",
-
-                    concepts: [
-                        "Variables",
-                        "Types",
-                        "Conditions",
-                        "Loops",
-                        "Methods"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "Boolean values",
-                            text:
-                                "C# uses bool for values that can be either true or false.",
-
-                            code:
-`bool isLoggedIn = true;
-
-Console.WriteLine(isLoggedIn);`,
-
-                            question:
-                                "Which C# type stores true or false?",
-
-                            answers: [
-                                ["bool", "correct"],
-                                ["int", "wrong"],
-                                ["string", "wrong"],
-                                ["double", "wrong"]
-                            ],
-
-                            hint:
-                                "The type is a shortened form of the word boolean.",
-
-                            explanation:
-                                "bool represents a Boolean value: true or false."
-                        },
-
-                        {
-                            title: "C# strings",
-                            text:
-                                "Strings represent sequences of characters.",
-
-                            code:
-`string name = "Alex";
-
-Console.WriteLine(name);`,
-
-                            question:
-                                "Which type stores text in C#?",
-
-                            answers: [
-                                ["string", "correct"],
-                                ["int", "wrong"],
-                                ["bool", "wrong"],
-                                ["char[] only", "wrong"]
-                            ],
-
-                            hint:
-                                "The type name describes what it stores.",
-
-                            explanation:
-                                "string is the common C# type used for text."
-                        }
-                    ]
-                },
-
-                {
-                    name: "Core Skills",
-                    difficulty: "INTERMEDIATE",
-                    description:
-                        "Build object-oriented programs with classes, methods and collections.",
-
-                    concepts: [
-                        "Classes",
-                        "Objects",
-                        "Methods",
-                        "Collections",
-                        "Interfaces"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "C# classes",
-                            text:
-                                "Classes define the structure and behavior of objects.",
-
-                            code:
-`class Student
-{
-    public string Name;
-}
-
-Student s =
-    new Student();`,
-
-                            question:
-                                "What does new Student() create?",
-
-                            answers: [
-                                ["An object", "correct"],
-                                ["A namespace", "wrong"],
-                                ["A method", "wrong"],
-                                ["A loop", "wrong"]
-                            ],
-
-                            hint:
-                                "It creates an instance from the class.",
-
-                            explanation:
-                                "new Student() creates a Student object."
-                        }
-                    ]
-                },
-
-                {
-                    name: "Advanced Development",
-                    difficulty: "ADVANCED",
-                    description:
-                        "Explore generics, LINQ, asynchronous programming and architecture.",
-
-                    concepts: [
-                        "LINQ",
-                        "Generics",
-                        "Async",
-                        "Tasks",
-                        "Architecture"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "Asynchronous C#",
-                            text:
-                                "async and await make asynchronous operations easier to express.",
-
-                            code:
-`async Task LoadData()
-{
-    var result =
-        await GetDataAsync();
-}`,
-
-                            question:
-                                "What does await work with?",
-
-                            answers: [
-                                ["An asynchronous operation", "correct"],
-                                ["A CSS selector", "wrong"],
-                                ["An HTML element", "wrong"],
-                                ["A database table only", "wrong"]
-                            ],
-
-                            hint:
-                                "Think about Task-based asynchronous programming.",
-
-                            explanation:
-                                "await waits asynchronously for the awaited operation to complete."
-                        }
-                    ]
-                }
-            ]
-        },
-
-
-        cpp: {
-
-            name: "C++",
-            icon: "⚙️",
-
-            description:
-                "Learn C++ fundamentals and gradually move toward memory, OOP, STL and modern C++.",
-
-            levels: [
-
-                {
-                    name: "Foundations",
-                    difficulty: "BEGINNER",
-                    description:
-                        "Learn variables, types, conditions and loops.",
-
-                    concepts: [
-                        "Variables",
-                        "Types",
-                        "Conditions",
-                        "Loops",
-                        "Functions"
-                    ],
-
-        lessons: [
-
-                        {
-                            title: "C++ integer variables",
-                            text:
-                                "C++ uses int for commonly used whole-number values.",
-
-                            code:
-`int age = 18;
-
-cout << age;`,
-
-                            question:
-                                "Which C++ type is commonly used for whole numbers?",
-
-                            answers: [
-                                ["int", "correct"],
-                                ["string", "wrong"],
-                                ["bool", "wrong"],
-                                ["double only", "wrong"]
-                            ],
-
-                            hint:
-                                "The type name is short for integer.",
-
-                            explanation:
-                                "int is commonly used for signed whole-number values."
-                        },
-
-                        {
-                            title: "C++ functions",
-                            text:
-                                "Functions group reusable instructions.",
-
-                            code:
-`int add(int a, int b)
-{
-    return a + b;
-}`,
-
-                            question:
-                                "What does this function return?",
-
-                            answers: [
-                                ["An integer", "correct"],
-                                ["A CSS rule", "wrong"],
-                                ["An HTML element", "wrong"],
-                                ["A Boolean only", "wrong"]
-                            ],
-
-                            hint:
-                                "Look at the type before the function name.",
-
-                            explanation:
-                                "The function's declared return type is int."
-                        }
-                    ]
-                },
-
-                {
-                    name: "Core Skills",
-                    difficulty: "INTERMEDIATE",
-                    description:
-                        "Move into classes, objects, arrays and pointers.",
-
-                    concepts: [
-                        "Classes",
-                        "Objects",
-                        "Pointers",
-                        "References",
-                        "Arrays"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "C++ pointers",
-                            text:
-                                "A pointer stores the address of another object.",
-
-                            code:
-`int age = 18;
-
-int* ptr = &age;`,
-
-                            question:
-                                "What does ptr store here?",
-
-                            answers: [
-                                [
-                                    "The address of age",
-                                    "correct"
-                                ],
-                                [
-                                    "The CSS of age",
-                                    "wrong"
-                                ],
-                                [
-                                    "The HTML of age",
-                                    "wrong"
-                                ],
-                                [
-                                    "A random string",
-                                    "wrong"
-                                ]
-                            ],
-
-                            hint:
-                                "The & operator is taking an address.",
-
-                            explanation:
-                                "ptr contains the address of age."
-                        }
-                    ]
-                },
-
-                {
-                    name: "Advanced Development",
-                    difficulty: "ADVANCED",
-                    description:
-                        "Work with the STL, templates, memory and modern C++ features.",
-
-                    concepts: [
-                        "STL",
-                        "Templates",
-                        "Smart pointers",
-                        "Memory",
-                        "Modern C++"
-                    ],
-
-                    lessons: [
-
-                        {
-                            title: "C++ vectors",
-                            text:
-                                "std::vector is a dynamic sequence container provided by the standard library.",
-
-                            code:
-`std::vector<int> numbers;
-
-numbers.push_back(10);
-numbers.push_back(20);`,
-
-                            question:
-                                "What does push_back do?",
-
-                            answers: [
-                                [
-                                    "Adds an element to the vector",
-                                    "correct"
-                                ],
-                                [
-                                    "Deletes the vector",
-                                    "wrong"
-                                ],
-                                [
-                                    "Creates a pointer",
-                                    "wrong"
-                                ],
-                                [
-                                    "Compiles the program",
-                                    "wrong"
-                                ]
-                            ],
-
-                            hint:
-                                "The name suggests placing something at the end.",
-
-                            explanation:
-                                "push_back adds a new element to the end of a vector."
-                        }
-                    ]
-                }
-            ]
-        }
-
-    };
-
-
-   <!-- =========================================================
-     BUG DETECTIVE — COMPLETE REPLACEMENT
-     Replace ONLY your existing Bug Detective section with this.
-     ========================================================= -->
-
-<style>
 /* =========================================================
-   BUG DETECTIVE
-   ========================================================= */
-
-.bug-detective {
-    width: 100%;
-    padding: 70px 0;
-}
-
-.bug-detective-container {
-    width: min(1050px, calc(100% - 30px));
-    margin: 0 auto;
-}
-
-/* HEADER */
-
-.bug-detective-header {
-    max-width: 760px;
-    margin-bottom: 28px;
-}
-
-.bug-detective-label {
-    display: inline-block;
-    margin-bottom: 10px;
-    color: #8b7cff;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-}
-
-.bug-detective-header h2 {
-    margin: 0;
-    color: #f4f7ff;
-    font-size: clamp(30px, 5vw, 48px);
-    line-height: 1.1;
-    letter-spacing: -1.5px;
-}
-
-.bug-detective-header h2 strong {
-    color: #8b7cff;
-}
-
-.bug-detective-header p {
-    max-width: 680px;
-    margin-top: 14px;
-    color: #8f9db3;
-    font-size: 13px;
-    line-height: 1.7;
-}
-
-/* TOP CONTROLS */
-
-.bug-controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 15px;
-}
-
-.bug-language {
-    padding: 9px 13px;
-    border: 1px solid #26344f;
-    border-radius: 8px;
-    background: #0d1424;
-    color: #8f9db3;
-    font-size: 11px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: .2s ease;
-}
-
-.bug-language:hover {
-    border-color: #8b7cff;
-    color: #fff;
-}
-
-.bug-language.active {
-    border-color: #8b7cff;
-    background: rgba(139,124,255,.12);
-    color: #fff;
-}
-
-/* STATS */
-
-.bug-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.bug-stat {
-    padding: 15px;
-    border: 1px solid rgba(255,255,255,.07);
-    border-radius: 10px;
-    background: #0d1424;
-}
-
-.bug-stat small {
-    display: block;
-    color: #647188;
-    font-size: 8px;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-.bug-stat strong {
-    display: block;
-    margin-top: 5px;
-    color: #f4f7ff;
-    font-size: 19px;
-}
-
-/* MAIN CARD */
-
-.bug-card {
-    overflow: hidden;
-    border: 1px solid rgba(139,124,255,.23);
-    border-radius: 16px;
-
-    background:
-        radial-gradient(
-            circle at 100% 0%,
-            rgba(112,92,255,.10),
-            transparent 35%
-        ),
-        #0b151c;
-}
-
-/* CARD TOP */
-
-.bug-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-
-    padding: 20px 22px;
-
-    border-bottom: 1px solid rgba(255,255,255,.06);
-}
-
-.bug-case-title {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-}
-
-.bug-icon {
-    width: 42px;
-    height: 42px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 10px;
-
-    background: rgba(139,124,255,.12);
-
-    font-size: 20px;
-}
-
-.bug-case-title small {
-    display: block;
-    color: #8f86d9;
-    font-size: 8px;
-    font-weight: 800;
-    letter-spacing: 1.2px;
-}
-
-.bug-case-title h3 {
-    margin: 4px 0 0;
-    color: #f4f7ff;
-    font-size: 16px;
-}
-
-.bug-difficulty {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.bug-difficulty span {
-    color: #69778c;
-    font-size: 8px;
-    font-weight: 800;
-}
-
-.bug-difficulty i {
-    width: 7px;
-    height: 17px;
-    display: block;
-    border-radius: 2px;
-    background: #26344f;
-}
-
-/* BODY */
-
-.bug-body {
-    padding: 22px;
-}
-
-.bug-description {
-    margin: 0 0 15px;
-    color: #9da9c2;
-    font-size: 12px;
-    line-height: 1.7;
-}
-
-/* CODE */
-
-.bug-code-wrapper {
-    overflow: auto;
-
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 10px;
-
-    background: #060b12;
-}
-
-.bug-code-header {
-    display: flex;
-    justify-content: space-between;
-
-    padding: 9px 13px;
-
-    border-bottom: 1px solid rgba(255,255,255,.06);
-
-    color: #647188;
-    font-size: 9px;
-    font-weight: 700;
-}
-
-.bug-code {
-    margin: 0;
-    padding: 18px;
-
-    color: #d4dbe6;
-
-    font-family:
-        Consolas,
-        Monaco,
-        "Courier New",
-        monospace;
-
-    font-size: 12px;
-    line-height: 1.75;
-
-    white-space: pre;
-}
-
-/* QUESTION */
-
-.bug-question {
-    margin-top: 17px;
-    color: #f4f7ff;
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.bug-input {
-    width: 100%;
-    min-height: 100px;
-
-    box-sizing: border-box;
-
-    margin-top: 10px;
-    padding: 13px;
-
-    resize: vertical;
-
-    border: 1px solid #26344f;
-    border-radius: 9px;
-
-    outline: none;
-
-    background: #080f1b;
-
-    color: #f4f7ff;
-
-    font-family:
-        Consolas,
-        Monaco,
-        monospace;
-
-    font-size: 12px;
-
-    transition: .2s ease;
-}
-
-.bug-input:focus {
-    border-color: rgba(139,124,255,.65);
-}
-
-/* BUTTONS */
-
-.bug-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-
-    margin-top: 12px;
-}
-
-.bug-button {
-    padding: 10px 15px;
-
-    border: 1px solid #26344f;
-    border-radius: 8px;
-
-    background: #0d1424;
-
-    color: #9da9c2;
-
-    font-size: 10px;
-    font-weight: 800;
-
-    cursor: pointer;
-
-    transition: .2s ease;
-}
-
-.bug-button:hover {
-    transform: translateY(-1px);
-    border-color: #8b7cff;
-    color: #fff;
-}
-
-.bug-button.primary {
-    border-color: #8b7cff;
-    background: #8b7cff;
-    color: #080711;
-}
-
-.bug-button.primary:hover {
-    opacity: .9;
-}
-
-/* HINT */
-
-.bug-hint {
-    display: none;
-
-    margin-top: 13px;
-    padding: 13px;
-
-    border: 1px solid rgba(139,124,255,.18);
-    border-radius: 9px;
-
-    background: rgba(139,124,255,.05);
-
-    color: #a9b3c5;
-
-    font-size: 11px;
-    line-height: 1.6;
-}
-
-.bug-hint.show {
-    display: block;
-}
-
-.bug-hint strong {
-    color: #a69dff;
-}
-
-/* RESULT */
-
-.bug-result {
-    display: none;
-
-    margin-top: 15px;
-    padding: 16px;
-
-    border-radius: 10px;
-
-    font-size: 11px;
-    line-height: 1.7;
-}
-
-.bug-result.show {
-    display: block;
-}
-
-.bug-result.correct {
-    border: 1px solid rgba(50,213,131,.20);
-    background: rgba(50,213,131,.05);
-    color: #8de3b0;
-}
-
-.bug-result.wrong {
-    border: 1px solid rgba(255,92,114,.20);
-    background: rgba(255,92,114,.05);
-    color: #ff9aa7;
-}
-
-.bug-result-title {
-    margin-bottom: 5px;
-    font-weight: 800;
-}
-
-.bug-explanation {
-    color: inherit;
-}
-
-/* NEXT CASE */
-
-.bug-next {
-    display: none;
-
-    margin-top: 12px;
-
-    padding: 10px 15px;
-
-    border: none;
-    border-radius: 8px;
-
-    background: #38d3b4;
-
-    color: #06100d;
-
-    font-size: 10px;
-    font-weight: 800;
-
-    cursor: pointer;
-}
-
-.bug-next.show {
-    display: inline-block;
-}
-
-/* COMPLETION */
-
-.bug-complete {
-    display: none;
-
-    margin-top: 15px;
-    padding: 18px;
-
-    border: 1px solid rgba(139,124,255,.22);
-    border-radius: 10px;
-
-    background: rgba(139,124,255,.05);
-}
-
-.bug-complete.show {
-    display: block;
-}
-
-.bug-complete h3 {
-    margin: 0;
-    color: #f4f7ff;
-    font-size: 15px;
-}
-
-.bug-complete p {
-    margin: 7px 0 0;
-    color: #8f9db3;
-    font-size: 11px;
-    line-height: 1.6;
-}
-
-/* MOBILE */
-
-@media (max-width: 650px) {
-
-    .bug-detective {
-        padding: 55px 0;
+   CURRICULUM
+========================================================= */
+
+const curriculum = {
+
+html: {
+  name:"HTML",
+  levels:[
+    {
+      name:"Beginner",
+      lessons:[
+        ["Introduction","Learn what HTML is and how browsers use HTML documents."],
+        ["Syntax","Understand tags, elements and document structure."],
+        ["Environment Setup","Create and open your first HTML file."],
+        ["Variables & Data Types","Understand data concepts used alongside HTML."],
+        ["Operators","Understand basic expressions used with embedded scripting."],
+        ["Basic I/O","Understand forms and user input."],
+        ["Conditionals","Learn how conditional behavior is represented with JavaScript."],
+        ["Loops","Understand repeated operations in web applications."],
+        ["Functions","Understand the role of functions in interactive pages."]
+      ]
+    },
+    {
+      name:"Intermediate",
+      lessons:[
+        ["Semantic HTML","Build meaningful page structures."],
+        ["Forms","Create accessible forms."],
+        ["Accessibility","Make pages usable by more people."],
+        ["Tables","Structure tabular information."],
+        ["Media","Work with images, audio and video."],
+        ["DOM Concepts","Understand how HTML becomes a document tree."]
+      ]
+    },
+    {
+      name:"Advanced",
+      lessons:[
+        ["Web Components","Understand reusable browser components."],
+        ["SEO","Structure pages for discoverability."],
+        ["Performance","Build efficient documents."],
+        ["Security","Understand safe HTML practices."],
+        ["Testing","Learn how HTML interfaces can be tested."],
+        ["Production Architecture","Organize large frontend applications."]
+      ]
     }
+  ]
+},
 
-    .bug-detective-container {
-        width: calc(100% - 24px);
+css: {
+  name:"CSS",
+  levels:[
+    {
+      name:"Beginner",
+      lessons:[
+        ["Introduction","Understand what CSS does."],
+        ["Syntax","Learn selectors and declarations."],
+        ["Environment Setup","Connect CSS to HTML."],
+        ["Variables & Data Types","Use custom properties and values."],
+        ["Operators","Understand CSS calculations."],
+        ["Basic I/O","Style form controls."],
+        ["Conditionals","Understand media queries."],
+        ["Loops","Understand repeated styling patterns."],
+        ["Functions","Use CSS functions such as calc()."]
+      ]
+    },
+    {
+      name:"Intermediate",
+      lessons:[
+        ["Box Model","Master margin, border, padding and content."],
+        ["Flexbox","Build flexible layouts."],
+        ["Grid","Build two-dimensional layouts."],
+        ["Responsive Design","Adapt layouts to screen sizes."],
+        ["Animations","Create transitions and animations."],
+        ["Architecture","Organize scalable CSS."]
+      ]
+    },
+    {
+      name:"Advanced",
+      lessons:[
+        ["Design Systems","Build reusable visual rules."],
+        ["Performance","Optimize CSS delivery."],
+        ["Advanced Layout","Handle complex interfaces."],
+        ["Accessibility","Create accessible visual experiences."],
+        ["Testing","Test visual behavior."],
+        ["Production Architecture","Structure large CSS systems."]
+      ]
     }
+  ]
+},
 
-    .bug-stats {
-        grid-template-columns: 1fr;
+javascript: {
+  name:"JavaScript",
+  levels:[
+    {
+      name:"Beginner",
+      lessons:[
+        ["Introduction","Understand JavaScript and its role in web development."],
+        ["Syntax","Learn JavaScript syntax."],
+        ["Environment Setup","Run JavaScript in a browser."],
+        ["Variables & Data Types","Work with let, const and common types."],
+        ["Operators","Perform calculations and comparisons."],
+        ["Basic I/O","Use input and console output."],
+        ["Conditionals","Use if, else and switch."],
+        ["Loops","Repeat operations with for and while."],
+        ["Functions","Create reusable functions."]
+      ]
+    },
+    {
+      name:"Intermediate",
+      lessons:[
+        ["Arrays","Store collections of values."],
+        ["Objects","Represent structured data."],
+        ["Classes","Use object-oriented programming."],
+        ["Error Handling","Handle failures safely."],
+        ["DOM Manipulation","Change webpages with JavaScript."],
+        ["Async Programming","Use promises and async/await."]
+      ]
+    },
+    {
+      name:"Advanced",
+      lessons:[
+        ["Design Patterns","Use reusable architecture patterns."],
+        ["Memory","Understand references and garbage collection."],
+        ["Performance","Analyze and improve application speed."],
+        ["Security","Build safer applications."],
+        ["APIs","Integrate external services."],
+        ["Testing & CI/CD","Understand production engineering."]
+      ]
     }
+  ]
+},
 
-    .bug-card-top {
-        align-items: flex-start;
-        flex-direction: column;
+typescript: {
+  name:"TypeScript",
+  levels:[
+    {
+      name:"Beginner",
+      lessons:[
+        ["Introduction","Understand TypeScript."],
+        ["Syntax","Learn typed syntax."],
+        ["Environment Setup","Configure a TypeScript project."],
+        ["Variables & Types","Use explicit types."],
+        ["Operators","Work with typed expressions."],
+        ["Basic I/O","Handle input data."],
+        ["Conditionals","Use conditional logic."],
+        ["Loops","Repeat typed operations."],
+        ["Functions","Type function parameters and results."]
+      ]
+    },
+    {
+      name:"Intermediate",
+      lessons:[
+        ["Arrays","Create typed collections."],
+        ["Objects","Create structured types."],
+        ["Classes","Use typed classes."],
+        ["Generics","Create reusable typed code."],
+        ["Error Handling","Handle errors."],
+        ["Async Programming","Type promises and asynchronous code."]
+      ]
+    },
+    {
+      name:"Advanced",
+      lessons:[
+        ["Advanced Types","Use unions and intersections."],
+        ["Design Patterns","Structure large TypeScript applications."],
+        ["Performance","Improve build and runtime performance."],
+        ["Security","Use safer type boundaries."],
+        ["API Integration","Type API responses."],
+        ["Testing & CI/CD","Build production workflows."]
+      ]
     }
+  ]
+},
 
-    .bug-body {
-        padding: 17px;
+python: {
+  name:"Python",
+  levels:[
+    {
+      name:"Beginner",
+      lessons:[
+        ["Introduction","Understand Python."],
+        ["Syntax","Learn Python syntax."],
+        ["Environment Setup","Run Python programs."],
+        ["Variables & Data Types","Store and manipulate values."],
+        ["Operators","Perform calculations and comparisons."],
+        ["Basic I/O","Use input and print."],
+        ["Conditionals","Use if, elif and else."],
+        ["Loops","Use for and while."],
+        ["Functions","Create reusable functions."]
+      ]
+    },
+    {
+      name:"Intermediate",
+      lessons:[
+        ["Lists","Work with collections."],
+        ["Dictionaries","Store key-value data."],
+        ["Sets","Work with unique values."],
+        ["Classes","Use object-oriented programming."],
+        ["Exceptions","Handle errors."],
+        ["File I/O","Read and write files."]
+      ]
+    },
+    {
+      name:"Advanced",
+      lessons:[
+        ["Design Patterns","Structure reusable solutions."],
+        ["Memory","Understand references and garbage collection."],
+        ["Performance","Optimize Python programs."],
+        ["Security","Write safer Python applications."],
+        ["APIs","Consume and build APIs."],
+        ["Testing & CI/CD","Prepare applications for production."]
+      ]
     }
+  ]
+},
 
-    .bug-actions {
-        flex-direction: column;
+java: {
+  name:"Java",
+  levels:[
+    {
+      name:"Beginner",
+      lessons:[
+        ["Introduction","Understand Java and the JVM."],
+        ["Syntax","Learn Java syntax."],
+        ["Environment Setup","Compile and run Java."],
+        ["Variables & Data Types","Use Java's type system."],
+        ["Operators","Work with Java expressions."],
+        ["Basic I/O","Read and display data."],
+        ["Conditionals","Use if and switch."],
+        ["Loops","Use for and while."],
+        ["Methods","Create reusable methods."]
+      ]
+    },
+    {
+      name:"Intermediate",
+      lessons:[
+        ["Arrays","Store collections."],
+        ["Classes","Create classes."],
+        ["Objects","Work with object instances."],
+        ["Inheritance","Reuse behavior."],
+        ["Encapsulation","Protect object state."],
+        ["Exceptions","Handle errors."],
+        ["Collections","Use lists, sets and maps."]
+      ]
+    },
+    {
+      name:"Advanced",
+      lessons:[
+        ["Design Patterns","Build maintainable systems."],
+        ["Memory Management","Understand JVM memory."],
+        ["Concurrency","Work with threads."],
+        ["Performance","Optimize Java applications."],
+        ["Security","Build safer applications."],
+        ["Testing & CI/CD","Prepare production systems."]
+      ]
     }
+  ]
+},
 
-    .bug-button {
-        width: 100%;
+csharp: {
+  name:"C#",
+  levels:[
+    {
+      name:"Beginner",
+      lessons:[
+        ["Introduction","Understand C# and .NET."],
+        ["Syntax","Learn C# syntax."],
+        ["Environment Setup","Run a C# project."],
+        ["Variables & Data Types","Use C# types."],
+        ["Operators","Work with expressions."],
+        ["Basic I/O","Read and display data."],
+        ["Conditionals","Use if and switch."],
+        ["Loops","Repeat operations."],
+        ["Methods","Create reusable methods."]
+      ]
+    },
+    {
+      name:"Intermediate",
+      lessons:[
+        ["Arrays","Store collections."],
+        ["Classes","Create classes."],
+        ["Objects","Use object instances."],
+        ["Inheritance","Reuse behavior."],
+        ["Encapsulation","Protect state."],
+        ["Exceptions","Handle failures."],
+        ["Collections","Use generic collections."]
+      ]
+    },
+    {
+      name:"Advanced",
+      lessons:[
+        ["LINQ","Query collections."],
+        ["Async Programming","Use async and await."],
+        ["Memory","Understand managed memory."],
+        ["Performance","Optimize applications."],
+        ["Security","Build safer software."],
+        ["Testing & CI/CD","Prepare production software."]
+      ]
     }
-
-}
-</style>
-
-
-<section class="bug-detective" id="bugDetective">
-
-    <div class="bug-detective-container">
-
-        <!-- HEADER -->
-
-        <div class="bug-detective-header">
-
-            <span class="bug-detective-label">
-                AI CODE DEBUGGING CHALLENGE
-            </span>
-
-            <h2>
-                Become a
-                <strong>Bug Detective.</strong>
-            </h2>
-
-            <p>
-                Find the mistake, explain why it happens,
-                and fix it. Every case is different, so
-                you can keep practicing without getting
-                the same challenge again and again.
-            </p>
-
-        </div>
-
-
-        <!-- LANGUAGE SELECTOR -->
-
-        <div class="bug-controls">
-
-            <button
-                type="button"
-                class="bug-language active"
-                data-bug-language="html"
-            >
-                🌐 HTML
-            </button>
-
-            <button
-                type="button"
-                class="bug-language"
-                data-bug-language="css"
-            >
-                🎨 CSS
-            </button>
-
-            <button
-                type="button"
-                class="bug-language"
-                data-bug-language="javascript"
-            >
-                ⚡ JavaScript
-            </button>
-
-            <button
-                type="button"
-                class="bug-language"
-                data-bug-language="java"
-            >
-                ☕ Java
-            </button>
-
-            <button
-                type="button"
-                class="bug-language"
-                data-bug-language="csharp"
-            >
-                💠 C#
-            </button>
-
-            <button
-                type="button"
-                class="bug-language"
-                data-bug-language="cpp"
-            >
-                ⚙️ C++
-            </button>
-
-        </div>
-
-
-        <!-- STATS -->
-
-        <div class="bug-stats">
-
-            <div class="bug-stat">
-                <small>
-                    CASES SOLVED
-                </small>
-
-                <strong id="bugSolved">
-                    0
-                </strong>
-            </div>
-
-            <div class="bug-stat">
-                <small>
-                    CURRENT STREAK
-                </small>
-
-                <strong id="bugStreak">
-                    0
-                </strong>
-            </div>
-
-            <div class="bug-stat">
-                <small>
-                    LANGUAGE
-                </small>
-
-                <strong id="bugCurrentLanguage">
-                    HTML
-                </strong>
-            </div>
-
-        </div>
-
-
-        <!-- CASE -->
-
-        <div class="bug-card">
-
-            <div class="bug-card-top">
-
-                <div class="bug-case-title">
-
-                    <div class="bug-icon">
-                        🕵️
-                    </div>
-
-                    <div>
-
-                        <small>
-                            CURRENT CASE
-                        </small>
-
-                        <h3 id="bugCaseTitle">
-                            HTML Mystery #1
-                        </h3>
-
-                    </div>
-
-                </div>
-
-
-                <div class="bug-difficulty">
-
-                    <span>
-                        DIFFICULTY
-                    </span>
-
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-
-                </div>
-
-            </div>
-
-
-            <div class="bug-body">
-
-                <p
-                    class="bug-description"
-                    id="bugDescription"
-                >
-                    Something is wrong with this code.
-                    Can you identify the problem?
-                </p>
-
-
-                <!-- CODE -->
-
-                <div class="bug-code-wrapper">
-
-                    <div class="bug-code-header">
-
-                        <span id="bugFileName">
-                            index.html
-                        </span>
-
-                        <span>
-                            FIND THE BUG
-                        </span>
-
-                    </div>
-
-                    <pre
-                        class="bug-code"
-                        id="bugCode"
-                    ></pre>
-
-                </div>
-
-
-                <!-- QUESTION -->
-
-                <div class="bug-question">
-                    What is wrong with this code?
-                </div>
-
-
-                <textarea
-                    id="bugAnswer"
-                    class="bug-input"
-                    placeholder="Explain the bug in your own words..."
-                ></textarea>
-
-
-                <!-- ACTIONS -->
-
-                <div class="bug-actions">
-
-                    <button
-                        type="button"
-                        class="bug-button primary"
-                        id="checkBug"
-                    >
-                        🔍 Check My Answer
-                    </button>
-
-                    <button
-                        type="button"
-                        class="bug-button"
-                        id="showBugHint"
-                    >
-                        💡 Give Me a Hint
-                    </button>
-
-                    <button
-                        type="button"
-                        class="bug-button"
-                        id="skipBug"
-                    >
-                        Skip Case
-                    </button>
-
-                </div>
-
-
-                <!-- HINT -->
-
-                <div
-                    class="bug-hint"
-                    id="bugHint"
-                >
-                    <strong>💡 Detective Hint:</strong>
-                    <span id="bugHintText"></span>
-                </div>
-
-
-                <!-- RESULT -->
-
-                <div
-                    class="bug-result"
-                    id="bugResult"
-                >
-
-                    <div
-                        class="bug-result-title"
-                        id="bugResultTitle"
-                    ></div>
-
-                    <div
-                        class="bug-explanation"
-                        id="bugExplanation"
-                    ></div>
-
-                </div>
-
-
-                <!-- NEXT -->
-
-                <button
-                    type="button"
-                    class="bug-next"
-                    id="nextBug"
-                >
-                    Next Case →
-                </button>
-
-
-                <!-- COMPLETION -->
-
-                <div
-                    class="bug-complete"
-                    id="bugComplete"
-                >
-
-                    <h3>
-                        🎉 Case Collection Complete
-                    </h3>
-
-                    <p id="bugCompleteText">
-                        You solved every available case
-                        for this language.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<script>
-(function () {
-
-    "use strict";
-
-
-    /* =====================================================
-       BUG DATABASE
-
-       Every language has multiple cases.
-       The system remembers solved cases and avoids
-       immediately repeating the same problem.
-       ===================================================== */
-
-    const bugDatabase = {
-
-        html: [
-
-            {
-                title: "HTML Mystery #1",
-                difficulty: 1,
-                file: "index.html",
-
-                description:
-                    "The heading is not appearing on the page. Find the structural mistake.",
-
-                code:
-`<!DOCTYPE html>
-<html>
-<head>
-    <title>My Page</title>
-<body>
-
-    <h1>Hello World</h1>
-
-</body>
-</html>`,
-
-                hint:
-                    "Look carefully at where the head section ends.",
-
-                keywords: [
-                    "head",
-                    "closing",
-                    "</head>"
-                ],
-
-                explanation:
-                    "The <head> element was never closed. Add </head> before <body>."
-            },
-
-            {
-                title: "HTML Mystery #2",
-                difficulty: 1,
-                file: "index.html",
-
-                description:
-                    "The image is not displaying correctly. Find the problem.",
-
-                code:
-`<!DOCTYPE html>
-<html>
-<body>
-
-    <img src="photo.png">
-
-</body>
-</html>`,
-
-                hint:
-                    "Check whether the image path actually points to a file.",
-
-                keywords: [
-                    "src",
-                    "path",
-                    "image"
-                ],
-
-                explanation:
-                    "The src value must point to the actual image location. Check the filename and path."
-            },
-
-            {
-                title: "HTML Mystery #3",
-                difficulty: 2,
-                file: "index.html",
-
-                description:
-                    "A form cannot be submitted correctly because an important attribute is missing.",
-
-                code:
-`<form>
-    <input type="text">
-    <button>Submit</button>
-</form>`,
-
-                hint:
-                    "Think about where the form should send its data.",
-
-                keywords: [
-                    "action",
-                    "form"
-                ],
-
-                explanation:
-                    "The form is missing an action attribute if it is expected to submit data to a specific endpoint."
-            },
-
-            {
-                title: "HTML Mystery #4",
-                difficulty: 2,
-                file: "index.html",
-
-                description:
-                    "The browser is not interpreting the document using the intended HTML standard.",
-
-                code:
-`<html>
-<head>
-    <title>Website</title>
-</head>
-<body>
-    <p>Hello</p>
-</body>
-</html>`,
-
-                hint:
-                    "Look at the very first line.",
-
-                keywords: [
-                    "doctype",
-                    "<!doctype html>"
-                ],
-
-                explanation:
-                    "A modern HTML document should begin with <!DOCTYPE html>."
-            }
-
-        ],
-
-
-        css: [
-
-            {
-                title: "CSS Mystery #1",
-                difficulty: 1,
-                file: "style.css",
-
-                description:
-                    "The text refuses to become blue. Find the CSS syntax problem.",
-
-                code:
-`.title {
-    color blue;
-}`,
-
-                hint:
-                    "CSS declarations have a specific separator between a property and its value.",
-
-                keywords: [
-                    ":",
-                    "colon",
-                    "color:"
-                ],
-
-                explanation:
-                    "CSS properties and values are separated by a colon. It should be color: blue;"
-            },
-
-            {
-                title: "CSS Mystery #2",
-                difficulty: 1,
-                file: "style.css",
-
-                description:
-                    "The card background is not changing.",
-
-                code:
-`.card {
-    background-color: #ffffff
-    padding: 20px;
-}`,
-
-                hint:
-                    "Check the end of the background-color declaration.",
-
-                keywords: [
-                    "semicolon",
-                    ";",
-                    "background"
-                ],
-
-                explanation:
-                    "The background-color declaration should end with a semicolon."
-            },
-
-            {
-                title: "CSS Mystery #3",
-                difficulty: 2,
-                file: "style.css",
-
-                description:
-                    "The element is not becoming a flex container.",
-
-                code:
-`.container {
-    display flex;
-    justify-content: center;
-}`,
-
-                hint:
-                    "The display property is written differently from the other declarations.",
-
-                keywords: [
-                    "display:",
-                    "colon"
-                ],
-
-                explanation:
-                    "The display declaration needs a colon: display: flex;"
-            },
-
-            {
-                title: "CSS Mystery #4",
-                difficulty: 3,
-                file: "style.css",
-
-                description:
-                    "The selector appears correct, but the style is not being applied.",
-
-                code:
-`#menu {
-    color: white;
+  ]
+},
+
+cpp: {
+  name:"C++",
+  levels:[
+    {
+      name:"Beginner",
+      lessons:[
+        ["Introduction","Understand C++."],
+        ["Syntax","Learn C++ syntax."],
+        ["Environment Setup","Compile C++."],
+        ["Variables & Data Types","Work with C++ types."],
+        ["Operators","Use expressions."],
+        ["Basic I/O","Use streams."],
+        ["Conditionals","Use if and switch."],
+        ["Loops","Use for and while."],
+        ["Functions","Create reusable functions."]
+      ]
+    },
+    {
+      name:"Intermediate",
+      lessons:[
+        ["Arrays","Store values."],
+        ["References","Work with references."],
+        ["Pointers","Understand memory addresses."],
+        ["Classes","Create classes."],
+        ["Inheritance","Reuse behavior."],
+        ["Exceptions","Handle errors."],
+        ["STL","Use standard containers."]
+      ]
+    },
+    {
+      name:"Advanced",
+      lessons:[
+        ["Templates","Create generic code."],
+        ["Memory Management","Manage resources."],
+        ["Smart Pointers","Use safer ownership."],
+        ["Performance","Optimize programs."],
+        ["Concurrency","Work with threads."],
+        ["Testing & CI/CD","Prepare production software."]
+      ]
+    }
+  ]
+},
+
+sql: {
+  name:"SQL",
+  levels:[
+    {
+      name:"Beginner",
+      lessons:[
+        ["Introduction","Understand relational databases."],
+        ["Syntax","Learn SQL syntax."],
+        ["Environment Setup","Connect to a database."],
+        ["Data Types","Understand database types."],
+        ["Operators","Filter and compare values."],
+        ["Basic I/O","Read and insert records."],
+        ["Conditionals","Use conditional expressions."],
+        ["Loops","Understand procedural SQL concepts."],
+        ["Functions","Use SQL functions."]
+      ]
+    },
+    {
+      name:"Intermediate",
+      lessons:[
+        ["SELECT","Query data."],
+        ["WHERE","Filter records."],
+        ["JOIN","Combine tables."],
+        ["GROUP BY","Aggregate data."],
+        ["Subqueries","Build nested queries."],
+        ["Transactions","Control changes."],
+        ["Error Handling","Handle database errors."]
+      ]
+    },
+    {
+      name:"Advanced",
+      lessons:[
+        ["Indexes","Improve query performance."],
+        ["Query Optimization","Analyze expensive queries."],
+        ["Security","Prevent injection attacks."],
+        ["Transactions","Understand isolation."],
+        ["Database Architecture","Design scalable databases."],
+        ["Testing & CI/CD","Manage production database changes."]
+      ]
+    }
+  ]
 }
 
-.menu {
-    background: black;
-}`,
-
-                hint:
-                    "Compare #menu with .menu. Are they selecting the same thing?",
-
-                keywords: [
-                    "id",
-                    "class",
-                    "#menu",
-                    ".menu"
-                ],
-
-                explanation:
-                    "#menu targets an element with an id of menu, while .menu targets a class named menu. They are different selectors."
-            }
-
-        ],
-
-
-        javascript: [
-
-            {
-                title: "JavaScript Mystery #1",
-                difficulty: 1,
-                file: "script.js",
-
-                description:
-                    "The program should print the user's name, but nothing useful is printed.",
-
-                code:
-`let name = "Alex";
-
-console.log(nam);`,
-
-                hint:
-                    "Compare the variable declaration with the variable being printed.",
-
-                keywords: [
-                    "name",
-                    "nam",
-                    "variable",
-                    "typo"
-                ],
-
-                explanation:
-                    "The variable is called name, but the code tries to use nam. That causes a variable reference error."
-            },
-
-            {
-                title: "JavaScript Mystery #2",
-                difficulty: 1,
-                file: "script.js",
-
-                description:
-                    "The function is supposed to run, but the function call is incorrect.",
-
-                code:
-`function greet() {
-    console.log("Hello");
-}
-
-gret();`,
-
-                hint:
-                    "Compare the function name with the name used when calling it.",
-
-                keywords: [
-                    "greet",
-                    "gret",
-                    "function",
-                    "typo"
-                ],
-
-                explanation:
-                    "The function is named greet, but the code calls gret. The names must match."
-            },
-
-            {
-                title: "JavaScript Mystery #3",
-                difficulty: 2,
-                file: "script.js",
-
-                description:
-                    "The condition never behaves as expected.",
-
-                code:
-`let age = 18;
-
-if (age = 18) {
-    console.log("Adult");
-}`,
-
-                hint:
-                    "Is the operator inside the if statement comparing or assigning?",
-
-                keywords: [
-                    "===",
-                    "==",
-                    "comparison",
-                    "assignment",
-                    "="
-                ],
-
-                explanation:
-                    "The single = operator assigns a value. A comparison should use ===, such as if (age === 18)."
-            },
-
-            {
-                title: "JavaScript Mystery #4",
-                difficulty: 3,
-                file: "script.js",
-
-                description:
-                    "The code tries to access a property from an object, but the property name is wrong.",
-
-                code:
-`const user = {
-    name: "Alex",
-    age: 18
 };
 
-console.log(user.username);`,
 
-                hint:
-                    "Look at the properties actually defined inside the object.",
+/* =========================================================
+   LESSON GENERATOR
+========================================================= */
 
-                keywords: [
-                    "username",
-                    "name",
-                    "property",
-                    "object"
-                ],
+const examples = {
+html:
+`<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Hello World</h1>
+  </body>
+</html>`,
 
-                explanation:
-                    "The object has name and age properties, but no username property."
-            }
-
-        ],
-
-
-        java: [
-
-            {
-                title: "Java Mystery #1",
-                difficulty: 1,
-                file: "Main.java",
-
-                description:
-                    "The Java program does not compile. Find the declaration problem.",
-
-                code:
-`public class Main {
-
-    public static void main(String[] args) {
-
-        int age = "18";
-
-        System.out.println(age);
-    }
+css:
+`.card {
+  padding: 20px;
+  border-radius: 10px;
 }`,
 
-                hint:
-                    "Compare the declared type of age with the value assigned to it.",
+javascript:
+`const name = "Alex";
 
-                keywords: [
-                    "int",
-                    "string",
-                    "18",
-                    "type"
-                ],
-
-                explanation:
-                    "An int cannot be assigned a String value. Use int age = 18;."
-            },
-
-            {
-                title: "Java Mystery #2",
-                difficulty: 1,
-                file: "Main.java",
-
-                description:
-                    "The program tries to print a variable that does not exist.",
-
-                code:
-`public class Main {
-
-    public static void main(String[] args) {
-
-        String name = "Alex";
-
-        System.out.println(nam);
-    }
-}`,
-
-                hint:
-                    "Compare the variable declaration and println statement.",
-
-                keywords: [
-                    "name",
-                    "nam",
-                    "variable",
-                    "typo"
-                ],
-
-                explanation:
-                    "The variable is named name, but the code attempts to use nam."
-            },
-
-            {
-                title: "Java Mystery #3",
-                difficulty: 2,
-                file: "Main.java",
-
-                description:
-                    "The loop does not execute the expected number of times.",
-
-                code:
-`for (int i = 0; i < 5; i--) {
-    System.out.println(i);
-}`,
-
-                hint:
-                    "Watch how i changes after every iteration.",
-
-                keywords: [
-                    "i--",
-                    "i++",
-                    "increment",
-                    "decrement"
-                ],
-
-                explanation:
-                    "The loop starts at 0 and requires i to become larger than 0, but i-- makes it smaller. Use i++."
-            },
-
-            {
-                title: "Java Mystery #4",
-                difficulty: 3,
-                file: "Main.java",
-
-                description:
-                    "The class is being used incorrectly. Identify the object creation issue.",
-
-                code:
-`class Student {
-    String name;
+function greet() {
+  console.log("Hello " + name);
 }
 
-public class Main {
+greet();`,
 
-    public static void main(String[] args) {
+typescript:
+`function add(a: number, b: number): number {
+  return a + b;
+}
 
-        Student student = new student();
+console.log(add(2, 3));`,
 
-    }
+python:
+`name = "Alex"
+
+def greet():
+    print("Hello", name)
+
+greet()`,
+
+java:
+`public class Main {
+  public static void main(String[] args) {
+    int age = 18;
+    System.out.println(age);
+  }
 }`,
 
-                hint:
-                    "Java class names are case-sensitive.",
+csharp:
+`using System;
 
-                keywords: [
-                    "Student",
-                    "student",
-                    "case",
-                    "new Student"
-                ],
+class Program {
+  static void Main() {
+    int age = 18;
+    Console.WriteLine(age);
+  }
+}`,
 
-                explanation:
-                    "The class is Student with a capital S. Object creation should use new Student()."
+cpp:
+`#include <iostream>
+
+int main() {
+  int age = 18;
+  std::cout << age;
+  return 0;
+}`,
+
+sql:
+`SELECT name, age
+FROM students
+WHERE age >= 18;`
+};
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let state = {
+  language:"html",
+  level:0,
+  lesson:0,
+  completed:{},
+  quizAnswered:false,
+  currentBug:null,
+  chatHistory:[]
+};
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+function storageKey(){
+  return "aiCodingMentor_" + state.language;
+}
+
+function saveProgress(){
+  localStorage.setItem(
+    storageKey(),
+    JSON.stringify(state.completed)
+  );
+}
+
+function loadProgress(){
+  try{
+    state.completed =
+      JSON.parse(
+        localStorage.getItem(storageKey()) || "{}"
+      );
+  }catch{
+    state.completed = {};
+  }
+}
+
+
+/* =========================================================
+   CURRICULUM HELPERS
+========================================================= */
+
+function currentCourse(){
+  return curriculum[state.language];
+}
+
+function lessonKey(level,lesson){
+  return `${state.language}:${level}:${lesson}`;
+}
+
+function isComplete(level,lesson){
+  return !!state.completed[
+    lessonKey(level,lesson)
+  ];
+}
+
+function isUnlocked(level,lesson){
+
+  if(level === 0 && lesson === 0){
+    return true;
+  }
+
+  if(lesson > 0){
+    return isComplete(level,lesson - 1);
+  }
+
+  return isComplete(level - 1,
+    currentCourse().levels[level - 1].lessons.length - 1
+  );
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+function renderCurriculum(){
+
+  const root =
+    document.getElementById("curriculum");
+
+  root.innerHTML = "";
+
+  currentCourse().levels.forEach(
+    (level,index)=>{
+
+      const group =
+        document.createElement("div");
+
+      group.className = "level-group";
+
+      const title =
+        document.createElement("div");
+
+      title.className = "level-title";
+
+      title.textContent =
+        `${String(index+1).padStart(2,"0")} — ${level.name.toUpperCase()}`;
+
+      group.appendChild(title);
+
+      level.lessons.forEach(
+        (lesson,lessonIndex)=>{
+
+          const button =
+            document.createElement("button");
+
+          button.className = "lesson-btn";
+
+          const unlocked =
+            isUnlocked(index,lessonIndex);
+
+          button.disabled = !unlocked;
+
+          if(!unlocked){
+            button.classList.add("locked");
+          }
+
+          if(
+            state.level === index &&
+            state.lesson === lessonIndex
+          ){
+            button.classList.add("active");
+          }
+
+          const done =
+            isComplete(index,lessonIndex);
+
+          button.textContent =
+            `${done ? "✓ " : ""}${lesson[0]}`;
+
+          button.addEventListener(
+            "click",
+            ()=>{
+              if(!isUnlocked(index,lessonIndex)){
+                return;
+              }
+
+              state.level = index;
+              state.lesson = lessonIndex;
+
+              renderAll();
             }
+          );
 
-        ],
+          group.appendChild(button);
+
+        }
+      );
+
+      root.appendChild(group);
+    }
+  );
+}
 
 
-        csharp: [
+/* =========================================================
+   PROGRESS
+========================================================= */
 
-            {
-                title: "C# Mystery #1",
-                difficulty: 1,
-                file: "Program.cs",
+function updateProgress(){
 
-                description:
-                    "The program does not compile because the assigned value has the wrong type.",
+  const course =
+    currentCourse();
 
-                code:
-`int age = "18";
+  let total = 0;
+  let done = 0;
 
+  course.levels.forEach(
+    (level,l)=>{
+      level.lessons.forEach(
+        (_,i)=>{
+          total++;
+
+          if(isComplete(l,i)){
+            done++;
+          }
+        }
+      );
+    }
+  );
+
+  const percent =
+    Math.round((done / total) * 100);
+
+  document.getElementById("progressFill")
+    .style.width = percent + "%";
+
+  document.getElementById("progressText")
+    .textContent = percent + "%";
+}
+
+
+/* =========================================================
+   LESSON CONTENT
+========================================================= */
+
+function renderLesson(){
+
+  const course =
+    currentCourse();
+
+  const lesson =
+    course.levels[state.level].lessons[state.lesson];
+
+  document.getElementById("levelBadge")
+    .textContent =
+    course.levels[state.level].name.toUpperCase();
+
+  document.getElementById("pageHeading")
+    .textContent = lesson[0];
+
+  document.getElementById("lessonBadge")
+    .textContent =
+    `LESSON ${String(state.lesson+1).padStart(2,"0")}`;
+
+  document.getElementById("lessonTitle")
+    .textContent = lesson[0];
+
+  document.getElementById("lessonDescription")
+    .textContent = lesson[1];
+
+  document.getElementById("conceptText")
+    .textContent =
+    getConceptExplanation(
+      state.language,
+      lesson[0]
+    );
+
+  document.getElementById("codeLanguage")
+    .textContent =
+    state.language.toUpperCase();
+
+  document.getElementById("lessonCode")
+    .textContent =
+    examples[state.language];
+
+  document.getElementById("editor")
+    .value =
+    examples[state.language];
+
+  document.getElementById("hintBox")
+    .style.display = "none";
+
+  renderQuiz();
+
+  renderBug();
+
+  updateProgress();
+}
+
+
+/* =========================================================
+   EXPLANATIONS
+========================================================= */
+
+function getConceptExplanation(language,topic){
+
+  const map = {
+    "Introduction":
+      `Start by understanding what ${language} is used for and what problems it solves.`,
+
+    "Syntax":
+      `Syntax is the set of rules that tells the ${language} environment how your code should be written.`,
+
+    "Variables & Data Types":
+      `Variables give your program a place to store information. Data types describe what kind of information is stored.`,
+
+    "Operators":
+      `Operators let programs calculate, compare and combine values.`,
+
+    "Conditionals":
+      `Conditionals allow your program to choose different actions based on a condition.`,
+
+    "Loops":
+      `Loops repeat an operation while a condition or sequence requires it.`,
+
+    "Functions":
+      `Functions package logic into reusable pieces so programs become easier to understand and maintain.`,
+
+    "Arrays":
+      `Arrays store multiple values in an ordered collection.`,
+
+    "Objects":
+      `Objects group related data and behavior.`,
+
+    "Classes":
+      `Classes provide a blueprint for creating objects.`,
+
+    "Error Handling":
+      `Error handling lets your program respond to unexpected situations instead of failing silently.`,
+
+    "Async Programming":
+      `Asynchronous programming allows work to continue without unnecessarily blocking other operations.`,
+
+    "Performance":
+      `Performance work focuses on reducing unnecessary computation, memory use and waiting time.`,
+
+    "Security":
+      `Security means treating input and external data carefully and avoiding unsafe assumptions.`,
+
+    "Testing & CI/CD":
+      `Testing checks behavior while CI/CD helps automate reliable delivery of software.`
+  };
+
+  return map[topic] ||
+    `This lesson builds an important ${language} skill. Study the example, experiment in the playground and complete the concept check before moving forward.`;
+}
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+function createQuiz(){
+
+  const language = state.language;
+  const course = currentCourse();
+  const lesson =
+    course.levels[state.level].lessons[state.lesson];
+
+  const topic = lesson[0];
+
+  const quizzes = {
+
+    "Introduction":[
+      `What is ${language} mainly used for?`,
+      ["Programming and building software","Only drawing images","Only writing documents"],
+      0
+    ],
+
+    "Syntax":[
+      `Why is syntax important?`,
+      ["It gives code rules the language can understand","It changes the monitor brightness","It stores files automatically"],
+      0
+    ],
+
+    "Variables & Data Types":[
+      "What does a variable usually store?",
+      ["A value or reference","Only a web page","Only a color"],
+      0
+    ],
+
+    "Operators":[
+      "What can operators do?",
+      ["Calculate or compare values","Create physical hardware","Delete the operating system"],
+      0
+    ],
+
+    "Conditionals":[
+      "Why are conditionals useful?",
+      ["They let programs make decisions","They always repeat code","They only format text"],
+      0
+    ],
+
+    "Loops":[
+      "What is a loop used for?",
+      ["Repeating operations","Creating a database automatically","Changing screen resolution"],
+      0
+    ],
+
+    "Functions":[
+      "Why use functions?",
+      ["To reuse organized logic","To prevent all variables from existing","To turn code into images"],
+      0
+    ],
+
+    "Arrays":[
+      "What is an array?",
+      ["A collection of values","A compiler","A database server"],
+      0
+    ],
+
+    "Classes":[
+      "What is a class?",
+      ["A blueprint for objects","A loop","A network protocol"],
+      0
+    ],
+
+    "Error Handling":[
+      "Why handle errors?",
+      ["To respond safely when something goes wrong","To make every program slower","To remove all variables"],
+      0
+    ]
+
+  };
+
+  return quizzes[topic] || [
+    `What is an important goal of ${topic}?`,
+    [
+      "Understand the concept and apply it",
+      "Ignore the concept",
+      "Avoid practicing"
+    ],
+    0
+  ];
+}
+
+
+function renderQuiz(){
+
+  const quiz = createQuiz();
+
+  document.getElementById("quizQuestion")
+    .textContent = quiz[0];
+
+  const root =
+    document.getElementById("quizOptions");
+
+  root.innerHTML = "";
+
+  document.getElementById("quizResult")
+    .textContent = "";
+
+  quiz[1].forEach(
+    (option,index)=>{
+
+      const button =
+        document.createElement("button");
+
+      button.className = "quiz-option";
+      button.textContent = option;
+
+      button.addEventListener(
+        "click",
+        ()=>{
+
+          if(index === quiz[2]){
+
+            document.getElementById("quizResult")
+              .textContent =
+              "✓ Correct. Lesson completed.";
+
+            document.getElementById("quizResult")
+              .style.color = "var(--green)";
+
+            completeCurrentLesson();
+
+          }else{
+
+            document.getElementById("quizResult")
+              .textContent =
+              "Not quite. Think about the lesson concept and try again.";
+
+            document.getElementById("quizResult")
+              .style.color = "var(--red)";
+          }
+
+        }
+      );
+
+      root.appendChild(button);
+    }
+  );
+}
+
+
+/* =========================================================
+   COMPLETE LESSON
+========================================================= */
+
+function completeCurrentLesson(){
+
+  state.completed[
+    lessonKey(state.level,state.lesson)
+  ] = true;
+
+  saveProgress();
+
+  renderCurriculum();
+  updateProgress();
+}
+
+
+/* =========================================================
+   NEXT LESSON
+========================================================= */
+
+function nextLesson(){
+
+  const course =
+    currentCourse();
+
+  if(!isComplete(state.level,state.lesson)){
+
+    alert(
+      "Complete the lesson quiz before unlocking the next lesson."
+    );
+
+    return;
+  }
+
+  const level =
+    course.levels[state.level];
+
+  if(state.lesson < level.lessons.length - 1){
+
+    state.lesson++;
+
+  }else if(
+    state.level < course.levels.length - 1
+  ){
+
+    state.level++;
+    state.lesson = 0;
+
+    alert(
+      `🎉 ${level.name} completed! The next level is now unlocked.`
+    );
+
+  }else{
+
+    alert(
+      "🏆 You completed the entire curriculum for this language!"
+    );
+
+    return;
+  }
+
+  renderAll();
+}
+
+
+/* =========================================================
+   HINT
+========================================================= */
+
+function showHint(){
+
+  const topic =
+    currentCourse()
+      .levels[state.level]
+      .lessons[state.lesson][0];
+
+  const box =
+    document.getElementById("hintBox");
+
+  box.style.display = "block";
+
+  box.innerHTML =
+    `<strong>💡 Hint</strong>
+     Think about the purpose of <b>${escapeHtml(topic)}</b>.
+     Don't try to memorize the answer. Ask yourself what problem this concept solves and what the smallest example would look like.`;
+}
+
+
+/* =========================================================
+   BUG DETECTIVE
+========================================================= */
+
+const bugBank = {
+
+javascript:[
+  {
+    title:"The Missing Function Call",
+    description:"This program defines a function but does not call it.",
+    code:`function greet() {
+  console.log("Hello");
+}
+
+// Something is missing here`,
+    answer:["call","greet","function"]
+  },
+  {
+    title:"The Wrong Variable Name",
+    description:"Look carefully at the variable being printed.",
+    code:`const username = "Alex";
+
+console.log(usernme);`,
+    answer:["username","usernme","name"]
+  },
+  {
+    title:"The Comparison Mistake",
+    description:"The condition does not compare the values correctly.",
+    code:`const age = 18;
+
+if (age = 18) {
+  console.log("Adult");
+}`,
+    answer:["===","==","comparison"]
+  }
+],
+
+python:[
+  {
+    title:"The Missing Colon",
+    description:"Python requires a specific symbol after this statement.",
+    code:`age = 18
+
+if age >= 18
+    print("Adult")`,
+    answer:["colon",":","if"]
+  },
+  {
+    title:"The Wrong Variable",
+    description:"The printed variable does not match the declared one.",
+    code:`name = "Alex"
+
+print(nam)`,
+    answer:["name","nam"]
+  }
+],
+
+html:[
+  {
+    title:"The Unclosed Element",
+    description:"One element has not been closed correctly.",
+    code:`<html>
+  <body>
+    <h1>Hello
+  </body>
+</html>`,
+    answer:["h1","closing","close"]
+  }
+],
+
+css:[
+  {
+    title:"The Missing Brace",
+    description:"A CSS rule is missing part of its block structure.",
+    code:`.card {
+  color: white;
+  padding: 20px;`,
+    answer:["}","brace","closing"]
+  }
+],
+
+java:[
+  {
+    title:"The Missing Semicolon",
+    description:"A Java statement is missing its terminator.",
+    code:`public class Main {
+  public static void main(String[] args) {
+    int age = 18
+    System.out.println(age);
+  }
+}`,
+    answer:["semicolon",";"]
+  }
+],
+
+csharp:[
+  {
+    title:"The Missing Semicolon",
+    description:"A C# statement needs its terminator.",
+    code:`int age = 18
 Console.WriteLine(age);`,
+    answer:["semicolon",";"]
+  }
+],
 
-                hint:
-                    "An int expects a number, not text.",
+cpp:[
+  {
+    title:"The Missing Semicolon",
+    description:"A statement has not been terminated.",
+    code:`int age = 18
+std::cout << age;`,
+    answer:["semicolon",";"]
+  }
+],
 
-                keywords: [
-                    "int",
-                    "string",
-                    "type"
-                ],
+sql:[
+  {
+    title:"The Missing Table",
+    description:"The query refers to a table name that is not present.",
+    code:`SELECT name
+FROM
+WHERE age > 18;`,
+    answer:["table","from"]
+  }
+],
 
-                explanation:
-                    "The int variable should receive a numeric value: int age = 18;."
-            },
+typescript:[
+  {
+    title:"The Wrong Type",
+    description:"The value does not match the declared type.",
+    code:`let age: number = "eighteen";`,
+    answer:["number","string","type"]
+  }
+]
 
-            {
-                title: "C# Mystery #2",
-                difficulty: 1,
-                file: "Program.cs",
+};
 
-                description:
-                    "The variable cannot be found when it is printed.",
 
-                code:
-`string name = "Alex";
+function renderBug(){
 
-Console.WriteLine(nam);`,
+  const bugs =
+    bugBank[state.language] ||
+    bugBank.javascript;
 
-                hint:
-                    "Compare the variable name in both lines.",
+  const index =
+    Math.floor(
+      Math.random() * bugs.length
+    );
 
-                keywords: [
-                    "name",
-                    "nam",
-                    "typo"
-                ],
+  state.currentBug =
+    bugs[index];
 
-                explanation:
-                    "The variable is named name, but the code uses nam."
-            },
+  document.getElementById("bugTitle")
+    .textContent =
+    state.currentBug.title;
 
-            {
-                title: "C# Mystery #3",
-                difficulty: 2,
-                file: "Program.cs",
+  document.getElementById("bugDescription")
+    .textContent =
+    state.currentBug.description;
 
-                description:
-                    "The condition does not produce the expected result.",
+  document.getElementById("bugCode")
+    .textContent =
+    state.currentBug.code;
 
-                code:
-`int age = 18;
+  document.getElementById("bugAnswer")
+    .value = "";
 
-if (age = 18)
-{
-    Console.WriteLine("Adult");
-}`,
+  document.getElementById("bugResult")
+    .textContent = "";
+}
 
-                hint:
-                    "The operator used in the condition is normally used for assignment.",
 
-                keywords: [
-                    "==",
-                    "=",
-                    "comparison",
-                    "assignment"
-                ],
+function checkBug(){
 
-                explanation:
-                    "Use == when comparing values in this context: if (age == 18)."
-            },
+  if(!state.currentBug){
+    return;
+  }
 
-            {
-                title: "C# Mystery #4",
-                difficulty: 3,
-                file: "Program.cs",
+  const answer =
+    document.getElementById("bugAnswer")
+      .value
+      .trim()
+      .toLowerCase();
 
-                description:
-                    "The loop is supposed to count upward but moves in the wrong direction.",
+  if(!answer){
+    return;
+  }
 
-                code:
-`for (int i = 0; i < 5; i--)
-{
-    Console.WriteLine(i);
-}`,
+  const correct =
+    state.currentBug.answer.some(
+      item =>
+        answer.includes(item.toLowerCase())
+    );
 
-                hint:
-                    "Look at the final expression in the for loop.",
+  const result =
+    document.getElementById("bugResult");
 
-                keywords: [
-                    "i++",
-                    "i--",
-                    "increment"
-                ],
+  if(correct){
 
-                explanation:
-                    "The loop needs i++ to increase the counter. i-- decreases it."
+    result.textContent =
+      "✓ Good diagnosis. You found the core problem.";
+
+    result.style.color =
+      "var(--green)";
+
+  }else{
+
+    result.textContent =
+      "Not quite. Look again at the syntax and compare each line with what the language expects.";
+
+    result.style.color =
+      "var(--red)";
+  }
+}
+
+
+/* =========================================================
+   PLAYGROUND
+========================================================= */
+
+function runCode(){
+
+  const code =
+    document.getElementById("editor").value;
+
+  const output =
+    document.getElementById("output");
+
+  if(
+    state.language === "html" ||
+    state.language === "css" ||
+    state.language === "javascript"
+  ){
+
+    if(state.language === "html"){
+
+      output.srcdoc = code;
+
+    }else if(state.language === "css"){
+
+      output.srcdoc =
+        `<style>${code}</style>
+         <div class="card">
+           CSS preview
+         </div>`;
+
+    }else{
+
+      output.srcdoc =
+        `<body>
+          <h2>JavaScript Preview</h2>
+          <pre id="log"></pre>
+          <script>
+            const oldLog = console.log;
+            console.log = function(...args){
+              document.getElementById("log").textContent +=
+              args.join(" ") + "\\n";
+            };
+            try{
+              ${code}
+            }catch(error){
+              document.getElementById("log").textContent =
+              error.toString();
             }
+          <\/script>
+        </body>`;
+    }
 
-        ],
+  }else{
+
+    output.srcdoc =
+      `<body style="font-family:system-ui;padding:20px">
+        <h3>Code Preview</h3>
+        <p>
+          Browser execution is available for HTML, CSS and JavaScript.
+        </p>
+        <p>
+          Use <b>Analyze Code</b> to get AI feedback for ${escapeHtml(
+            state.language
+          )}.
+        </p>
+      </body>`;
+  }
+}
 
 
-        cpp: [
+async function analyzeCode(){
 
-            {
-                title: "C++ Mystery #1",
-                difficulty: 1,
-                file: "main.cpp",
+  const code =
+    document.getElementById("editor").value;
 
-                description:
-                    "The program cannot print the text because a required header is missing.",
+  const result =
+    document.getElementById("analysisResult");
 
-                code:
-`int main() {
+  result.style.display = "block";
+  result.textContent = "Analyzing your code...";
 
-    std::cout << "Hello World";
+  const response =
+    await callBackend({
+      action:"analyze",
+      language:state.language,
+      level:currentCourse().levels[state.level].name,
+      lesson:currentCourse().levels[state.level].lessons[state.lesson][0],
+      code
+    });
 
-    return 0;
-}`,
+  if(!response.ok){
 
-                hint:
-                    "Which standard library component provides cout?",
+    result.textContent =
+      response.error ||
+      "Could not analyze the code.";
 
-                keywords: [
-                    "iostream",
-                    "cout",
-                    "#include"
-                ],
+    return;
+  }
 
-                explanation:
-                    "std::cout is provided by the iostream header. Add #include <iostream>."
-            },
+  result.innerHTML =
+    `<strong>AI Code Review</strong><br><br>
+     ${escapeHtml(response.answer)}`;
+}
 
-            {
-                title: "C++ Mystery #2",
-                difficulty: 1,
-                file: "main.cpp",
 
-                description:
-                    "The variable declaration uses an inappropriate type for the text value.",
+/* =========================================================
+   AI CHAT
+========================================================= */
 
-                code:
-`int name = "Alex";
+function addMessage(type,text){
 
-std::cout << name;`,
+  const chat =
+    document.getElementById("chat");
 
-                hint:
-                    "Is name storing a number or text?",
+  const div =
+    document.createElement("div");
 
-                keywords: [
-                    "string",
-                    "int",
-                    "text",
-                    "type"
-                ],
+  div.className =
+    "message " + type;
 
-                explanation:
-                    "name contains text, so it should use a string type, such as std::string."
-            },
+  div.textContent = text;
 
-            {
-                title: "C++ Mystery #3",
-                difficulty: 2,
-                file: "main.cpp",
+  chat.appendChild(div);
 
-                description:
-                    "The loop never reaches the expected stopping condition.",
+  chat.scrollTop =
+    chat.scrollHeight;
+}
 
-                code:
-`for (int i = 0; i < 5; i--) {
 
-    std::cout << i;
-}`,
+async function sendMessage(){
 
-                hint:
-                    "The counter should move toward 5, not away from it.",
+  const input =
+    document.getElementById("chatInput");
 
-                keywords: [
-                    "i++",
-                    "i--",
-                    "increment"
-                ],
+  const text =
+    input.value.trim();
 
-                explanation:
-                    "The loop needs i++ because i must increase from 0 toward 5."
-            },
+  if(!text){
+    return;
+  }
 
-            {
-                title: "C++ Mystery #4",
-                difficulty: 3,
-                file: "main.cpp",
+  input.value = "";
 
-                description:
-                    "The condition is assigning a value instead of comparing two values.",
+  addMessage("user",text);
 
-                code:
-`int age = 18;
+  addMessage("ai","Thinking...");
 
-if (age = 20) {
+  const messages =
+    state.chatHistory.slice(-8);
 
-    std::cout << "Age is 20";
-}`,
+  messages.push({
+    role:"user",
+    text
+  });
 
-                hint:
-                    "Look at the operator inside the if condition.",
+  const response =
+    await callBackend({
+      action:"chat",
+      language:state.language,
+      level:currentCourse().levels[state.level].name,
+      lesson:currentCourse().levels[state.level].lessons[state.lesson][0],
+      messages,
+      code:document.getElementById("editor").value
+    });
 
-                keywords: [
-                    "==",
-                    "=",
-                    "comparison"
-                ],
+  const chat =
+    document.getElementById("chat");
 
-                explanation:
-                    "Use == for comparison. The condition should be if (age == 20)."
-            }
+  const thinking =
+    chat.lastElementChild;
 
-        ]
+  if(!response.ok){
 
+    thinking.textContent =
+      response.error ||
+      "The mentor could not respond.";
+
+    return;
+  }
+
+  thinking.textContent =
+    response.answer;
+
+  state.chatHistory.push({
+    role:"user",
+    text
+  });
+
+  state.chatHistory.push({
+    role:"assistant",
+    text:response.answer
+  });
+}
+
+
+/* =========================================================
+   BACKEND CALL
+========================================================= */
+
+async function callBackend(payload){
+
+  if(
+    !BACKEND_URL ||
+    BACKEND_URL.includes("PASTE_YOUR")
+  ){
+
+    return {
+      ok:false,
+      error:
+        "Backend is not connected yet. Add your Google Apps Script /exec URL to BACKEND_URL."
     };
+  }
 
+  try{
 
-    /* =====================================================
-       STATE
-       ===================================================== */
-
-    let currentLanguage = "html";
-
-    let currentCase = null;
-
-    let solvedCases = {};
-
-    let currentStreak = 0;
-
-    let hintUsed = false;
-
-
-    /* =====================================================
-       ELEMENTS
-       ===================================================== */
-
-    const root =
-        document.getElementById("bugDetective");
-
-    if (!root) {
-        return;
-    }
-
-    const languageButtons =
-        root.querySelectorAll(".bug-language");
-
-    const caseTitle =
-        document.getElementById("bugCaseTitle");
-
-    const description =
-        document.getElementById("bugDescription");
-
-    const fileName =
-        document.getElementById("bugFileName");
-
-    const code =
-        document.getElementById("bugCode");
-
-    const answer =
-        document.getElementById("bugAnswer");
-
-    const hint =
-        document.getElementById("bugHint");
-
-    const hintText =
-        document.getElementById("bugHintText");
-
-    const result =
-        document.getElementById("bugResult");
-
-    const resultTitle =
-        document.getElementById("bugResultTitle");
-
-    const explanation =
-        document.getElementById("bugExplanation");
-
-    const nextButton =
-        document.getElementById("nextBug");
-
-    const checkButton =
-        document.getElementById("checkBug");
-
-    const hintButton =
-        document.getElementById("showBugHint");
-
-    const skipButton =
-        document.getElementById("skipBug");
-
-    const solvedDisplay =
-        document.getElementById("bugSolved");
-
-    const streakDisplay =
-        document.getElementById("bugStreak");
-
-    const languageDisplay =
-        document.getElementById("bugCurrentLanguage");
-
-    const complete =
-        document.getElementById("bugComplete");
-
-    const completeText =
-        document.getElementById("bugCompleteText");
-
-
-    /* =====================================================
-       STORAGE
-       ===================================================== */
-
-    function loadProgress() {
-
-        try {
-
-            const saved =
-                localStorage.getItem(
-                    "aiMentorBugDetective"
-                );
-
-            if (saved) {
-
-                const data =
-                    JSON.parse(saved);
-
-                solvedCases =
-                    data.solvedCases || {};
-
-            }
-
-        } catch (error) {
-
-            solvedCases = {};
-
+    const response =
+      await fetch(
+        BACKEND_URL,
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+          body:
+            JSON.stringify(payload)
         }
+      );
 
+    const text =
+      await response.text();
+
+    let data;
+
+    try{
+      data =
+        JSON.parse(text);
+    }catch{
+
+      return {
+        ok:false,
+        error:
+          "Backend returned invalid JSON."
+      };
     }
 
+    return data;
 
-    function saveProgress() {
+  }catch(error){
 
-        try {
+    return {
+      ok:false,
+      error:
+        "Could not connect to the AI backend."
+    };
+  }
+}
 
-            localStorage.setItem(
-                "aiMentorBugDetective",
-                JSON.stringify({
-                    solvedCases: solvedCases
-                })
-            );
 
-        } catch (error) {
+/* =========================================================
+   UTILITIES
+========================================================= */
 
-            /* Storage may be unavailable.
-               The game still works without it. */
+function escapeHtml(value){
 
-        }
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+/* =========================================================
+   LANGUAGE CHANGE
+========================================================= */
+
+document
+  .getElementById("languageSelect")
+  .addEventListener(
+    "change",
+    event=>{
+
+      state.language =
+        event.target.value;
+
+      state.level = 0;
+      state.lesson = 0;
+      state.chatHistory = [];
+
+      loadProgress();
+      renderAll();
+
+      document.getElementById("chat")
+        .innerHTML = "";
+
+      addMessage(
+        "ai",
+        `Hi! I'm your ${currentCourse().name} mentor. Ask me about the current lesson, your code, or a bug you're trying to understand.`
+      );
+    }
+  );
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+document
+  .getElementById("completeButton")
+  .addEventListener(
+    "click",
+    ()=>{
+      completeCurrentLesson();
+
+      alert(
+        "✓ Lesson completed. The next lesson is unlocked."
+      );
+    }
+  );
+
+
+document
+  .getElementById("nextButton")
+  .addEventListener(
+    "click",
+    nextLesson
+  );
+
+
+document
+  .getElementById("hintButton")
+  .addEventListener(
+    "click",
+    showHint
+  );
+
+
+document
+  .getElementById("runButton")
+  .addEventListener(
+    "click",
+    runCode
+  );
+
+
+document
+  .getElementById("analyzeButton")
+  .addEventListener(
+    "click",
+    analyzeCode
+  );
+
+
+document
+  .getElementById("resetEditor")
+  .addEventListener(
+    "click",
+    ()=>{
+      document.getElementById("editor")
+        .value =
+        examples[state.language];
+    }
+  );
+
+
+document
+  .getElementById("checkBug")
+  .addEventListener(
+    "click",
+    checkBug
+  );
+
+
+document
+  .getElementById("newBug")
+  .addEventListener(
+    "click",
+    renderBug
+  );
+
+
+document
+  .getElementById("sendButton")
+  .addEventListener(
+    "click",
+    sendMessage
+  );
+
+
+document
+  .getElementById("chatInput")
+  .addEventListener(
+    "keydown",
+    event=>{
+
+      if(
+        event.key === "Enter" &&
+        !event.shiftKey
+      ){
+
+        event.preventDefault();
+        sendMessage();
+
+      }
 
     }
+  );
 
 
-    /* =====================================================
-       HELPERS
-       ===================================================== */
-
-    function getSolvedList(language) {
-
-        if (!Array.isArray(solvedCases[language])) {
-            solvedCases[language] = [];
-        }
-
-        return solvedCases[language];
-
+document
+  .getElementById("tryButton")
+  .addEventListener(
+    "click",
+    ()=>{
+      document.getElementById("playground")
+        .scrollIntoView({
+          behavior:"smooth"
+        });
     }
+  );
 
 
-    function getAvailableCases(language) {
+/* =========================================================
+   RENDER EVERYTHING
+========================================================= */
 
-        const cases =
-            bugDatabase[language] || [];
+function renderAll(){
 
-        const solved =
-            getSolvedList(language);
+  renderCurriculum();
+  renderLesson();
+}
 
-        return cases.filter(
-            function (item) {
 
-                return !solved.includes(
-                    item.title
-                );
+/* =========================================================
+   START
+========================================================= */
 
-            }
-        );
+loadProgress();
 
-    }
+renderAll();
 
+addMessage(
+  "ai",
+  "Hi! I'm your AI Coding Mentor. Ask me about the current lesson or paste your code when you want help."
+);
 
-    /*
-       Random case selection.
-
-       Priority:
-       1. Never solved cases.
-       2. Avoid current case.
-       3. Randomize the result.
-       4. If every case has been solved,
-          reset that language's case pool.
-    */
-
-    function chooseCase(language) {
-
-        let available =
-            getAvailableCases(language);
-
-        if (available.length === 0) {
-
-            solvedCases[language] = [];
-
-            saveProgress();
-
-            available =
-                bugDatabase[language].slice();
-
-        }
-
-
-        if (
-            currentCase &&
-            available.length > 1
-        ) {
-
-            available =
-                available.filter(
-                    function (item) {
-
-                        return (
-                            item.title !==
-                            currentCase.title
-                        );
-
-                    }
-                );
-
-        }
-
-
-        const index =
-            Math.floor(
-                Math.random() *
-                available.length
-            );
-
-        return available[index];
-
-    }
-
-
-    /* =====================================================
-       UPDATE STATS
-       ===================================================== */
-
-    function updateStats() {
-
-        let total = 0;
-
-        Object.keys(solvedCases)
-            .forEach(
-                function (language) {
-
-                    if (
-                        Array.isArray(
-                            solvedCases[language]
-                        )
-                    ) {
-
-                        total +=
-                            solvedCases[language].length;
-
-                    }
-
-                }
-            );
-
-        solvedDisplay.textContent =
-            total;
-
-        streakDisplay.textContent =
-            currentStreak;
-
-        languageDisplay.textContent =
-            currentLanguage.toUpperCase();
-
-    }
-
-
-    /* =====================================================
-       DIFFICULTY
-       ===================================================== */
-
-    function updateDifficulty(level) {
-
-        const bars =
-            root.querySelectorAll(
-                ".bug-difficulty i"
-            );
-
-        bars.forEach(
-            function (bar, index) {
-
-                if (index < level) {
-
-                    bar.style.background =
-                        "#8b7cff";
-
-                } else {
-
-                    bar.style.background =
-                        "#26344f";
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       LOAD CASE
-       ===================================================== */
-
-    function loadCase(language) {
-
-        currentLanguage =
-            language;
-
-        currentCase =
-            chooseCase(language);
-
-        if (!currentCase) {
-            return;
-        }
-
-
-        caseTitle.textContent =
-            currentCase.title;
-
-        description.textContent =
-            currentCase.description;
-
-        fileName.textContent =
-            currentCase.file;
-
-        code.textContent =
-            currentCase.code;
-
-
-        updateDifficulty(
-            currentCase.difficulty
-        );
-
-
-        answer.value = "";
-
-        hint.classList.remove("show");
-
-        hintText.textContent =
-            currentCase.hint;
-
-        result.className =
-            "bug-result";
-
-        resultTitle.textContent =
-            "";
-
-        explanation.textContent =
-            "";
-
-        nextButton.classList.remove(
-            "show"
-        );
-
-        complete.classList.remove(
-            "show"
-        );
-
-        hintUsed = false;
-
-        hintButton.disabled = false;
-
-        hintButton.style.opacity = "1";
-
-        updateStats();
-
-    }
-
-
-    /* =====================================================
-       CHECK ANSWER
-       ===================================================== */
-
-    function checkAnswer() {
-
-        if (!currentCase) {
-            return;
-        }
-
-
-        const userAnswer =
-            answer.value
-                .trim()
-                .toLowerCase();
-
-
-        if (!userAnswer) {
-
-            result.className =
-                "bug-result wrong show";
-
-            resultTitle.textContent =
-                "Write your diagnosis first.";
-
-            explanation.textContent =
-                "Explain what you think is wrong with the code.";
-
-            return;
-
-        }
-
-
-        /*
-           We don't require an exact sentence.
-
-           Instead, we check whether the student's
-           explanation contains relevant debugging terms.
-        */
-
-        const matched =
-            currentCase.keywords.filter(
-                function (keyword) {
-
-                    return userAnswer.includes(
-                        keyword.toLowerCase()
-                    );
-
-                }
-            );
-
-
-        const isCorrect =
-            matched.length >= 1;
-
-
-        if (isCorrect) {
-
-            const solved =
-                getSolvedList(
-                    currentLanguage
-                );
-
-
-            if (
-                !solved.includes(
-                    currentCase.title
-                )
-            ) {
-
-                solved.push(
-                    currentCase.title
-                );
-
-            }
-
-
-            saveProgress();
-
-            currentStreak++;
-
-            result.className =
-                "bug-result correct show";
-
-            resultTitle.textContent =
-                "✓ Case solved!";
-
-            explanation.textContent =
-                currentCase.explanation;
-
-
-            nextButton.classList.add(
-                "show"
-            );
-
-
-            const remaining =
-                getAvailableCases(
-                    currentLanguage
-                ).length;
-
-
-            if (remaining === 0) {
-
-                complete.classList.add(
-                    "show"
-                );
-
-                completeText.textContent =
-                    "You solved every available " +
-                    currentLanguage.toUpperCase() +
-                    " case. Start a new round to practice them again.";
-
-            }
-
-
-            updateStats();
-
-
-        } else {
-
-            currentStreak = 0;
-
-            result.className =
-                "bug-result wrong show";
-
-            resultTitle.textContent =
-                "Not quite. Keep investigating.";
-
-            explanation.textContent =
-                "Look at the syntax, variable names, operators, " +
-                "types, or structure. Try explaining the specific " +
-                "line that causes the problem.";
-
-            updateStats();
-
-        }
-
-    }
-
-
-    /* =====================================================
-       HINT
-       ===================================================== */
-
-    function showHint() {
-
-        if (!currentCase) {
-            return;
-        }
-
-        hint.classList.add(
-            "show"
-        );
-
-        hintUsed = true;
-
-        hintButton.disabled =
-            true;
-
-        hintButton.style.opacity =
-            ".5";
-
-    }
-
-
-    /* =====================================================
-       SKIP
-       ===================================================== */
-
-    function skipCase() {
-
-        currentStreak = 0;
-
-        loadCase(
-            currentLanguage
-        );
-
-    }
-
-
-    /* =====================================================
-       NEXT CASE
-       ===================================================== */
-
-    function nextCase() {
-
-        loadCase(
-            currentLanguage
-        );
-
-    }
-
-
-    /* =====================================================
-       LANGUAGE CHANGE
-       ===================================================== */
-
-    languageButtons.forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    languageButtons.forEach(
-                        function (item) {
-
-                            item.classList.remove(
-                                "active"
-                            );
-
-                        }
-                    );
-
-
-                    button.classList.add(
-                        "active"
-                    );
-
-
-                    currentStreak = 0;
-
-
-                    loadCase(
-                        button.dataset.bugLanguage
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       BUTTON EVENTS
-       ===================================================== */
-
-    checkButton.addEventListener(
-        "click",
-        checkAnswer
-    );
-
-
-    hintButton.addEventListener(
-        "click",
-        showHint
-    );
-
-
-    skipButton.addEventListener(
-        "click",
-        skipCase
-    );
-
-
-    nextButton.addEventListener(
-        "click",
-        nextCase
-    );
-
-
-    /* =====================================================
-       KEYBOARD SHORTCUT
-       ===================================================== */
-
-    answer.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                (event.ctrlKey || event.metaKey) &&
-                event.key === "Enter"
-            ) {
-
-                checkAnswer();
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       INITIALIZE
-       ===================================================== */
-
-    loadProgress();
-
-    loadCase("html");
-
-})();
 </script>
 
-<!-- =========================================================
-     END BUG DETECTIVE
-     ========================================================= -->
+</body>
+</html>
