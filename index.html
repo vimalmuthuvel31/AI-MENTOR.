@@ -6,2465 +6,3806 @@
 <title>AI Coding Mentor</title>
 
 <style>
-:root{
-  --bg:#071018;
-  --panel:#0d1722;
-  --panel2:#101d2b;
-  --border:#203044;
-  --text:#eef4ff;
-  --muted:#91a1b7;
-  --blue:#6d8cff;
-  --purple:#8b72ff;
-  --green:#32d583;
-  --red:#ff647c;
-  --yellow:#ffc857;
-  --shadow:0 20px 60px rgba(0,0,0,.25);
+/* =========================================================
+   AI CODING MENTOR — COMPLETE REDESIGNED UI
+   ========================================================= */
+
+:root {
+    --bg: #070a12;
+    --panel: #0d1220;
+    --panel-2: #111827;
+    --panel-3: #151d2d;
+    --border: rgba(255,255,255,.08);
+
+    --text: #f5f7fb;
+    --muted: #8994aa;
+    --muted2: #657087;
+
+    --primary: #7c5cff;
+    --primary-2: #5b8cff;
+    --cyan: #27d8ff;
+    --green: #35d39a;
+    --orange: #ffb454;
+    --red: #ff647c;
+
+    --radius: 18px;
+    --sidebar: 270px;
 }
 
-*{
-  box-sizing:border-box;
+* {
+    box-sizing: border-box;
 }
 
-html{
-  scroll-behavior:smooth;
+html {
+    scroll-behavior: smooth;
 }
 
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+body {
+    margin: 0;
+    background:
+        radial-gradient(circle at 15% 0%, rgba(124,92,255,.10), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(39,216,255,.06), transparent 25%),
+        var(--bg);
+    color: var(--text);
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 }
 
 button,
 textarea,
-select{
-  font:inherit;
+select {
+    font: inherit;
 }
 
-button{
-  cursor:pointer;
+button {
+    cursor: pointer;
 }
 
-.app{
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:270px minmax(0,1fr) 350px;
+.app {
+    min-height: 100vh;
 }
 
-/* ================= SIDEBAR ================= */
 
-.sidebar{
-  position:sticky;
-  top:0;
-  height:100vh;
-  overflow:auto;
-  padding:20px 15px;
-  border-right:1px solid var(--border);
-  background:#09131d;
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.topbar {
+    height: 68px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 22px;
+
+    border-bottom: 1px solid var(--border);
+
+    background: rgba(7,10,18,.82);
+    backdrop-filter: blur(18px);
 }
 
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:25px;
-  font-weight:900;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
 }
 
-.logo-icon{
-  width:36px;
-  height:36px;
-  display:grid;
-  place-items:center;
-  border-radius:10px;
-  background:linear-gradient(135deg,var(--blue),var(--purple));
+.brand-mark {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(135deg, #7c5cff, #27d8ff);
+
+    color: white;
+    font-weight: 900;
 }
 
-.logo span{
-  color:#fff;
+.brand-text strong {
+    display: block;
+    font-size: 14px;
 }
 
-.language-select{
-  width:100%;
-  padding:11px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  background:var(--panel);
-  color:#fff;
-  outline:none;
-  margin-bottom:20px;
+.brand-text span {
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 1px;
 }
 
-.level-group{
-  margin-bottom:20px;
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
 }
 
-.level-title{
-  color:#65758b;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:1.4px;
-  margin:0 0 8px;
-  padding-left:7px;
+.top-pill {
+    padding: 8px 12px;
+
+    border: 1px solid var(--border);
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.035);
+
+    color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 800;
 }
 
-.lesson-btn{
-  width:100%;
-  text-align:left;
-  border:1px solid transparent;
-  background:transparent;
-  color:var(--muted);
-  padding:9px 10px;
-  border-radius:8px;
-  margin-bottom:3px;
-  font-size:12px;
+.xp-pill {
+    color: var(--orange);
 }
 
-.lesson-btn:hover{
-  background:rgba(109,140,255,.08);
-  color:#fff;
+.menu-button {
+    display: none;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: var(--panel);
+
+    color: white;
 }
 
-.lesson-btn.active{
-  background:rgba(109,140,255,.12);
-  border-color:rgba(109,140,255,.25);
-  color:#fff;
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: fixed;
+    top: 68px;
+    left: 0;
+    bottom: 0;
+
+    width: var(--sidebar);
+
+    padding: 20px 14px;
+
+    overflow-y: auto;
+
+    border-right: 1px solid var(--border);
+
+    background: rgba(9,13,23,.94);
+
+    z-index: 90;
 }
 
-.lesson-btn.locked{
-  opacity:.45;
-  cursor:not-allowed;
+.language-select {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid var(--border);
+    border-radius: 11px;
+
+    background: var(--panel);
+
+    color: white;
+    outline: none;
 }
 
-/* ================= MAIN ================= */
+.nav-label {
+    margin: 22px 9px 8px;
 
-.main{
-  min-width:0;
-  padding:30px;
+    color: var(--muted2);
+
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
 }
 
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  align-items:center;
-  margin-bottom:25px;
+.nav-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 4px;
+    padding: 10px 11px;
+
+    border: 1px solid transparent;
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    text-align: left;
+    font-size: 11px;
+
+    transition: .2s;
 }
 
-.topbar h1{
-  margin:0;
-  font-size:25px;
+.nav-item:hover {
+    background: rgba(255,255,255,.035);
+    color: white;
 }
 
-.progress-wrap{
-  min-width:180px;
+.nav-item.active {
+    border-color: rgba(124,92,255,.25);
+    background: rgba(124,92,255,.10);
+    color: white;
 }
 
-.progress-label{
-  display:flex;
-  justify-content:space-between;
-  color:var(--muted);
-  font-size:10px;
-  margin-bottom:6px;
+.nav-item.locked {
+    opacity: .45;
 }
 
-.progress{
-  height:6px;
-  border-radius:10px;
-  background:#172333;
-  overflow:hidden;
+.nav-number {
+    width: 23px;
+    height: 23px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 7px;
+
+    background: rgba(255,255,255,.05);
+
+    color: var(--muted2);
+
+    font-size: 8px;
+    font-weight: 900;
 }
 
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,var(--blue),var(--purple));
-  transition:.3s;
+.nav-item.active .nav-number {
+    background: var(--primary);
+    color: white;
 }
 
-.card{
-  border:1px solid var(--border);
-  background:var(--panel);
-  border-radius:15px;
-  padding:25px;
-  margin-bottom:18px;
-  box-shadow:var(--shadow);
+.progress-mini {
+    height: 5px;
+
+    margin: 16px 7px;
+
+    overflow: hidden;
+
+    border-radius: 99px;
+
+    background: rgba(255,255,255,.06);
 }
 
-.badge{
-  display:inline-block;
-  padding:6px 9px;
-  border-radius:6px;
-  background:rgba(109,140,255,.1);
-  color:var(--blue);
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:1px;
+.progress-mini span {
+    display: block;
+    width: 18%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(90deg,var(--primary),var(--cyan));
 }
 
-.lesson-title{
-  margin:12px 0 8px;
-  font-size:32px;
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.main {
+    margin-left: var(--sidebar);
+    padding-top: 68px;
 }
 
-.lesson-description{
-  color:var(--muted);
-  line-height:1.7;
-  font-size:14px;
+.content {
+    width: min(1250px, calc(100% - 42px));
+
+    margin: auto;
+
+    padding: 34px 0 80px;
 }
 
-.concept-box{
-  padding:17px;
-  border:1px solid rgba(109,140,255,.2);
-  border-radius:10px;
-  background:rgba(109,140,255,.04);
-  margin-top:18px;
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.5fr .8fr;
+    gap: 18px;
+
+    margin-bottom: 18px;
 }
 
-.concept-box strong{
-  display:block;
-  margin-bottom:7px;
+.hero-card {
+    min-height: 270px;
+
+    position: relative;
+    overflow: hidden;
+
+    padding: 34px;
+
+    border: 1px solid var(--border);
+    border-radius: 24px;
+
+    background:
+        radial-gradient(circle at 90% 0%, rgba(124,92,255,.18), transparent 35%),
+        linear-gradient(145deg,#111827,#0b101c);
 }
 
-.code-block{
-  margin-top:18px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  overflow:hidden;
+.hero-card:after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    right: -90px;
+    bottom: -110px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(39,216,255,.14);
 }
 
-.code-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:9px 12px;
-  background:#07101a;
-  border-bottom:1px solid var(--border);
-  color:#7e8da3;
-  font-size:10px;
+.eyebrow {
+    color: var(--cyan);
+
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.7px;
 }
 
-.code-block pre{
-  margin:0;
-  padding:18px;
-  overflow:auto;
-  color:#d6e0ef;
-  background:#050b12;
-  font-family:Consolas,Monaco,monospace;
-  font-size:12px;
-  line-height:1.7;
+.hero h1 {
+    max-width: 720px;
+
+    margin: 11px 0 12px;
+
+    font-size: clamp(34px,5vw,58px);
+    line-height: 1.02;
+    letter-spacing: -3px;
 }
 
-.try-btn{
-  border:0;
-  border-radius:7px;
-  padding:7px 10px;
-  background:var(--blue);
-  color:white;
-  font-size:10px;
-  font-weight:800;
+.hero h1 span {
+    color: var(--primary);
 }
 
-.action-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:9px;
-  margin-top:18px;
+.hero p {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+    line-height: 1.7;
 }
 
-.primary,
-.secondary,
-.danger{
-  border-radius:8px;
-  padding:10px 14px;
-  border:1px solid var(--border);
-  font-size:11px;
-  font-weight:800;
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    margin-top: 22px;
 }
 
-.primary{
-  background:var(--blue);
-  color:white;
-  border-color:transparent;
+.primary-button,
+.secondary-button {
+    padding: 11px 16px;
+
+    border-radius: 10px;
+
+    font-size: 10px;
+    font-weight: 900;
 }
 
-.secondary{
-  background:var(--panel2);
-  color:#d8e2ef;
+.primary-button {
+    border: 0;
+    background: var(--primary);
+    color: white;
 }
 
-.danger{
-  background:rgba(255,100,124,.08);
-  color:#ff8295;
-  border-color:rgba(255,100,124,.2);
+.secondary-button {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.04);
+    color: white;
 }
 
-/* ================= QUIZ ================= */
+.stats-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
 
-.quiz-option{
-  display:block;
-  width:100%;
-  text-align:left;
-  margin-top:8px;
-  padding:11px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:#0a141f;
-  color:#b9c6d7;
+    padding: 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 24px;
+
+    background: var(--panel);
 }
 
-.quiz-option:hover{
-  border-color:var(--blue);
-  color:white;
+.stat {
+    padding: 18px;
+
+    border: 1px solid var(--border);
+    border-radius: 15px;
+
+    background: rgba(255,255,255,.025);
 }
 
-.quiz-result{
-  min-height:20px;
-  margin-top:10px;
-  font-size:12px;
-  font-weight:800;
+.stat strong {
+    display: block;
+
+    font-size: 25px;
 }
 
-/* ================= PLAYGROUND ================= */
+.stat span {
+    color: var(--muted);
 
-.editor{
-  width:100%;
-  min-height:230px;
-  resize:vertical;
-  border:1px solid var(--border);
-  border-radius:9px;
-  background:#050b12;
-  color:#d9e4f2;
-  padding:15px;
-  font-family:Consolas,Monaco,monospace;
-  font-size:12px;
-  line-height:1.6;
-  outline:none;
+    font-size: 9px;
 }
 
-.editor:focus{
-  border-color:var(--blue);
+
+/* =========================================================
+   THREE FEATURE CARDS
+   ========================================================= */
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 12px;
+
+    margin-bottom: 18px;
 }
 
-.output{
-  margin-top:12px;
-  width:100%;
-  height:220px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  background:white;
+.feature-card {
+    min-height: 160px;
+
+    padding: 20px;
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    background: var(--panel);
+
+    transition: .25s;
 }
 
-/* ================= BUG DETECTIVE ================= */
-
-.bug-code{
-  border:1px solid rgba(255,100,124,.2);
-  background:#090e15;
-  border-radius:9px;
-  padding:16px;
-  overflow:auto;
-  color:#d7e0ec;
-  font-family:monospace;
-  font-size:12px;
-  line-height:1.7;
+.feature-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(124,92,255,.3);
 }
 
-.bug-input{
-  width:100%;
-  margin-top:10px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:#08121c;
-  color:#fff;
-  padding:11px;
-  outline:none;
+.feature-icon {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    margin-bottom: 15px;
+
+    border-radius: 11px;
+
+    background: rgba(124,92,255,.11);
+
+    font-size: 17px;
 }
 
-.bug-input:focus{
-  border-color:var(--red);
+.feature-card:nth-child(2) .feature-icon {
+    background: rgba(39,216,255,.09);
 }
 
-.bug-result{
-  margin-top:10px;
-  min-height:20px;
-  font-size:12px;
-  font-weight:800;
+.feature-card:nth-child(3) .feature-icon {
+    background: rgba(53,211,154,.09);
 }
 
-/* ================= RIGHT MENTOR ================= */
+.feature-card h3 {
+    margin: 0 0 7px;
 
-.mentor{
-  position:sticky;
-  top:0;
-  height:100vh;
-  border-left:1px solid var(--border);
-  background:#09131d;
-  display:flex;
-  flex-direction:column;
+    font-size: 14px;
 }
 
-.mentor-head{
-  padding:17px;
-  border-bottom:1px solid var(--border);
+.feature-card p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 10px;
+    line-height: 1.65;
 }
 
-.mentor-head strong{
-  display:block;
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.section {
+    margin-top: 18px;
 }
 
-.mentor-head span{
-  color:var(--green);
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:1px;
+.section-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
+    margin-bottom: 12px;
 }
 
-.chat{
-  flex:1;
-  overflow:auto;
-  padding:15px;
+.section-head h2 {
+    margin: 0;
+
+    font-size: 19px;
 }
 
-.message{
-  max-width:92%;
-  padding:11px;
-  border-radius:10px;
-  margin-bottom:10px;
-  font-size:12px;
-  line-height:1.6;
-  white-space:pre-wrap;
+.section-head p {
+    margin: 4px 0 0;
+
+    color: var(--muted);
+
+    font-size: 10px;
 }
 
-.message.user{
-  margin-left:auto;
-  background:rgba(109,140,255,.15);
-  border:1px solid rgba(109,140,255,.2);
+
+/* =========================================================
+   ROADMAP
+   ========================================================= */
+
+.roadmap {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 12px;
 }
 
-.message.ai{
-  background:#101d2a;
-  border:1px solid var(--border);
+.level-card {
+    position: relative;
+
+    padding: 20px;
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    background: var(--panel);
 }
 
-.chat-input{
-  padding:12px;
-  border-top:1px solid var(--border);
+.level-card.current {
+    border-color: rgba(124,92,255,.35);
 }
 
-.chat-input textarea{
-  width:100%;
-  resize:none;
-  height:75px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  background:#07111a;
-  color:#fff;
-  padding:10px;
-  outline:none;
+.level-card.locked {
+    opacity: .62;
 }
 
-.chat-input textarea:focus{
-  border-color:var(--purple);
+.level-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.send{
-  width:100%;
-  margin-top:8px;
-  border:0;
-  border-radius:8px;
-  padding:11px;
-  background:var(--purple);
-  color:white;
-  font-size:11px;
-  font-weight:900;
+.level-badge {
+    padding: 6px 8px;
+
+    border-radius: 7px;
+
+    background: rgba(124,92,255,.10);
+
+    color: var(--primary);
+
+    font-size: 8px;
+    font-weight: 900;
 }
 
-/* ================= MOBILE ================= */
-
-@media(max-width:1050px){
-  .app{
-    grid-template-columns:230px minmax(0,1fr);
-  }
-
-  .mentor{
-    display:none;
-  }
+.level-card.locked .level-badge {
+    color: var(--muted2);
+    background: rgba(255,255,255,.04);
 }
 
-@media(max-width:700px){
-  .app{
-    display:block;
-  }
+.level-card h3 {
+    margin: 13px 0 6px;
 
-  .sidebar{
-    position:relative;
-    height:auto;
-    border-right:0;
-    border-bottom:1px solid var(--border);
-  }
-
-  .main{
-    padding:15px;
-  }
-
-  .lesson-title{
-    font-size:25px;
-  }
-
-  .topbar{
-    align-items:flex-start;
-    flex-direction:column;
-  }
+    font-size: 16px;
 }
+
+.level-card p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.lesson-list {
+    margin-top: 16px;
+}
+
+.lesson {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 7px 0;
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+.lesson.done {
+    color: var(--green);
+}
+
+.lesson-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--muted2);
+}
+
+.lesson.done .lesson-dot {
+    background: var(--green);
+}
+
+
+/* =========================================================
+   WORKSPACE
+   ========================================================= */
+
+.workspace {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.workspace-card {
+    min-height: 450px;
+
+    border: 1px solid var(--border);
+    border-radius: 20px;
+
+    background: var(--panel);
+
+    overflow: hidden;
+}
+
+.card-header {
+    min-height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 17px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.card-header strong {
+    font-size: 11px;
+}
+
+.card-header span {
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+.code-editor {
+    width: 100%;
+    min-height: 280px;
+
+    display: block;
+
+    resize: vertical;
+
+    padding: 18px;
+
+    border: 0;
+    outline: none;
+
+    background: #070b14;
+
+    color: #dbe3f0;
+
+    font-family:
+        Consolas,
+        Monaco,
+        monospace;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.editor-actions {
+    display: flex;
+    gap: 8px;
+
+    padding: 12px;
+
+    border-top: 1px solid var(--border);
+}
+
+.small-button {
+    padding: 9px 12px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: rgba(255,255,255,.035);
+
+    color: white;
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.small-button.primary {
+    border-color: transparent;
+    background: var(--primary);
+}
+
+
+/* =========================================================
+   OUTPUT
+   ========================================================= */
+
+.output {
+    min-height: 150px;
+
+    padding: 18px;
+
+    color: var(--muted);
+
+    font-family: monospace;
+
+    font-size: 11px;
+
+    white-space: pre-wrap;
+}
+
+
+/* =========================================================
+   AI MENTOR
+   ========================================================= */
+
+.mentor {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 14px;
+}
+
+.chat-card {
+    min-height: 520px;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid var(--border);
+    border-radius: 20px;
+
+    background: var(--panel);
+
+    overflow: hidden;
+}
+
+.chat-messages {
+    flex: 1;
+
+    min-height: 350px;
+    max-height: 450px;
+
+    padding: 18px;
+
+    overflow-y: auto;
+}
+
+.message {
+    max-width: 85%;
+
+    margin-bottom: 12px;
+    padding: 11px 13px;
+
+    border-radius: 12px;
+
+    font-size: 10px;
+    line-height: 1.65;
+}
+
+.message.ai {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.035);
+    color: #cdd6e6;
+}
+
+.message.user {
+    margin-left: auto;
+
+    background: rgba(124,92,255,.14);
+
+    color: #e6e1ff;
+}
+
+.chat-tools {
+    display: flex;
+    gap: 6px;
+
+    padding: 9px 12px;
+
+    overflow-x: auto;
+
+    border-top: 1px solid var(--border);
+}
+
+.chat-tool {
+    flex-shrink: 0;
+
+    padding: 7px 9px;
+
+    border: 1px solid var(--border);
+    border-radius: 7px;
+
+    background: rgba(255,255,255,.03);
+
+    color: var(--muted);
+
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.chat-tool:hover {
+    color: white;
+    border-color: rgba(124,92,255,.4);
+}
+
+.chat-input-row {
+    display: flex;
+    gap: 7px;
+
+    padding: 12px;
+
+    border-top: 1px solid var(--border);
+}
+
+.chat-input {
+    flex: 1;
+
+    min-height: 40px;
+
+    resize: none;
+
+    padding: 11px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #080c15;
+
+    color: white;
+
+    font-size: 10px;
+}
+
+.send-button {
+    width: 43px;
+
+    border: 0;
+    border-radius: 9px;
+
+    background: var(--primary);
+
+    color: white;
+}
+
+
+/* =========================================================
+   SKILL RADAR
+   ========================================================= */
+
+.skill-card {
+    padding: 20px;
+
+    border: 1px solid var(--border);
+    border-radius: 20px;
+
+    background: var(--panel);
+}
+
+.skill-card h3 {
+    margin: 0;
+
+    font-size: 14px;
+}
+
+.skill-card > p {
+    margin: 6px 0 18px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.skill {
+    margin-bottom: 15px;
+}
+
+.skill-top {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 6px;
+
+    font-size: 9px;
+}
+
+.skill-top span:last-child {
+    color: var(--muted);
+}
+
+.skill-bar {
+    height: 6px;
+
+    overflow: hidden;
+
+    border-radius: 99px;
+
+    background: rgba(255,255,255,.06);
+}
+
+.skill-bar span {
+    display: block;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(90deg,var(--primary),var(--cyan));
+}
+
+
+/* =========================================================
+   CODE THINKING REPLAY
+   ========================================================= */
+
+.replay {
+    padding: 22px;
+
+    border: 1px solid var(--border);
+    border-radius: 20px;
+
+    background: var(--panel);
+}
+
+.replay-stage {
+    margin: 15px 0;
+
+    padding: 18px;
+
+    border: 1px solid rgba(39,216,255,.13);
+    border-radius: 13px;
+
+    background: #080d17;
+}
+
+.replay-stage small {
+    color: var(--cyan);
+
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.replay-stage h3 {
+    margin: 7px 0;
+
+    font-size: 15px;
+}
+
+.replay-stage p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.replay-controls {
+    display: flex;
+    gap: 7px;
+}
+
+
+/* =========================================================
+   BUG DETECTIVE
+   ========================================================= */
+
+.bug-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+}
+
+.bug-card {
+    padding: 20px;
+
+    border: 1px solid rgba(255,100,124,.14);
+    border-radius: 18px;
+
+    background:
+        radial-gradient(circle at 100% 0%, rgba(255,100,124,.07), transparent 35%),
+        var(--panel);
+}
+
+.bug-card h3 {
+    margin: 0 0 7px;
+
+    font-size: 15px;
+}
+
+.bug-card p {
+    color: var(--muted);
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.bug-code {
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background: #070b14;
+
+    color: #dbe3f0;
+
+    font-family: monospace;
+
+    font-size: 10px;
+    line-height: 1.7;
+
+    white-space: pre-wrap;
+}
+
+.bug-answer {
+    width: 100%;
+
+    min-height: 80px;
+
+    margin-top: 10px;
+
+    resize: vertical;
+
+    padding: 10px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #080c15;
+
+    color: white;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   MISTAKE MEMORY
+   ========================================================= */
+
+.memory {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 14px;
+}
+
+.memory-score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 220px;
+
+    border: 1px solid rgba(53,211,154,.14);
+    border-radius: 20px;
+
+    background:
+        radial-gradient(circle, rgba(53,211,154,.08), transparent 55%),
+        var(--panel);
+}
+
+.memory-score strong {
+    font-size: 54px;
+
+    color: var(--green);
+}
+
+.memory-list {
+    padding: 20px;
+
+    border: 1px solid var(--border);
+    border-radius: 20px;
+
+    background: var(--panel);
+}
+
+.mistake {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.mistake:last-child {
+    border-bottom: 0;
+}
+
+.mistake strong {
+    display: block;
+
+    font-size: 10px;
+}
+
+.mistake span {
+    color: var(--muted);
+
+    font-size: 8px;
+}
+
+.mistake-count {
+    color: var(--orange);
+
+    font-size: 9px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+.toast {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    max-width: 320px;
+
+    padding: 12px 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 11px;
+
+    background: #111827;
+
+    color: white;
+
+    font-size: 10px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,.35);
+
+    transform: translateY(120px);
+
+    opacity: 0;
+
+    transition: .3s;
+
+    z-index: 500;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:1000px) {
+
+    .hero,
+    .mentor,
+    .memory {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-grid,
+    .roadmap {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+@media(max-width:750px) {
+
+    .menu-button {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: .25s;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+    .content {
+        width: min(100% - 22px,1250px);
+        padding-top: 20px;
+    }
+
+    .hero,
+    .workspace,
+    .bug-grid,
+    .feature-grid,
+    .roadmap {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-card {
+        padding: 25px;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .top-pill {
+        display: none;
+    }
+
+}
+
 </style>
 </head>
+
 
 <body>
 
 <div class="app">
 
 <!-- =========================================================
+     TOP BAR
+     ========================================================= -->
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="brand-mark">
+            &lt;/&gt;
+        </div>
+
+        <div class="brand-text">
+            <strong>AI Coding Mentor</strong>
+            <span>LEARN • BUILD • DEBUG</span>
+        </div>
+
+    </div>
+
+    <div class="top-actions">
+
+        <div class="top-pill">
+            🔥 <span id="streakTop">3</span> day streak
+        </div>
+
+        <div class="top-pill xp-pill">
+            ⚡ <span id="xpTop">420</span> XP
+        </div>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+        >
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
      SIDEBAR
-========================================================= -->
+     ========================================================= -->
 
-<aside class="sidebar">
+<aside class="sidebar" id="sidebar">
 
-  <div class="logo">
-    <div class="logo-icon">AI</div>
-    <span>Coding Mentor</span>
-  </div>
+    <select
+        class="language-select"
+        id="languageSelect"
+    >
+        <option value="HTML">HTML</option>
+        <option value="CSS">CSS</option>
+        <option value="JavaScript">JavaScript</option>
+        <option value="TypeScript">TypeScript</option>
+        <option value="Python">Python</option>
+        <option value="Java">Java</option>
+        <option value="C#">C#</option>
+        <option value="C++">C++</option>
+        <option value="SQL">SQL</option>
+    </select>
 
-  <select id="languageSelect" class="language-select">
-    <option value="html">HTML</option>
-    <option value="css">CSS</option>
-    <option value="javascript">JavaScript</option>
-    <option value="typescript">TypeScript</option>
-    <option value="python">Python</option>
-    <option value="java">Java</option>
-    <option value="csharp">C#</option>
-    <option value="cpp">C++</option>
-    <option value="sql">SQL</option>
-  </select>
 
-  <div id="curriculum"></div>
+    <div class="nav-label">
+        YOUR PROGRESS
+    </div>
+
+    <div class="progress-mini">
+        <span id="sidebarProgress"></span>
+    </div>
+
+
+    <div class="nav-label">
+        BEGINNER
+    </div>
+
+    <button class="nav-item active" data-lesson="Introduction">
+        <span class="nav-number">01</span>
+        Introduction
+    </button>
+
+    <button class="nav-item" data-lesson="Syntax">
+        <span class="nav-number">02</span>
+        Syntax
+    </button>
+
+    <button class="nav-item" data-lesson="Variables">
+        <span class="nav-number">03</span>
+        Variables & Types
+    </button>
+
+    <button class="nav-item" data-lesson="Operators">
+        <span class="nav-number">04</span>
+        Operators
+    </button>
+
+    <button class="nav-item" data-lesson="Conditions">
+        <span class="nav-number">05</span>
+        Conditions
+    </button>
+
+    <button class="nav-item" data-lesson="Loops">
+        <span class="nav-number">06</span>
+        Loops
+    </button>
+
+
+    <div class="nav-label">
+        INTERMEDIATE
+    </div>
+
+    <button class="nav-item locked" data-level="2">
+        <span class="nav-number">07</span>
+        Data Structures
+    </button>
+
+    <button class="nav-item locked" data-level="2">
+        <span class="nav-number">08</span>
+        Functions
+    </button>
+
+    <button class="nav-item locked" data-level="2">
+        <span class="nav-number">09</span>
+        OOP
+    </button>
+
+    <button class="nav-item locked" data-level="2">
+        <span class="nav-number">10</span>
+        Error Handling
+    </button>
+
+
+    <div class="nav-label">
+        ADVANCED
+    </div>
+
+    <button class="nav-item locked" data-level="3">
+        <span class="nav-number">11</span>
+        Design Patterns
+    </button>
+
+    <button class="nav-item locked" data-level="3">
+        <span class="nav-number">12</span>
+        Performance
+    </button>
+
+    <button class="nav-item locked" data-level="3">
+        <span class="nav-number">13</span>
+        Security
+    </button>
+
+    <button class="nav-item locked" data-level="3">
+        <span class="nav-number">14</span>
+        Testing & CI/CD
+    </button>
 
 </aside>
 
 
 <!-- =========================================================
      MAIN
-========================================================= -->
+     ========================================================= -->
 
 <main class="main">
 
-  <div class="topbar">
-
-    <div>
-      <div class="badge" id="levelBadge">BEGINNER</div>
-      <h1 id="pageHeading">Introduction</h1>
-    </div>
-
-    <div class="progress-wrap">
-      <div class="progress-label">
-        <span>COURSE PROGRESS</span>
-        <span id="progressText">0%</span>
-      </div>
-
-      <div class="progress">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-    </div>
-
-  </div>
+<div class="content">
 
 
-  <!-- LESSON -->
+<!-- =========================================================
+     HERO
+     ========================================================= -->
 
-  <section class="card">
+<section class="hero">
 
-    <div class="badge" id="lessonBadge">
-      LESSON 01
-    </div>
+    <div class="hero-card">
 
-    <h2 class="lesson-title" id="lessonTitle">
-      Introduction
-    </h2>
+        <div class="eyebrow">
+            YOUR PERSONAL CODING LAB
+        </div>
 
-    <p class="lesson-description" id="lessonDescription"></p>
+        <h1>
+            Don't just learn code.
+            <span>Learn how to think.</span>
+        </h1>
 
-    <div class="concept-box">
-      <strong>What you should understand</strong>
-      <div id="conceptText"></div>
-    </div>
+        <p>
+            AI Coding Mentor combines structured lessons,
+            Socratic AI guidance, debugging challenges,
+            live coding and active recall into one learning
+            workspace.
+        </p>
 
-    <div class="code-block">
+        <div class="hero-buttons">
 
-      <div class="code-header">
-        <span id="codeLanguage">CODE</span>
+            <button
+                class="primary-button"
+                id="startLearning"
+                type="button"
+            >
+                Start Learning →
+            </button>
 
-        <button class="try-btn" id="tryButton">
-          TRY IT
-        </button>
-      </div>
+            <button
+                class="secondary-button"
+                id="randomChallenge"
+                type="button"
+            >
+                🎯 Random Challenge
+            </button>
 
-      <pre id="lessonCode"></pre>
+        </div>
 
     </div>
 
-    <div class="action-row">
 
-      <button class="primary" id="completeButton">
-        Complete Lesson
-      </button>
+    <div class="stats-card">
 
-      <button class="secondary" id="hintButton">
-        Get Hint
-      </button>
+        <div class="stat">
+            <strong id="statLessons">6</strong>
+            <span>Lessons completed</span>
+        </div>
 
-      <button class="secondary" id="nextButton">
-        Next Lesson →
-      </button>
+        <div class="stat">
+            <strong id="statXP">420</strong>
+            <span>Total XP</span>
+        </div>
 
-    </div>
+        <div class="stat">
+            <strong id="statBugs">8</strong>
+            <span>Bugs solved</span>
+        </div>
 
-    <div id="hintBox" class="concept-box" style="display:none"></div>
-
-  </section>
-
-
-  <!-- PLAYGROUND -->
-
-  <section class="card" id="playground">
-
-    <div class="badge">
-      TRY IT YOURSELF
-    </div>
-
-    <h2>Code Playground</h2>
-
-    <p class="lesson-description">
-      Experiment with the current lesson. For web languages,
-      the preview runs directly in your browser.
-    </p>
-
-    <textarea id="editor" class="editor"></textarea>
-
-    <div class="action-row">
-
-      <button class="primary" id="runButton">
-        ▶ Run Code
-      </button>
-
-      <button class="secondary" id="analyzeButton">
-        Analyze Code
-      </button>
-
-      <button class="secondary" id="resetEditor">
-        Reset
-      </button>
+        <div class="stat">
+            <strong id="statSkills">64%</strong>
+            <span>Skill strength</span>
+        </div>
 
     </div>
 
-    <iframe id="output" class="output"></iframe>
-
-    <div id="analysisResult" class="concept-box" style="display:none"></div>
-
-  </section>
+</section>
 
 
-  <!-- QUIZ -->
+<!-- =========================================================
+     THREE NEW FEATURES
+     ========================================================= -->
 
-  <section class="card">
+<section class="feature-grid">
 
-    <div class="badge">
-      ACTIVE RECALL
-    </div>
+    <div class="feature-card">
 
-    <h2>Quick Concept Check</h2>
+        <div class="feature-icon">
+            🧠
+        </div>
 
-    <p id="quizQuestion"></p>
+        <h3>
+            Code Thinking Replay
+        </h3>
 
-    <div id="quizOptions"></div>
-
-    <div id="quizResult" class="quiz-result"></div>
-
-  </section>
-
-
-  <!-- BUG DETECTIVE -->
-
-  <section class="card">
-
-    <div class="badge">
-      BUG DETECTIVE
-    </div>
-
-    <h2 id="bugTitle">Find the Bug</h2>
-
-    <p class="lesson-description" id="bugDescription"></p>
-
-    <pre class="bug-code" id="bugCode"></pre>
-
-    <input
-      id="bugAnswer"
-      class="bug-input"
-      placeholder="What do you think is wrong?"
-    >
-
-    <div class="action-row">
-
-      <button class="primary" id="checkBug">
-        Check My Diagnosis
-      </button>
-
-      <button class="secondary" id="newBug">
-        New Case
-      </button>
+        <p>
+            Step through your program execution one
+            state at a time and understand what the
+            computer is actually doing.
+        </p>
 
     </div>
 
-    <div id="bugResult" class="bug-result"></div>
 
-  </section>
+    <div class="feature-card">
 
-</main>
+        <div class="feature-icon">
+            📊
+        </div>
+
+        <h3>
+            Skill Radar
+        </h3>
+
+        <p>
+            Track logic, syntax, debugging, algorithms
+            and other individual skills instead of
+            relying on one generic progress percentage.
+        </p>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            🧬
+        </div>
+
+        <h3>
+            Mistake Memory
+        </h3>
+
+        <p>
+            Your repeated mistakes become future practice
+            topics, allowing the mentor to target the
+            concepts you actually struggle with.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ROADMAP
+     ========================================================= -->
+
+<section class="section">
+
+    <div class="section-head">
+
+        <div>
+            <h2>
+                Your Learning Roadmap
+            </h2>
+
+            <p>
+                Progress unlocks sequentially.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="roadmap">
+
+        <div
+            class="level-card current"
+            id="beginnerLevel"
+        >
+
+            <div class="level-top">
+
+                <span class="level-badge">
+                    LEVEL 01
+                </span>
+
+                <span>🌱</span>
+
+            </div>
+
+            <h3>
+                Foundations
+            </h3>
+
+            <p>
+                Build the basic mental models needed
+                to understand programming.
+            </p>
+
+            <div class="lesson-list">
+
+                <div class="lesson done">
+                    <i class="lesson-dot"></i>
+                    Introduction
+                </div>
+
+                <div class="lesson done">
+                    <i class="lesson-dot"></i>
+                    Syntax
+                </div>
+
+                <div class="lesson">
+                    <i class="lesson-dot"></i>
+                    Variables
+                </div>
+
+                <div class="lesson">
+                    <i class="lesson-dot"></i>
+                    Conditions
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="level-card locked"
+            id="intermediateLevel"
+        >
+
+            <div class="level-top">
+
+                <span class="level-badge">
+                    LEVEL 02
+                </span>
+
+                <span>🔒</span>
+
+            </div>
+
+            <h3>
+                Building Capability
+            </h3>
+
+            <p>
+                Combine concepts and begin solving
+                real programming problems.
+            </p>
+
+            <div class="lesson-list">
+
+                <div class="lesson">
+                    <i class="lesson-dot"></i>
+                    Data Structures
+                </div>
+
+                <div class="lesson">
+                    <i class="lesson-dot"></i>
+                    Functions
+                </div>
+
+                <div class="lesson">
+                    <i class="lesson-dot"></i>
+                    OOP
+                </div>
+
+                <div class="lesson">
+                    <i class="lesson-dot"></i>
+                    Debugging
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="level-card locked"
+            id="advancedLevel"
+        >
+
+            <div class="level-top">
+
+                <span class="level-badge">
+                    LEVEL 03
+                </span>
+
+                <span>🔒</span>
+
+            </div>
+
+            <h3>
+                Production & Architecture
+            </h3>
+
+            <p>
+                Move from writing programs to designing
+                robust software systems.
+            </p>
+
+            <div class="lesson-list">
+
+                <div class="lesson">
+                    <i class="lesson-dot"></i>
+                    Design Patterns
+                </div>
+
+                <div class="lesson">
+                    <i class="lesson-dot"></i>
+                    Performance
+                </div>
+
+                <div class="lesson">
+                    <i class="lesson-dot"></i>
+                    Security
+                </div>
+
+                <div class="lesson">
+                    <i class="lesson-dot"></i>
+                    Testing & CI/CD
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CODING WORKSPACE
+     ========================================================= -->
+
+<section class="section">
+
+    <div class="section-head">
+
+        <div>
+            <h2>
+                Try It Yourself
+            </h2>
+
+            <p>
+                Write code, run it and ask the mentor about it.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="workspace">
+
+        <div class="workspace-card">
+
+            <div class="card-header">
+
+                <strong>
+                    CODE EDITOR
+                </strong>
+
+                <span id="editorLanguage">
+                    HTML
+                </span>
+
+            </div>
+
+
+            <textarea
+                class="code-editor"
+                id="codeEditor"
+                spellcheck="false"
+            >&lt;h1&gt;Hello, world!&lt;/h1&gt;
+
+&lt;p&gt;I am learning to code.&lt;/p&gt;</textarea>
+
+
+            <div class="editor-actions">
+
+                <button
+                    class="small-button primary"
+                    id="runCode"
+                    type="button"
+                >
+                    ▶ Run
+                </button>
+
+                <button
+                    class="small-button"
+                    id="analyzeCode"
+                    type="button"
+                >
+                    🔍 Analyze
+                </button>
+
+                <button
+                    class="small-button"
+                    id="sendCodeToMentor"
+                    type="button"
+                >
+                    🧠 Ask Mentor
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="workspace-card">
+
+            <div class="card-header">
+
+                <strong>
+                    OUTPUT / REVIEW
+                </strong>
+
+                <span id="outputStatus">
+                    Ready
+                </span>
+
+            </div>
+
+            <div
+                class="output"
+                id="output"
+            >
+                Your result will appear here.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 
 <!-- =========================================================
      AI MENTOR
-========================================================= -->
+     ========================================================= -->
 
-<aside class="mentor">
+<section class="section">
 
-  <div class="mentor-head">
+    <div class="section-head">
 
-    <strong>🧠 AI Coding Mentor</strong>
+        <div>
+            <h2>
+                Socratic AI Mentor
+            </h2>
 
-    <span>
-      SOCRATIC LEARNING MODE
-    </span>
+            <p>
+                Ask questions. Get guidance. Discover the answer.
+            </p>
 
-  </div>
+        </div>
 
-  <div class="chat" id="chat"></div>
+    </div>
 
-  <div class="chat-input">
 
-    <textarea
-      id="chatInput"
-      placeholder="Ask about your code or lesson..."
-    ></textarea>
+    <div class="mentor">
 
-    <button class="send" id="sendButton">
-      Ask Mentor
-    </button>
+        <div class="chat-card">
 
-  </div>
+            <div class="card-header">
 
-</aside>
+                <strong>
+                    🧠 MENTOR
+                </strong>
+
+                <span>
+                    <span id="mentorLanguage">HTML</span>
+                    • Socratic Mode
+                </span>
+
+            </div>
+
+
+            <div
+                class="chat-messages"
+                id="chatMessages"
+            >
+
+                <div class="message ai">
+
+                    Hey! I'm your coding mentor.
+
+                    I won't immediately dump the answer.
+                    Tell me what you're trying to build,
+                    or paste your code, and we'll reason
+                    through it together.
+
+                </div>
+
+            </div>
+
+
+            <div class="chat-tools">
+
+                <button class="chat-tool" data-mode="explain">
+                    Explain
+                </button>
+
+                <button class="chat-tool" data-mode="hint">
+                    Give Hint
+                </button>
+
+                <button class="chat-tool" data-mode="debug">
+                    Find Bug
+                </button>
+
+                <button class="chat-tool" data-mode="quiz">
+                    Quiz Me
+                </button>
+
+                <button class="chat-tool" data-mode="review">
+                    Review Code
+                </button>
+
+            </div>
+
+
+            <div class="chat-input-row">
+
+                <textarea
+                    class="chat-input"
+                    id="chatInput"
+                    placeholder="Ask your mentor something..."
+                ></textarea>
+
+                <button
+                    class="send-button"
+                    id="sendMessage"
+                    type="button"
+                >
+                    ↑
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- SKILL RADAR -->
+
+        <div class="skill-card">
+
+            <h3>
+                Skill Radar
+            </h3>
+
+            <p>
+                Your current strengths and areas that
+                need more practice.
+            </p>
+
+
+            <div class="skill">
+
+                <div class="skill-top">
+                    <span>Syntax</span>
+                    <span>82%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <span style="width:82%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-top">
+                    <span>Logic</span>
+                    <span>65%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <span style="width:65%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-top">
+                    <span>Debugging</span>
+                    <span>48%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <span style="width:48%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-top">
+                    <span>Functions</span>
+                    <span>58%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <span style="width:58%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-top">
+                    <span>Problem Solving</span>
+                    <span>61%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <span style="width:61%"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CODE THINKING REPLAY
+     ========================================================= -->
+
+<section class="section">
+
+    <div class="replay">
+
+        <div class="section-head">
+
+            <div>
+                <h2>
+                    🧠 Code Thinking Replay
+                </h2>
+
+                <p>
+                    See how your program changes state step by step.
+                </p>
+            </div>
+
+            <span id="replayCounter">
+                Step 1 / 4
+            </span>
+
+        </div>
+
+
+        <div class="replay-stage">
+
+            <small id="replayType">
+                EXECUTION STEP
+            </small>
+
+            <h3 id="replayTitle">
+                Program starts
+            </h3>
+
+            <p id="replayDescription">
+                The browser begins reading the document.
+            </p>
+
+        </div>
+
+
+        <div class="replay-controls">
+
+            <button
+                class="small-button"
+                id="replayPrevious"
+                type="button"
+            >
+                ← Previous
+            </button>
+
+            <button
+                class="small-button primary"
+                id="replayNext"
+                type="button"
+            >
+                Next →
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     BUG DETECTIVE
+     ========================================================= -->
+
+<section class="section">
+
+    <div class="section-head">
+
+        <div>
+            <h2>
+                🕵️ Bug Detective
+            </h2>
+
+            <p>
+                Diagnose the problem before seeing the explanation.
+            </p>
+        </div>
+
+        <button
+            class="small-button"
+            id="newBug"
+            type="button"
+        >
+            New Case
+        </button>
+
+    </div>
+
+
+    <div class="bug-grid">
+
+        <div class="bug-card">
+
+            <h3 id="bugTitle">
+                Case #01 — Broken Heading
+            </h3>
+
+            <p id="bugDescription">
+                Something is wrong with this code.
+                Identify what the browser will interpret incorrectly.
+            </p>
+
+            <div
+                class="bug-code"
+                id="bugCode"
+            >&lt;h1&gt;Welcome&lt;/h2&gt;</div>
+
+        </div>
+
+
+        <div class="bug-card">
+
+            <h3>
+                Your Diagnosis
+            </h3>
+
+            <p>
+                Explain the bug in your own words.
+            </p>
+
+            <textarea
+                class="bug-answer"
+                id="bugAnswer"
+                placeholder="What do you think is wrong?"
+            ></textarea>
+
+            <div style="display:flex;gap:8px;margin-top:10px;">
+
+                <button
+                    class="small-button primary"
+                    id="checkBug"
+                    type="button"
+                >
+                    Check Diagnosis
+                </button>
+
+                <button
+                    class="small-button"
+                    id="bugHint"
+                    type="button"
+                >
+                    Hint
+                </button>
+
+            </div>
+
+            <p id="bugFeedback"></p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MISTAKE MEMORY
+     ========================================================= -->
+
+<section class="section">
+
+    <div class="section-head">
+
+        <div>
+            <h2>
+                🧬 Mistake Memory
+            </h2>
+
+            <p>
+                Your repeated mistakes become personalized practice.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="memory">
+
+        <div class="memory-score">
+
+            <div style="text-align:center">
+
+                <strong id="memoryScore">
+                    72
+                </strong>
+
+                <div style="color:var(--muted);font-size:9px;">
+                    Learning resilience
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="memory-list">
+
+            <div class="mistake">
+
+                <div>
+                    <strong>
+                        HTML closing tags
+                    </strong>
+
+                    <span>
+                        Review recommended
+                    </span>
+                </div>
+
+                <span class="mistake-count">
+                    3 mistakes
+                </span>
+
+            </div>
+
+
+            <div class="mistake">
+
+                <div>
+                    <strong>
+                        JavaScript variable scope
+                    </strong>
+
+                    <span>
+                        Practice again soon
+                    </span>
+                </div>
+
+                <span class="mistake-count">
+                    2 mistakes
+                </span>
+
+            </div>
+
+
+            <div class="mistake">
+
+                <div>
+                    <strong>
+                        Conditional logic
+                    </strong>
+
+                    <span>
+                        Improving
+                    </span>
+                </div>
+
+                <span class="mistake-count">
+                    1 mistake
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer style="
+    margin-top:60px;
+    padding:30px 0;
+    border-top:1px solid var(--border);
+    color:var(--muted);
+    font-size:9px;
+    text-align:center;
+">
+
+    <strong style="color:white;">
+        AI Coding Mentor
+    </strong>
+
+    <br><br>
+
+    Learn the concept. Make the mistake. Understand the fix.
+
+</footer>
+
 
 </div>
+</main>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
 
 
 <script>
 /* =========================================================
-   CONFIGURATION
-========================================================= */
+   AI CODING MENTOR — APPLICATION LOGIC
+   ========================================================= */
 
-/*
-  Replace this with your deployed Google Apps Script
-  /exec URL.
+(function () {
 
-  Example:
-  https://script.google.com/macros/s/XXXXXXXX/exec
-*/
-const BACKEND_URL =
-  "PASTE_YOUR_GOOGLE_APPS_SCRIPT_EXEC_URL_HERE";
-
-
-/* =========================================================
-   CURRICULUM
-========================================================= */
-
-const curriculum = {
-
-html: {
-  name:"HTML",
-  levels:[
-    {
-      name:"Beginner",
-      lessons:[
-        ["Introduction","Learn what HTML is and how browsers use HTML documents."],
-        ["Syntax","Understand tags, elements and document structure."],
-        ["Environment Setup","Create and open your first HTML file."],
-        ["Variables & Data Types","Understand data concepts used alongside HTML."],
-        ["Operators","Understand basic expressions used with embedded scripting."],
-        ["Basic I/O","Understand forms and user input."],
-        ["Conditionals","Learn how conditional behavior is represented with JavaScript."],
-        ["Loops","Understand repeated operations in web applications."],
-        ["Functions","Understand the role of functions in interactive pages."]
-      ]
-    },
-    {
-      name:"Intermediate",
-      lessons:[
-        ["Semantic HTML","Build meaningful page structures."],
-        ["Forms","Create accessible forms."],
-        ["Accessibility","Make pages usable by more people."],
-        ["Tables","Structure tabular information."],
-        ["Media","Work with images, audio and video."],
-        ["DOM Concepts","Understand how HTML becomes a document tree."]
-      ]
-    },
-    {
-      name:"Advanced",
-      lessons:[
-        ["Web Components","Understand reusable browser components."],
-        ["SEO","Structure pages for discoverability."],
-        ["Performance","Build efficient documents."],
-        ["Security","Understand safe HTML practices."],
-        ["Testing","Learn how HTML interfaces can be tested."],
-        ["Production Architecture","Organize large frontend applications."]
-      ]
-    }
-  ]
-},
-
-css: {
-  name:"CSS",
-  levels:[
-    {
-      name:"Beginner",
-      lessons:[
-        ["Introduction","Understand what CSS does."],
-        ["Syntax","Learn selectors and declarations."],
-        ["Environment Setup","Connect CSS to HTML."],
-        ["Variables & Data Types","Use custom properties and values."],
-        ["Operators","Understand CSS calculations."],
-        ["Basic I/O","Style form controls."],
-        ["Conditionals","Understand media queries."],
-        ["Loops","Understand repeated styling patterns."],
-        ["Functions","Use CSS functions such as calc()."]
-      ]
-    },
-    {
-      name:"Intermediate",
-      lessons:[
-        ["Box Model","Master margin, border, padding and content."],
-        ["Flexbox","Build flexible layouts."],
-        ["Grid","Build two-dimensional layouts."],
-        ["Responsive Design","Adapt layouts to screen sizes."],
-        ["Animations","Create transitions and animations."],
-        ["Architecture","Organize scalable CSS."]
-      ]
-    },
-    {
-      name:"Advanced",
-      lessons:[
-        ["Design Systems","Build reusable visual rules."],
-        ["Performance","Optimize CSS delivery."],
-        ["Advanced Layout","Handle complex interfaces."],
-        ["Accessibility","Create accessible visual experiences."],
-        ["Testing","Test visual behavior."],
-        ["Production Architecture","Structure large CSS systems."]
-      ]
-    }
-  ]
-},
-
-javascript: {
-  name:"JavaScript",
-  levels:[
-    {
-      name:"Beginner",
-      lessons:[
-        ["Introduction","Understand JavaScript and its role in web development."],
-        ["Syntax","Learn JavaScript syntax."],
-        ["Environment Setup","Run JavaScript in a browser."],
-        ["Variables & Data Types","Work with let, const and common types."],
-        ["Operators","Perform calculations and comparisons."],
-        ["Basic I/O","Use input and console output."],
-        ["Conditionals","Use if, else and switch."],
-        ["Loops","Repeat operations with for and while."],
-        ["Functions","Create reusable functions."]
-      ]
-    },
-    {
-      name:"Intermediate",
-      lessons:[
-        ["Arrays","Store collections of values."],
-        ["Objects","Represent structured data."],
-        ["Classes","Use object-oriented programming."],
-        ["Error Handling","Handle failures safely."],
-        ["DOM Manipulation","Change webpages with JavaScript."],
-        ["Async Programming","Use promises and async/await."]
-      ]
-    },
-    {
-      name:"Advanced",
-      lessons:[
-        ["Design Patterns","Use reusable architecture patterns."],
-        ["Memory","Understand references and garbage collection."],
-        ["Performance","Analyze and improve application speed."],
-        ["Security","Build safer applications."],
-        ["APIs","Integrate external services."],
-        ["Testing & CI/CD","Understand production engineering."]
-      ]
-    }
-  ]
-},
-
-typescript: {
-  name:"TypeScript",
-  levels:[
-    {
-      name:"Beginner",
-      lessons:[
-        ["Introduction","Understand TypeScript."],
-        ["Syntax","Learn typed syntax."],
-        ["Environment Setup","Configure a TypeScript project."],
-        ["Variables & Types","Use explicit types."],
-        ["Operators","Work with typed expressions."],
-        ["Basic I/O","Handle input data."],
-        ["Conditionals","Use conditional logic."],
-        ["Loops","Repeat typed operations."],
-        ["Functions","Type function parameters and results."]
-      ]
-    },
-    {
-      name:"Intermediate",
-      lessons:[
-        ["Arrays","Create typed collections."],
-        ["Objects","Create structured types."],
-        ["Classes","Use typed classes."],
-        ["Generics","Create reusable typed code."],
-        ["Error Handling","Handle errors."],
-        ["Async Programming","Type promises and asynchronous code."]
-      ]
-    },
-    {
-      name:"Advanced",
-      lessons:[
-        ["Advanced Types","Use unions and intersections."],
-        ["Design Patterns","Structure large TypeScript applications."],
-        ["Performance","Improve build and runtime performance."],
-        ["Security","Use safer type boundaries."],
-        ["API Integration","Type API responses."],
-        ["Testing & CI/CD","Build production workflows."]
-      ]
-    }
-  ]
-},
-
-python: {
-  name:"Python",
-  levels:[
-    {
-      name:"Beginner",
-      lessons:[
-        ["Introduction","Understand Python."],
-        ["Syntax","Learn Python syntax."],
-        ["Environment Setup","Run Python programs."],
-        ["Variables & Data Types","Store and manipulate values."],
-        ["Operators","Perform calculations and comparisons."],
-        ["Basic I/O","Use input and print."],
-        ["Conditionals","Use if, elif and else."],
-        ["Loops","Use for and while."],
-        ["Functions","Create reusable functions."]
-      ]
-    },
-    {
-      name:"Intermediate",
-      lessons:[
-        ["Lists","Work with collections."],
-        ["Dictionaries","Store key-value data."],
-        ["Sets","Work with unique values."],
-        ["Classes","Use object-oriented programming."],
-        ["Exceptions","Handle errors."],
-        ["File I/O","Read and write files."]
-      ]
-    },
-    {
-      name:"Advanced",
-      lessons:[
-        ["Design Patterns","Structure reusable solutions."],
-        ["Memory","Understand references and garbage collection."],
-        ["Performance","Optimize Python programs."],
-        ["Security","Write safer Python applications."],
-        ["APIs","Consume and build APIs."],
-        ["Testing & CI/CD","Prepare applications for production."]
-      ]
-    }
-  ]
-},
-
-java: {
-  name:"Java",
-  levels:[
-    {
-      name:"Beginner",
-      lessons:[
-        ["Introduction","Understand Java and the JVM."],
-        ["Syntax","Learn Java syntax."],
-        ["Environment Setup","Compile and run Java."],
-        ["Variables & Data Types","Use Java's type system."],
-        ["Operators","Work with Java expressions."],
-        ["Basic I/O","Read and display data."],
-        ["Conditionals","Use if and switch."],
-        ["Loops","Use for and while."],
-        ["Methods","Create reusable methods."]
-      ]
-    },
-    {
-      name:"Intermediate",
-      lessons:[
-        ["Arrays","Store collections."],
-        ["Classes","Create classes."],
-        ["Objects","Work with object instances."],
-        ["Inheritance","Reuse behavior."],
-        ["Encapsulation","Protect object state."],
-        ["Exceptions","Handle errors."],
-        ["Collections","Use lists, sets and maps."]
-      ]
-    },
-    {
-      name:"Advanced",
-      lessons:[
-        ["Design Patterns","Build maintainable systems."],
-        ["Memory Management","Understand JVM memory."],
-        ["Concurrency","Work with threads."],
-        ["Performance","Optimize Java applications."],
-        ["Security","Build safer applications."],
-        ["Testing & CI/CD","Prepare production systems."]
-      ]
-    }
-  ]
-},
-
-csharp: {
-  name:"C#",
-  levels:[
-    {
-      name:"Beginner",
-      lessons:[
-        ["Introduction","Understand C# and .NET."],
-        ["Syntax","Learn C# syntax."],
-        ["Environment Setup","Run a C# project."],
-        ["Variables & Data Types","Use C# types."],
-        ["Operators","Work with expressions."],
-        ["Basic I/O","Read and display data."],
-        ["Conditionals","Use if and switch."],
-        ["Loops","Repeat operations."],
-        ["Methods","Create reusable methods."]
-      ]
-    },
-    {
-      name:"Intermediate",
-      lessons:[
-        ["Arrays","Store collections."],
-        ["Classes","Create classes."],
-        ["Objects","Use object instances."],
-        ["Inheritance","Reuse behavior."],
-        ["Encapsulation","Protect state."],
-        ["Exceptions","Handle failures."],
-        ["Collections","Use generic collections."]
-      ]
-    },
-    {
-      name:"Advanced",
-      lessons:[
-        ["LINQ","Query collections."],
-        ["Async Programming","Use async and await."],
-        ["Memory","Understand managed memory."],
-        ["Performance","Optimize applications."],
-        ["Security","Build safer software."],
-        ["Testing & CI/CD","Prepare production software."]
-      ]
-    }
-  ]
-},
-
-cpp: {
-  name:"C++",
-  levels:[
-    {
-      name:"Beginner",
-      lessons:[
-        ["Introduction","Understand C++."],
-        ["Syntax","Learn C++ syntax."],
-        ["Environment Setup","Compile C++."],
-        ["Variables & Data Types","Work with C++ types."],
-        ["Operators","Use expressions."],
-        ["Basic I/O","Use streams."],
-        ["Conditionals","Use if and switch."],
-        ["Loops","Use for and while."],
-        ["Functions","Create reusable functions."]
-      ]
-    },
-    {
-      name:"Intermediate",
-      lessons:[
-        ["Arrays","Store values."],
-        ["References","Work with references."],
-        ["Pointers","Understand memory addresses."],
-        ["Classes","Create classes."],
-        ["Inheritance","Reuse behavior."],
-        ["Exceptions","Handle errors."],
-        ["STL","Use standard containers."]
-      ]
-    },
-    {
-      name:"Advanced",
-      lessons:[
-        ["Templates","Create generic code."],
-        ["Memory Management","Manage resources."],
-        ["Smart Pointers","Use safer ownership."],
-        ["Performance","Optimize programs."],
-        ["Concurrency","Work with threads."],
-        ["Testing & CI/CD","Prepare production software."]
-      ]
-    }
-  ]
-},
-
-sql: {
-  name:"SQL",
-  levels:[
-    {
-      name:"Beginner",
-      lessons:[
-        ["Introduction","Understand relational databases."],
-        ["Syntax","Learn SQL syntax."],
-        ["Environment Setup","Connect to a database."],
-        ["Data Types","Understand database types."],
-        ["Operators","Filter and compare values."],
-        ["Basic I/O","Read and insert records."],
-        ["Conditionals","Use conditional expressions."],
-        ["Loops","Understand procedural SQL concepts."],
-        ["Functions","Use SQL functions."]
-      ]
-    },
-    {
-      name:"Intermediate",
-      lessons:[
-        ["SELECT","Query data."],
-        ["WHERE","Filter records."],
-        ["JOIN","Combine tables."],
-        ["GROUP BY","Aggregate data."],
-        ["Subqueries","Build nested queries."],
-        ["Transactions","Control changes."],
-        ["Error Handling","Handle database errors."]
-      ]
-    },
-    {
-      name:"Advanced",
-      lessons:[
-        ["Indexes","Improve query performance."],
-        ["Query Optimization","Analyze expensive queries."],
-        ["Security","Prevent injection attacks."],
-        ["Transactions","Understand isolation."],
-        ["Database Architecture","Design scalable databases."],
-        ["Testing & CI/CD","Manage production database changes."]
-      ]
-    }
-  ]
-}
-
-};
-
-
-/* =========================================================
-   LESSON GENERATOR
-========================================================= */
-
-const examples = {
-html:
-`<!DOCTYPE html>
-<html>
-  <body>
-    <h1>Hello World</h1>
-  </body>
-</html>`,
-
-css:
-`.card {
-  padding: 20px;
-  border-radius: 10px;
-}`,
-
-javascript:
-`const name = "Alex";
-
-function greet() {
-  console.log("Hello " + name);
-}
-
-greet();`,
-
-typescript:
-`function add(a: number, b: number): number {
-  return a + b;
-}
-
-console.log(add(2, 3));`,
-
-python:
-`name = "Alex"
-
-def greet():
-    print("Hello", name)
-
-greet()`,
-
-java:
-`public class Main {
-  public static void main(String[] args) {
-    int age = 18;
-    System.out.println(age);
-  }
-}`,
-
-csharp:
-`using System;
-
-class Program {
-  static void Main() {
-    int age = 18;
-    Console.WriteLine(age);
-  }
-}`,
-
-cpp:
-`#include <iostream>
-
-int main() {
-  int age = 18;
-  std::cout << age;
-  return 0;
-}`,
-
-sql:
-`SELECT name, age
-FROM students
-WHERE age >= 18;`
-};
+"use strict";
 
 
 /* =========================================================
    STATE
-========================================================= */
+   ========================================================= */
 
-let state = {
-  language:"html",
-  level:0,
-  lesson:0,
-  completed:{},
-  quizAnswered:false,
-  currentBug:null,
-  chatHistory:[]
+const state = {
+
+    language: "HTML",
+
+    xp: 420,
+
+    streak: 3,
+
+    completedLessons: 2,
+
+    currentLevel: 1,
+
+    replayStep: 0,
+
+    mistakeMemory: {},
+
+    bugIndex: 0,
+
+    mentorHistory: []
+
 };
 
 
 /* =========================================================
-   STORAGE
-========================================================= */
+   ELEMENTS
+   ========================================================= */
 
-function storageKey(){
-  return "aiCodingMentor_" + state.language;
-}
+const $ = id => document.getElementById(id);
 
-function saveProgress(){
-  localStorage.setItem(
-    storageKey(),
-    JSON.stringify(state.completed)
-  );
-}
+const sidebar = $("sidebar");
+const menuButton = $("menuButton");
 
-function loadProgress(){
-  try{
-    state.completed =
-      JSON.parse(
-        localStorage.getItem(storageKey()) || "{}"
-      );
-  }catch{
-    state.completed = {};
-  }
+const languageSelect = $("languageSelect");
+
+const codeEditor = $("codeEditor");
+
+const output = $("output");
+const outputStatus = $("outputStatus");
+
+const chatMessages = $("chatMessages");
+const chatInput = $("chatInput");
+
+const bugCode = $("bugCode");
+const bugTitle = $("bugTitle");
+const bugDescription = $("bugDescription");
+const bugAnswer = $("bugAnswer");
+const bugFeedback = $("bugFeedback");
+
+const toast = $("toast");
+
+
+/* =========================================================
+   DATA
+   ========================================================= */
+
+const languageExamples = {
+
+    HTML:
+`<h1>Hello, world!</h1>
+
+<p>I am learning HTML.</p>`,
+
+    CSS:
+`.card {
+    padding: 20px;
+    color: blue;
+}`,
+
+    JavaScript:
+`let name = "Alex";
+
+console.log(name);`,
+
+    TypeScript:
+`let age: number = 18;
+
+console.log(age);`,
+
+    Python:
+`name = "Alex"
+
+print(name)`,
+
+    Java:
+`public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello");
+    }
+}`,
+
+    "C#":
+`using System;
+
+class Program {
+    static void Main() {
+        Console.WriteLine("Hello");
+    }
+}`,
+
+    "C++":
+`#include <iostream>
+
+int main() {
+    std::cout << "Hello";
+}`,
+
+    SQL:
+`SELECT *
+FROM students
+WHERE age > 18;`
+
+};
+
+
+const bugCases = [
+
+    {
+        title: "Case #01 — Broken Heading",
+
+        description:
+            "The opening and closing HTML tags do not match.",
+
+        code:
+`<h1>Welcome</h2>`,
+
+        answer:
+            "The opening tag is h1 but the closing tag is h2.",
+
+        hint:
+            "Compare the element names on both sides."
+    },
+
+
+    {
+        title: "Case #02 — Wrong Variable",
+
+        description:
+            "Something is wrong with the JavaScript variable.",
+
+        code:
+`let userName = "Alex";
+
+console.log(username);`,
+
+        answer:
+            "The variable is named userName, but the code tries to use username.",
+
+        hint:
+            "JavaScript is case-sensitive."
+    },
+
+
+    {
+        title: "Case #03 — Condition Error",
+
+        description:
+            "The condition does not compare the values correctly.",
+
+        code:
+`let age = 20;
+
+if (age = 18) {
+    console.log("Adult");
+}`,
+
+        answer:
+            "The code assigns 18 instead of comparing age with 18.",
+
+        hint:
+            "Look carefully at the operator inside if."
+    },
+
+
+    {
+        title: "Case #04 — Missing Parenthesis",
+
+        description:
+            "The function call is missing something.",
+
+        code:
+`console.log("Hello";`,
+
+        answer:
+            "The closing parenthesis is missing.",
+
+        hint:
+            "Check whether every opening symbol has a matching closing symbol."
+    },
+
+
+    {
+        title: "Case #05 — Python Indentation",
+
+        description:
+            "Python uses indentation to define blocks.",
+
+        code:
+`if age >= 18:
+print("Adult")`,
+
+        answer:
+            "The print statement needs to be indented inside the if block.",
+
+        hint:
+            "Python uses whitespace to define code blocks."
+    }
+
+];
+
+
+const replaySteps = [
+
+    {
+        type: "EXECUTION STEP",
+        title: "Program starts",
+        description:
+            "The browser begins reading the document from the top."
+    },
+
+    {
+        type: "STATE CHANGE",
+        title: "Element discovered",
+        description:
+            "The browser finds the heading element and creates it in the document structure."
+    },
+
+    {
+        type: "RENDER",
+        title: "Content displayed",
+        description:
+            "The browser calculates how the element should appear and paints it on screen."
+    },
+
+    {
+        type: "OUTPUT",
+        title: "Program complete",
+        description:
+            "The browser has finished this simple execution path."
+    }
+
+];
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+let toastTimer;
+
+function showToast(message) {
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 2500);
+
 }
 
 
 /* =========================================================
-   CURRICULUM HELPERS
-========================================================= */
+   XP
+   ========================================================= */
 
-function currentCourse(){
-  return curriculum[state.language];
-}
+function addXP(amount) {
 
-function lessonKey(level,lesson){
-  return `${state.language}:${level}:${lesson}`;
-}
+    state.xp += amount;
 
-function isComplete(level,lesson){
-  return !!state.completed[
-    lessonKey(level,lesson)
-  ];
-}
+    $("xpTop").textContent = state.xp;
+    $("statXP").textContent = state.xp;
 
-function isUnlocked(level,lesson){
+    showToast("+" + amount + " XP earned!");
 
-  if(level === 0 && lesson === 0){
-    return true;
-  }
-
-  if(lesson > 0){
-    return isComplete(level,lesson - 1);
-  }
-
-  return isComplete(level - 1,
-    currentCourse().levels[level - 1].lessons.length - 1
-  );
 }
 
 
 /* =========================================================
-   SIDEBAR
-========================================================= */
+   LANGUAGE SWITCH
+   ========================================================= */
 
-function renderCurriculum(){
+languageSelect.addEventListener(
+    "change",
+    function () {
 
-  const root =
-    document.getElementById("curriculum");
+        state.language = this.value;
 
-  root.innerHTML = "";
+        $("editorLanguage").textContent =
+            state.language;
 
-  currentCourse().levels.forEach(
-    (level,index)=>{
+        $("mentorLanguage").textContent =
+            state.language;
 
-      const group =
-        document.createElement("div");
+        codeEditor.value =
+            languageExamples[state.language] ||
+            "";
 
-      group.className = "level-group";
+        addMentorMessage(
+            "ai",
+            "You're now learning " +
+            state.language +
+            ". What concept would you like to explore?"
+        );
 
-      const title =
-        document.createElement("div");
+        showToast(
+            state.language +
+            " learning path loaded."
+        );
 
-      title.className = "level-title";
+    }
+);
 
-      title.textContent =
-        `${String(index+1).padStart(2,"0")} — ${level.name.toUpperCase()}`;
 
-      group.appendChild(title);
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
 
-      level.lessons.forEach(
-        (lesson,lessonIndex)=>{
+menuButton.addEventListener(
+    "click",
+    function () {
 
-          const button =
-            document.createElement("button");
+        sidebar.classList.toggle("open");
 
-          button.className = "lesson-btn";
+    }
+);
 
-          const unlocked =
-            isUnlocked(index,lessonIndex);
 
-          button.disabled = !unlocked;
+/* =========================================================
+   SIDEBAR LESSONS
+   ========================================================= */
 
-          if(!unlocked){
-            button.classList.add("locked");
-          }
+document.querySelectorAll(".nav-item").forEach(
+    button => {
 
-          if(
-            state.level === index &&
-            state.lesson === lessonIndex
-          ){
-            button.classList.add("active");
-          }
-
-          const done =
-            isComplete(index,lessonIndex);
-
-          button.textContent =
-            `${done ? "✓ " : ""}${lesson[0]}`;
-
-          button.addEventListener(
+        button.addEventListener(
             "click",
-            ()=>{
-              if(!isUnlocked(index,lessonIndex)){
-                return;
-              }
+            function () {
 
-              state.level = index;
-              state.lesson = lessonIndex;
+                if (
+                    this.classList.contains("locked")
+                ) {
 
-              renderAll();
+                    showToast(
+                        "Complete the previous level first."
+                    );
+
+                    return;
+
+                }
+
+                document
+                    .querySelectorAll(".nav-item")
+                    .forEach(
+                        item =>
+                            item.classList.remove("active")
+                    );
+
+                this.classList.add("active");
+
+                const lesson =
+                    this.dataset.lesson ||
+                    "Advanced lesson";
+
+                addMentorMessage(
+                    "ai",
+                    "Let's work on " +
+                    lesson +
+                    " in " +
+                    state.language +
+                    ". Before I explain it, what do you already know about it?"
+                );
+
+                addXP(5);
+
             }
-          );
+        );
 
-          group.appendChild(button);
+    }
+);
+
+
+/* =========================================================
+   START LEARNING
+   ========================================================= */
+
+$("startLearning").addEventListener(
+    "click",
+    function () {
+
+        document
+            .querySelector(".workspace")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+        showToast(
+            "Learning session started."
+        );
+
+    }
+);
+
+
+/* =========================================================
+   RANDOM CHALLENGE
+   ========================================================= */
+
+$("randomChallenge").addEventListener(
+    "click",
+    function () {
+
+        generateBug();
+
+        document
+            .querySelector(".bug-grid")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+);
+
+
+/* =========================================================
+   RUN CODE
+   ========================================================= */
+
+$("runCode").addEventListener(
+    "click",
+    function () {
+
+        const code =
+            codeEditor.value.trim();
+
+        if (!code) {
+
+            output.textContent =
+                "Nothing to run.";
+
+            return;
 
         }
-      );
 
-      root.appendChild(group);
-    }
-  );
-}
 
+        outputStatus.textContent =
+            "Running...";
 
-/* =========================================================
-   PROGRESS
-========================================================= */
 
-function updateProgress(){
+        if (
+            state.language === "HTML"
+        ) {
 
-  const course =
-    currentCourse();
-
-  let total = 0;
-  let done = 0;
-
-  course.levels.forEach(
-    (level,l)=>{
-      level.lessons.forEach(
-        (_,i)=>{
-          total++;
-
-          if(isComplete(l,i)){
-            done++;
-          }
-        }
-      );
-    }
-  );
-
-  const percent =
-    Math.round((done / total) * 100);
-
-  document.getElementById("progressFill")
-    .style.width = percent + "%";
-
-  document.getElementById("progressText")
-    .textContent = percent + "%";
-}
-
-
-/* =========================================================
-   LESSON CONTENT
-========================================================= */
-
-function renderLesson(){
-
-  const course =
-    currentCourse();
-
-  const lesson =
-    course.levels[state.level].lessons[state.lesson];
-
-  document.getElementById("levelBadge")
-    .textContent =
-    course.levels[state.level].name.toUpperCase();
-
-  document.getElementById("pageHeading")
-    .textContent = lesson[0];
-
-  document.getElementById("lessonBadge")
-    .textContent =
-    `LESSON ${String(state.lesson+1).padStart(2,"0")}`;
-
-  document.getElementById("lessonTitle")
-    .textContent = lesson[0];
-
-  document.getElementById("lessonDescription")
-    .textContent = lesson[1];
-
-  document.getElementById("conceptText")
-    .textContent =
-    getConceptExplanation(
-      state.language,
-      lesson[0]
-    );
-
-  document.getElementById("codeLanguage")
-    .textContent =
-    state.language.toUpperCase();
-
-  document.getElementById("lessonCode")
-    .textContent =
-    examples[state.language];
-
-  document.getElementById("editor")
-    .value =
-    examples[state.language];
-
-  document.getElementById("hintBox")
-    .style.display = "none";
-
-  renderQuiz();
-
-  renderBug();
-
-  updateProgress();
-}
-
-
-/* =========================================================
-   EXPLANATIONS
-========================================================= */
-
-function getConceptExplanation(language,topic){
-
-  const map = {
-    "Introduction":
-      `Start by understanding what ${language} is used for and what problems it solves.`,
-
-    "Syntax":
-      `Syntax is the set of rules that tells the ${language} environment how your code should be written.`,
-
-    "Variables & Data Types":
-      `Variables give your program a place to store information. Data types describe what kind of information is stored.`,
-
-    "Operators":
-      `Operators let programs calculate, compare and combine values.`,
-
-    "Conditionals":
-      `Conditionals allow your program to choose different actions based on a condition.`,
-
-    "Loops":
-      `Loops repeat an operation while a condition or sequence requires it.`,
-
-    "Functions":
-      `Functions package logic into reusable pieces so programs become easier to understand and maintain.`,
-
-    "Arrays":
-      `Arrays store multiple values in an ordered collection.`,
-
-    "Objects":
-      `Objects group related data and behavior.`,
-
-    "Classes":
-      `Classes provide a blueprint for creating objects.`,
-
-    "Error Handling":
-      `Error handling lets your program respond to unexpected situations instead of failing silently.`,
-
-    "Async Programming":
-      `Asynchronous programming allows work to continue without unnecessarily blocking other operations.`,
-
-    "Performance":
-      `Performance work focuses on reducing unnecessary computation, memory use and waiting time.`,
-
-    "Security":
-      `Security means treating input and external data carefully and avoiding unsafe assumptions.`,
-
-    "Testing & CI/CD":
-      `Testing checks behavior while CI/CD helps automate reliable delivery of software.`
-  };
-
-  return map[topic] ||
-    `This lesson builds an important ${language} skill. Study the example, experiment in the playground and complete the concept check before moving forward.`;
-}
-
-
-/* =========================================================
-   QUIZ
-========================================================= */
-
-function createQuiz(){
-
-  const language = state.language;
-  const course = currentCourse();
-  const lesson =
-    course.levels[state.level].lessons[state.lesson];
-
-  const topic = lesson[0];
-
-  const quizzes = {
-
-    "Introduction":[
-      `What is ${language} mainly used for?`,
-      ["Programming and building software","Only drawing images","Only writing documents"],
-      0
-    ],
-
-    "Syntax":[
-      `Why is syntax important?`,
-      ["It gives code rules the language can understand","It changes the monitor brightness","It stores files automatically"],
-      0
-    ],
-
-    "Variables & Data Types":[
-      "What does a variable usually store?",
-      ["A value or reference","Only a web page","Only a color"],
-      0
-    ],
-
-    "Operators":[
-      "What can operators do?",
-      ["Calculate or compare values","Create physical hardware","Delete the operating system"],
-      0
-    ],
-
-    "Conditionals":[
-      "Why are conditionals useful?",
-      ["They let programs make decisions","They always repeat code","They only format text"],
-      0
-    ],
-
-    "Loops":[
-      "What is a loop used for?",
-      ["Repeating operations","Creating a database automatically","Changing screen resolution"],
-      0
-    ],
-
-    "Functions":[
-      "Why use functions?",
-      ["To reuse organized logic","To prevent all variables from existing","To turn code into images"],
-      0
-    ],
-
-    "Arrays":[
-      "What is an array?",
-      ["A collection of values","A compiler","A database server"],
-      0
-    ],
-
-    "Classes":[
-      "What is a class?",
-      ["A blueprint for objects","A loop","A network protocol"],
-      0
-    ],
-
-    "Error Handling":[
-      "Why handle errors?",
-      ["To respond safely when something goes wrong","To make every program slower","To remove all variables"],
-      0
-    ]
-
-  };
-
-  return quizzes[topic] || [
-    `What is an important goal of ${topic}?`,
-    [
-      "Understand the concept and apply it",
-      "Ignore the concept",
-      "Avoid practicing"
-    ],
-    0
-  ];
-}
-
-
-function renderQuiz(){
-
-  const quiz = createQuiz();
-
-  document.getElementById("quizQuestion")
-    .textContent = quiz[0];
-
-  const root =
-    document.getElementById("quizOptions");
-
-  root.innerHTML = "";
-
-  document.getElementById("quizResult")
-    .textContent = "";
-
-  quiz[1].forEach(
-    (option,index)=>{
-
-      const button =
-        document.createElement("button");
-
-      button.className = "quiz-option";
-      button.textContent = option;
-
-      button.addEventListener(
-        "click",
-        ()=>{
-
-          if(index === quiz[2]){
-
-            document.getElementById("quizResult")
-              .textContent =
-              "✓ Correct. Lesson completed.";
-
-            document.getElementById("quizResult")
-              .style.color = "var(--green)";
-
-            completeCurrentLesson();
-
-          }else{
-
-            document.getElementById("quizResult")
-              .textContent =
-              "Not quite. Think about the lesson concept and try again.";
-
-            document.getElementById("quizResult")
-              .style.color = "var(--red)";
-          }
+            output.innerHTML =
+                code;
 
         }
-      );
 
-      root.appendChild(button);
+        else if (
+            state.language === "JavaScript"
+        ) {
+
+            try {
+
+                const logs = [];
+
+                const fakeConsole = {
+
+                    log: (...args) => {
+                        logs.push(
+                            args.join(" ")
+                        );
+                    }
+
+                };
+
+                const fn =
+                    new Function(
+                        "console",
+                        code
+                    );
+
+                fn(fakeConsole);
+
+                output.textContent =
+                    logs.length
+                        ? logs.join("\n")
+                        : "Code executed successfully.";
+
+            }
+
+            catch (error) {
+
+                output.textContent =
+                    "Error: " +
+                    error.message;
+
+                rememberMistake(
+                    "JavaScript runtime/debugging"
+                );
+
+            }
+
+        }
+
+        else {
+
+            output.textContent =
+                state.language +
+                " preview is connected to the learning workspace.\n\n" +
+                "Use Analyze Code to receive mentor feedback.";
+
+        }
+
+
+        outputStatus.textContent =
+            "Complete";
+
+        addXP(10);
+
     }
-  );
-}
+);
 
 
 /* =========================================================
-   COMPLETE LESSON
-========================================================= */
+   ANALYZE CODE
+   ========================================================= */
 
-function completeCurrentLesson(){
+$("analyzeCode").addEventListener(
+    "click",
+    function () {
 
-  state.completed[
-    lessonKey(state.level,state.lesson)
-  ] = true;
+        const code =
+            codeEditor.value.trim();
 
-  saveProgress();
+        if (!code) {
 
-  renderCurriculum();
-  updateProgress();
-}
+            showToast(
+                "Write some code first."
+            );
+
+            return;
+
+        }
+
+
+        let feedback =
+            "Code Review\n\n";
+
+
+        if (
+            code.length < 10
+        ) {
+
+            feedback +=
+                "• Your code is very short. Try adding a small behavior or concept.\n";
+
+        }
+
+        else {
+
+            feedback +=
+                "✓ Code has enough structure to review.\n";
+
+        }
+
+
+        if (
+            state.language === "HTML" &&
+            code.includes("<h1>") &&
+            !code.includes("</h1>")
+        ) {
+
+            feedback +=
+                "⚠ Your h1 element may be missing its closing tag.\n";
+
+            rememberMistake(
+                "HTML closing tags"
+            );
+
+        }
+
+
+        if (
+            state.language === "JavaScript" &&
+            code.includes(" = ") &&
+            code.includes("if")
+        ) {
+
+            feedback +=
+                "• Check whether your if condition uses assignment or comparison.\n";
+
+        }
+
+
+        feedback +=
+            "\nSuggested approach:\n" +
+            "1. Identify the purpose of each statement.\n" +
+            "2. Check assumptions.\n" +
+            "3. Test one part at a time.\n" +
+            "4. Refactor only after it works.";
+
+
+        output.textContent =
+            feedback;
+
+        outputStatus.textContent =
+            "AI Review";
+
+        addXP(15);
+
+    }
+);
 
 
 /* =========================================================
-   NEXT LESSON
-========================================================= */
+   SEND CODE TO MENTOR
+   ========================================================= */
 
-function nextLesson(){
+$("sendCodeToMentor").addEventListener(
+    "click",
+    function () {
 
-  const course =
-    currentCourse();
+        const code =
+            codeEditor.value.trim();
 
-  if(!isComplete(state.level,state.lesson)){
+        chatInput.value =
+            "Review this " +
+            state.language +
+            " code:\n\n" +
+            code;
 
-    alert(
-      "Complete the lesson quiz before unlocking the next lesson."
-    );
+        chatInput.focus();
 
-    return;
-  }
+        document
+            .querySelector(".mentor")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
 
-  const level =
-    course.levels[state.level];
-
-  if(state.lesson < level.lessons.length - 1){
-
-    state.lesson++;
-
-  }else if(
-    state.level < course.levels.length - 1
-  ){
-
-    state.level++;
-    state.lesson = 0;
-
-    alert(
-      `🎉 ${level.name} completed! The next level is now unlocked.`
-    );
-
-  }else{
-
-    alert(
-      "🏆 You completed the entire curriculum for this language!"
-    );
-
-    return;
-  }
-
-  renderAll();
-}
+    }
+);
 
 
 /* =========================================================
-   HINT
-========================================================= */
+   CHAT
+   ========================================================= */
 
-function showHint(){
+function addMentorMessage(
+    type,
+    text
+) {
 
-  const topic =
-    currentCourse()
-      .levels[state.level]
-      .lessons[state.lesson][0];
+    const div =
+        document.createElement("div");
 
-  const box =
-    document.getElementById("hintBox");
+    div.className =
+        "message " + type;
 
-  box.style.display = "block";
+    div.textContent =
+        text;
 
-  box.innerHTML =
-    `<strong>💡 Hint</strong>
-     Think about the purpose of <b>${escapeHtml(topic)}</b>.
-     Don't try to memorize the answer. Ask yourself what problem this concept solves and what the smallest example would look like.`;
+    chatMessages.appendChild(div);
+
+    chatMessages.scrollTop =
+        chatMessages.scrollHeight;
+
 }
+
+
+function mentorResponse(
+    question,
+    mode = "normal"
+) {
+
+    const q =
+        question.toLowerCase();
+
+
+    if (
+        mode === "hint"
+    ) {
+
+        return (
+            "Let's narrow it down without giving away the answer. " +
+            "Look at the smallest part of your code that controls the behavior you're asking about. " +
+            "What value do you expect at that point, and what value do you actually get?"
+        );
+
+    }
+
+
+    if (
+        mode === "quiz"
+    ) {
+
+        const quizzes = {
+
+            HTML:
+                "Quick check: which HTML element is normally used for the main page heading?",
+
+            CSS:
+                "Quick check: what is the difference between margin and padding?",
+
+            JavaScript:
+                "Quick check: what is the difference between == and ===?",
+
+            Python:
+                "Quick check: why does Python care about indentation?",
+
+            Java:
+                "Quick check: what is the purpose of a Java class?"
+
+        };
+
+        return (
+            quizzes[state.language] ||
+            "Quick check: explain the main purpose of the concept you're currently studying."
+        );
+
+    }
+
+
+    if (
+        mode === "debug" ||
+        q.includes("bug") ||
+        q.includes("error") ||
+        q.includes("wrong")
+    ) {
+
+        rememberMistake(
+            state.language + " debugging"
+        );
+
+        return (
+            "Let's debug it systematically.\n\n" +
+            "First, don't change the code yet. " +
+            "Tell me what you expected the program to do. " +
+            "Then compare that with what it actually does.\n\n" +
+            "Now inspect the smallest line where those two behaviors diverge. " +
+            "What value or condition is different there?"
+        );
+
+    }
+
+
+    if (
+        mode === "review"
+    ) {
+
+        return (
+            "I'll review the code without rewriting it for you.\n\n" +
+            "Start by checking three things: correctness, clarity and unnecessary complexity. " +
+            "Ask yourself whether every variable has a clear purpose and whether each condition is actually necessary.\n\n" +
+            "Which part of your code are you least confident about?"
+        );
+
+    }
+
+
+    if (
+        q.includes("explain")
+    ) {
+
+        return (
+            "Let's build the idea from the foundation.\n\n" +
+            "Instead of memorizing syntax, think about what problem the concept solves in " +
+            state.language +
+            ".\n\n" +
+            "Try explaining the concept in your own words first. " +
+            "I'll correct the mental model if something is missing."
+        );
+
+    }
+
+
+    if (
+        q.includes("loop")
+    ) {
+
+        return (
+            "Think of a loop as a repeated decision.\n\n" +
+            "At each iteration, something changes and the program asks whether it should continue.\n\n" +
+            "Here's the important question: what condition eventually becomes false?"
+        );
+
+    }
+
+
+    if (
+        q.includes("function")
+    ) {
+
+        return (
+            "A function is a named piece of behavior that can receive information and produce a result.\n\n" +
+            "Before writing one, identify three things: what information goes in, what work happens, and what should come out.\n\n" +
+            "Which of those three are you currently unsure about?"
+        );
+
+    }
+
+
+    if (
+        q.includes("variable")
+    ) {
+
+        return (
+            "Think of a variable as a named piece of program state.\n\n" +
+            "Ask yourself: what information am I storing, and does that information need to change later?\n\n" +
+            "What value are you trying to store?"
+        );
+
+    }
+
+
+    return (
+        "Good question. Let's reason through it rather than jump straight to the answer.\n\n" +
+        "What do you think the program should do?\n\n" +
+        "Then tell me which specific line or concept is confusing you. " +
+        "I'll give you the next hint based on your answer."
+    );
+
+}
+
+
+async function sendChat(
+    mode = "normal"
+) {
+
+    const question =
+        chatInput.value.trim();
+
+    if (!question && mode === "normal") {
+
+        showToast(
+            "Ask your mentor something first."
+        );
+
+        return;
+
+    }
+
+
+    const finalQuestion =
+        question ||
+        "Help me with the current lesson.";
+
+
+    addMentorMessage(
+        "user",
+        finalQuestion
+    );
+
+
+    chatInput.value = "";
+
+
+    addMentorMessage(
+        "ai",
+        "Thinking..."
+    );
+
+
+    const thinkingMessage =
+        chatMessages.lastElementChild;
+
+
+    try {
+
+        /*
+         * BACKEND CONNECTION
+         *
+         * Set this URL to your deployed
+         * Google Apps Script endpoint.
+         */
+
+        const BACKEND_URL =
+            window.AI_MENTOR_BACKEND_URL || "";
+
+
+        if (BACKEND_URL) {
+
+            const response =
+                await fetch(
+                    BACKEND_URL,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            question:
+                                finalQuestion,
+
+                            mode:
+                                mode,
+
+                            language:
+                                state.language,
+
+                            code:
+                                codeEditor.value,
+
+                            history:
+                                state.mentorHistory
+
+                        })
+
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Backend request failed."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const reply =
+                data.reply ||
+                data.message ||
+                "The mentor could not generate a response.";
+
+
+            thinkingMessage.textContent =
+                reply;
+
+
+            state.mentorHistory.push({
+                role: "user",
+                content: finalQuestion
+            });
+
+            state.mentorHistory.push({
+                role: "assistant",
+                content: reply
+            });
+
+        }
+
+        else {
+
+            const reply =
+                mentorResponse(
+                    finalQuestion,
+                    mode
+                );
+
+            thinkingMessage.textContent =
+                reply;
+
+        }
+
+
+        addXP(5);
+
+    }
+
+    catch (error) {
+
+        thinkingMessage.textContent =
+            "I couldn't reach the AI backend. " +
+            "The local mentor is still available. " +
+            "Try your question again.";
+
+    }
+
+}
+
+
+$("sendMessage").addEventListener(
+    "click",
+    () => sendChat()
+);
+
+
+chatInput.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (
+            event.key === "Enter" &&
+            !event.shiftKey
+        ) {
+
+            event.preventDefault();
+
+            sendChat();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CHAT TOOL BUTTONS
+   ========================================================= */
+
+document
+    .querySelectorAll(".chat-tool")
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    const mode =
+                        this.dataset.mode;
+
+                    sendChat(mode);
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   CODE THINKING REPLAY
+   ========================================================= */
+
+function renderReplay() {
+
+    const step =
+        replaySteps[state.replayStep];
+
+    $("replayCounter").textContent =
+        "Step " +
+        (state.replayStep + 1) +
+        " / " +
+        replaySteps.length;
+
+    $("replayType").textContent =
+        step.type;
+
+    $("replayTitle").textContent =
+        step.title;
+
+    $("replayDescription").textContent =
+        step.description;
+
+}
+
+
+$("replayNext").addEventListener(
+    "click",
+    function () {
+
+        if (
+            state.replayStep <
+            replaySteps.length - 1
+        ) {
+
+            state.replayStep++;
+
+            renderReplay();
+
+        }
+
+        else {
+
+            state.replayStep = 0;
+
+            renderReplay();
+
+            addXP(10);
+
+            showToast(
+                "Execution replay completed."
+            );
+
+        }
+
+    }
+);
+
+
+$("replayPrevious").addEventListener(
+    "click",
+    function () {
+
+        if (
+            state.replayStep > 0
+        ) {
+
+            state.replayStep--;
+
+            renderReplay();
+
+        }
+
+    }
+);
 
 
 /* =========================================================
    BUG DETECTIVE
-========================================================= */
+   ========================================================= */
 
-const bugBank = {
+function generateBug() {
 
-javascript:[
-  {
-    title:"The Missing Function Call",
-    description:"This program defines a function but does not call it.",
-    code:`function greet() {
-  console.log("Hello");
-}
+    let next;
 
-// Something is missing here`,
-    answer:["call","greet","function"]
-  },
-  {
-    title:"The Wrong Variable Name",
-    description:"Look carefully at the variable being printed.",
-    code:`const username = "Alex";
+    do {
 
-console.log(usernme);`,
-    answer:["username","usernme","name"]
-  },
-  {
-    title:"The Comparison Mistake",
-    description:"The condition does not compare the values correctly.",
-    code:`const age = 18;
+        next =
+            Math.floor(
+                Math.random() *
+                bugCases.length
+            );
 
-if (age = 18) {
-  console.log("Adult");
-}`,
-    answer:["===","==","comparison"]
-  }
-],
+    }
 
-python:[
-  {
-    title:"The Missing Colon",
-    description:"Python requires a specific symbol after this statement.",
-    code:`age = 18
-
-if age >= 18
-    print("Adult")`,
-    answer:["colon",":","if"]
-  },
-  {
-    title:"The Wrong Variable",
-    description:"The printed variable does not match the declared one.",
-    code:`name = "Alex"
-
-print(nam)`,
-    answer:["name","nam"]
-  }
-],
-
-html:[
-  {
-    title:"The Unclosed Element",
-    description:"One element has not been closed correctly.",
-    code:`<html>
-  <body>
-    <h1>Hello
-  </body>
-</html>`,
-    answer:["h1","closing","close"]
-  }
-],
-
-css:[
-  {
-    title:"The Missing Brace",
-    description:"A CSS rule is missing part of its block structure.",
-    code:`.card {
-  color: white;
-  padding: 20px;`,
-    answer:["}","brace","closing"]
-  }
-],
-
-java:[
-  {
-    title:"The Missing Semicolon",
-    description:"A Java statement is missing its terminator.",
-    code:`public class Main {
-  public static void main(String[] args) {
-    int age = 18
-    System.out.println(age);
-  }
-}`,
-    answer:["semicolon",";"]
-  }
-],
-
-csharp:[
-  {
-    title:"The Missing Semicolon",
-    description:"A C# statement needs its terminator.",
-    code:`int age = 18
-Console.WriteLine(age);`,
-    answer:["semicolon",";"]
-  }
-],
-
-cpp:[
-  {
-    title:"The Missing Semicolon",
-    description:"A statement has not been terminated.",
-    code:`int age = 18
-std::cout << age;`,
-    answer:["semicolon",";"]
-  }
-],
-
-sql:[
-  {
-    title:"The Missing Table",
-    description:"The query refers to a table name that is not present.",
-    code:`SELECT name
-FROM
-WHERE age > 18;`,
-    answer:["table","from"]
-  }
-],
-
-typescript:[
-  {
-    title:"The Wrong Type",
-    description:"The value does not match the declared type.",
-    code:`let age: number = "eighteen";`,
-    answer:["number","string","type"]
-  }
-]
-
-};
-
-
-function renderBug(){
-
-  const bugs =
-    bugBank[state.language] ||
-    bugBank.javascript;
-
-  const index =
-    Math.floor(
-      Math.random() * bugs.length
+    while (
+        next === state.bugIndex &&
+        bugCases.length > 1
     );
 
-  state.currentBug =
-    bugs[index];
 
-  document.getElementById("bugTitle")
-    .textContent =
-    state.currentBug.title;
+    state.bugIndex =
+        next;
 
-  document.getElementById("bugDescription")
-    .textContent =
-    state.currentBug.description;
 
-  document.getElementById("bugCode")
-    .textContent =
-    state.currentBug.code;
+    const bug =
+        bugCases[state.bugIndex];
 
-  document.getElementById("bugAnswer")
-    .value = "";
 
-  document.getElementById("bugResult")
-    .textContent = "";
+    bugTitle.textContent =
+        bug.title;
+
+    bugDescription.textContent =
+        bug.description;
+
+    bugCode.textContent =
+        bug.code;
+
+    bugAnswer.value = "";
+
+    bugFeedback.textContent = "";
+
 }
 
 
-function checkBug(){
-
-  if(!state.currentBug){
-    return;
-  }
-
-  const answer =
-    document.getElementById("bugAnswer")
-      .value
-      .trim()
-      .toLowerCase();
-
-  if(!answer){
-    return;
-  }
-
-  const correct =
-    state.currentBug.answer.some(
-      item =>
-        answer.includes(item.toLowerCase())
-    );
-
-  const result =
-    document.getElementById("bugResult");
-
-  if(correct){
-
-    result.textContent =
-      "✓ Good diagnosis. You found the core problem.";
-
-    result.style.color =
-      "var(--green)";
-
-  }else{
-
-    result.textContent =
-      "Not quite. Look again at the syntax and compare each line with what the language expects.";
-
-    result.style.color =
-      "var(--red)";
-  }
-}
-
-
-/* =========================================================
-   PLAYGROUND
-========================================================= */
-
-function runCode(){
-
-  const code =
-    document.getElementById("editor").value;
-
-  const output =
-    document.getElementById("output");
-
-  if(
-    state.language === "html" ||
-    state.language === "css" ||
-    state.language === "javascript"
-  ){
-
-    if(state.language === "html"){
-
-      output.srcdoc = code;
-
-    }else if(state.language === "css"){
-
-      output.srcdoc =
-        `<style>${code}</style>
-         <div class="card">
-           CSS preview
-         </div>`;
-
-    }else{
-
-      output.srcdoc =
-        `<body>
-          <h2>JavaScript Preview</h2>
-          <pre id="log"></pre>
-          <script>
-            const oldLog = console.log;
-            console.log = function(...args){
-              document.getElementById("log").textContent +=
-              args.join(" ") + "\\n";
-            };
-            try{
-              ${code}
-            }catch(error){
-              document.getElementById("log").textContent =
-              error.toString();
-            }
-          <\/script>
-        </body>`;
-    }
-
-  }else{
-
-    output.srcdoc =
-      `<body style="font-family:system-ui;padding:20px">
-        <h3>Code Preview</h3>
-        <p>
-          Browser execution is available for HTML, CSS and JavaScript.
-        </p>
-        <p>
-          Use <b>Analyze Code</b> to get AI feedback for ${escapeHtml(
-            state.language
-          )}.
-        </p>
-      </body>`;
-  }
-}
-
-
-async function analyzeCode(){
-
-  const code =
-    document.getElementById("editor").value;
-
-  const result =
-    document.getElementById("analysisResult");
-
-  result.style.display = "block";
-  result.textContent = "Analyzing your code...";
-
-  const response =
-    await callBackend({
-      action:"analyze",
-      language:state.language,
-      level:currentCourse().levels[state.level].name,
-      lesson:currentCourse().levels[state.level].lessons[state.lesson][0],
-      code
-    });
-
-  if(!response.ok){
-
-    result.textContent =
-      response.error ||
-      "Could not analyze the code.";
-
-    return;
-  }
-
-  result.innerHTML =
-    `<strong>AI Code Review</strong><br><br>
-     ${escapeHtml(response.answer)}`;
-}
-
-
-/* =========================================================
-   AI CHAT
-========================================================= */
-
-function addMessage(type,text){
-
-  const chat =
-    document.getElementById("chat");
-
-  const div =
-    document.createElement("div");
-
-  div.className =
-    "message " + type;
-
-  div.textContent = text;
-
-  chat.appendChild(div);
-
-  chat.scrollTop =
-    chat.scrollHeight;
-}
-
-
-async function sendMessage(){
-
-  const input =
-    document.getElementById("chatInput");
-
-  const text =
-    input.value.trim();
-
-  if(!text){
-    return;
-  }
-
-  input.value = "";
-
-  addMessage("user",text);
-
-  addMessage("ai","Thinking...");
-
-  const messages =
-    state.chatHistory.slice(-8);
-
-  messages.push({
-    role:"user",
-    text
-  });
-
-  const response =
-    await callBackend({
-      action:"chat",
-      language:state.language,
-      level:currentCourse().levels[state.level].name,
-      lesson:currentCourse().levels[state.level].lessons[state.lesson][0],
-      messages,
-      code:document.getElementById("editor").value
-    });
-
-  const chat =
-    document.getElementById("chat");
-
-  const thinking =
-    chat.lastElementChild;
-
-  if(!response.ok){
-
-    thinking.textContent =
-      response.error ||
-      "The mentor could not respond.";
-
-    return;
-  }
-
-  thinking.textContent =
-    response.answer;
-
-  state.chatHistory.push({
-    role:"user",
-    text
-  });
-
-  state.chatHistory.push({
-    role:"assistant",
-    text:response.answer
-  });
-}
-
-
-/* =========================================================
-   BACKEND CALL
-========================================================= */
-
-async function callBackend(payload){
-
-  if(
-    !BACKEND_URL ||
-    BACKEND_URL.includes("PASTE_YOUR")
-  ){
-
-    return {
-      ok:false,
-      error:
-        "Backend is not connected yet. Add your Google Apps Script /exec URL to BACKEND_URL."
-    };
-  }
-
-  try{
-
-    const response =
-      await fetch(
-        BACKEND_URL,
-        {
-          method:"POST",
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-          body:
-            JSON.stringify(payload)
-        }
-      );
-
-    const text =
-      await response.text();
-
-    let data;
-
-    try{
-      data =
-        JSON.parse(text);
-    }catch{
-
-      return {
-        ok:false,
-        error:
-          "Backend returned invalid JSON."
-      };
-    }
-
-    return data;
-
-  }catch(error){
-
-    return {
-      ok:false,
-      error:
-        "Could not connect to the AI backend."
-    };
-  }
-}
-
-
-/* =========================================================
-   UTILITIES
-========================================================= */
-
-function escapeHtml(value){
-
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-
-/* =========================================================
-   LANGUAGE CHANGE
-========================================================= */
-
-document
-  .getElementById("languageSelect")
-  .addEventListener(
-    "change",
-    event=>{
-
-      state.language =
-        event.target.value;
-
-      state.level = 0;
-      state.lesson = 0;
-      state.chatHistory = [];
-
-      loadProgress();
-      renderAll();
-
-      document.getElementById("chat")
-        .innerHTML = "";
-
-      addMessage(
-        "ai",
-        `Hi! I'm your ${currentCourse().name} mentor. Ask me about the current lesson, your code, or a bug you're trying to understand.`
-      );
-    }
-  );
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-document
-  .getElementById("completeButton")
-  .addEventListener(
+$("newBug").addEventListener(
     "click",
-    ()=>{
-      completeCurrentLesson();
+    function () {
 
-      alert(
-        "✓ Lesson completed. The next lesson is unlocked."
-      );
-    }
-  );
+        generateBug();
 
-
-document
-  .getElementById("nextButton")
-  .addEventListener(
-    "click",
-    nextLesson
-  );
-
-
-document
-  .getElementById("hintButton")
-  .addEventListener(
-    "click",
-    showHint
-  );
-
-
-document
-  .getElementById("runButton")
-  .addEventListener(
-    "click",
-    runCode
-  );
-
-
-document
-  .getElementById("analyzeButton")
-  .addEventListener(
-    "click",
-    analyzeCode
-  );
-
-
-document
-  .getElementById("resetEditor")
-  .addEventListener(
-    "click",
-    ()=>{
-      document.getElementById("editor")
-        .value =
-        examples[state.language];
-    }
-  );
-
-
-document
-  .getElementById("checkBug")
-  .addEventListener(
-    "click",
-    checkBug
-  );
-
-
-document
-  .getElementById("newBug")
-  .addEventListener(
-    "click",
-    renderBug
-  );
-
-
-document
-  .getElementById("sendButton")
-  .addEventListener(
-    "click",
-    sendMessage
-  );
-
-
-document
-  .getElementById("chatInput")
-  .addEventListener(
-    "keydown",
-    event=>{
-
-      if(
-        event.key === "Enter" &&
-        !event.shiftKey
-      ){
-
-        event.preventDefault();
-        sendMessage();
-
-      }
+        showToast(
+            "New bug case loaded."
+        );
 
     }
-  );
-
-
-document
-  .getElementById("tryButton")
-  .addEventListener(
-    "click",
-    ()=>{
-      document.getElementById("playground")
-        .scrollIntoView({
-          behavior:"smooth"
-        });
-    }
-  );
-
-
-/* =========================================================
-   RENDER EVERYTHING
-========================================================= */
-
-function renderAll(){
-
-  renderCurriculum();
-  renderLesson();
-}
-
-
-/* =========================================================
-   START
-========================================================= */
-
-loadProgress();
-
-renderAll();
-
-addMessage(
-  "ai",
-  "Hi! I'm your AI Coding Mentor. Ask me about the current lesson or paste your code when you want help."
 );
 
+
+$("bugHint").addEventListener(
+    "click",
+    function () {
+
+        const bug =
+            bugCases[state.bugIndex];
+
+        bugFeedback.textContent =
+            "💡 Hint: " +
+            bug.hint;
+
+        bugFeedback.style.color =
+            "var(--orange)";
+
+    }
+);
+
+
+$("checkBug").addEventListener(
+    "click",
+    function () {
+
+        const answer =
+            bugAnswer.value
+                .trim()
+                .toLowerCase();
+
+        if (!answer) {
+
+            showToast(
+                "Write your diagnosis first."
+            );
+
+            return;
+
+        }
+
+
+        const bug =
+            bugCases[state.bugIndex];
+
+
+        const keywords =
+            bug.answer
+                .toLowerCase()
+                .split(" ")
+                .filter(
+                    word =>
+                        word.length > 4
+                );
+
+
+        const matches =
+            keywords.filter(
+                word =>
+                    answer.includes(word)
+            ).length;
+
+
+        if (
+            matches >= 2 ||
+            answer.includes(
+                bug.answer
+                    .toLowerCase()
+                    .substring(0,20)
+            )
+        ) {
+
+            bugFeedback.textContent =
+                "✓ Good diagnosis! You identified the important idea.";
+
+            bugFeedback.style.color =
+                "var(--green)";
+
+            state.completedLessons++;
+
+            $("statBugs").textContent =
+                Number(
+                    $("statBugs").textContent
+                ) + 1;
+
+            addXP(25);
+
+            rememberMistake(
+                bug.title
+            );
+
+        }
+
+        else {
+
+            bugFeedback.textContent =
+                "Not quite. Try focusing on the exact difference between what the code says and what it should say.";
+
+            bugFeedback.style.color =
+                "var(--orange)";
+
+            rememberMistake(
+                bug.title
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MISTAKE MEMORY
+   ========================================================= */
+
+function rememberMistake(topic) {
+
+    if (
+        !state.mistakeMemory[topic]
+    ) {
+
+        state.mistakeMemory[topic] =
+            0;
+
+    }
+
+    state.mistakeMemory[topic]++;
+
+    const score =
+        Math.max(
+            20,
+            100 -
+            Object.values(
+                state.mistakeMemory
+            ).reduce(
+                (a,b) => a+b,
+                0
+            ) * 3
+        );
+
+
+    $("memoryScore").textContent =
+        score;
+
+}
+
+
+/* =========================================================
+   LEVEL UNLOCK
+   ========================================================= */
+
+function unlockProgress() {
+
+    if (
+        state.completedLessons >= 4
+    ) {
+
+        const intermediate =
+            $("intermediateLevel");
+
+        intermediate.classList.remove(
+            "locked"
+        );
+
+        intermediate.querySelector(
+            ".level-top span:last-child"
+        ).textContent =
+            "🔓";
+
+        document
+            .querySelectorAll(
+                '.nav-item[data-level="2"]'
+            )
+            .forEach(
+                item =>
+                    item.classList.remove(
+                        "locked"
+                    )
+            );
+
+    }
+
+
+    if (
+        state.completedLessons >= 8
+    ) {
+
+        const advanced =
+            $("advancedLevel");
+
+        advanced.classList.remove(
+            "locked"
+        );
+
+        advanced.querySelector(
+            ".level-top span:last-child"
+        ).textContent =
+            "🔓";
+
+        document
+            .querySelectorAll(
+                '.nav-item[data-level="3"]'
+            )
+            .forEach(
+                item =>
+                    item.classList.remove(
+                        "locked"
+                    )
+            );
+
+    }
+
+}
+
+
+setInterval(
+    unlockProgress,
+    1000
+);
+
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+renderReplay();
+
+generateBug();
+
+unlockProgress();
+
+
+})();
 </script>
 
 </body>
