@@ -336,12 +336,111 @@ function openModal(id){document.getElementById(id).classList.add('show')}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
 
 document.getElementById('askBtn').addEventListener('click',()=>openModal('mentorModal'));
-document.getElementById('sendQuestion').addEventListener('click',()=>{
-  const q=document.getElementById('mentorQuestion').value.trim();
-  if(!q){showToast('Please enter a question first.');return}
-  closeModal('mentorModal');
-  document.getElementById('mentorQuestion').value='';
-  showToast('Mentor received your question. Connect your AI backend here for live answers.');
+document.getElementById('sendQuestion').addEventListener('click', async () => {
+
+    const question =
+        document.getElementById('mentorQuestion').value.trim();
+
+    if (!question) {
+        showToast('Please enter a question first.');
+        return;
+    }
+
+    const button = document.getElementById('sendQuestion');
+
+    button.disabled = true;
+    button.textContent = 'Thinking...';
+
+    try {
+
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                question: question
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Request failed');
+        }
+
+        closeModal('mentorModal');
+
+        document.getElementById('mentorQuestion').value = '';
+
+        showMentorAnswer(data.answer);
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            'AI Mentor could not respond. Please try again.'
+        );
+
+    } finally {
+
+        button.disabled = false;
+        button.textContent = 'Ask Mentor';
+    }
+});
+
+
+function showMentorAnswer(answer) {
+
+    const overlay = document.getElementById('mentorModal');
+
+    const modal = overlay.querySelector('.modal');
+
+    modal.innerHTML = `
+        <h3>AI Mentor</h3>
+
+        <div style="
+            margin-top:16px;
+            padding:16px;
+            background:#231e27;
+            border:1px solid rgba(255,255,255,.1);
+            border-radius:10px;
+            color:#eadfed;
+            line-height:1.7;
+            white-space:pre-wrap;
+            max-height:400px;
+            overflow:auto;
+        ">${escapeHTML(answer)}</div>
+
+        <div style="
+            display:flex;
+            justify-content:flex-end;
+            margin-top:16px;
+        ">
+            <button
+                class="close-btn"
+                onclick="closeModal('mentorModal')"
+            >
+                Close
+            </button>
+        </div>
+    `;
+
+    overlay.classList.add('show');
+}
+
+
+function escapeHTML(text) {
+
+    const div = document.createElement('div');
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}
 });
 
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
