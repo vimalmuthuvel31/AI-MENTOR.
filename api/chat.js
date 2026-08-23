@@ -37,9 +37,9 @@ export default async function handler(req, res) {
 
     let answer = "";
 
-    // ---------------------------------------
-    // JAVASCRIPT
-    // ---------------------------------------
+    // ===============================================
+    // JAVASCRIPT TOPICS
+    // ===============================================
 
     if (
       q.includes("variable") ||
@@ -209,9 +209,109 @@ Try adding another fruit to the array and determine its index.
 `;
     }
 
-    // ---------------------------------------
-    // HTML
-    // ---------------------------------------
+    else if (
+      q.includes("async") ||
+      q.includes("await") ||
+      q.includes("promise")
+    ) {
+      answer = `
+### 💡 Concept: Async/Await & Promises
+
+Promises handle operations that take time, like fetching data from the web.
+
+### Example with Promises
+
+\`\`\`javascript
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("Success!");
+  }, 1000);
+});
+
+myPromise.then(result => console.log(result));
+\`\`\`
+
+### Modern Approach: Async/Await
+
+\`\`\`javascript
+async function fetchData() {
+  try {
+    const response = await fetch('/api/data');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+\`\`\`
+
+### 🧠 Understand it
+
+- \`async\` creates an asynchronous function
+- \`await\` pauses execution until promise resolves
+- \`try/catch\` handles errors gracefully
+
+### 🎯 Mentor Hint
+
+Think of async/await like ordering food at a restaurant:
+1. You order (async function starts)
+2. You wait for food (await)
+3. Food arrives (promise resolves)
+4. You eat (continue code)
+`;
+    }
+
+    else if (
+      q.includes("object") ||
+      q.includes("json")
+    ) {
+      answer = `
+### 💡 Concept: Objects & JSON
+
+Objects store related data and functionality together.
+
+### Example
+
+\`\`\`javascript
+const person = {
+  name: "Alex",
+  age: 25,
+  city: "Chennai",
+  greet: function() {
+    return "Hello, I'm " + this.name;
+  }
+};
+
+console.log(person.name);
+console.log(person.greet());
+\`\`\`
+
+### Accessing Properties
+
+\`\`\`javascript
+// Dot notation
+person.name;
+
+// Bracket notation
+person["name"];
+
+// Adding properties
+person.email = "alex@example.com";
+\`\`\`
+
+### 🎯 Mentor Hint
+
+Objects are like filing cabinets:
+- **Keys** = drawer labels
+- **Values** = contents inside
+
+Use objects to group related information together.
+`;
+    }
+
+    // ===============================================
+    // HTML & CSS
+    // ===============================================
 
     else if (
       q.includes("html") ||
@@ -249,10 +349,6 @@ First decide what content your webpage needs. Then choose the appropriate HTML t
 `;
     }
 
-    // ---------------------------------------
-    // CSS
-    // ---------------------------------------
-
     else if (
       q.includes("css") ||
       q.includes("style") ||
@@ -270,6 +366,7 @@ CSS controls the appearance and layout of a webpage.
 h1 {
   font-size: 32px;
   text-align: center;
+  color: blue;
 }
 \`\`\`
 
@@ -291,19 +388,26 @@ For example:
 
 \`32px\` → value
 
+### Common Properties
+
+\`\`\`css
+color: blue;              /* Text color */
+background-color: yellow; /* Background color */
+font-size: 20px;         /* Text size */
+margin: 10px;            /* Space outside */
+padding: 10px;           /* Space inside */
+border: 1px solid black;  /* Border */
+\`\`\`
+
 ### 🎯 Mentor Hint
 
-HTML creates the structure.
-
-CSS controls the appearance.
-
-JavaScript adds behavior.
+HTML creates the structure. CSS controls the appearance.
 `;
     }
 
-    // ---------------------------------------
+    // ===============================================
     // JAVA
-    // ---------------------------------------
+    // ===============================================
 
     else if (
       lang.includes("java") ||
@@ -334,15 +438,13 @@ public class Main {
 
 ### 🎯 Mentor Hint
 
-Don't memorize the entire program.
-
-Understand the role of each part first.
+Don't memorize the entire program. Understand the role of each part first.
 `;
     }
 
-    // ---------------------------------------
+    // ===============================================
     // C / C++
-    // ---------------------------------------
+    // ===============================================
 
     else if (
       lang.includes("c++") ||
@@ -352,7 +454,7 @@ Understand the role of each part first.
       answer = `
 ### 💡 C++ Mentor
 
-C++ is a powerful programming language commonly used for problem solving and system-level programming.
+C++ is a powerful programming language commonly used for problem solving.
 
 ### Example
 
@@ -383,9 +485,9 @@ Start by understanding the flow:
 `;
     }
 
-    // ---------------------------------------
+    // ===============================================
     // PYTHON
-    // ---------------------------------------
+    // ===============================================
 
     else if (
       lang.includes("python") ||
@@ -412,15 +514,34 @@ Python doesn't require a declaration keyword such as \`int\` for a normal variab
 
 The variable is created when you assign a value.
 
+### Common Data Types
+
+\`\`\`python
+# String
+name = "Alex"
+
+# Integer
+age = 25
+
+# Float
+price = 19.99
+
+# List
+fruits = ["apple", "banana"]
+
+# Dictionary
+person = {"name": "Alex", "age": 25}
+\`\`\`
+
 ### 🎯 Mentor Hint
 
 Focus on understanding what each line does instead of memorizing syntax.
 `;
     }
 
-    // ---------------------------------------
+    // ===============================================
     // ERROR / BUG DETECTION
-    // ---------------------------------------
+    // ===============================================
 
     else if (
       q.includes("error") ||
@@ -460,6 +581,10 @@ Then compare it with:
 
 **What is the program actually doing?**
 
+### Step 3 — Test your fix
+
+Make one small change and test.
+
 ### 🎯 Mentor Hint
 
 Don't immediately rewrite the entire program.
@@ -470,17 +595,82 @@ That's usually the best place to start debugging.
 `;
     }
 
-    // ---------------------------------------
+    // ===============================================
+    // RECURSION
+    // ===============================================
+
+    else if (
+      q.includes("recursion") ||
+      q.includes("recursive")
+    ) {
+      answer = `
+### 💡 Concept: Recursion
+
+Recursion is when a function calls itself to solve a smaller version of the same problem.
+
+### Example: Countdown
+
+\`\`\`javascript
+function countdown(n) {
+  if (n <= 0) {
+    console.log("Done!");
+    return;  // Base case - stops recursion
+  }
+  console.log(n);
+  countdown(n - 1);  // Function calls itself
+}
+
+countdown(5);
+\`\`\`
+
+### Output
+
+\`\`\`
+5
+4
+3
+2
+1
+Done!
+\`\`\`
+
+### 🧠 Key Parts of Recursion
+
+1. **Base Case**: When to stop
+2. **Recursive Case**: Call function with smaller problem
+
+### Example: Factorial
+
+\`\`\`javascript
+function factorial(n) {
+  if (n <= 1) return 1;  // Base case
+  return n * factorial(n - 1);  // Recursive case
+}
+
+console.log(factorial(5));  // 120
+\`\`\`
+
+### 🎯 Mentor Hint
+
+Before writing recursion:
+
+1. Define the **base case** (when to stop)
+2. Define the **recursive case** (call with smaller problem)
+3. Make sure you're always moving toward the base case
+
+Without these, your function will run forever!
+`;
+    }
+
+    // ===============================================
     // DEFAULT RESPONSE
-    // ---------------------------------------
+    // ===============================================
 
     else {
       answer = `
 ### 👨‍💻 Codegenius AI Mentor
 
-Good question!
-
-Let's approach it like a programmer rather than simply copying an answer.
+Good question! Let's approach it like a programmer rather than simply copying an answer.
 
 ### 🧠 First, understand the problem
 
@@ -509,13 +699,21 @@ Try solving the smallest part of the problem first.
 
 Once you understand that part, build the next step on top of it.
 
-If you tell me the programming language and the exact error or concept you're struggling with, I can guide you more specifically.
+### Topics I can help with:
+
+**JavaScript**: variables, functions, loops, arrays, objects, async/await
+**HTML/CSS**: tags, styling, layout
+**Java, C++, Python**: basics and concepts
+**Debugging**: finding and fixing bugs
+**Recursion**: understanding recursive functions
+
+Tell me the programming language and the exact concept you're struggling with, and I can guide you more specifically!
 `;
     }
 
-    // ---------------------------------------
-    // RESPONSE
-    // ---------------------------------------
+    // ===============================================
+    // RETURN RESPONSE
+    // ===============================================
 
     return res.status(200).json({
       success: true,
