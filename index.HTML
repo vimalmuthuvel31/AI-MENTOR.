@@ -284,7 +284,14 @@ img{display:block;max-width:100%}
     <div id="setupWarning" style="display:none;padding:12px;margin:12px 0;border:1px solid rgba(255,180,80,.35);background:rgba(255,180,80,.08);border-radius:10px;color:#ffd89a;font-size:12px;line-height:1.5">Supabase is not configured yet. Add your Project URL and Publishable key in the configuration section of this file.</div>
     <form class="intro-form" id="introForm">
       <input type="text" class="intro-input" id="userName" placeholder="Your name" autocomplete="name">
-      <input type="tel" class="intro-input" id="userPhone" placeholder="+91 9876543210" autocomplete="tel" required>
+      <input
+    type="email"
+    id="email"
+    name="email"
+    placeholder="Enter your email address"
+    autocomplete="email"
+    required
+>
       <div class="intro-buttons"><button type="submit" class="intro-submit" id="sendOtpBtn">Send OTP</button></div>
     </form>
     <form class="intro-form" id="otpForm" style="display:none">
