@@ -2251,5 +2251,39 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+<script>
+async function sendEmailOTP() {
+
+    const emailInput = document.getElementById("email");
+
+    if (!emailInput) {
+        alert("Email field not found.");
+        return;
+    }
+
+    const email = emailInput.value.trim();
+
+    if (!email) {
+        alert("Please enter your email address.");
+        return;
+    }
+
+    const { data, error } =
+        await supabaseClient.auth.signInWithOtp({
+            email: email,
+            options: {
+                shouldCreateUser: true
+            }
+        });
+
+    if (error) {
+        console.error(error);
+        alert("Could not send OTP: " + error.message);
+        return;
+    }
+
+    alert("✅ OTP sent to " + email);
+}
+</script>
 </body>
 </html>
