@@ -1952,9 +1952,110 @@ bindDashboard();
 updateDashboardStats();
 initializeAuthentication();
 </script>
-<!-- ================= SUPABASE OTP SYSTEM ================= -->
+<!-- ================= SUPABASE OTP LOGIN ================= -->
+
+<div id="supabaseLoginBox"
+     style="
+     max-width:420px;
+     margin:40px auto;
+     padding:25px;
+     border:1px solid #24304a;
+     border-radius:18px;
+     background:#0d1426;
+     color:white;
+     font-family:Arial,sans-serif;
+     ">
+
+    <h2 style="margin-bottom:10px;">
+        🔐 Secure Login
+    </h2>
+
+    <p style="color:#9ba8c2;margin-bottom:20px;">
+        Sign in using your email OTP
+    </p>
+
+    <input
+        id="supabaseEmail"
+        type="email"
+        placeholder="Enter your email"
+        style="
+        width:100%;
+        padding:13px;
+        border-radius:10px;
+        border:1px solid #24304a;
+        background:#080f20;
+        color:white;
+        margin-bottom:12px;
+        outline:none;
+        "
+    >
+
+    <button
+        id="supabaseSendOTP"
+        style="
+        width:100%;
+        padding:13px;
+        border:0;
+        border-radius:10px;
+        background:#5b8cff;
+        color:white;
+        font-weight:bold;
+        cursor:pointer;
+        ">
+        Send OTP
+    </button>
+
+    <div id="supabaseOTPSection"
+         style="display:none;margin-top:15px;">
+
+        <input
+            id="supabaseOTP"
+            type="text"
+            inputmode="numeric"
+            maxlength="8"
+            placeholder="Enter OTP"
+            style="
+            width:100%;
+            padding:13px;
+            border-radius:10px;
+            border:1px solid #24304a;
+            background:#080f20;
+            color:white;
+            margin-bottom:12px;
+            outline:none;
+            "
+        >
+
+        <button
+            id="supabaseVerifyOTP"
+            style="
+            width:100%;
+            padding:13px;
+            border:0;
+            border-radius:10px;
+            background:#32d583;
+            color:#06130d;
+            font-weight:bold;
+            cursor:pointer;
+            ">
+            Verify OTP
+        </button>
+
+    </div>
+
+    <p id="supabaseMessage"
+       style="
+       margin-top:15px;
+       font-size:13px;
+       color:#9ba8c2;
+       ">
+    </p>
+
+</div>
+
 
 <script>
+
 document.addEventListener("DOMContentLoaded", function () {
 
     const SUPABASE_URL =
@@ -1963,153 +2064,192 @@ document.addEventListener("DOMContentLoaded", function () {
     const SUPABASE_KEY =
         "PASTE_YOUR_SB_PUBLISHABLE_KEY_HERE";
 
-    const sb = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    const emailInput =
+        document.getElementById("supabaseEmail");
+
+    const otpInput =
+        document.getElementById("supabaseOTP");
+
+    const sendButton =
+        document.getElementById("supabaseSendOTP");
+
+    const verifyButton =
+        document.getElementById("supabaseVerifyOTP");
+
+    const otpSection =
+        document.getElementById("supabaseOTPSection");
+
+    const message =
+        document.getElementById("supabaseMessage");
+
+
+    // =========================
+    // SEND OTP
+    // =========================
+
+    sendButton.addEventListener(
+        "click",
+        async function () {
+
+            const email =
+                emailInput.value.trim();
+
+            if (!email) {
+
+                message.textContent =
+                    "Please enter your email.";
+
+                return;
+            }
+
+
+            sendButton.disabled = true;
+
+            sendButton.textContent =
+                "Sending...";
+
+
+            const { error } =
+                await supabaseClient.auth.signInWithOtp({
+
+                    email: email,
+
+                    options: {
+                        shouldCreateUser: true
+                    }
+
+                });
+
+
+            if (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Error: " + error.message;
+
+                sendButton.disabled = false;
+
+                sendButton.textContent =
+                    "Send OTP";
+
+                return;
+            }
+
+
+            message.textContent =
+                "✅ OTP sent! Check your email.";
+
+            otpSection.style.display =
+                "block";
+
+            sendButton.disabled = false;
+
+            sendButton.textContent =
+                "Resend OTP";
+
+        }
     );
 
-    console.log("Supabase initialized");
 
-    // Find ALL text/email inputs
-    function getEmailInput() {
+    // =========================
+    // VERIFY OTP
+    // =========================
 
-        const inputs = document.querySelectorAll("input");
+    verifyButton.addEventListener(
+        "click",
+        async function () {
 
-        for (const input of inputs) {
+            const email =
+                emailInput.value.trim();
 
-            const type = (input.type || "").toLowerCase();
-            const name = (input.name || "").toLowerCase();
-            const placeholder =
-                (input.placeholder || "").toLowerCase();
+            const token =
+                otpInput.value.trim();
 
-            if (
-                type === "email" ||
-                name.includes("email") ||
-                placeholder.includes("email")
-            ) {
-                return input;
+
+            if (!token) {
+
+                message.textContent =
+                    "Please enter the OTP.";
+
+                return;
             }
-        }
-
-        return null;
-    }
 
 
-    // Find the existing Send OTP button
-    const buttons =
-        document.querySelectorAll("button");
+            verifyButton.disabled = true;
 
-    buttons.forEach(function (button) {
-
-        const text =
-            button.innerText
-                .trim()
-                .toLowerCase();
-
-        if (
-            text.includes("send otp") ||
-            text.includes("get otp") ||
-            text.includes("verify email")
-        ) {
-
-            button.addEventListener("click", async function (event) {
-
-                event.preventDefault();
-
-                const emailInput = getEmailInput();
-
-                if (!emailInput) {
-
-                    alert(
-                        "I couldn't find the email field."
-                    );
-
-                    console.log(
-                        "Available input fields:"
-                    );
-
-                    document
-                        .querySelectorAll("input")
-                        .forEach(function (input) {
-
-                            console.log({
-                                id: input.id,
-                                name: input.name,
-                                type: input.type,
-                                placeholder: input.placeholder
-                            });
-
-                        });
-
-                    return;
-                }
-
-                const email =
-                    emailInput.value.trim();
-
-                if (!email) {
-
-                    alert(
-                        "Please enter your email address."
-                    );
-
-                    emailInput.focus();
-
-                    return;
-                }
+            verifyButton.textContent =
+                "Verifying...";
 
 
-                console.log(
-                    "Sending OTP to:",
-                    email
-                );
+            const { data, error } =
+                await supabaseClient.auth.verifyOtp({
+
+                    email: email,
+
+                    token: token,
+
+                    type: "email"
+
+                });
 
 
-                const { data, error } =
-                    await sb.auth.signInWithOtp({
+            if (error) {
 
-                        email: email,
+                console.error(error);
 
-                        options: {
-                            shouldCreateUser: true
-                        }
+                message.textContent =
+                    "❌ " + error.message;
+
+                verifyButton.disabled = false;
+
+                verifyButton.textContent =
+                    "Verify OTP";
+
+                return;
+            }
+
+
+            message.textContent =
+                "✅ Login successful!";
+
+            console.log(
+                "Logged in user:",
+                data.user
+            );
+
+
+            // Save profile after successful login
+            if (data.user) {
+
+                await supabaseClient
+                    .from("profiles")
+                    .upsert({
+
+                        id: data.user.id,
+
+                        email: data.user.email
 
                     });
 
+            }
 
-                if (error) {
-
-                    console.error(
-                        "Supabase OTP Error:",
-                        error
-                    );
-
-                    alert(
-                        "OTP Error:\n\n" +
-                        error.message
-                    );
-
-                    return;
-                }
-
-
-                console.log(
-                    "OTP request successful:",
-                    data
-                );
-
-                alert(
-                    "OTP sent successfully!\n\n" +
-                    "Please check your email."
-                );
-
-            });
+            verifyButton.textContent =
+                "Verified ✓";
 
         }
-
-    });
+    );
 
 });
+
 </script>
 </body>
 </html>
