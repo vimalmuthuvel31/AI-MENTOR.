@@ -1952,6 +1952,288 @@ bindDashboard();
 updateDashboardStats();
 initializeAuthentication();
 </script>
+<!-- =========================================================
+     SUPABASE EMAIL OTP
+     Add this at the bottom of your existing index.html
+     ========================================================= -->
 
+<script>
+(function () {
+
+    // Make sure Supabase has loaded
+    if (!window.supabase) {
+        console.error("Supabase library was not loaded.");
+        return;
+    }
+
+    // Your Supabase project
+    const SUPABASE_URL =
+        "https://ilsqjjgyvfogofdyapdc.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "PASTE_YOUR_SB_PUBLISHABLE_KEY_HERE";
+
+    // Create client
+    const supabaseOTP = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+    console.log("Supabase OTP system ready");
+
+
+    // =====================================================
+    // FIND EMAIL INPUT
+    // =====================================================
+
+    function findEmailInput() {
+
+        const possibleIds = [
+            "email",
+            "userEmail",
+            "loginEmail",
+            "signupEmail",
+            "emailInput"
+        ];
+
+        for (const id of possibleIds) {
+            const element = document.getElementById(id);
+
+            if (element) {
+                return element;
+            }
+        }
+
+        return document.querySelector(
+            'input[type="email"]'
+        );
+    }
+
+
+    // =====================================================
+    // SEND OTP
+    // =====================================================
+
+    async function sendSupabaseOTP() {
+
+        const emailInput = findEmailInput();
+
+        if (!emailInput) {
+            alert(
+                "Email input was not found. Please check your email field."
+            );
+            console.error(
+                "No email input found."
+            );
+            return;
+        }
+
+        const email = emailInput.value.trim();
+
+        if (!email) {
+            alert("Please enter your email address.");
+            emailInput.focus();
+            return;
+        }
+
+        // Basic email check
+        if (!email.includes("@")) {
+            alert("Please enter a valid email address.");
+            emailInput.focus();
+            return;
+        }
+
+        console.log("Sending OTP to:", email);
+
+        try {
+
+            const { data, error } =
+                await supabaseOTP.auth.signInWithOtp({
+                    email: email,
+                    options: {
+                        shouldCreateUser: true
+                    }
+                });
+
+            if (error) {
+
+                console.error(
+                    "Supabase OTP Error:",
+                    error
+                );
+
+                alert(
+                    "OTP could not be sent.\n\n" +
+                    error.message
+                );
+
+                return;
+            }
+
+            console.log(
+                "OTP successfully requested:",
+                data
+            );
+
+            alert(
+                "OTP sent successfully!\n\n" +
+                "Check your email inbox."
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Unexpected OTP error:",
+                error
+            );
+
+            alert(
+                "Something went wrong while sending the OTP."
+            );
+        }
+    }
+
+
+    // =====================================================
+    // VERIFY OTP
+    // =====================================================
+
+    async function verifySupabaseOTP() {
+
+        const emailInput = findEmailInput();
+
+        const email =
+            emailInput ? emailInput.value.trim() : "";
+
+        const otpInput =
+            document.getElementById("otp") ||
+            document.getElementById("otpInput") ||
+            document.querySelector(
+                'input[placeholder*="OTP" i]'
+            );
+
+        if (!email) {
+            alert("Please enter your email address.");
+            return;
+        }
+
+        if (!otpInput) {
+            alert("Please enter the OTP you received.");
+            return;
+        }
+
+        const otp = otpInput.value.trim();
+
+        if (!otp) {
+            alert("Please enter the OTP.");
+            return;
+        }
+
+        try {
+
+            const { data, error } =
+                await supabaseOTP.auth.verifyOtp({
+                    email: email,
+                    token: otp,
+                    type: "email"
+                });
+
+            if (error) {
+
+                console.error(
+                    "OTP verification error:",
+                    error
+                );
+
+                alert(
+                    "OTP verification failed.\n\n" +
+                    error.message
+                );
+
+                return;
+            }
+
+            console.log(
+                "User successfully authenticated:",
+                data.user
+            );
+
+            alert(
+                "Login successful!"
+            );
+
+            // You can redirect here if needed.
+            // window.location.href = "dashboard.html";
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                "Something went wrong while verifying the OTP."
+            );
+        }
+    }
+
+
+    // =====================================================
+    // MAKE FUNCTIONS AVAILABLE TO YOUR HTML
+    // =====================================================
+
+    window.sendSupabaseOTP =
+        sendSupabaseOTP;
+
+    window.verifySupabaseOTP =
+        verifySupabaseOTP;
+
+
+    // =====================================================
+    // AUTOMATICALLY CONNECT EXISTING BUTTONS
+    // =====================================================
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            const buttons =
+                document.querySelectorAll("button");
+
+            buttons.forEach(function (button) {
+
+                const text =
+                    button.textContent
+                        .trim()
+                        .toLowerCase();
+
+                if (
+                    text.includes("send otp") ||
+                    text.includes("get otp") ||
+                    text.includes("email otp")
+                ) {
+
+                    button.addEventListener(
+                        "click",
+                        function (event) {
+
+                            event.preventDefault();
+
+                            sendSupabaseOTP();
+
+                        }
+                    );
+
+                    console.log(
+                        "OTP button connected:",
+                        button
+                    );
+                }
+
+            });
+
+        }
+    );
+
+})();
+</script>
 </body>
 </html>
